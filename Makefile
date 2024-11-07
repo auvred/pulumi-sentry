@@ -1,6 +1,6 @@
 PROJECT_NAME := sentry Package
 
-SHELL            := /bin/bash
+SHELL            := $(shell which bash)
 PACK             := sentry
 ORG              := pulumiverse
 PROJECT          := github.com/${ORG}/pulumi-${PACK}
@@ -11,7 +11,7 @@ VERSION_PATH     := ${PROVIDER_PATH}/pkg/version.Version
 
 TFGEN           := pulumi-tfgen-${PACK}
 PROVIDER        := pulumi-resource-${PACK}
-VERSION         := $(shell pulumictl get version)
+VERSION         := 0.0.0
 
 TESTPARALLELISM := 4
 
@@ -57,16 +57,19 @@ provider:: tfgen install_plugins # build the provider binary
 
 build_sdks:: install_plugins provider build_nodejs build_python build_go build_dotnet # build all the sdks
 
-build_nodejs:: VERSION := $(shell pulumictl get version --language javascript)
-build_nodejs:: install_plugins tfgen # build the node sdk
+build_nodejs:: tfgen
+	rm -rf sdk/nodejs/
 	$(WORKING_DIR)/bin/$(TFGEN) nodejs --overlays provider/overlays/nodejs --out sdk/nodejs/
 	cd sdk/nodejs/ && \
-        yarn install && \
-        yarn run tsc && \
-        cp ../../README.md ../../LICENSE package.json yarn.lock ./bin/ && \
-		sed -i.bak -e "s/\$${VERSION}/$(VERSION)/g" ./bin/package.json
+		npm install && \
+		cat tsconfig.json | jq 'del(.compilerOptions | .outDir, .sourceMap)' > _tsconfig.json && \
+		mv _tsconfig.json tsconfig.json && \
+		npm run build && \
+		sed -i -e "s/\$${VERSION}/$(VERSION)/g" ./package.json && \
+		sed -i -e "s/\$${VERSION}/$(VERSION)/g" ./package.json && \
+		rm -rf node_modules package-lock.json && \
+		find -name '*.ts' -not -name '*.d.ts' -exec rm -rf {} \;
 
-build_python:: PYPI_VERSION := $(shell pulumictl get version --language python)
 build_python:: install_plugins tfgen # build the python sdk
 	$(WORKING_DIR)/bin/$(TFGEN) python --overlays provider/overlays/python --out sdk/python/
 	cd sdk/python/ && \
@@ -77,7 +80,6 @@ build_python:: install_plugins tfgen # build the python sdk
         rm ./bin/setup.py.bak && \
         cd ./bin && python3 setup.py build sdist
 
-build_dotnet:: DOTNET_VERSION := $(shell pulumictl get version --language dotnet)
 build_dotnet:: install_plugins tfgen # build the dotnet sdk
 	pulumictl get version --language dotnet
 	$(WORKING_DIR)/bin/$(TFGEN) dotnet --overlays provider/overlays/dotnet --out sdk/dotnet/
@@ -104,8 +106,8 @@ clean::
 	rm -rf sdk/{dotnet,nodejs,go,python}
 
 install_plugins::
-	[ -x $(shell which pulumi) ] || curl -fsSL https://get.pulumi.com | sh
-	pulumi plugin install resource random 4.3.1
+	# [ -x $(shell which pulumi) ] || curl -fsSL https://get.pulumi.com | sh
+	# pulumi plugin install resource random 4.3.1
 
 install_dotnet_sdk::
 	mkdir -p $(WORKING_DIR)/nuget

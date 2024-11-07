@@ -17,6 +17,7 @@ package sentry
 import (
 	// Allow embedding bridge-metadata.json in the provider.
 	"context"
+	"errors"
 	_ "embed"
 
 	"fmt"
@@ -27,6 +28,8 @@ import (
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
 	"github.com/pulumiverse/pulumi-sentry/provider/pkg/version"
+
+	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 )
 
 // all of the token components used below.
@@ -115,7 +118,12 @@ func Provider() tfbridge.ProviderInfo {
 			// 	},
 			// },
 
-			"sentry_all_projects_spike_protection": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryAllProjectsSpikeProtection")},
+			"sentry_all_projects_spike_protection": {
+				Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryAllProjectsSpikeProtection"),
+				ComputeID: func(ctx context.Context, state resource.PropertyMap) (resource.ID, error) {
+					return "", errors.New("unsupported")
+				},
+			},
 			"sentry_dashboard":                     {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryDashboard")},
 			"sentry_integration_opsgenie":          {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryIntegrationOpsgenie")},
 			"sentry_integration_pagerduty":         {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryIntegrationPagerDuty")},
@@ -132,6 +140,7 @@ func Provider() tfbridge.ProviderInfo {
 			"sentry_organization":                   {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryOrganization")},
 			"sentry_organization_code_mapping":      {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryOrganizationCodeMapping")},
 			"sentry_organization_member":            {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryOrganizationMember")},
+			"sentry_organization_repository":        {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryOrganizationRepository")},
 			"sentry_organization_repository_github": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryOrganizationRepositoryGithub")},
 			"sentry_plugin":                         {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryPlugin")},
 			"sentry_project":                        {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryProject")},
@@ -155,6 +164,7 @@ func Provider() tfbridge.ProviderInfo {
 			// "aws_ami": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAmi")},
 
 			"sentry_all_keys":     {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSentryAllKeys")},
+			"sentry_all_organization_members":     {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSentryAllOrganizationMembers")},
 			"sentry_all_projects": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSentryAllProjects")},
 			"sentry_dashboard":    {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSentryDashboard")},
 			"sentry_issue_alert":  {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSentryIssueAlert")},
