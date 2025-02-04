@@ -13,7 +13,7 @@ namespace Pulumiverse.Sentry
     public static class GetSentryOrganizationIntegration
     {
         /// <summary>
-        /// Sentry Organization Integration data source.
+        /// Sentry Organization Integration data source. See the [Sentry documentation](https://docs.sentry.io/api/integrations/list-an-organizations-available-integrations/) for more information.
         /// 
         /// ## Example Usage
         /// 
@@ -48,7 +48,7 @@ namespace Pulumiverse.Sentry
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSentryOrganizationIntegrationResult>("sentry:index/getSentryOrganizationIntegration:getSentryOrganizationIntegration", args ?? new GetSentryOrganizationIntegrationArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Sentry Organization Integration data source.
+        /// Sentry Organization Integration data source. See the [Sentry documentation](https://docs.sentry.io/api/integrations/list-an-organizations-available-integrations/) for more information.
         /// 
         /// ## Example Usage
         /// 
@@ -87,19 +87,19 @@ namespace Pulumiverse.Sentry
     public sealed class GetSentryOrganizationIntegrationArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The name of the organization integration.
+        /// The name of the integration.
         /// </summary>
         [Input("name", required: true)]
         public string Name { get; set; } = null!;
 
         /// <summary>
-        /// The slug of the organization the integration belongs to.
+        /// The organization the resource belongs to.
         /// </summary>
         [Input("organization", required: true)]
         public string Organization { get; set; } = null!;
 
         /// <summary>
-        /// The key of the organization integration provider.
+        /// Specific integration provider to filter by such as `slack`. See [the list of supported providers](https://docs.sentry.io/product/integrations/).
         /// </summary>
         [Input("providerKey", required: true)]
         public string ProviderKey { get; set; } = null!;
@@ -113,19 +113,19 @@ namespace Pulumiverse.Sentry
     public sealed class GetSentryOrganizationIntegrationInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The name of the organization integration.
+        /// The name of the integration.
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
         /// <summary>
-        /// The slug of the organization the integration belongs to.
+        /// The organization the resource belongs to.
         /// </summary>
         [Input("organization", required: true)]
         public Input<string> Organization { get; set; } = null!;
 
         /// <summary>
-        /// The key of the organization integration provider.
+        /// Specific integration provider to filter by such as `slack`. See [the list of supported providers](https://docs.sentry.io/product/integrations/).
         /// </summary>
         [Input("providerKey", required: true)]
         public Input<string> ProviderKey { get; set; } = null!;
@@ -141,23 +141,23 @@ namespace Pulumiverse.Sentry
     public sealed class GetSentryOrganizationIntegrationResult
     {
         /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
+        /// The ID of this resource.
         /// </summary>
         public readonly string Id;
         /// <summary>
-        /// The internal ID for this organization integration.
+        /// The internal ID for this organization integration. **Deprecated** Use `id` instead.
         /// </summary>
         public readonly string InternalId;
         /// <summary>
-        /// The name of the organization integration.
+        /// The name of the integration.
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// The slug of the organization the integration belongs to.
+        /// The organization the resource belongs to.
         /// </summary>
         public readonly string Organization;
         /// <summary>
-        /// The key of the organization integration provider.
+        /// Specific integration provider to filter by such as `slack`. See [the list of supported providers](https://docs.sentry.io/product/integrations/).
         /// </summary>
         public readonly string ProviderKey;
 

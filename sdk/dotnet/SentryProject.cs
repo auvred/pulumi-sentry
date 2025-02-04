@@ -13,34 +13,6 @@ namespace Pulumiverse.Sentry
     /// <summary>
     /// Sentry Project resource.
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Sentry = Pulumiverse.Sentry;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     // Create a project
-    ///     var @default = new Sentry.SentryProject("default", new()
-    ///     {
-    ///         Organization = "my-organization",
-    ///         Teams = new[]
-    ///         {
-    ///             "my-first-team",
-    ///             "my-second-team",
-    ///         },
-    ///         Name = "Web App",
-    ///         Slug = "web-app",
-    ///         Platform = "javascript",
-    ///         ResolveAge = 720,
-    ///     });
-    /// 
-    /// });
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// import using the organization and team slugs from the URL:
@@ -54,8 +26,23 @@ namespace Pulumiverse.Sentry
     [SentryResourceType("sentry:index/sentryProject:SentryProject")]
     public partial class SentryProject : global::Pulumi.CustomResource
     {
-        [Output("color")]
-        public Output<string> Color { get; private set; } = null!;
+        /// <summary>
+        /// Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+        /// </summary>
+        [Output("clientSecurity")]
+        public Output<Outputs.SentryProjectClientSecurity> ClientSecurity { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `sentry.SentryKey` resource.
+        /// </summary>
+        [Output("defaultKey")]
+        public Output<bool?> DefaultKey { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
+        /// </summary>
+        [Output("defaultRules")]
+        public Output<bool?> DefaultRules { get; private set; } = null!;
 
         /// <summary>
         /// The maximum amount of time (in seconds) to wait between scheduling digests for delivery.
@@ -73,16 +60,28 @@ namespace Pulumiverse.Sentry
         public Output<ImmutableArray<string>> Features { get; private set; } = null!;
 
         /// <summary>
+        /// Custom filters for this project.
+        /// </summary>
+        [Output("filters")]
+        public Output<Outputs.SentryProjectFilters> Filters { get; private set; } = null!;
+
+        /// <summary>
+        /// This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob &gt; fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+        /// </summary>
+        [Output("fingerprintingRules")]
+        public Output<string> FingerprintingRules { get; private set; } = null!;
+
+        /// <summary>
+        /// This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
+        /// </summary>
+        [Output("groupingEnhancements")]
+        public Output<string> GroupingEnhancements { get; private set; } = null!;
+
+        /// <summary>
         /// The internal ID for this project.
         /// </summary>
         [Output("internalId")]
         public Output<string> InternalId { get; private set; } = null!;
-
-        [Output("isBookmarked")]
-        public Output<bool> IsBookmarked { get; private set; } = null!;
-
-        [Output("isPublic")]
-        public Output<bool> IsPublic { get; private set; } = null!;
 
         /// <summary>
         /// The name for the project.
@@ -91,22 +90,16 @@ namespace Pulumiverse.Sentry
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The slug of the organization the project belongs to.
+        /// The organization of this resource.
         /// </summary>
         [Output("organization")]
         public Output<string> Organization { get; private set; } = null!;
 
         /// <summary>
-        /// The optional platform for this project.
+        /// The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
         /// </summary>
         [Output("platform")]
-        public Output<string> Platform { get; private set; } = null!;
-
-        /// <summary>
-        /// Use `internal_id` instead.
-        /// </summary>
-        [Output("projectId")]
-        public Output<string> ProjectId { get; private set; } = null!;
+        public Output<string?> Platform { get; private set; } = null!;
 
         /// <summary>
         /// Hours in which an issue is automatically resolve if not seen after this amount of time.
@@ -119,15 +112,6 @@ namespace Pulumiverse.Sentry
         /// </summary>
         [Output("slug")]
         public Output<string> Slug { get; private set; } = null!;
-
-        [Output("status")]
-        public Output<string> Status { get; private set; } = null!;
-
-        /// <summary>
-        /// The slug of the team to create the project for. **Deprecated** Use `teams` instead.
-        /// </summary>
-        [Output("team")]
-        public Output<string?> Team { get; private set; } = null!;
 
         /// <summary>
         /// The slugs of the teams to create the project for.
@@ -183,6 +167,24 @@ namespace Pulumiverse.Sentry
     public sealed class SentryProjectArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+        /// </summary>
+        [Input("clientSecurity")]
+        public Input<Inputs.SentryProjectClientSecurityArgs>? ClientSecurity { get; set; }
+
+        /// <summary>
+        /// Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `sentry.SentryKey` resource.
+        /// </summary>
+        [Input("defaultKey")]
+        public Input<bool>? DefaultKey { get; set; }
+
+        /// <summary>
+        /// Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
+        /// </summary>
+        [Input("defaultRules")]
+        public Input<bool>? DefaultRules { get; set; }
+
+        /// <summary>
         /// The maximum amount of time (in seconds) to wait between scheduling digests for delivery.
         /// </summary>
         [Input("digestsMaxDelay")]
@@ -195,19 +197,37 @@ namespace Pulumiverse.Sentry
         public Input<int>? DigestsMinDelay { get; set; }
 
         /// <summary>
+        /// Custom filters for this project.
+        /// </summary>
+        [Input("filters")]
+        public Input<Inputs.SentryProjectFiltersArgs>? Filters { get; set; }
+
+        /// <summary>
+        /// This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob &gt; fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+        /// </summary>
+        [Input("fingerprintingRules")]
+        public Input<string>? FingerprintingRules { get; set; }
+
+        /// <summary>
+        /// This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
+        /// </summary>
+        [Input("groupingEnhancements")]
+        public Input<string>? GroupingEnhancements { get; set; }
+
+        /// <summary>
         /// The name for the project.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The slug of the organization the project belongs to.
+        /// The organization of this resource.
         /// </summary>
         [Input("organization", required: true)]
         public Input<string> Organization { get; set; } = null!;
 
         /// <summary>
-        /// The optional platform for this project.
+        /// The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
         /// </summary>
         [Input("platform")]
         public Input<string>? Platform { get; set; }
@@ -224,13 +244,7 @@ namespace Pulumiverse.Sentry
         [Input("slug")]
         public Input<string>? Slug { get; set; }
 
-        /// <summary>
-        /// The slug of the team to create the project for. **Deprecated** Use `teams` instead.
-        /// </summary>
-        [Input("team")]
-        public Input<string>? Team { get; set; }
-
-        [Input("teams")]
+        [Input("teams", required: true)]
         private InputList<string>? _teams;
 
         /// <summary>
@@ -250,8 +264,23 @@ namespace Pulumiverse.Sentry
 
     public sealed class SentryProjectState : global::Pulumi.ResourceArgs
     {
-        [Input("color")]
-        public Input<string>? Color { get; set; }
+        /// <summary>
+        /// Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+        /// </summary>
+        [Input("clientSecurity")]
+        public Input<Inputs.SentryProjectClientSecurityGetArgs>? ClientSecurity { get; set; }
+
+        /// <summary>
+        /// Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `sentry.SentryKey` resource.
+        /// </summary>
+        [Input("defaultKey")]
+        public Input<bool>? DefaultKey { get; set; }
+
+        /// <summary>
+        /// Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
+        /// </summary>
+        [Input("defaultRules")]
+        public Input<bool>? DefaultRules { get; set; }
 
         /// <summary>
         /// The maximum amount of time (in seconds) to wait between scheduling digests for delivery.
@@ -274,16 +303,28 @@ namespace Pulumiverse.Sentry
         }
 
         /// <summary>
+        /// Custom filters for this project.
+        /// </summary>
+        [Input("filters")]
+        public Input<Inputs.SentryProjectFiltersGetArgs>? Filters { get; set; }
+
+        /// <summary>
+        /// This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob &gt; fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+        /// </summary>
+        [Input("fingerprintingRules")]
+        public Input<string>? FingerprintingRules { get; set; }
+
+        /// <summary>
+        /// This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
+        /// </summary>
+        [Input("groupingEnhancements")]
+        public Input<string>? GroupingEnhancements { get; set; }
+
+        /// <summary>
         /// The internal ID for this project.
         /// </summary>
         [Input("internalId")]
         public Input<string>? InternalId { get; set; }
-
-        [Input("isBookmarked")]
-        public Input<bool>? IsBookmarked { get; set; }
-
-        [Input("isPublic")]
-        public Input<bool>? IsPublic { get; set; }
 
         /// <summary>
         /// The name for the project.
@@ -292,22 +333,16 @@ namespace Pulumiverse.Sentry
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The slug of the organization the project belongs to.
+        /// The organization of this resource.
         /// </summary>
         [Input("organization")]
         public Input<string>? Organization { get; set; }
 
         /// <summary>
-        /// The optional platform for this project.
+        /// The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
         /// </summary>
         [Input("platform")]
         public Input<string>? Platform { get; set; }
-
-        /// <summary>
-        /// Use `internal_id` instead.
-        /// </summary>
-        [Input("projectId")]
-        public Input<string>? ProjectId { get; set; }
 
         /// <summary>
         /// Hours in which an issue is automatically resolve if not seen after this amount of time.
@@ -320,15 +355,6 @@ namespace Pulumiverse.Sentry
         /// </summary>
         [Input("slug")]
         public Input<string>? Slug { get; set; }
-
-        [Input("status")]
-        public Input<string>? Status { get; set; }
-
-        /// <summary>
-        /// The slug of the team to create the project for. **Deprecated** Use `teams` instead.
-        /// </summary>
-        [Input("team")]
-        public Input<string>? Team { get; set; }
 
         [Input("teams")]
         private InputList<string>? _teams;

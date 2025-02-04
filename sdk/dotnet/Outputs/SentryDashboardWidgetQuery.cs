@@ -20,7 +20,7 @@ namespace Pulumiverse.Sentry.Outputs
         public readonly ImmutableArray<string> FieldAliases;
         public readonly ImmutableArray<string> Fields;
         /// <summary>
-        /// The ID of this resource.
+        /// The ID of the query.
         /// </summary>
         public readonly string? Id;
         public readonly string? Name;

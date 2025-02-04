@@ -67,7 +67,7 @@ namespace Pulumiverse.Sentry
     public sealed class GetSentryOrganizationArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The unique URL slug for this organization.
+        /// The organization the resource belongs to.
         /// </summary>
         [Input("slug", required: true)]
         public string Slug { get; set; } = null!;
@@ -81,7 +81,7 @@ namespace Pulumiverse.Sentry
     public sealed class GetSentryOrganizationInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
-        /// The unique URL slug for this organization.
+        /// The organization the resource belongs to.
         /// </summary>
         [Input("slug", required: true)]
         public Input<string> Slug { get; set; } = null!;
@@ -97,7 +97,7 @@ namespace Pulumiverse.Sentry
     public sealed class GetSentryOrganizationResult
     {
         /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
+        /// The unique URL slug for this organization.
         /// </summary>
         public readonly string Id;
         /// <summary>
@@ -109,7 +109,7 @@ namespace Pulumiverse.Sentry
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// The unique URL slug for this organization.
+        /// The organization the resource belongs to.
         /// </summary>
         public readonly string Slug;
 

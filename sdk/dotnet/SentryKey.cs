@@ -11,7 +11,7 @@ using Pulumi;
 namespace Pulumiverse.Sentry
 {
     /// <summary>
-    /// Sentry Key resource.
+    /// Return a client key bound to a project.
     /// 
     /// ## Example Usage
     /// 
@@ -48,40 +48,49 @@ namespace Pulumiverse.Sentry
     public partial class SentryKey : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// DSN for the Content Security Policy (CSP) for the key.
+        /// This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+        /// </summary>
+        [Output("dsn")]
+        public Output<ImmutableDictionary<string, string>> Dsn { get; private set; } = null!;
+
+        /// <summary>
+        /// Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
         /// </summary>
         [Output("dsnCsp")]
         public Output<string> DsnCsp { get; private set; } = null!;
 
         /// <summary>
-        /// DSN for the key.
+        /// The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
         /// </summary>
         [Output("dsnPublic")]
         public Output<string> DsnPublic { get; private set; } = null!;
 
+        /// <summary>
+        /// Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+        /// </summary>
         [Output("dsnSecret")]
         public Output<string> DsnSecret { get; private set; } = null!;
 
         /// <summary>
-        /// Flag indicating the key is active.
+        /// The JavaScript loader script configuration.
         /// </summary>
-        [Output("isActive")]
-        public Output<bool> IsActive { get; private set; } = null!;
+        [Output("javascriptLoaderScript")]
+        public Output<Outputs.SentryKeyJavascriptLoaderScript> JavascriptLoaderScript { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the key.
+        /// The name of the client key.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// The slug of the organization the key should be created for.
+        /// The organization of this resource.
         /// </summary>
         [Output("organization")]
         public Output<string> Organization { get; private set; } = null!;
 
         /// <summary>
-        /// The slug of the project the key should be created for.
+        /// The project of this resource.
         /// </summary>
         [Output("project")]
         public Output<string> Project { get; private set; } = null!;
@@ -90,10 +99,10 @@ namespace Pulumiverse.Sentry
         /// The ID of the project that the key belongs to.
         /// </summary>
         [Output("projectId")]
-        public Output<int> ProjectId { get; private set; } = null!;
+        public Output<string> ProjectId { get; private set; } = null!;
 
         /// <summary>
-        /// Public key portion of the client key.
+        /// The public key.
         /// </summary>
         [Output("public")]
         public Output<string> Public { get; private set; } = null!;
@@ -105,13 +114,13 @@ namespace Pulumiverse.Sentry
         public Output<int> RateLimitCount { get; private set; } = null!;
 
         /// <summary>
-        /// Length of time that will be considered when checking the rate limit.
+        /// Length of time in seconds that will be considered when checking the rate limit.
         /// </summary>
         [Output("rateLimitWindow")]
         public Output<int> RateLimitWindow { get; private set; } = null!;
 
         /// <summary>
-        /// Secret key portion of the client key.
+        /// The secret key.
         /// </summary>
         [Output("secret")]
         public Output<string> Secret { get; private set; } = null!;
@@ -169,19 +178,25 @@ namespace Pulumiverse.Sentry
     public sealed class SentryKeyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The name of the key.
+        /// The JavaScript loader script configuration.
+        /// </summary>
+        [Input("javascriptLoaderScript")]
+        public Input<Inputs.SentryKeyJavascriptLoaderScriptArgs>? JavascriptLoaderScript { get; set; }
+
+        /// <summary>
+        /// The name of the client key.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The slug of the organization the key should be created for.
+        /// The organization of this resource.
         /// </summary>
         [Input("organization", required: true)]
         public Input<string> Organization { get; set; } = null!;
 
         /// <summary>
-        /// The slug of the project the key should be created for.
+        /// The project of this resource.
         /// </summary>
         [Input("project", required: true)]
         public Input<string> Project { get; set; } = null!;
@@ -193,7 +208,7 @@ namespace Pulumiverse.Sentry
         public Input<int>? RateLimitCount { get; set; }
 
         /// <summary>
-        /// Length of time that will be considered when checking the rate limit.
+        /// Length of time in seconds that will be considered when checking the rate limit.
         /// </summary>
         [Input("rateLimitWindow")]
         public Input<int>? RateLimitWindow { get; set; }
@@ -206,21 +221,37 @@ namespace Pulumiverse.Sentry
 
     public sealed class SentryKeyState : global::Pulumi.ResourceArgs
     {
+        [Input("dsn")]
+        private InputMap<string>? _dsn;
+
         /// <summary>
-        /// DSN for the Content Security Policy (CSP) for the key.
+        /// This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+        /// </summary>
+        public InputMap<string> Dsn
+        {
+            get => _dsn ?? (_dsn = new InputMap<string>());
+            set => _dsn = value;
+        }
+
+        /// <summary>
+        /// Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
         /// </summary>
         [Input("dsnCsp")]
         public Input<string>? DsnCsp { get; set; }
 
         /// <summary>
-        /// DSN for the key.
+        /// The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
         /// </summary>
         [Input("dsnPublic")]
         public Input<string>? DsnPublic { get; set; }
 
         [Input("dsnSecret")]
         private Input<string>? _dsnSecret;
-        [Obsolete(@"DSN (Deprecated) for the key.")]
+
+        /// <summary>
+        /// Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+        /// </summary>
+        [Obsolete(@"This field is deprecated and will be removed in a future version. Use `dsn[""secret""]` instead.")]
         public Input<string>? DsnSecret
         {
             get => _dsnSecret;
@@ -232,25 +263,25 @@ namespace Pulumiverse.Sentry
         }
 
         /// <summary>
-        /// Flag indicating the key is active.
+        /// The JavaScript loader script configuration.
         /// </summary>
-        [Input("isActive")]
-        public Input<bool>? IsActive { get; set; }
+        [Input("javascriptLoaderScript")]
+        public Input<Inputs.SentryKeyJavascriptLoaderScriptGetArgs>? JavascriptLoaderScript { get; set; }
 
         /// <summary>
-        /// The name of the key.
+        /// The name of the client key.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The slug of the organization the key should be created for.
+        /// The organization of this resource.
         /// </summary>
         [Input("organization")]
         public Input<string>? Organization { get; set; }
 
         /// <summary>
-        /// The slug of the project the key should be created for.
+        /// The project of this resource.
         /// </summary>
         [Input("project")]
         public Input<string>? Project { get; set; }
@@ -259,10 +290,10 @@ namespace Pulumiverse.Sentry
         /// The ID of the project that the key belongs to.
         /// </summary>
         [Input("projectId")]
-        public Input<int>? ProjectId { get; set; }
+        public Input<string>? ProjectId { get; set; }
 
         /// <summary>
-        /// Public key portion of the client key.
+        /// The public key.
         /// </summary>
         [Input("public")]
         public Input<string>? Public { get; set; }
@@ -274,7 +305,7 @@ namespace Pulumiverse.Sentry
         public Input<int>? RateLimitCount { get; set; }
 
         /// <summary>
-        /// Length of time that will be considered when checking the rate limit.
+        /// Length of time in seconds that will be considered when checking the rate limit.
         /// </summary>
         [Input("rateLimitWindow")]
         public Input<int>? RateLimitWindow { get; set; }
@@ -283,7 +314,7 @@ namespace Pulumiverse.Sentry
         private Input<string>? _secret;
 
         /// <summary>
-        /// Secret key portion of the client key.
+        /// The secret key.
         /// </summary>
         public Input<string>? Secret
         {

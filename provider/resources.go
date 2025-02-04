@@ -15,18 +15,21 @@
 package sentry
 
 import (
+	"context"
 	"fmt"
 	"path/filepath"
+	"strings"
 
 	// Enable embedding of package metadata
 	_ "embed"
 
-	"github.com/jianyuan/terraform-provider-sentry/sentry"
+	provShim "github.com/jianyuan/terraform-provider-sentry/shim"
+	pfbridge "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
+	tks "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"
+	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
-	shim "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim"
 	shimv2 "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfshim/sdk-v2"
-	"github.com/pulumi/pulumi/sdk/v3/go/common/resource"
 
 	"github.com/pulumiverse/pulumi-sentry/provider/pkg/version"
 )
@@ -40,31 +43,19 @@ const (
 	mainMod = "index" // the sentry module
 )
 
-// preConfigureCallback is called before the providerConfigure function of the underlying provider.
-// It should validate that the provider can be configured, and provide actionable errors in the case
-// it cannot be. Configuration variables can be read from `vars` using the `stringValue` function -
-// for example `stringValue(vars, "accessKey")`.
-func preConfigureCallback(_ resource.PropertyMap, _ shim.ResourceConfig) error {
-	return nil
-}
-
-// boolRef returns a reference to the bool argument.
-func boolRef(b bool) *bool {
-	return &b
-}
-
 //go:embed cmd/pulumi-resource-sentry/bridge-metadata.json
 var metadata []byte
 
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	// Instantiate the Terraform provider
-	p := shimv2.NewProvider(sentry.NewProvider(version.Version)())
+	p := pfbridge.MuxShimWithPF(context.Background(), shimv2.NewProvider(provShim.SDKProvider(version.Version)), provShim.PFProvider(version.Version))
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
-		P:    p,
-		Name: "sentry",
+		P:       p,
+		Name:    "sentry",
+		Version: version.Version,
 		// DisplayName is a way to be able to change the casing of the provider
 		// name when being displayed on the Pulumi registry
 		DisplayName: "Sentry",
@@ -107,7 +98,7 @@ func Provider() tfbridge.ProviderInfo {
 				Default: &tfbridge.DefaultInfo{
 					EnvVars: []string{"SENTRY_TOKEN"},
 				},
-				Secret: boolRef(true),
+				Secret: tfbridge.True(),
 			},
 			"base_url": {
 				Default: &tfbridge.DefaultInfo{
@@ -115,7 +106,6 @@ func Provider() tfbridge.ProviderInfo {
 				},
 			},
 		},
-		PreConfigureCallback: preConfigureCallback,
 		Resources: map[string]*tfbridge.ResourceInfo{
 			// Map each resource in the Terraform provider to a Pulumi type. Two examples
 			// are below - the single line form is the common case. The multi-line form is
@@ -129,50 +119,43 @@ func Provider() tfbridge.ProviderInfo {
 			// 		"tags": {Type: tfbridge.MakeType(mainPkg, "Tags")},
 			// 	},
 			// },
-			"sentry_key": {
-				Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryKey"),
-				Fields: map[string]*tfbridge.SchemaInfo{
-					"dsn_secret": {Secret: boolRef(true)},
-					"secret":     {Secret: boolRef(true)},
+			"sentry_all_projects_spike_protection": {
+				ComputeID: func(ctx context.Context, state resource.PropertyMap) (resource.ID, error) {
+					organizationId := state["organization"]
+					projectIds := state["projects"]
+
+					if organizationId.IsNull() {
+						return "", fmt.Errorf("organization is required")
+					}
+					if projectIds.IsNull() {
+						return "", fmt.Errorf("organization is required")
+					}
+
+					idParts := []string{organizationId.StringValue()}
+					for _, id := range projectIds.ArrayValue() {
+						idParts = append(idParts, id.StringValue())
+					}
+
+					return resource.ID(strings.Join(idParts, ":")), nil
 				},
 			},
-			"sentry_organization": {
-				Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryOrganization"),
+			"sentry_key": {
+				Fields: map[string]*tfbridge.SchemaInfo{
+					"dsn_secret": {Secret: tfbridge.True()},
+					"secret":     {Secret: tfbridge.True()},
+				},
 			},
-			"sentry_organization_code_mapping": {
-				Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryOrganizationCodeMapping"),
-			},
-			"sentry_organization_member": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryOrganizationMember")},
-			"sentry_organization_repository_github": {
-				Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryOrganizationRepositoryGithub"),
-			},
-			"sentry_project":      {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryProject")},
-			"sentry_plugin":       {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryPlugin")},
-			"sentry_rule":         {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryRule")},
-			"sentry_team":         {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryTeam")},
-			"sentry_dashboard":    {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryDashboard")},
-			"sentry_issue_alert":  {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryIssueAlert")},
-			"sentry_metric_alert": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "SentryMetricAlert")},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			// Map each resource in the Terraform provider to a Pulumi function. An example
 			// is below.
 			// "aws_ami": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getAmi")},
 			"sentry_key": {
-				Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSentryKey"),
 				Fields: map[string]*tfbridge.SchemaInfo{
-					"dsn_secret": {Secret: boolRef(true)},
-					"secret":     {Secret: boolRef(true)},
+					"dsn_secret": {Secret: tfbridge.True()},
+					"secret":     {Secret: tfbridge.True()},
 				},
 			},
-			"sentry_organization": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSentryOrganization")},
-			"sentry_organization_integration": {
-				Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSentryOrganizationIntegration"),
-			},
-			"sentry_team":         {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSentryTeam")},
-			"sentry_dashboard":    {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSentryDashboard")},
-			"sentry_issue_alert":  {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSentryIssueAlert")},
-			"sentry_metric_alert": {Tok: tfbridge.MakeDataSource(mainPkg, mainMod, "getSentryMetricAlert")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@pulumiverse/sentry",
@@ -218,6 +201,17 @@ func Provider() tfbridge.ProviderInfo {
 		},
 	}
 
+	standardFinalizer := tks.MakeStandard(mainPkg)
+	prov.MustComputeTokens(tks.SingleModule("sentry_", mainMod,
+		// Backwards compatibility
+		func(module, name string) (string, error) {
+			if strings.HasPrefix(name, "get") {
+				name = name[:3] + "Sentry" + name[3:]
+			} else {
+				name = "Sentry" + name
+			}
+			return standardFinalizer(module, name)
+		}))
 	prov.SetAutonaming(255, "-")
 	prov.MustApplyAutoAliases()
 

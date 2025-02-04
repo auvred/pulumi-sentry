@@ -65,6 +65,7 @@ import (
 //								Type:             pulumi.String("slack"),
 //								TargetType:       pulumi.String("specific"),
 //								TargetIdentifier: pulumi.String("#slack-channel"),
+//								InputChannelId:   pulumi.String("C0XXXXXXXXX"),
 //								IntegrationId:    pulumi.String(slack.Id),
 //							},
 //						},
@@ -108,10 +109,12 @@ type SentryMetricAlert struct {
 
 	// The aggregation criteria to apply
 	Aggregate pulumi.StringOutput `pulumi:"aggregate"`
+	// An optional int representing the time delta to use as the comparison period, in minutes. Required when using a percentage change threshold
+	ComparisonDelta pulumi.Float64PtrOutput `pulumi:"comparisonDelta"`
 	// The Sentry Alert category
 	Dataset pulumi.StringPtrOutput `pulumi:"dataset"`
 	// Perform Alert rule in a specific environment
-	Environment pulumi.StringOutput `pulumi:"environment"`
+	Environment pulumi.StringPtrOutput `pulumi:"environment"`
 	// The events type of dataset.
 	EventTypes pulumi.StringArrayOutput `pulumi:"eventTypes"`
 	// The internal ID for this metric alert.
@@ -121,7 +124,7 @@ type SentryMetricAlert struct {
 	// The slug of the organization the metric alert belongs to.
 	Organization pulumi.StringOutput `pulumi:"organization"`
 	// Specifies the owner id of this Alert rule
-	Owner pulumi.StringOutput `pulumi:"owner"`
+	Owner pulumi.StringPtrOutput `pulumi:"owner"`
 	// The slug of the project to create the metric alert for.
 	Project pulumi.StringOutput `pulumi:"project"`
 	// The query filter to apply
@@ -188,6 +191,8 @@ func GetSentryMetricAlert(ctx *pulumi.Context,
 type sentryMetricAlertState struct {
 	// The aggregation criteria to apply
 	Aggregate *string `pulumi:"aggregate"`
+	// An optional int representing the time delta to use as the comparison period, in minutes. Required when using a percentage change threshold
+	ComparisonDelta *float64 `pulumi:"comparisonDelta"`
 	// The Sentry Alert category
 	Dataset *string `pulumi:"dataset"`
 	// Perform Alert rule in a specific environment
@@ -218,6 +223,8 @@ type sentryMetricAlertState struct {
 type SentryMetricAlertState struct {
 	// The aggregation criteria to apply
 	Aggregate pulumi.StringPtrInput
+	// An optional int representing the time delta to use as the comparison period, in minutes. Required when using a percentage change threshold
+	ComparisonDelta pulumi.Float64PtrInput
 	// The Sentry Alert category
 	Dataset pulumi.StringPtrInput
 	// Perform Alert rule in a specific environment
@@ -252,6 +259,8 @@ func (SentryMetricAlertState) ElementType() reflect.Type {
 type sentryMetricAlertArgs struct {
 	// The aggregation criteria to apply
 	Aggregate string `pulumi:"aggregate"`
+	// An optional int representing the time delta to use as the comparison period, in minutes. Required when using a percentage change threshold
+	ComparisonDelta *float64 `pulumi:"comparisonDelta"`
 	// The Sentry Alert category
 	Dataset *string `pulumi:"dataset"`
 	// Perform Alert rule in a specific environment
@@ -281,6 +290,8 @@ type sentryMetricAlertArgs struct {
 type SentryMetricAlertArgs struct {
 	// The aggregation criteria to apply
 	Aggregate pulumi.StringInput
+	// An optional int representing the time delta to use as the comparison period, in minutes. Required when using a percentage change threshold
+	ComparisonDelta pulumi.Float64PtrInput
 	// The Sentry Alert category
 	Dataset pulumi.StringPtrInput
 	// Perform Alert rule in a specific environment
@@ -398,14 +409,19 @@ func (o SentryMetricAlertOutput) Aggregate() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryMetricAlert) pulumi.StringOutput { return v.Aggregate }).(pulumi.StringOutput)
 }
 
+// An optional int representing the time delta to use as the comparison period, in minutes. Required when using a percentage change threshold
+func (o SentryMetricAlertOutput) ComparisonDelta() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *SentryMetricAlert) pulumi.Float64PtrOutput { return v.ComparisonDelta }).(pulumi.Float64PtrOutput)
+}
+
 // The Sentry Alert category
 func (o SentryMetricAlertOutput) Dataset() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *SentryMetricAlert) pulumi.StringPtrOutput { return v.Dataset }).(pulumi.StringPtrOutput)
 }
 
 // Perform Alert rule in a specific environment
-func (o SentryMetricAlertOutput) Environment() pulumi.StringOutput {
-	return o.ApplyT(func(v *SentryMetricAlert) pulumi.StringOutput { return v.Environment }).(pulumi.StringOutput)
+func (o SentryMetricAlertOutput) Environment() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryMetricAlert) pulumi.StringPtrOutput { return v.Environment }).(pulumi.StringPtrOutput)
 }
 
 // The events type of dataset.
@@ -429,8 +445,8 @@ func (o SentryMetricAlertOutput) Organization() pulumi.StringOutput {
 }
 
 // Specifies the owner id of this Alert rule
-func (o SentryMetricAlertOutput) Owner() pulumi.StringOutput {
-	return o.ApplyT(func(v *SentryMetricAlert) pulumi.StringOutput { return v.Owner }).(pulumi.StringOutput)
+func (o SentryMetricAlertOutput) Owner() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryMetricAlert) pulumi.StringPtrOutput { return v.Owner }).(pulumi.StringPtrOutput)
 }
 
 // The slug of the project to create the metric alert for.

@@ -15,7 +15,7 @@ var _ = internal.GetEnvOrDefault
 
 type SentryDashboardWidget struct {
 	DisplayType string `pulumi:"displayType"`
-	// The ID of this resource.
+	// The ID of the widget.
 	Id         *string                      `pulumi:"id"`
 	Interval   *string                      `pulumi:"interval"`
 	Layout     SentryDashboardWidgetLayout  `pulumi:"layout"`
@@ -38,7 +38,7 @@ type SentryDashboardWidgetInput interface {
 
 type SentryDashboardWidgetArgs struct {
 	DisplayType pulumi.StringInput `pulumi:"displayType"`
-	// The ID of this resource.
+	// The ID of the widget.
 	Id         pulumi.StringPtrInput                `pulumi:"id"`
 	Interval   pulumi.StringPtrInput                `pulumi:"interval"`
 	Layout     SentryDashboardWidgetLayoutInput     `pulumi:"layout"`
@@ -103,7 +103,7 @@ func (o SentryDashboardWidgetOutput) DisplayType() pulumi.StringOutput {
 	return o.ApplyT(func(v SentryDashboardWidget) string { return v.DisplayType }).(pulumi.StringOutput)
 }
 
-// The ID of this resource.
+// The ID of the widget.
 func (o SentryDashboardWidgetOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SentryDashboardWidget) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -231,7 +231,7 @@ type SentryDashboardWidgetQuery struct {
 	Conditions   *string  `pulumi:"conditions"`
 	FieldAliases []string `pulumi:"fieldAliases"`
 	Fields       []string `pulumi:"fields"`
-	// The ID of this resource.
+	// The ID of the query.
 	Id      *string `pulumi:"id"`
 	Name    *string `pulumi:"name"`
 	OrderBy *string `pulumi:"orderBy"`
@@ -254,7 +254,7 @@ type SentryDashboardWidgetQueryArgs struct {
 	Conditions   pulumi.StringPtrInput   `pulumi:"conditions"`
 	FieldAliases pulumi.StringArrayInput `pulumi:"fieldAliases"`
 	Fields       pulumi.StringArrayInput `pulumi:"fields"`
-	// The ID of this resource.
+	// The ID of the query.
 	Id      pulumi.StringPtrInput `pulumi:"id"`
 	Name    pulumi.StringPtrInput `pulumi:"name"`
 	OrderBy pulumi.StringPtrInput `pulumi:"orderBy"`
@@ -331,7 +331,7 @@ func (o SentryDashboardWidgetQueryOutput) Fields() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v SentryDashboardWidgetQuery) []string { return v.Fields }).(pulumi.StringArrayOutput)
 }
 
-// The ID of this resource.
+// The ID of the query.
 func (o SentryDashboardWidgetQueryOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SentryDashboardWidgetQuery) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -364,10 +364,6172 @@ func (o SentryDashboardWidgetQueryArrayOutput) Index(i pulumi.IntInput) SentryDa
 	}).(SentryDashboardWidgetQueryOutput)
 }
 
+type SentryIssueAlertActionsV2 struct {
+	// Create an Azure DevOps work item in `integration`.
+	AzureDevopsCreateTicket *SentryIssueAlertActionsV2AzureDevopsCreateTicket `pulumi:"azureDevopsCreateTicket"`
+	// Send a notification to the `server` Discord server in the channel with ID or URL: `channelId` and show tags `tags` in the notification.
+	DiscordNotifyService *SentryIssueAlertActionsV2DiscordNotifyService `pulumi:"discordNotifyService"`
+	// Create a GitHub issue in `integration`.
+	GithubCreateTicket *SentryIssueAlertActionsV2GithubCreateTicket `pulumi:"githubCreateTicket"`
+	// Create a GitHub Enterprise issue in `integration`.
+	GithubEnterpriseCreateTicket *SentryIssueAlertActionsV2GithubEnterpriseCreateTicket `pulumi:"githubEnterpriseCreateTicket"`
+	// Create a Jira issue in `integration`.
+	JiraCreateTicket *SentryIssueAlertActionsV2JiraCreateTicket `pulumi:"jiraCreateTicket"`
+	// Create a Jira Server issue in `integration`.
+	JiraServerCreateTicket *SentryIssueAlertActionsV2JiraServerCreateTicket `pulumi:"jiraServerCreateTicket"`
+	// Send a notification to the `team` Team to `channel`.
+	MsteamsNotifyService *SentryIssueAlertActionsV2MsteamsNotifyService `pulumi:"msteamsNotifyService"`
+	// Send a notification to `targetType` and if none can be found then send a notification to `fallthroughType`.
+	NotifyEmail *SentryIssueAlertActionsV2NotifyEmail `pulumi:"notifyEmail"`
+	// Send a notification to all legacy integrations.
+	NotifyEvent *SentryIssueAlertActionsV2NotifyEvent `pulumi:"notifyEvent"`
+	// Send a notification to a Sentry app.
+	NotifyEventSentryApp *SentryIssueAlertActionsV2NotifyEventSentryApp `pulumi:"notifyEventSentryApp"`
+	// Send a notification via an integration.
+	NotifyEventService *SentryIssueAlertActionsV2NotifyEventService `pulumi:"notifyEventService"`
+	// Send a notification to Opsgenie account `account` and team `team` with `priority` priority.
+	OpsgenieNotifyTeam *SentryIssueAlertActionsV2OpsgenieNotifyTeam `pulumi:"opsgenieNotifyTeam"`
+	// Send a notification to PagerDuty account `account` and service `service` with `severity` severity.
+	PagerdutyNotifyService *SentryIssueAlertActionsV2PagerdutyNotifyService `pulumi:"pagerdutyNotifyService"`
+	// Send a notification to the `workspace` Slack workspace to `channel` (optionally, an ID: `channelId`) and show tags `tags` and notes `notes` in notification.
+	SlackNotifyService *SentryIssueAlertActionsV2SlackNotifyService `pulumi:"slackNotifyService"`
+}
+
+// SentryIssueAlertActionsV2Input is an input type that accepts SentryIssueAlertActionsV2Args and SentryIssueAlertActionsV2Output values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2Input` via:
+//
+//	SentryIssueAlertActionsV2Args{...}
+type SentryIssueAlertActionsV2Input interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2Output() SentryIssueAlertActionsV2Output
+	ToSentryIssueAlertActionsV2OutputWithContext(context.Context) SentryIssueAlertActionsV2Output
+}
+
+type SentryIssueAlertActionsV2Args struct {
+	// Create an Azure DevOps work item in `integration`.
+	AzureDevopsCreateTicket SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrInput `pulumi:"azureDevopsCreateTicket"`
+	// Send a notification to the `server` Discord server in the channel with ID or URL: `channelId` and show tags `tags` in the notification.
+	DiscordNotifyService SentryIssueAlertActionsV2DiscordNotifyServicePtrInput `pulumi:"discordNotifyService"`
+	// Create a GitHub issue in `integration`.
+	GithubCreateTicket SentryIssueAlertActionsV2GithubCreateTicketPtrInput `pulumi:"githubCreateTicket"`
+	// Create a GitHub Enterprise issue in `integration`.
+	GithubEnterpriseCreateTicket SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrInput `pulumi:"githubEnterpriseCreateTicket"`
+	// Create a Jira issue in `integration`.
+	JiraCreateTicket SentryIssueAlertActionsV2JiraCreateTicketPtrInput `pulumi:"jiraCreateTicket"`
+	// Create a Jira Server issue in `integration`.
+	JiraServerCreateTicket SentryIssueAlertActionsV2JiraServerCreateTicketPtrInput `pulumi:"jiraServerCreateTicket"`
+	// Send a notification to the `team` Team to `channel`.
+	MsteamsNotifyService SentryIssueAlertActionsV2MsteamsNotifyServicePtrInput `pulumi:"msteamsNotifyService"`
+	// Send a notification to `targetType` and if none can be found then send a notification to `fallthroughType`.
+	NotifyEmail SentryIssueAlertActionsV2NotifyEmailPtrInput `pulumi:"notifyEmail"`
+	// Send a notification to all legacy integrations.
+	NotifyEvent SentryIssueAlertActionsV2NotifyEventPtrInput `pulumi:"notifyEvent"`
+	// Send a notification to a Sentry app.
+	NotifyEventSentryApp SentryIssueAlertActionsV2NotifyEventSentryAppPtrInput `pulumi:"notifyEventSentryApp"`
+	// Send a notification via an integration.
+	NotifyEventService SentryIssueAlertActionsV2NotifyEventServicePtrInput `pulumi:"notifyEventService"`
+	// Send a notification to Opsgenie account `account` and team `team` with `priority` priority.
+	OpsgenieNotifyTeam SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrInput `pulumi:"opsgenieNotifyTeam"`
+	// Send a notification to PagerDuty account `account` and service `service` with `severity` severity.
+	PagerdutyNotifyService SentryIssueAlertActionsV2PagerdutyNotifyServicePtrInput `pulumi:"pagerdutyNotifyService"`
+	// Send a notification to the `workspace` Slack workspace to `channel` (optionally, an ID: `channelId`) and show tags `tags` and notes `notes` in notification.
+	SlackNotifyService SentryIssueAlertActionsV2SlackNotifyServicePtrInput `pulumi:"slackNotifyService"`
+}
+
+func (SentryIssueAlertActionsV2Args) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2Args) ToSentryIssueAlertActionsV2Output() SentryIssueAlertActionsV2Output {
+	return i.ToSentryIssueAlertActionsV2OutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2Args) ToSentryIssueAlertActionsV2OutputWithContext(ctx context.Context) SentryIssueAlertActionsV2Output {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2Output)
+}
+
+// SentryIssueAlertActionsV2ArrayInput is an input type that accepts SentryIssueAlertActionsV2Array and SentryIssueAlertActionsV2ArrayOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2ArrayInput` via:
+//
+//	SentryIssueAlertActionsV2Array{ SentryIssueAlertActionsV2Args{...} }
+type SentryIssueAlertActionsV2ArrayInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2ArrayOutput() SentryIssueAlertActionsV2ArrayOutput
+	ToSentryIssueAlertActionsV2ArrayOutputWithContext(context.Context) SentryIssueAlertActionsV2ArrayOutput
+}
+
+type SentryIssueAlertActionsV2Array []SentryIssueAlertActionsV2Input
+
+func (SentryIssueAlertActionsV2Array) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SentryIssueAlertActionsV2)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2Array) ToSentryIssueAlertActionsV2ArrayOutput() SentryIssueAlertActionsV2ArrayOutput {
+	return i.ToSentryIssueAlertActionsV2ArrayOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2Array) ToSentryIssueAlertActionsV2ArrayOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2ArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2ArrayOutput)
+}
+
+type SentryIssueAlertActionsV2Output struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2Output) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2Output) ToSentryIssueAlertActionsV2Output() SentryIssueAlertActionsV2Output {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2Output) ToSentryIssueAlertActionsV2OutputWithContext(ctx context.Context) SentryIssueAlertActionsV2Output {
+	return o
+}
+
+// Create an Azure DevOps work item in `integration`.
+func (o SentryIssueAlertActionsV2Output) AzureDevopsCreateTicket() SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2) *SentryIssueAlertActionsV2AzureDevopsCreateTicket {
+		return v.AzureDevopsCreateTicket
+	}).(SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput)
+}
+
+// Send a notification to the `server` Discord server in the channel with ID or URL: `channelId` and show tags `tags` in the notification.
+func (o SentryIssueAlertActionsV2Output) DiscordNotifyService() SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2) *SentryIssueAlertActionsV2DiscordNotifyService {
+		return v.DiscordNotifyService
+	}).(SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput)
+}
+
+// Create a GitHub issue in `integration`.
+func (o SentryIssueAlertActionsV2Output) GithubCreateTicket() SentryIssueAlertActionsV2GithubCreateTicketPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2) *SentryIssueAlertActionsV2GithubCreateTicket {
+		return v.GithubCreateTicket
+	}).(SentryIssueAlertActionsV2GithubCreateTicketPtrOutput)
+}
+
+// Create a GitHub Enterprise issue in `integration`.
+func (o SentryIssueAlertActionsV2Output) GithubEnterpriseCreateTicket() SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2) *SentryIssueAlertActionsV2GithubEnterpriseCreateTicket {
+		return v.GithubEnterpriseCreateTicket
+	}).(SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput)
+}
+
+// Create a Jira issue in `integration`.
+func (o SentryIssueAlertActionsV2Output) JiraCreateTicket() SentryIssueAlertActionsV2JiraCreateTicketPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2) *SentryIssueAlertActionsV2JiraCreateTicket {
+		return v.JiraCreateTicket
+	}).(SentryIssueAlertActionsV2JiraCreateTicketPtrOutput)
+}
+
+// Create a Jira Server issue in `integration`.
+func (o SentryIssueAlertActionsV2Output) JiraServerCreateTicket() SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2) *SentryIssueAlertActionsV2JiraServerCreateTicket {
+		return v.JiraServerCreateTicket
+	}).(SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput)
+}
+
+// Send a notification to the `team` Team to `channel`.
+func (o SentryIssueAlertActionsV2Output) MsteamsNotifyService() SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2) *SentryIssueAlertActionsV2MsteamsNotifyService {
+		return v.MsteamsNotifyService
+	}).(SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput)
+}
+
+// Send a notification to `targetType` and if none can be found then send a notification to `fallthroughType`.
+func (o SentryIssueAlertActionsV2Output) NotifyEmail() SentryIssueAlertActionsV2NotifyEmailPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2) *SentryIssueAlertActionsV2NotifyEmail { return v.NotifyEmail }).(SentryIssueAlertActionsV2NotifyEmailPtrOutput)
+}
+
+// Send a notification to all legacy integrations.
+func (o SentryIssueAlertActionsV2Output) NotifyEvent() SentryIssueAlertActionsV2NotifyEventPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2) *SentryIssueAlertActionsV2NotifyEvent { return v.NotifyEvent }).(SentryIssueAlertActionsV2NotifyEventPtrOutput)
+}
+
+// Send a notification to a Sentry app.
+func (o SentryIssueAlertActionsV2Output) NotifyEventSentryApp() SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2) *SentryIssueAlertActionsV2NotifyEventSentryApp {
+		return v.NotifyEventSentryApp
+	}).(SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput)
+}
+
+// Send a notification via an integration.
+func (o SentryIssueAlertActionsV2Output) NotifyEventService() SentryIssueAlertActionsV2NotifyEventServicePtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2) *SentryIssueAlertActionsV2NotifyEventService {
+		return v.NotifyEventService
+	}).(SentryIssueAlertActionsV2NotifyEventServicePtrOutput)
+}
+
+// Send a notification to Opsgenie account `account` and team `team` with `priority` priority.
+func (o SentryIssueAlertActionsV2Output) OpsgenieNotifyTeam() SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2) *SentryIssueAlertActionsV2OpsgenieNotifyTeam {
+		return v.OpsgenieNotifyTeam
+	}).(SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput)
+}
+
+// Send a notification to PagerDuty account `account` and service `service` with `severity` severity.
+func (o SentryIssueAlertActionsV2Output) PagerdutyNotifyService() SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2) *SentryIssueAlertActionsV2PagerdutyNotifyService {
+		return v.PagerdutyNotifyService
+	}).(SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput)
+}
+
+// Send a notification to the `workspace` Slack workspace to `channel` (optionally, an ID: `channelId`) and show tags `tags` and notes `notes` in notification.
+func (o SentryIssueAlertActionsV2Output) SlackNotifyService() SentryIssueAlertActionsV2SlackNotifyServicePtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2) *SentryIssueAlertActionsV2SlackNotifyService {
+		return v.SlackNotifyService
+	}).(SentryIssueAlertActionsV2SlackNotifyServicePtrOutput)
+}
+
+type SentryIssueAlertActionsV2ArrayOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2ArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SentryIssueAlertActionsV2)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2ArrayOutput) ToSentryIssueAlertActionsV2ArrayOutput() SentryIssueAlertActionsV2ArrayOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2ArrayOutput) ToSentryIssueAlertActionsV2ArrayOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2ArrayOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2ArrayOutput) Index(i pulumi.IntInput) SentryIssueAlertActionsV2Output {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SentryIssueAlertActionsV2 {
+		return vs[0].([]SentryIssueAlertActionsV2)[vs[1].(int)]
+	}).(SentryIssueAlertActionsV2Output)
+}
+
+type SentryIssueAlertActionsV2AzureDevopsCreateTicket struct {
+	// The integration ID.
+	Integration string  `pulumi:"integration"`
+	Name        *string `pulumi:"name"`
+	// The ID of the Azure DevOps project.
+	Project string `pulumi:"project"`
+	// The type of work item to create.
+	WorkItemType string `pulumi:"workItemType"`
+}
+
+// SentryIssueAlertActionsV2AzureDevopsCreateTicketInput is an input type that accepts SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs and SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2AzureDevopsCreateTicketInput` via:
+//
+//	SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs{...}
+type SentryIssueAlertActionsV2AzureDevopsCreateTicketInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput() SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput
+	ToSentryIssueAlertActionsV2AzureDevopsCreateTicketOutputWithContext(context.Context) SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput
+}
+
+type SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs struct {
+	// The integration ID.
+	Integration pulumi.StringInput    `pulumi:"integration"`
+	Name        pulumi.StringPtrInput `pulumi:"name"`
+	// The ID of the Azure DevOps project.
+	Project pulumi.StringInput `pulumi:"project"`
+	// The type of work item to create.
+	WorkItemType pulumi.StringInput `pulumi:"workItemType"`
+}
+
+func (SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2AzureDevopsCreateTicket)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs) ToSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput() SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput {
+	return i.ToSentryIssueAlertActionsV2AzureDevopsCreateTicketOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs) ToSentryIssueAlertActionsV2AzureDevopsCreateTicketOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput)
+}
+
+func (i SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs) ToSentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput() SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput {
+	return i.ToSentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs) ToSentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput).ToSentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrInput is an input type that accepts SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs, SentryIssueAlertActionsV2AzureDevopsCreateTicketPtr and SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrInput` via:
+//
+//	        SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput() SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput
+	ToSentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutputWithContext(context.Context) SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput
+}
+
+type sentryIssueAlertActionsV2AzureDevopsCreateTicketPtrType SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs
+
+func SentryIssueAlertActionsV2AzureDevopsCreateTicketPtr(v *SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs) SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrInput {
+	return (*sentryIssueAlertActionsV2AzureDevopsCreateTicketPtrType)(v)
+}
+
+func (*sentryIssueAlertActionsV2AzureDevopsCreateTicketPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2AzureDevopsCreateTicket)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertActionsV2AzureDevopsCreateTicketPtrType) ToSentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput() SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput {
+	return i.ToSentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertActionsV2AzureDevopsCreateTicketPtrType) ToSentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput)
+}
+
+type SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2AzureDevopsCreateTicket)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput) ToSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput() SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput) ToSentryIssueAlertActionsV2AzureDevopsCreateTicketOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput) ToSentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput() SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput {
+	return o.ToSentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput) ToSentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertActionsV2AzureDevopsCreateTicket) *SentryIssueAlertActionsV2AzureDevopsCreateTicket {
+		return &v
+	}).(SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput)
+}
+
+// The integration ID.
+func (o SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput) Integration() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2AzureDevopsCreateTicket) string { return v.Integration }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2AzureDevopsCreateTicket) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Azure DevOps project.
+func (o SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput) Project() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2AzureDevopsCreateTicket) string { return v.Project }).(pulumi.StringOutput)
+}
+
+// The type of work item to create.
+func (o SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput) WorkItemType() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2AzureDevopsCreateTicket) string { return v.WorkItemType }).(pulumi.StringOutput)
+}
+
+type SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2AzureDevopsCreateTicket)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput) ToSentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput() SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput) ToSentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput) Elem() SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2AzureDevopsCreateTicket) SentryIssueAlertActionsV2AzureDevopsCreateTicket {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertActionsV2AzureDevopsCreateTicket
+		return ret
+	}).(SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput)
+}
+
+// The integration ID.
+func (o SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput) Integration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2AzureDevopsCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Integration
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2AzureDevopsCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Azure DevOps project.
+func (o SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput) Project() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2AzureDevopsCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Project
+	}).(pulumi.StringPtrOutput)
+}
+
+// The type of work item to create.
+func (o SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput) WorkItemType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2AzureDevopsCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.WorkItemType
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertActionsV2DiscordNotifyService struct {
+	// The ID of the channel to send the notification to. You must enter either a channel ID or a channel URL, not a channel name
+	ChannelId string  `pulumi:"channelId"`
+	Name      *string `pulumi:"name"`
+	// The integration ID associated with the Discord server.
+	Server string `pulumi:"server"`
+	// A string of tags to show in the notification.
+	Tags []string `pulumi:"tags"`
+}
+
+// SentryIssueAlertActionsV2DiscordNotifyServiceInput is an input type that accepts SentryIssueAlertActionsV2DiscordNotifyServiceArgs and SentryIssueAlertActionsV2DiscordNotifyServiceOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2DiscordNotifyServiceInput` via:
+//
+//	SentryIssueAlertActionsV2DiscordNotifyServiceArgs{...}
+type SentryIssueAlertActionsV2DiscordNotifyServiceInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2DiscordNotifyServiceOutput() SentryIssueAlertActionsV2DiscordNotifyServiceOutput
+	ToSentryIssueAlertActionsV2DiscordNotifyServiceOutputWithContext(context.Context) SentryIssueAlertActionsV2DiscordNotifyServiceOutput
+}
+
+type SentryIssueAlertActionsV2DiscordNotifyServiceArgs struct {
+	// The ID of the channel to send the notification to. You must enter either a channel ID or a channel URL, not a channel name
+	ChannelId pulumi.StringInput    `pulumi:"channelId"`
+	Name      pulumi.StringPtrInput `pulumi:"name"`
+	// The integration ID associated with the Discord server.
+	Server pulumi.StringInput `pulumi:"server"`
+	// A string of tags to show in the notification.
+	Tags pulumi.StringArrayInput `pulumi:"tags"`
+}
+
+func (SentryIssueAlertActionsV2DiscordNotifyServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2DiscordNotifyService)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2DiscordNotifyServiceArgs) ToSentryIssueAlertActionsV2DiscordNotifyServiceOutput() SentryIssueAlertActionsV2DiscordNotifyServiceOutput {
+	return i.ToSentryIssueAlertActionsV2DiscordNotifyServiceOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2DiscordNotifyServiceArgs) ToSentryIssueAlertActionsV2DiscordNotifyServiceOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2DiscordNotifyServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2DiscordNotifyServiceOutput)
+}
+
+func (i SentryIssueAlertActionsV2DiscordNotifyServiceArgs) ToSentryIssueAlertActionsV2DiscordNotifyServicePtrOutput() SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput {
+	return i.ToSentryIssueAlertActionsV2DiscordNotifyServicePtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2DiscordNotifyServiceArgs) ToSentryIssueAlertActionsV2DiscordNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2DiscordNotifyServiceOutput).ToSentryIssueAlertActionsV2DiscordNotifyServicePtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertActionsV2DiscordNotifyServicePtrInput is an input type that accepts SentryIssueAlertActionsV2DiscordNotifyServiceArgs, SentryIssueAlertActionsV2DiscordNotifyServicePtr and SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2DiscordNotifyServicePtrInput` via:
+//
+//	        SentryIssueAlertActionsV2DiscordNotifyServiceArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertActionsV2DiscordNotifyServicePtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2DiscordNotifyServicePtrOutput() SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput
+	ToSentryIssueAlertActionsV2DiscordNotifyServicePtrOutputWithContext(context.Context) SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput
+}
+
+type sentryIssueAlertActionsV2DiscordNotifyServicePtrType SentryIssueAlertActionsV2DiscordNotifyServiceArgs
+
+func SentryIssueAlertActionsV2DiscordNotifyServicePtr(v *SentryIssueAlertActionsV2DiscordNotifyServiceArgs) SentryIssueAlertActionsV2DiscordNotifyServicePtrInput {
+	return (*sentryIssueAlertActionsV2DiscordNotifyServicePtrType)(v)
+}
+
+func (*sentryIssueAlertActionsV2DiscordNotifyServicePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2DiscordNotifyService)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertActionsV2DiscordNotifyServicePtrType) ToSentryIssueAlertActionsV2DiscordNotifyServicePtrOutput() SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput {
+	return i.ToSentryIssueAlertActionsV2DiscordNotifyServicePtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertActionsV2DiscordNotifyServicePtrType) ToSentryIssueAlertActionsV2DiscordNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput)
+}
+
+type SentryIssueAlertActionsV2DiscordNotifyServiceOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2DiscordNotifyServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2DiscordNotifyService)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2DiscordNotifyServiceOutput) ToSentryIssueAlertActionsV2DiscordNotifyServiceOutput() SentryIssueAlertActionsV2DiscordNotifyServiceOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2DiscordNotifyServiceOutput) ToSentryIssueAlertActionsV2DiscordNotifyServiceOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2DiscordNotifyServiceOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2DiscordNotifyServiceOutput) ToSentryIssueAlertActionsV2DiscordNotifyServicePtrOutput() SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput {
+	return o.ToSentryIssueAlertActionsV2DiscordNotifyServicePtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertActionsV2DiscordNotifyServiceOutput) ToSentryIssueAlertActionsV2DiscordNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertActionsV2DiscordNotifyService) *SentryIssueAlertActionsV2DiscordNotifyService {
+		return &v
+	}).(SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput)
+}
+
+// The ID of the channel to send the notification to. You must enter either a channel ID or a channel URL, not a channel name
+func (o SentryIssueAlertActionsV2DiscordNotifyServiceOutput) ChannelId() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2DiscordNotifyService) string { return v.ChannelId }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertActionsV2DiscordNotifyServiceOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2DiscordNotifyService) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// The integration ID associated with the Discord server.
+func (o SentryIssueAlertActionsV2DiscordNotifyServiceOutput) Server() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2DiscordNotifyService) string { return v.Server }).(pulumi.StringOutput)
+}
+
+// A string of tags to show in the notification.
+func (o SentryIssueAlertActionsV2DiscordNotifyServiceOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2DiscordNotifyService) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2DiscordNotifyService)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput) ToSentryIssueAlertActionsV2DiscordNotifyServicePtrOutput() SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput) ToSentryIssueAlertActionsV2DiscordNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput) Elem() SentryIssueAlertActionsV2DiscordNotifyServiceOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2DiscordNotifyService) SentryIssueAlertActionsV2DiscordNotifyService {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertActionsV2DiscordNotifyService
+		return ret
+	}).(SentryIssueAlertActionsV2DiscordNotifyServiceOutput)
+}
+
+// The ID of the channel to send the notification to. You must enter either a channel ID or a channel URL, not a channel name
+func (o SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput) ChannelId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2DiscordNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ChannelId
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2DiscordNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// The integration ID associated with the Discord server.
+func (o SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput) Server() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2DiscordNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Server
+	}).(pulumi.StringPtrOutput)
+}
+
+// A string of tags to show in the notification.
+func (o SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2DiscordNotifyService) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
+}
+
+type SentryIssueAlertActionsV2GithubCreateTicket struct {
+	// The GitHub user to assign the issue to.
+	Assignee *string `pulumi:"assignee"`
+	// The integration ID associated with GitHub.
+	Integration string `pulumi:"integration"`
+	// A list of labels to assign to the issue.
+	Labels []string `pulumi:"labels"`
+	Name   *string  `pulumi:"name"`
+	// The name of the repository to create the issue in.
+	Repo string `pulumi:"repo"`
+}
+
+// SentryIssueAlertActionsV2GithubCreateTicketInput is an input type that accepts SentryIssueAlertActionsV2GithubCreateTicketArgs and SentryIssueAlertActionsV2GithubCreateTicketOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2GithubCreateTicketInput` via:
+//
+//	SentryIssueAlertActionsV2GithubCreateTicketArgs{...}
+type SentryIssueAlertActionsV2GithubCreateTicketInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2GithubCreateTicketOutput() SentryIssueAlertActionsV2GithubCreateTicketOutput
+	ToSentryIssueAlertActionsV2GithubCreateTicketOutputWithContext(context.Context) SentryIssueAlertActionsV2GithubCreateTicketOutput
+}
+
+type SentryIssueAlertActionsV2GithubCreateTicketArgs struct {
+	// The GitHub user to assign the issue to.
+	Assignee pulumi.StringPtrInput `pulumi:"assignee"`
+	// The integration ID associated with GitHub.
+	Integration pulumi.StringInput `pulumi:"integration"`
+	// A list of labels to assign to the issue.
+	Labels pulumi.StringArrayInput `pulumi:"labels"`
+	Name   pulumi.StringPtrInput   `pulumi:"name"`
+	// The name of the repository to create the issue in.
+	Repo pulumi.StringInput `pulumi:"repo"`
+}
+
+func (SentryIssueAlertActionsV2GithubCreateTicketArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2GithubCreateTicket)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2GithubCreateTicketArgs) ToSentryIssueAlertActionsV2GithubCreateTicketOutput() SentryIssueAlertActionsV2GithubCreateTicketOutput {
+	return i.ToSentryIssueAlertActionsV2GithubCreateTicketOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2GithubCreateTicketArgs) ToSentryIssueAlertActionsV2GithubCreateTicketOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2GithubCreateTicketOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2GithubCreateTicketOutput)
+}
+
+func (i SentryIssueAlertActionsV2GithubCreateTicketArgs) ToSentryIssueAlertActionsV2GithubCreateTicketPtrOutput() SentryIssueAlertActionsV2GithubCreateTicketPtrOutput {
+	return i.ToSentryIssueAlertActionsV2GithubCreateTicketPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2GithubCreateTicketArgs) ToSentryIssueAlertActionsV2GithubCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2GithubCreateTicketPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2GithubCreateTicketOutput).ToSentryIssueAlertActionsV2GithubCreateTicketPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertActionsV2GithubCreateTicketPtrInput is an input type that accepts SentryIssueAlertActionsV2GithubCreateTicketArgs, SentryIssueAlertActionsV2GithubCreateTicketPtr and SentryIssueAlertActionsV2GithubCreateTicketPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2GithubCreateTicketPtrInput` via:
+//
+//	        SentryIssueAlertActionsV2GithubCreateTicketArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertActionsV2GithubCreateTicketPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2GithubCreateTicketPtrOutput() SentryIssueAlertActionsV2GithubCreateTicketPtrOutput
+	ToSentryIssueAlertActionsV2GithubCreateTicketPtrOutputWithContext(context.Context) SentryIssueAlertActionsV2GithubCreateTicketPtrOutput
+}
+
+type sentryIssueAlertActionsV2GithubCreateTicketPtrType SentryIssueAlertActionsV2GithubCreateTicketArgs
+
+func SentryIssueAlertActionsV2GithubCreateTicketPtr(v *SentryIssueAlertActionsV2GithubCreateTicketArgs) SentryIssueAlertActionsV2GithubCreateTicketPtrInput {
+	return (*sentryIssueAlertActionsV2GithubCreateTicketPtrType)(v)
+}
+
+func (*sentryIssueAlertActionsV2GithubCreateTicketPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2GithubCreateTicket)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertActionsV2GithubCreateTicketPtrType) ToSentryIssueAlertActionsV2GithubCreateTicketPtrOutput() SentryIssueAlertActionsV2GithubCreateTicketPtrOutput {
+	return i.ToSentryIssueAlertActionsV2GithubCreateTicketPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertActionsV2GithubCreateTicketPtrType) ToSentryIssueAlertActionsV2GithubCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2GithubCreateTicketPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2GithubCreateTicketPtrOutput)
+}
+
+type SentryIssueAlertActionsV2GithubCreateTicketOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2GithubCreateTicketOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2GithubCreateTicket)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2GithubCreateTicketOutput) ToSentryIssueAlertActionsV2GithubCreateTicketOutput() SentryIssueAlertActionsV2GithubCreateTicketOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2GithubCreateTicketOutput) ToSentryIssueAlertActionsV2GithubCreateTicketOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2GithubCreateTicketOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2GithubCreateTicketOutput) ToSentryIssueAlertActionsV2GithubCreateTicketPtrOutput() SentryIssueAlertActionsV2GithubCreateTicketPtrOutput {
+	return o.ToSentryIssueAlertActionsV2GithubCreateTicketPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertActionsV2GithubCreateTicketOutput) ToSentryIssueAlertActionsV2GithubCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2GithubCreateTicketPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertActionsV2GithubCreateTicket) *SentryIssueAlertActionsV2GithubCreateTicket {
+		return &v
+	}).(SentryIssueAlertActionsV2GithubCreateTicketPtrOutput)
+}
+
+// The GitHub user to assign the issue to.
+func (o SentryIssueAlertActionsV2GithubCreateTicketOutput) Assignee() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2GithubCreateTicket) *string { return v.Assignee }).(pulumi.StringPtrOutput)
+}
+
+// The integration ID associated with GitHub.
+func (o SentryIssueAlertActionsV2GithubCreateTicketOutput) Integration() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2GithubCreateTicket) string { return v.Integration }).(pulumi.StringOutput)
+}
+
+// A list of labels to assign to the issue.
+func (o SentryIssueAlertActionsV2GithubCreateTicketOutput) Labels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2GithubCreateTicket) []string { return v.Labels }).(pulumi.StringArrayOutput)
+}
+
+func (o SentryIssueAlertActionsV2GithubCreateTicketOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2GithubCreateTicket) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// The name of the repository to create the issue in.
+func (o SentryIssueAlertActionsV2GithubCreateTicketOutput) Repo() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2GithubCreateTicket) string { return v.Repo }).(pulumi.StringOutput)
+}
+
+type SentryIssueAlertActionsV2GithubCreateTicketPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2GithubCreateTicketPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2GithubCreateTicket)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2GithubCreateTicketPtrOutput) ToSentryIssueAlertActionsV2GithubCreateTicketPtrOutput() SentryIssueAlertActionsV2GithubCreateTicketPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2GithubCreateTicketPtrOutput) ToSentryIssueAlertActionsV2GithubCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2GithubCreateTicketPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2GithubCreateTicketPtrOutput) Elem() SentryIssueAlertActionsV2GithubCreateTicketOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2GithubCreateTicket) SentryIssueAlertActionsV2GithubCreateTicket {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertActionsV2GithubCreateTicket
+		return ret
+	}).(SentryIssueAlertActionsV2GithubCreateTicketOutput)
+}
+
+// The GitHub user to assign the issue to.
+func (o SentryIssueAlertActionsV2GithubCreateTicketPtrOutput) Assignee() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2GithubCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Assignee
+	}).(pulumi.StringPtrOutput)
+}
+
+// The integration ID associated with GitHub.
+func (o SentryIssueAlertActionsV2GithubCreateTicketPtrOutput) Integration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2GithubCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Integration
+	}).(pulumi.StringPtrOutput)
+}
+
+// A list of labels to assign to the issue.
+func (o SentryIssueAlertActionsV2GithubCreateTicketPtrOutput) Labels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2GithubCreateTicket) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Labels
+	}).(pulumi.StringArrayOutput)
+}
+
+func (o SentryIssueAlertActionsV2GithubCreateTicketPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2GithubCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the repository to create the issue in.
+func (o SentryIssueAlertActionsV2GithubCreateTicketPtrOutput) Repo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2GithubCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Repo
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertActionsV2GithubEnterpriseCreateTicket struct {
+	// The GitHub user to assign the issue to.
+	Assignee *string `pulumi:"assignee"`
+	// The integration ID associated with GitHub Enterprise.
+	Integration string `pulumi:"integration"`
+	// A list of labels to assign to the issue.
+	Labels []string `pulumi:"labels"`
+	Name   *string  `pulumi:"name"`
+	// The name of the repository to create the issue in.
+	Repo string `pulumi:"repo"`
+}
+
+// SentryIssueAlertActionsV2GithubEnterpriseCreateTicketInput is an input type that accepts SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs and SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2GithubEnterpriseCreateTicketInput` via:
+//
+//	SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs{...}
+type SentryIssueAlertActionsV2GithubEnterpriseCreateTicketInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput() SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput
+	ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutputWithContext(context.Context) SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput
+}
+
+type SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs struct {
+	// The GitHub user to assign the issue to.
+	Assignee pulumi.StringPtrInput `pulumi:"assignee"`
+	// The integration ID associated with GitHub Enterprise.
+	Integration pulumi.StringInput `pulumi:"integration"`
+	// A list of labels to assign to the issue.
+	Labels pulumi.StringArrayInput `pulumi:"labels"`
+	Name   pulumi.StringPtrInput   `pulumi:"name"`
+	// The name of the repository to create the issue in.
+	Repo pulumi.StringInput `pulumi:"repo"`
+}
+
+func (SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2GithubEnterpriseCreateTicket)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs) ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput() SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput {
+	return i.ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs) ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput)
+}
+
+func (i SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs) ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput() SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput {
+	return i.ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs) ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput).ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrInput is an input type that accepts SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs, SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtr and SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrInput` via:
+//
+//	        SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput() SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput
+	ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutputWithContext(context.Context) SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput
+}
+
+type sentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrType SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs
+
+func SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtr(v *SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs) SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrInput {
+	return (*sentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrType)(v)
+}
+
+func (*sentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2GithubEnterpriseCreateTicket)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrType) ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput() SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput {
+	return i.ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrType) ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput)
+}
+
+type SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2GithubEnterpriseCreateTicket)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput() SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput() SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput {
+	return o.ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertActionsV2GithubEnterpriseCreateTicket) *SentryIssueAlertActionsV2GithubEnterpriseCreateTicket {
+		return &v
+	}).(SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput)
+}
+
+// The GitHub user to assign the issue to.
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) Assignee() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2GithubEnterpriseCreateTicket) *string { return v.Assignee }).(pulumi.StringPtrOutput)
+}
+
+// The integration ID associated with GitHub Enterprise.
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) Integration() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2GithubEnterpriseCreateTicket) string { return v.Integration }).(pulumi.StringOutput)
+}
+
+// A list of labels to assign to the issue.
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) Labels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2GithubEnterpriseCreateTicket) []string { return v.Labels }).(pulumi.StringArrayOutput)
+}
+
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2GithubEnterpriseCreateTicket) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// The name of the repository to create the issue in.
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) Repo() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2GithubEnterpriseCreateTicket) string { return v.Repo }).(pulumi.StringOutput)
+}
+
+type SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2GithubEnterpriseCreateTicket)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput) ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput() SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput) ToSentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput) Elem() SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2GithubEnterpriseCreateTicket) SentryIssueAlertActionsV2GithubEnterpriseCreateTicket {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertActionsV2GithubEnterpriseCreateTicket
+		return ret
+	}).(SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput)
+}
+
+// The GitHub user to assign the issue to.
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput) Assignee() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2GithubEnterpriseCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Assignee
+	}).(pulumi.StringPtrOutput)
+}
+
+// The integration ID associated with GitHub Enterprise.
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput) Integration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2GithubEnterpriseCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Integration
+	}).(pulumi.StringPtrOutput)
+}
+
+// A list of labels to assign to the issue.
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput) Labels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2GithubEnterpriseCreateTicket) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Labels
+	}).(pulumi.StringArrayOutput)
+}
+
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2GithubEnterpriseCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// The name of the repository to create the issue in.
+func (o SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput) Repo() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2GithubEnterpriseCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Repo
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertActionsV2JiraCreateTicket struct {
+	// The integration ID associated with Jira.
+	Integration string `pulumi:"integration"`
+	// The ID of the type of issue that the ticket should be created as.
+	IssueType string  `pulumi:"issueType"`
+	Name      *string `pulumi:"name"`
+	// The ID of the Jira project.
+	Project string `pulumi:"project"`
+}
+
+// SentryIssueAlertActionsV2JiraCreateTicketInput is an input type that accepts SentryIssueAlertActionsV2JiraCreateTicketArgs and SentryIssueAlertActionsV2JiraCreateTicketOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2JiraCreateTicketInput` via:
+//
+//	SentryIssueAlertActionsV2JiraCreateTicketArgs{...}
+type SentryIssueAlertActionsV2JiraCreateTicketInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2JiraCreateTicketOutput() SentryIssueAlertActionsV2JiraCreateTicketOutput
+	ToSentryIssueAlertActionsV2JiraCreateTicketOutputWithContext(context.Context) SentryIssueAlertActionsV2JiraCreateTicketOutput
+}
+
+type SentryIssueAlertActionsV2JiraCreateTicketArgs struct {
+	// The integration ID associated with Jira.
+	Integration pulumi.StringInput `pulumi:"integration"`
+	// The ID of the type of issue that the ticket should be created as.
+	IssueType pulumi.StringInput    `pulumi:"issueType"`
+	Name      pulumi.StringPtrInput `pulumi:"name"`
+	// The ID of the Jira project.
+	Project pulumi.StringInput `pulumi:"project"`
+}
+
+func (SentryIssueAlertActionsV2JiraCreateTicketArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2JiraCreateTicket)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2JiraCreateTicketArgs) ToSentryIssueAlertActionsV2JiraCreateTicketOutput() SentryIssueAlertActionsV2JiraCreateTicketOutput {
+	return i.ToSentryIssueAlertActionsV2JiraCreateTicketOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2JiraCreateTicketArgs) ToSentryIssueAlertActionsV2JiraCreateTicketOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2JiraCreateTicketOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2JiraCreateTicketOutput)
+}
+
+func (i SentryIssueAlertActionsV2JiraCreateTicketArgs) ToSentryIssueAlertActionsV2JiraCreateTicketPtrOutput() SentryIssueAlertActionsV2JiraCreateTicketPtrOutput {
+	return i.ToSentryIssueAlertActionsV2JiraCreateTicketPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2JiraCreateTicketArgs) ToSentryIssueAlertActionsV2JiraCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2JiraCreateTicketPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2JiraCreateTicketOutput).ToSentryIssueAlertActionsV2JiraCreateTicketPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertActionsV2JiraCreateTicketPtrInput is an input type that accepts SentryIssueAlertActionsV2JiraCreateTicketArgs, SentryIssueAlertActionsV2JiraCreateTicketPtr and SentryIssueAlertActionsV2JiraCreateTicketPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2JiraCreateTicketPtrInput` via:
+//
+//	        SentryIssueAlertActionsV2JiraCreateTicketArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertActionsV2JiraCreateTicketPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2JiraCreateTicketPtrOutput() SentryIssueAlertActionsV2JiraCreateTicketPtrOutput
+	ToSentryIssueAlertActionsV2JiraCreateTicketPtrOutputWithContext(context.Context) SentryIssueAlertActionsV2JiraCreateTicketPtrOutput
+}
+
+type sentryIssueAlertActionsV2JiraCreateTicketPtrType SentryIssueAlertActionsV2JiraCreateTicketArgs
+
+func SentryIssueAlertActionsV2JiraCreateTicketPtr(v *SentryIssueAlertActionsV2JiraCreateTicketArgs) SentryIssueAlertActionsV2JiraCreateTicketPtrInput {
+	return (*sentryIssueAlertActionsV2JiraCreateTicketPtrType)(v)
+}
+
+func (*sentryIssueAlertActionsV2JiraCreateTicketPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2JiraCreateTicket)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertActionsV2JiraCreateTicketPtrType) ToSentryIssueAlertActionsV2JiraCreateTicketPtrOutput() SentryIssueAlertActionsV2JiraCreateTicketPtrOutput {
+	return i.ToSentryIssueAlertActionsV2JiraCreateTicketPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertActionsV2JiraCreateTicketPtrType) ToSentryIssueAlertActionsV2JiraCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2JiraCreateTicketPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2JiraCreateTicketPtrOutput)
+}
+
+type SentryIssueAlertActionsV2JiraCreateTicketOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2JiraCreateTicketOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2JiraCreateTicket)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2JiraCreateTicketOutput) ToSentryIssueAlertActionsV2JiraCreateTicketOutput() SentryIssueAlertActionsV2JiraCreateTicketOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2JiraCreateTicketOutput) ToSentryIssueAlertActionsV2JiraCreateTicketOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2JiraCreateTicketOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2JiraCreateTicketOutput) ToSentryIssueAlertActionsV2JiraCreateTicketPtrOutput() SentryIssueAlertActionsV2JiraCreateTicketPtrOutput {
+	return o.ToSentryIssueAlertActionsV2JiraCreateTicketPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertActionsV2JiraCreateTicketOutput) ToSentryIssueAlertActionsV2JiraCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2JiraCreateTicketPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertActionsV2JiraCreateTicket) *SentryIssueAlertActionsV2JiraCreateTicket {
+		return &v
+	}).(SentryIssueAlertActionsV2JiraCreateTicketPtrOutput)
+}
+
+// The integration ID associated with Jira.
+func (o SentryIssueAlertActionsV2JiraCreateTicketOutput) Integration() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2JiraCreateTicket) string { return v.Integration }).(pulumi.StringOutput)
+}
+
+// The ID of the type of issue that the ticket should be created as.
+func (o SentryIssueAlertActionsV2JiraCreateTicketOutput) IssueType() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2JiraCreateTicket) string { return v.IssueType }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertActionsV2JiraCreateTicketOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2JiraCreateTicket) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Jira project.
+func (o SentryIssueAlertActionsV2JiraCreateTicketOutput) Project() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2JiraCreateTicket) string { return v.Project }).(pulumi.StringOutput)
+}
+
+type SentryIssueAlertActionsV2JiraCreateTicketPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2JiraCreateTicketPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2JiraCreateTicket)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2JiraCreateTicketPtrOutput) ToSentryIssueAlertActionsV2JiraCreateTicketPtrOutput() SentryIssueAlertActionsV2JiraCreateTicketPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2JiraCreateTicketPtrOutput) ToSentryIssueAlertActionsV2JiraCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2JiraCreateTicketPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2JiraCreateTicketPtrOutput) Elem() SentryIssueAlertActionsV2JiraCreateTicketOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2JiraCreateTicket) SentryIssueAlertActionsV2JiraCreateTicket {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertActionsV2JiraCreateTicket
+		return ret
+	}).(SentryIssueAlertActionsV2JiraCreateTicketOutput)
+}
+
+// The integration ID associated with Jira.
+func (o SentryIssueAlertActionsV2JiraCreateTicketPtrOutput) Integration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2JiraCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Integration
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the type of issue that the ticket should be created as.
+func (o SentryIssueAlertActionsV2JiraCreateTicketPtrOutput) IssueType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2JiraCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.IssueType
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2JiraCreateTicketPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2JiraCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Jira project.
+func (o SentryIssueAlertActionsV2JiraCreateTicketPtrOutput) Project() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2JiraCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Project
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertActionsV2JiraServerCreateTicket struct {
+	// The integration ID associated with Jira Server.
+	Integration string `pulumi:"integration"`
+	// The ID of the type of issue that the ticket should be created as.
+	IssueType string  `pulumi:"issueType"`
+	Name      *string `pulumi:"name"`
+	// The ID of the Jira Server project.
+	Project string `pulumi:"project"`
+}
+
+// SentryIssueAlertActionsV2JiraServerCreateTicketInput is an input type that accepts SentryIssueAlertActionsV2JiraServerCreateTicketArgs and SentryIssueAlertActionsV2JiraServerCreateTicketOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2JiraServerCreateTicketInput` via:
+//
+//	SentryIssueAlertActionsV2JiraServerCreateTicketArgs{...}
+type SentryIssueAlertActionsV2JiraServerCreateTicketInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2JiraServerCreateTicketOutput() SentryIssueAlertActionsV2JiraServerCreateTicketOutput
+	ToSentryIssueAlertActionsV2JiraServerCreateTicketOutputWithContext(context.Context) SentryIssueAlertActionsV2JiraServerCreateTicketOutput
+}
+
+type SentryIssueAlertActionsV2JiraServerCreateTicketArgs struct {
+	// The integration ID associated with Jira Server.
+	Integration pulumi.StringInput `pulumi:"integration"`
+	// The ID of the type of issue that the ticket should be created as.
+	IssueType pulumi.StringInput    `pulumi:"issueType"`
+	Name      pulumi.StringPtrInput `pulumi:"name"`
+	// The ID of the Jira Server project.
+	Project pulumi.StringInput `pulumi:"project"`
+}
+
+func (SentryIssueAlertActionsV2JiraServerCreateTicketArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2JiraServerCreateTicket)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2JiraServerCreateTicketArgs) ToSentryIssueAlertActionsV2JiraServerCreateTicketOutput() SentryIssueAlertActionsV2JiraServerCreateTicketOutput {
+	return i.ToSentryIssueAlertActionsV2JiraServerCreateTicketOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2JiraServerCreateTicketArgs) ToSentryIssueAlertActionsV2JiraServerCreateTicketOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2JiraServerCreateTicketOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2JiraServerCreateTicketOutput)
+}
+
+func (i SentryIssueAlertActionsV2JiraServerCreateTicketArgs) ToSentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput() SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput {
+	return i.ToSentryIssueAlertActionsV2JiraServerCreateTicketPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2JiraServerCreateTicketArgs) ToSentryIssueAlertActionsV2JiraServerCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2JiraServerCreateTicketOutput).ToSentryIssueAlertActionsV2JiraServerCreateTicketPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertActionsV2JiraServerCreateTicketPtrInput is an input type that accepts SentryIssueAlertActionsV2JiraServerCreateTicketArgs, SentryIssueAlertActionsV2JiraServerCreateTicketPtr and SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2JiraServerCreateTicketPtrInput` via:
+//
+//	        SentryIssueAlertActionsV2JiraServerCreateTicketArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertActionsV2JiraServerCreateTicketPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput() SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput
+	ToSentryIssueAlertActionsV2JiraServerCreateTicketPtrOutputWithContext(context.Context) SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput
+}
+
+type sentryIssueAlertActionsV2JiraServerCreateTicketPtrType SentryIssueAlertActionsV2JiraServerCreateTicketArgs
+
+func SentryIssueAlertActionsV2JiraServerCreateTicketPtr(v *SentryIssueAlertActionsV2JiraServerCreateTicketArgs) SentryIssueAlertActionsV2JiraServerCreateTicketPtrInput {
+	return (*sentryIssueAlertActionsV2JiraServerCreateTicketPtrType)(v)
+}
+
+func (*sentryIssueAlertActionsV2JiraServerCreateTicketPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2JiraServerCreateTicket)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertActionsV2JiraServerCreateTicketPtrType) ToSentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput() SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput {
+	return i.ToSentryIssueAlertActionsV2JiraServerCreateTicketPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertActionsV2JiraServerCreateTicketPtrType) ToSentryIssueAlertActionsV2JiraServerCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput)
+}
+
+type SentryIssueAlertActionsV2JiraServerCreateTicketOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2JiraServerCreateTicketOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2JiraServerCreateTicket)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2JiraServerCreateTicketOutput) ToSentryIssueAlertActionsV2JiraServerCreateTicketOutput() SentryIssueAlertActionsV2JiraServerCreateTicketOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2JiraServerCreateTicketOutput) ToSentryIssueAlertActionsV2JiraServerCreateTicketOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2JiraServerCreateTicketOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2JiraServerCreateTicketOutput) ToSentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput() SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput {
+	return o.ToSentryIssueAlertActionsV2JiraServerCreateTicketPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertActionsV2JiraServerCreateTicketOutput) ToSentryIssueAlertActionsV2JiraServerCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertActionsV2JiraServerCreateTicket) *SentryIssueAlertActionsV2JiraServerCreateTicket {
+		return &v
+	}).(SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput)
+}
+
+// The integration ID associated with Jira Server.
+func (o SentryIssueAlertActionsV2JiraServerCreateTicketOutput) Integration() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2JiraServerCreateTicket) string { return v.Integration }).(pulumi.StringOutput)
+}
+
+// The ID of the type of issue that the ticket should be created as.
+func (o SentryIssueAlertActionsV2JiraServerCreateTicketOutput) IssueType() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2JiraServerCreateTicket) string { return v.IssueType }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertActionsV2JiraServerCreateTicketOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2JiraServerCreateTicket) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Jira Server project.
+func (o SentryIssueAlertActionsV2JiraServerCreateTicketOutput) Project() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2JiraServerCreateTicket) string { return v.Project }).(pulumi.StringOutput)
+}
+
+type SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2JiraServerCreateTicket)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput) ToSentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput() SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput) ToSentryIssueAlertActionsV2JiraServerCreateTicketPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput) Elem() SentryIssueAlertActionsV2JiraServerCreateTicketOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2JiraServerCreateTicket) SentryIssueAlertActionsV2JiraServerCreateTicket {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertActionsV2JiraServerCreateTicket
+		return ret
+	}).(SentryIssueAlertActionsV2JiraServerCreateTicketOutput)
+}
+
+// The integration ID associated with Jira Server.
+func (o SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput) Integration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2JiraServerCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Integration
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the type of issue that the ticket should be created as.
+func (o SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput) IssueType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2JiraServerCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.IssueType
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2JiraServerCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Jira Server project.
+func (o SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput) Project() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2JiraServerCreateTicket) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Project
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertActionsV2MsteamsNotifyService struct {
+	// The name of the channel to send the notification to.
+	Channel   string  `pulumi:"channel"`
+	ChannelId *string `pulumi:"channelId"`
+	Name      *string `pulumi:"name"`
+	// The integration ID associated with the Microsoft Teams team.
+	Team string `pulumi:"team"`
+}
+
+// SentryIssueAlertActionsV2MsteamsNotifyServiceInput is an input type that accepts SentryIssueAlertActionsV2MsteamsNotifyServiceArgs and SentryIssueAlertActionsV2MsteamsNotifyServiceOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2MsteamsNotifyServiceInput` via:
+//
+//	SentryIssueAlertActionsV2MsteamsNotifyServiceArgs{...}
+type SentryIssueAlertActionsV2MsteamsNotifyServiceInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2MsteamsNotifyServiceOutput() SentryIssueAlertActionsV2MsteamsNotifyServiceOutput
+	ToSentryIssueAlertActionsV2MsteamsNotifyServiceOutputWithContext(context.Context) SentryIssueAlertActionsV2MsteamsNotifyServiceOutput
+}
+
+type SentryIssueAlertActionsV2MsteamsNotifyServiceArgs struct {
+	// The name of the channel to send the notification to.
+	Channel   pulumi.StringInput    `pulumi:"channel"`
+	ChannelId pulumi.StringPtrInput `pulumi:"channelId"`
+	Name      pulumi.StringPtrInput `pulumi:"name"`
+	// The integration ID associated with the Microsoft Teams team.
+	Team pulumi.StringInput `pulumi:"team"`
+}
+
+func (SentryIssueAlertActionsV2MsteamsNotifyServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2MsteamsNotifyService)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2MsteamsNotifyServiceArgs) ToSentryIssueAlertActionsV2MsteamsNotifyServiceOutput() SentryIssueAlertActionsV2MsteamsNotifyServiceOutput {
+	return i.ToSentryIssueAlertActionsV2MsteamsNotifyServiceOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2MsteamsNotifyServiceArgs) ToSentryIssueAlertActionsV2MsteamsNotifyServiceOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2MsteamsNotifyServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2MsteamsNotifyServiceOutput)
+}
+
+func (i SentryIssueAlertActionsV2MsteamsNotifyServiceArgs) ToSentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput() SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput {
+	return i.ToSentryIssueAlertActionsV2MsteamsNotifyServicePtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2MsteamsNotifyServiceArgs) ToSentryIssueAlertActionsV2MsteamsNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2MsteamsNotifyServiceOutput).ToSentryIssueAlertActionsV2MsteamsNotifyServicePtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertActionsV2MsteamsNotifyServicePtrInput is an input type that accepts SentryIssueAlertActionsV2MsteamsNotifyServiceArgs, SentryIssueAlertActionsV2MsteamsNotifyServicePtr and SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2MsteamsNotifyServicePtrInput` via:
+//
+//	        SentryIssueAlertActionsV2MsteamsNotifyServiceArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertActionsV2MsteamsNotifyServicePtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput() SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput
+	ToSentryIssueAlertActionsV2MsteamsNotifyServicePtrOutputWithContext(context.Context) SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput
+}
+
+type sentryIssueAlertActionsV2MsteamsNotifyServicePtrType SentryIssueAlertActionsV2MsteamsNotifyServiceArgs
+
+func SentryIssueAlertActionsV2MsteamsNotifyServicePtr(v *SentryIssueAlertActionsV2MsteamsNotifyServiceArgs) SentryIssueAlertActionsV2MsteamsNotifyServicePtrInput {
+	return (*sentryIssueAlertActionsV2MsteamsNotifyServicePtrType)(v)
+}
+
+func (*sentryIssueAlertActionsV2MsteamsNotifyServicePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2MsteamsNotifyService)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertActionsV2MsteamsNotifyServicePtrType) ToSentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput() SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput {
+	return i.ToSentryIssueAlertActionsV2MsteamsNotifyServicePtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertActionsV2MsteamsNotifyServicePtrType) ToSentryIssueAlertActionsV2MsteamsNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput)
+}
+
+type SentryIssueAlertActionsV2MsteamsNotifyServiceOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2MsteamsNotifyServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2MsteamsNotifyService)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2MsteamsNotifyServiceOutput) ToSentryIssueAlertActionsV2MsteamsNotifyServiceOutput() SentryIssueAlertActionsV2MsteamsNotifyServiceOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2MsteamsNotifyServiceOutput) ToSentryIssueAlertActionsV2MsteamsNotifyServiceOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2MsteamsNotifyServiceOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2MsteamsNotifyServiceOutput) ToSentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput() SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput {
+	return o.ToSentryIssueAlertActionsV2MsteamsNotifyServicePtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertActionsV2MsteamsNotifyServiceOutput) ToSentryIssueAlertActionsV2MsteamsNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertActionsV2MsteamsNotifyService) *SentryIssueAlertActionsV2MsteamsNotifyService {
+		return &v
+	}).(SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput)
+}
+
+// The name of the channel to send the notification to.
+func (o SentryIssueAlertActionsV2MsteamsNotifyServiceOutput) Channel() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2MsteamsNotifyService) string { return v.Channel }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertActionsV2MsteamsNotifyServiceOutput) ChannelId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2MsteamsNotifyService) *string { return v.ChannelId }).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2MsteamsNotifyServiceOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2MsteamsNotifyService) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// The integration ID associated with the Microsoft Teams team.
+func (o SentryIssueAlertActionsV2MsteamsNotifyServiceOutput) Team() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2MsteamsNotifyService) string { return v.Team }).(pulumi.StringOutput)
+}
+
+type SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2MsteamsNotifyService)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput) ToSentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput() SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput) ToSentryIssueAlertActionsV2MsteamsNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput) Elem() SentryIssueAlertActionsV2MsteamsNotifyServiceOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2MsteamsNotifyService) SentryIssueAlertActionsV2MsteamsNotifyService {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertActionsV2MsteamsNotifyService
+		return ret
+	}).(SentryIssueAlertActionsV2MsteamsNotifyServiceOutput)
+}
+
+// The name of the channel to send the notification to.
+func (o SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput) Channel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2MsteamsNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Channel
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput) ChannelId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2MsteamsNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ChannelId
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2MsteamsNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// The integration ID associated with the Microsoft Teams team.
+func (o SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput) Team() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2MsteamsNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Team
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertActionsV2NotifyEmail struct {
+	// Who the notification should be sent to if there are no suggested assignees. Valid values are: `AllMembers`, `ActiveMembers`, and `NoOne`.
+	FallthroughType *string `pulumi:"fallthroughType"`
+	Name            *string `pulumi:"name"`
+	// The ID of the Member or Team the notification should be sent to. Only required when `targetType` is `Team` or `Member`.
+	TargetIdentifier *string `pulumi:"targetIdentifier"`
+	// Valid values are: `IssueOwners`, `Team`, and `Member`.
+	TargetType string `pulumi:"targetType"`
+}
+
+// SentryIssueAlertActionsV2NotifyEmailInput is an input type that accepts SentryIssueAlertActionsV2NotifyEmailArgs and SentryIssueAlertActionsV2NotifyEmailOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2NotifyEmailInput` via:
+//
+//	SentryIssueAlertActionsV2NotifyEmailArgs{...}
+type SentryIssueAlertActionsV2NotifyEmailInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2NotifyEmailOutput() SentryIssueAlertActionsV2NotifyEmailOutput
+	ToSentryIssueAlertActionsV2NotifyEmailOutputWithContext(context.Context) SentryIssueAlertActionsV2NotifyEmailOutput
+}
+
+type SentryIssueAlertActionsV2NotifyEmailArgs struct {
+	// Who the notification should be sent to if there are no suggested assignees. Valid values are: `AllMembers`, `ActiveMembers`, and `NoOne`.
+	FallthroughType pulumi.StringPtrInput `pulumi:"fallthroughType"`
+	Name            pulumi.StringPtrInput `pulumi:"name"`
+	// The ID of the Member or Team the notification should be sent to. Only required when `targetType` is `Team` or `Member`.
+	TargetIdentifier pulumi.StringPtrInput `pulumi:"targetIdentifier"`
+	// Valid values are: `IssueOwners`, `Team`, and `Member`.
+	TargetType pulumi.StringInput `pulumi:"targetType"`
+}
+
+func (SentryIssueAlertActionsV2NotifyEmailArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEmail)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2NotifyEmailArgs) ToSentryIssueAlertActionsV2NotifyEmailOutput() SentryIssueAlertActionsV2NotifyEmailOutput {
+	return i.ToSentryIssueAlertActionsV2NotifyEmailOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2NotifyEmailArgs) ToSentryIssueAlertActionsV2NotifyEmailOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEmailOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2NotifyEmailOutput)
+}
+
+func (i SentryIssueAlertActionsV2NotifyEmailArgs) ToSentryIssueAlertActionsV2NotifyEmailPtrOutput() SentryIssueAlertActionsV2NotifyEmailPtrOutput {
+	return i.ToSentryIssueAlertActionsV2NotifyEmailPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2NotifyEmailArgs) ToSentryIssueAlertActionsV2NotifyEmailPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEmailPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2NotifyEmailOutput).ToSentryIssueAlertActionsV2NotifyEmailPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertActionsV2NotifyEmailPtrInput is an input type that accepts SentryIssueAlertActionsV2NotifyEmailArgs, SentryIssueAlertActionsV2NotifyEmailPtr and SentryIssueAlertActionsV2NotifyEmailPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2NotifyEmailPtrInput` via:
+//
+//	        SentryIssueAlertActionsV2NotifyEmailArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertActionsV2NotifyEmailPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2NotifyEmailPtrOutput() SentryIssueAlertActionsV2NotifyEmailPtrOutput
+	ToSentryIssueAlertActionsV2NotifyEmailPtrOutputWithContext(context.Context) SentryIssueAlertActionsV2NotifyEmailPtrOutput
+}
+
+type sentryIssueAlertActionsV2NotifyEmailPtrType SentryIssueAlertActionsV2NotifyEmailArgs
+
+func SentryIssueAlertActionsV2NotifyEmailPtr(v *SentryIssueAlertActionsV2NotifyEmailArgs) SentryIssueAlertActionsV2NotifyEmailPtrInput {
+	return (*sentryIssueAlertActionsV2NotifyEmailPtrType)(v)
+}
+
+func (*sentryIssueAlertActionsV2NotifyEmailPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2NotifyEmail)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertActionsV2NotifyEmailPtrType) ToSentryIssueAlertActionsV2NotifyEmailPtrOutput() SentryIssueAlertActionsV2NotifyEmailPtrOutput {
+	return i.ToSentryIssueAlertActionsV2NotifyEmailPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertActionsV2NotifyEmailPtrType) ToSentryIssueAlertActionsV2NotifyEmailPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEmailPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2NotifyEmailPtrOutput)
+}
+
+type SentryIssueAlertActionsV2NotifyEmailOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2NotifyEmailOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEmail)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2NotifyEmailOutput) ToSentryIssueAlertActionsV2NotifyEmailOutput() SentryIssueAlertActionsV2NotifyEmailOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEmailOutput) ToSentryIssueAlertActionsV2NotifyEmailOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEmailOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEmailOutput) ToSentryIssueAlertActionsV2NotifyEmailPtrOutput() SentryIssueAlertActionsV2NotifyEmailPtrOutput {
+	return o.ToSentryIssueAlertActionsV2NotifyEmailPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertActionsV2NotifyEmailOutput) ToSentryIssueAlertActionsV2NotifyEmailPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEmailPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertActionsV2NotifyEmail) *SentryIssueAlertActionsV2NotifyEmail {
+		return &v
+	}).(SentryIssueAlertActionsV2NotifyEmailPtrOutput)
+}
+
+// Who the notification should be sent to if there are no suggested assignees. Valid values are: `AllMembers`, `ActiveMembers`, and `NoOne`.
+func (o SentryIssueAlertActionsV2NotifyEmailOutput) FallthroughType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2NotifyEmail) *string { return v.FallthroughType }).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2NotifyEmailOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2NotifyEmail) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Member or Team the notification should be sent to. Only required when `targetType` is `Team` or `Member`.
+func (o SentryIssueAlertActionsV2NotifyEmailOutput) TargetIdentifier() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2NotifyEmail) *string { return v.TargetIdentifier }).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `IssueOwners`, `Team`, and `Member`.
+func (o SentryIssueAlertActionsV2NotifyEmailOutput) TargetType() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2NotifyEmail) string { return v.TargetType }).(pulumi.StringOutput)
+}
+
+type SentryIssueAlertActionsV2NotifyEmailPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2NotifyEmailPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2NotifyEmail)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2NotifyEmailPtrOutput) ToSentryIssueAlertActionsV2NotifyEmailPtrOutput() SentryIssueAlertActionsV2NotifyEmailPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEmailPtrOutput) ToSentryIssueAlertActionsV2NotifyEmailPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEmailPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEmailPtrOutput) Elem() SentryIssueAlertActionsV2NotifyEmailOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2NotifyEmail) SentryIssueAlertActionsV2NotifyEmail {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertActionsV2NotifyEmail
+		return ret
+	}).(SentryIssueAlertActionsV2NotifyEmailOutput)
+}
+
+// Who the notification should be sent to if there are no suggested assignees. Valid values are: `AllMembers`, `ActiveMembers`, and `NoOne`.
+func (o SentryIssueAlertActionsV2NotifyEmailPtrOutput) FallthroughType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2NotifyEmail) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FallthroughType
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2NotifyEmailPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2NotifyEmail) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the Member or Team the notification should be sent to. Only required when `targetType` is `Team` or `Member`.
+func (o SentryIssueAlertActionsV2NotifyEmailPtrOutput) TargetIdentifier() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2NotifyEmail) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TargetIdentifier
+	}).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `IssueOwners`, `Team`, and `Member`.
+func (o SentryIssueAlertActionsV2NotifyEmailPtrOutput) TargetType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2NotifyEmail) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TargetType
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertActionsV2NotifyEvent struct {
+	Name *string `pulumi:"name"`
+}
+
+// SentryIssueAlertActionsV2NotifyEventInput is an input type that accepts SentryIssueAlertActionsV2NotifyEventArgs and SentryIssueAlertActionsV2NotifyEventOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2NotifyEventInput` via:
+//
+//	SentryIssueAlertActionsV2NotifyEventArgs{...}
+type SentryIssueAlertActionsV2NotifyEventInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2NotifyEventOutput() SentryIssueAlertActionsV2NotifyEventOutput
+	ToSentryIssueAlertActionsV2NotifyEventOutputWithContext(context.Context) SentryIssueAlertActionsV2NotifyEventOutput
+}
+
+type SentryIssueAlertActionsV2NotifyEventArgs struct {
+	Name pulumi.StringPtrInput `pulumi:"name"`
+}
+
+func (SentryIssueAlertActionsV2NotifyEventArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEvent)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2NotifyEventArgs) ToSentryIssueAlertActionsV2NotifyEventOutput() SentryIssueAlertActionsV2NotifyEventOutput {
+	return i.ToSentryIssueAlertActionsV2NotifyEventOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2NotifyEventArgs) ToSentryIssueAlertActionsV2NotifyEventOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2NotifyEventOutput)
+}
+
+func (i SentryIssueAlertActionsV2NotifyEventArgs) ToSentryIssueAlertActionsV2NotifyEventPtrOutput() SentryIssueAlertActionsV2NotifyEventPtrOutput {
+	return i.ToSentryIssueAlertActionsV2NotifyEventPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2NotifyEventArgs) ToSentryIssueAlertActionsV2NotifyEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2NotifyEventOutput).ToSentryIssueAlertActionsV2NotifyEventPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertActionsV2NotifyEventPtrInput is an input type that accepts SentryIssueAlertActionsV2NotifyEventArgs, SentryIssueAlertActionsV2NotifyEventPtr and SentryIssueAlertActionsV2NotifyEventPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2NotifyEventPtrInput` via:
+//
+//	        SentryIssueAlertActionsV2NotifyEventArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertActionsV2NotifyEventPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2NotifyEventPtrOutput() SentryIssueAlertActionsV2NotifyEventPtrOutput
+	ToSentryIssueAlertActionsV2NotifyEventPtrOutputWithContext(context.Context) SentryIssueAlertActionsV2NotifyEventPtrOutput
+}
+
+type sentryIssueAlertActionsV2NotifyEventPtrType SentryIssueAlertActionsV2NotifyEventArgs
+
+func SentryIssueAlertActionsV2NotifyEventPtr(v *SentryIssueAlertActionsV2NotifyEventArgs) SentryIssueAlertActionsV2NotifyEventPtrInput {
+	return (*sentryIssueAlertActionsV2NotifyEventPtrType)(v)
+}
+
+func (*sentryIssueAlertActionsV2NotifyEventPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2NotifyEvent)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertActionsV2NotifyEventPtrType) ToSentryIssueAlertActionsV2NotifyEventPtrOutput() SentryIssueAlertActionsV2NotifyEventPtrOutput {
+	return i.ToSentryIssueAlertActionsV2NotifyEventPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertActionsV2NotifyEventPtrType) ToSentryIssueAlertActionsV2NotifyEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2NotifyEventPtrOutput)
+}
+
+type SentryIssueAlertActionsV2NotifyEventOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2NotifyEventOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEvent)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventOutput) ToSentryIssueAlertActionsV2NotifyEventOutput() SentryIssueAlertActionsV2NotifyEventOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventOutput) ToSentryIssueAlertActionsV2NotifyEventOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventOutput) ToSentryIssueAlertActionsV2NotifyEventPtrOutput() SentryIssueAlertActionsV2NotifyEventPtrOutput {
+	return o.ToSentryIssueAlertActionsV2NotifyEventPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventOutput) ToSentryIssueAlertActionsV2NotifyEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertActionsV2NotifyEvent) *SentryIssueAlertActionsV2NotifyEvent {
+		return &v
+	}).(SentryIssueAlertActionsV2NotifyEventPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2NotifyEvent) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertActionsV2NotifyEventPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2NotifyEventPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2NotifyEvent)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventPtrOutput) ToSentryIssueAlertActionsV2NotifyEventPtrOutput() SentryIssueAlertActionsV2NotifyEventPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventPtrOutput) ToSentryIssueAlertActionsV2NotifyEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventPtrOutput) Elem() SentryIssueAlertActionsV2NotifyEventOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2NotifyEvent) SentryIssueAlertActionsV2NotifyEvent {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertActionsV2NotifyEvent
+		return ret
+	}).(SentryIssueAlertActionsV2NotifyEventOutput)
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2NotifyEvent) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertActionsV2NotifyEventSentryApp struct {
+	Name                      *string           `pulumi:"name"`
+	SentryAppInstallationUuid string            `pulumi:"sentryAppInstallationUuid"`
+	Settings                  map[string]string `pulumi:"settings"`
+}
+
+// SentryIssueAlertActionsV2NotifyEventSentryAppInput is an input type that accepts SentryIssueAlertActionsV2NotifyEventSentryAppArgs and SentryIssueAlertActionsV2NotifyEventSentryAppOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2NotifyEventSentryAppInput` via:
+//
+//	SentryIssueAlertActionsV2NotifyEventSentryAppArgs{...}
+type SentryIssueAlertActionsV2NotifyEventSentryAppInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2NotifyEventSentryAppOutput() SentryIssueAlertActionsV2NotifyEventSentryAppOutput
+	ToSentryIssueAlertActionsV2NotifyEventSentryAppOutputWithContext(context.Context) SentryIssueAlertActionsV2NotifyEventSentryAppOutput
+}
+
+type SentryIssueAlertActionsV2NotifyEventSentryAppArgs struct {
+	Name                      pulumi.StringPtrInput `pulumi:"name"`
+	SentryAppInstallationUuid pulumi.StringInput    `pulumi:"sentryAppInstallationUuid"`
+	Settings                  pulumi.StringMapInput `pulumi:"settings"`
+}
+
+func (SentryIssueAlertActionsV2NotifyEventSentryAppArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEventSentryApp)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2NotifyEventSentryAppArgs) ToSentryIssueAlertActionsV2NotifyEventSentryAppOutput() SentryIssueAlertActionsV2NotifyEventSentryAppOutput {
+	return i.ToSentryIssueAlertActionsV2NotifyEventSentryAppOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2NotifyEventSentryAppArgs) ToSentryIssueAlertActionsV2NotifyEventSentryAppOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventSentryAppOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2NotifyEventSentryAppOutput)
+}
+
+func (i SentryIssueAlertActionsV2NotifyEventSentryAppArgs) ToSentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput() SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput {
+	return i.ToSentryIssueAlertActionsV2NotifyEventSentryAppPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2NotifyEventSentryAppArgs) ToSentryIssueAlertActionsV2NotifyEventSentryAppPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2NotifyEventSentryAppOutput).ToSentryIssueAlertActionsV2NotifyEventSentryAppPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertActionsV2NotifyEventSentryAppPtrInput is an input type that accepts SentryIssueAlertActionsV2NotifyEventSentryAppArgs, SentryIssueAlertActionsV2NotifyEventSentryAppPtr and SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2NotifyEventSentryAppPtrInput` via:
+//
+//	        SentryIssueAlertActionsV2NotifyEventSentryAppArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertActionsV2NotifyEventSentryAppPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput() SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput
+	ToSentryIssueAlertActionsV2NotifyEventSentryAppPtrOutputWithContext(context.Context) SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput
+}
+
+type sentryIssueAlertActionsV2NotifyEventSentryAppPtrType SentryIssueAlertActionsV2NotifyEventSentryAppArgs
+
+func SentryIssueAlertActionsV2NotifyEventSentryAppPtr(v *SentryIssueAlertActionsV2NotifyEventSentryAppArgs) SentryIssueAlertActionsV2NotifyEventSentryAppPtrInput {
+	return (*sentryIssueAlertActionsV2NotifyEventSentryAppPtrType)(v)
+}
+
+func (*sentryIssueAlertActionsV2NotifyEventSentryAppPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2NotifyEventSentryApp)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertActionsV2NotifyEventSentryAppPtrType) ToSentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput() SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput {
+	return i.ToSentryIssueAlertActionsV2NotifyEventSentryAppPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertActionsV2NotifyEventSentryAppPtrType) ToSentryIssueAlertActionsV2NotifyEventSentryAppPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput)
+}
+
+type SentryIssueAlertActionsV2NotifyEventSentryAppOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2NotifyEventSentryAppOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEventSentryApp)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventSentryAppOutput) ToSentryIssueAlertActionsV2NotifyEventSentryAppOutput() SentryIssueAlertActionsV2NotifyEventSentryAppOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventSentryAppOutput) ToSentryIssueAlertActionsV2NotifyEventSentryAppOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventSentryAppOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventSentryAppOutput) ToSentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput() SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput {
+	return o.ToSentryIssueAlertActionsV2NotifyEventSentryAppPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventSentryAppOutput) ToSentryIssueAlertActionsV2NotifyEventSentryAppPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertActionsV2NotifyEventSentryApp) *SentryIssueAlertActionsV2NotifyEventSentryApp {
+		return &v
+	}).(SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventSentryAppOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2NotifyEventSentryApp) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventSentryAppOutput) SentryAppInstallationUuid() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2NotifyEventSentryApp) string { return v.SentryAppInstallationUuid }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventSentryAppOutput) Settings() pulumi.StringMapOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2NotifyEventSentryApp) map[string]string { return v.Settings }).(pulumi.StringMapOutput)
+}
+
+type SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2NotifyEventSentryApp)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput) ToSentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput() SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput) ToSentryIssueAlertActionsV2NotifyEventSentryAppPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput) Elem() SentryIssueAlertActionsV2NotifyEventSentryAppOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2NotifyEventSentryApp) SentryIssueAlertActionsV2NotifyEventSentryApp {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertActionsV2NotifyEventSentryApp
+		return ret
+	}).(SentryIssueAlertActionsV2NotifyEventSentryAppOutput)
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2NotifyEventSentryApp) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput) SentryAppInstallationUuid() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2NotifyEventSentryApp) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.SentryAppInstallationUuid
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput) Settings() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2NotifyEventSentryApp) map[string]string {
+		if v == nil {
+			return nil
+		}
+		return v.Settings
+	}).(pulumi.StringMapOutput)
+}
+
+type SentryIssueAlertActionsV2NotifyEventService struct {
+	Name    *string `pulumi:"name"`
+	Service string  `pulumi:"service"`
+}
+
+// SentryIssueAlertActionsV2NotifyEventServiceInput is an input type that accepts SentryIssueAlertActionsV2NotifyEventServiceArgs and SentryIssueAlertActionsV2NotifyEventServiceOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2NotifyEventServiceInput` via:
+//
+//	SentryIssueAlertActionsV2NotifyEventServiceArgs{...}
+type SentryIssueAlertActionsV2NotifyEventServiceInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2NotifyEventServiceOutput() SentryIssueAlertActionsV2NotifyEventServiceOutput
+	ToSentryIssueAlertActionsV2NotifyEventServiceOutputWithContext(context.Context) SentryIssueAlertActionsV2NotifyEventServiceOutput
+}
+
+type SentryIssueAlertActionsV2NotifyEventServiceArgs struct {
+	Name    pulumi.StringPtrInput `pulumi:"name"`
+	Service pulumi.StringInput    `pulumi:"service"`
+}
+
+func (SentryIssueAlertActionsV2NotifyEventServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEventService)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2NotifyEventServiceArgs) ToSentryIssueAlertActionsV2NotifyEventServiceOutput() SentryIssueAlertActionsV2NotifyEventServiceOutput {
+	return i.ToSentryIssueAlertActionsV2NotifyEventServiceOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2NotifyEventServiceArgs) ToSentryIssueAlertActionsV2NotifyEventServiceOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2NotifyEventServiceOutput)
+}
+
+func (i SentryIssueAlertActionsV2NotifyEventServiceArgs) ToSentryIssueAlertActionsV2NotifyEventServicePtrOutput() SentryIssueAlertActionsV2NotifyEventServicePtrOutput {
+	return i.ToSentryIssueAlertActionsV2NotifyEventServicePtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2NotifyEventServiceArgs) ToSentryIssueAlertActionsV2NotifyEventServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2NotifyEventServiceOutput).ToSentryIssueAlertActionsV2NotifyEventServicePtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertActionsV2NotifyEventServicePtrInput is an input type that accepts SentryIssueAlertActionsV2NotifyEventServiceArgs, SentryIssueAlertActionsV2NotifyEventServicePtr and SentryIssueAlertActionsV2NotifyEventServicePtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2NotifyEventServicePtrInput` via:
+//
+//	        SentryIssueAlertActionsV2NotifyEventServiceArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertActionsV2NotifyEventServicePtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2NotifyEventServicePtrOutput() SentryIssueAlertActionsV2NotifyEventServicePtrOutput
+	ToSentryIssueAlertActionsV2NotifyEventServicePtrOutputWithContext(context.Context) SentryIssueAlertActionsV2NotifyEventServicePtrOutput
+}
+
+type sentryIssueAlertActionsV2NotifyEventServicePtrType SentryIssueAlertActionsV2NotifyEventServiceArgs
+
+func SentryIssueAlertActionsV2NotifyEventServicePtr(v *SentryIssueAlertActionsV2NotifyEventServiceArgs) SentryIssueAlertActionsV2NotifyEventServicePtrInput {
+	return (*sentryIssueAlertActionsV2NotifyEventServicePtrType)(v)
+}
+
+func (*sentryIssueAlertActionsV2NotifyEventServicePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2NotifyEventService)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertActionsV2NotifyEventServicePtrType) ToSentryIssueAlertActionsV2NotifyEventServicePtrOutput() SentryIssueAlertActionsV2NotifyEventServicePtrOutput {
+	return i.ToSentryIssueAlertActionsV2NotifyEventServicePtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertActionsV2NotifyEventServicePtrType) ToSentryIssueAlertActionsV2NotifyEventServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2NotifyEventServicePtrOutput)
+}
+
+type SentryIssueAlertActionsV2NotifyEventServiceOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2NotifyEventServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEventService)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventServiceOutput) ToSentryIssueAlertActionsV2NotifyEventServiceOutput() SentryIssueAlertActionsV2NotifyEventServiceOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventServiceOutput) ToSentryIssueAlertActionsV2NotifyEventServiceOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventServiceOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventServiceOutput) ToSentryIssueAlertActionsV2NotifyEventServicePtrOutput() SentryIssueAlertActionsV2NotifyEventServicePtrOutput {
+	return o.ToSentryIssueAlertActionsV2NotifyEventServicePtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventServiceOutput) ToSentryIssueAlertActionsV2NotifyEventServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventServicePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertActionsV2NotifyEventService) *SentryIssueAlertActionsV2NotifyEventService {
+		return &v
+	}).(SentryIssueAlertActionsV2NotifyEventServicePtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventServiceOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2NotifyEventService) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventServiceOutput) Service() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2NotifyEventService) string { return v.Service }).(pulumi.StringOutput)
+}
+
+type SentryIssueAlertActionsV2NotifyEventServicePtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2NotifyEventServicePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2NotifyEventService)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventServicePtrOutput) ToSentryIssueAlertActionsV2NotifyEventServicePtrOutput() SentryIssueAlertActionsV2NotifyEventServicePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventServicePtrOutput) ToSentryIssueAlertActionsV2NotifyEventServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2NotifyEventServicePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventServicePtrOutput) Elem() SentryIssueAlertActionsV2NotifyEventServiceOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2NotifyEventService) SentryIssueAlertActionsV2NotifyEventService {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertActionsV2NotifyEventService
+		return ret
+	}).(SentryIssueAlertActionsV2NotifyEventServiceOutput)
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventServicePtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2NotifyEventService) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2NotifyEventServicePtrOutput) Service() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2NotifyEventService) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Service
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertActionsV2OpsgenieNotifyTeam struct {
+	Account  string  `pulumi:"account"`
+	Name     *string `pulumi:"name"`
+	Priority string  `pulumi:"priority"`
+	Team     string  `pulumi:"team"`
+}
+
+// SentryIssueAlertActionsV2OpsgenieNotifyTeamInput is an input type that accepts SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs and SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2OpsgenieNotifyTeamInput` via:
+//
+//	SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs{...}
+type SentryIssueAlertActionsV2OpsgenieNotifyTeamInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput() SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput
+	ToSentryIssueAlertActionsV2OpsgenieNotifyTeamOutputWithContext(context.Context) SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput
+}
+
+type SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs struct {
+	Account  pulumi.StringInput    `pulumi:"account"`
+	Name     pulumi.StringPtrInput `pulumi:"name"`
+	Priority pulumi.StringInput    `pulumi:"priority"`
+	Team     pulumi.StringInput    `pulumi:"team"`
+}
+
+func (SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2OpsgenieNotifyTeam)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs) ToSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput() SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput {
+	return i.ToSentryIssueAlertActionsV2OpsgenieNotifyTeamOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs) ToSentryIssueAlertActionsV2OpsgenieNotifyTeamOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput)
+}
+
+func (i SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs) ToSentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput() SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput {
+	return i.ToSentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs) ToSentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput).ToSentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrInput is an input type that accepts SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs, SentryIssueAlertActionsV2OpsgenieNotifyTeamPtr and SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrInput` via:
+//
+//	        SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput() SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput
+	ToSentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutputWithContext(context.Context) SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput
+}
+
+type sentryIssueAlertActionsV2OpsgenieNotifyTeamPtrType SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs
+
+func SentryIssueAlertActionsV2OpsgenieNotifyTeamPtr(v *SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs) SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrInput {
+	return (*sentryIssueAlertActionsV2OpsgenieNotifyTeamPtrType)(v)
+}
+
+func (*sentryIssueAlertActionsV2OpsgenieNotifyTeamPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2OpsgenieNotifyTeam)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertActionsV2OpsgenieNotifyTeamPtrType) ToSentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput() SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput {
+	return i.ToSentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertActionsV2OpsgenieNotifyTeamPtrType) ToSentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput)
+}
+
+type SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2OpsgenieNotifyTeam)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) ToSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput() SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) ToSentryIssueAlertActionsV2OpsgenieNotifyTeamOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) ToSentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput() SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput {
+	return o.ToSentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) ToSentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertActionsV2OpsgenieNotifyTeam) *SentryIssueAlertActionsV2OpsgenieNotifyTeam {
+		return &v
+	}).(SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) Account() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2OpsgenieNotifyTeam) string { return v.Account }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2OpsgenieNotifyTeam) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) Priority() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2OpsgenieNotifyTeam) string { return v.Priority }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) Team() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2OpsgenieNotifyTeam) string { return v.Team }).(pulumi.StringOutput)
+}
+
+type SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2OpsgenieNotifyTeam)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput) ToSentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput() SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput) ToSentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput) Elem() SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2OpsgenieNotifyTeam) SentryIssueAlertActionsV2OpsgenieNotifyTeam {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertActionsV2OpsgenieNotifyTeam
+		return ret
+	}).(SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput)
+}
+
+func (o SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput) Account() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2OpsgenieNotifyTeam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Account
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2OpsgenieNotifyTeam) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput) Priority() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2OpsgenieNotifyTeam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Priority
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput) Team() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2OpsgenieNotifyTeam) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Team
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertActionsV2PagerdutyNotifyService struct {
+	Account  string  `pulumi:"account"`
+	Name     *string `pulumi:"name"`
+	Service  string  `pulumi:"service"`
+	Severity string  `pulumi:"severity"`
+}
+
+// SentryIssueAlertActionsV2PagerdutyNotifyServiceInput is an input type that accepts SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs and SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2PagerdutyNotifyServiceInput` via:
+//
+//	SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs{...}
+type SentryIssueAlertActionsV2PagerdutyNotifyServiceInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput() SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput
+	ToSentryIssueAlertActionsV2PagerdutyNotifyServiceOutputWithContext(context.Context) SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput
+}
+
+type SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs struct {
+	Account  pulumi.StringInput    `pulumi:"account"`
+	Name     pulumi.StringPtrInput `pulumi:"name"`
+	Service  pulumi.StringInput    `pulumi:"service"`
+	Severity pulumi.StringInput    `pulumi:"severity"`
+}
+
+func (SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2PagerdutyNotifyService)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs) ToSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput() SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput {
+	return i.ToSentryIssueAlertActionsV2PagerdutyNotifyServiceOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs) ToSentryIssueAlertActionsV2PagerdutyNotifyServiceOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput)
+}
+
+func (i SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs) ToSentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput() SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput {
+	return i.ToSentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs) ToSentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput).ToSentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertActionsV2PagerdutyNotifyServicePtrInput is an input type that accepts SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs, SentryIssueAlertActionsV2PagerdutyNotifyServicePtr and SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2PagerdutyNotifyServicePtrInput` via:
+//
+//	        SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertActionsV2PagerdutyNotifyServicePtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput() SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput
+	ToSentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutputWithContext(context.Context) SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput
+}
+
+type sentryIssueAlertActionsV2PagerdutyNotifyServicePtrType SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs
+
+func SentryIssueAlertActionsV2PagerdutyNotifyServicePtr(v *SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs) SentryIssueAlertActionsV2PagerdutyNotifyServicePtrInput {
+	return (*sentryIssueAlertActionsV2PagerdutyNotifyServicePtrType)(v)
+}
+
+func (*sentryIssueAlertActionsV2PagerdutyNotifyServicePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2PagerdutyNotifyService)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertActionsV2PagerdutyNotifyServicePtrType) ToSentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput() SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput {
+	return i.ToSentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertActionsV2PagerdutyNotifyServicePtrType) ToSentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput)
+}
+
+type SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2PagerdutyNotifyService)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) ToSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput() SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) ToSentryIssueAlertActionsV2PagerdutyNotifyServiceOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) ToSentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput() SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput {
+	return o.ToSentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) ToSentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertActionsV2PagerdutyNotifyService) *SentryIssueAlertActionsV2PagerdutyNotifyService {
+		return &v
+	}).(SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) Account() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2PagerdutyNotifyService) string { return v.Account }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2PagerdutyNotifyService) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) Service() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2PagerdutyNotifyService) string { return v.Service }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) Severity() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2PagerdutyNotifyService) string { return v.Severity }).(pulumi.StringOutput)
+}
+
+type SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2PagerdutyNotifyService)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput) ToSentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput() SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput) ToSentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput) Elem() SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2PagerdutyNotifyService) SentryIssueAlertActionsV2PagerdutyNotifyService {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertActionsV2PagerdutyNotifyService
+		return ret
+	}).(SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput)
+}
+
+func (o SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput) Account() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2PagerdutyNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Account
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2PagerdutyNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput) Service() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2PagerdutyNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Service
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput) Severity() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2PagerdutyNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Severity
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertActionsV2SlackNotifyService struct {
+	// The name of the channel to send the notification to (e.g., #critical, Jane Schmidt).
+	Channel string `pulumi:"channel"`
+	// The ID of the channel to send the notification to.
+	ChannelId *string `pulumi:"channelId"`
+	Name      *string `pulumi:"name"`
+	// Text to show alongside the notification. To @ a user, include their user id like `@<USER_ID>`. To include a clickable link, format the link and title like `<http://example.com|Click Here>`.
+	Notes *string `pulumi:"notes"`
+	// A string of tags to show in the notification.
+	Tags []string `pulumi:"tags"`
+	// The integration ID associated with the Slack workspace.
+	Workspace string `pulumi:"workspace"`
+}
+
+// SentryIssueAlertActionsV2SlackNotifyServiceInput is an input type that accepts SentryIssueAlertActionsV2SlackNotifyServiceArgs and SentryIssueAlertActionsV2SlackNotifyServiceOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2SlackNotifyServiceInput` via:
+//
+//	SentryIssueAlertActionsV2SlackNotifyServiceArgs{...}
+type SentryIssueAlertActionsV2SlackNotifyServiceInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2SlackNotifyServiceOutput() SentryIssueAlertActionsV2SlackNotifyServiceOutput
+	ToSentryIssueAlertActionsV2SlackNotifyServiceOutputWithContext(context.Context) SentryIssueAlertActionsV2SlackNotifyServiceOutput
+}
+
+type SentryIssueAlertActionsV2SlackNotifyServiceArgs struct {
+	// The name of the channel to send the notification to (e.g., #critical, Jane Schmidt).
+	Channel pulumi.StringInput `pulumi:"channel"`
+	// The ID of the channel to send the notification to.
+	ChannelId pulumi.StringPtrInput `pulumi:"channelId"`
+	Name      pulumi.StringPtrInput `pulumi:"name"`
+	// Text to show alongside the notification. To @ a user, include their user id like `@<USER_ID>`. To include a clickable link, format the link and title like `<http://example.com|Click Here>`.
+	Notes pulumi.StringPtrInput `pulumi:"notes"`
+	// A string of tags to show in the notification.
+	Tags pulumi.StringArrayInput `pulumi:"tags"`
+	// The integration ID associated with the Slack workspace.
+	Workspace pulumi.StringInput `pulumi:"workspace"`
+}
+
+func (SentryIssueAlertActionsV2SlackNotifyServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2SlackNotifyService)(nil)).Elem()
+}
+
+func (i SentryIssueAlertActionsV2SlackNotifyServiceArgs) ToSentryIssueAlertActionsV2SlackNotifyServiceOutput() SentryIssueAlertActionsV2SlackNotifyServiceOutput {
+	return i.ToSentryIssueAlertActionsV2SlackNotifyServiceOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2SlackNotifyServiceArgs) ToSentryIssueAlertActionsV2SlackNotifyServiceOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2SlackNotifyServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2SlackNotifyServiceOutput)
+}
+
+func (i SentryIssueAlertActionsV2SlackNotifyServiceArgs) ToSentryIssueAlertActionsV2SlackNotifyServicePtrOutput() SentryIssueAlertActionsV2SlackNotifyServicePtrOutput {
+	return i.ToSentryIssueAlertActionsV2SlackNotifyServicePtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertActionsV2SlackNotifyServiceArgs) ToSentryIssueAlertActionsV2SlackNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2SlackNotifyServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2SlackNotifyServiceOutput).ToSentryIssueAlertActionsV2SlackNotifyServicePtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertActionsV2SlackNotifyServicePtrInput is an input type that accepts SentryIssueAlertActionsV2SlackNotifyServiceArgs, SentryIssueAlertActionsV2SlackNotifyServicePtr and SentryIssueAlertActionsV2SlackNotifyServicePtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertActionsV2SlackNotifyServicePtrInput` via:
+//
+//	        SentryIssueAlertActionsV2SlackNotifyServiceArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertActionsV2SlackNotifyServicePtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertActionsV2SlackNotifyServicePtrOutput() SentryIssueAlertActionsV2SlackNotifyServicePtrOutput
+	ToSentryIssueAlertActionsV2SlackNotifyServicePtrOutputWithContext(context.Context) SentryIssueAlertActionsV2SlackNotifyServicePtrOutput
+}
+
+type sentryIssueAlertActionsV2SlackNotifyServicePtrType SentryIssueAlertActionsV2SlackNotifyServiceArgs
+
+func SentryIssueAlertActionsV2SlackNotifyServicePtr(v *SentryIssueAlertActionsV2SlackNotifyServiceArgs) SentryIssueAlertActionsV2SlackNotifyServicePtrInput {
+	return (*sentryIssueAlertActionsV2SlackNotifyServicePtrType)(v)
+}
+
+func (*sentryIssueAlertActionsV2SlackNotifyServicePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2SlackNotifyService)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertActionsV2SlackNotifyServicePtrType) ToSentryIssueAlertActionsV2SlackNotifyServicePtrOutput() SentryIssueAlertActionsV2SlackNotifyServicePtrOutput {
+	return i.ToSentryIssueAlertActionsV2SlackNotifyServicePtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertActionsV2SlackNotifyServicePtrType) ToSentryIssueAlertActionsV2SlackNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2SlackNotifyServicePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertActionsV2SlackNotifyServicePtrOutput)
+}
+
+type SentryIssueAlertActionsV2SlackNotifyServiceOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2SlackNotifyServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertActionsV2SlackNotifyService)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2SlackNotifyServiceOutput) ToSentryIssueAlertActionsV2SlackNotifyServiceOutput() SentryIssueAlertActionsV2SlackNotifyServiceOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2SlackNotifyServiceOutput) ToSentryIssueAlertActionsV2SlackNotifyServiceOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2SlackNotifyServiceOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2SlackNotifyServiceOutput) ToSentryIssueAlertActionsV2SlackNotifyServicePtrOutput() SentryIssueAlertActionsV2SlackNotifyServicePtrOutput {
+	return o.ToSentryIssueAlertActionsV2SlackNotifyServicePtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertActionsV2SlackNotifyServiceOutput) ToSentryIssueAlertActionsV2SlackNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2SlackNotifyServicePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertActionsV2SlackNotifyService) *SentryIssueAlertActionsV2SlackNotifyService {
+		return &v
+	}).(SentryIssueAlertActionsV2SlackNotifyServicePtrOutput)
+}
+
+// The name of the channel to send the notification to (e.g., #critical, Jane Schmidt).
+func (o SentryIssueAlertActionsV2SlackNotifyServiceOutput) Channel() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2SlackNotifyService) string { return v.Channel }).(pulumi.StringOutput)
+}
+
+// The ID of the channel to send the notification to.
+func (o SentryIssueAlertActionsV2SlackNotifyServiceOutput) ChannelId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2SlackNotifyService) *string { return v.ChannelId }).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2SlackNotifyServiceOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2SlackNotifyService) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Text to show alongside the notification. To @ a user, include their user id like `@<USER_ID>`. To include a clickable link, format the link and title like `<http://example.com|Click Here>`.
+func (o SentryIssueAlertActionsV2SlackNotifyServiceOutput) Notes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2SlackNotifyService) *string { return v.Notes }).(pulumi.StringPtrOutput)
+}
+
+// A string of tags to show in the notification.
+func (o SentryIssueAlertActionsV2SlackNotifyServiceOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2SlackNotifyService) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+// The integration ID associated with the Slack workspace.
+func (o SentryIssueAlertActionsV2SlackNotifyServiceOutput) Workspace() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertActionsV2SlackNotifyService) string { return v.Workspace }).(pulumi.StringOutput)
+}
+
+type SentryIssueAlertActionsV2SlackNotifyServicePtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertActionsV2SlackNotifyServicePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertActionsV2SlackNotifyService)(nil)).Elem()
+}
+
+func (o SentryIssueAlertActionsV2SlackNotifyServicePtrOutput) ToSentryIssueAlertActionsV2SlackNotifyServicePtrOutput() SentryIssueAlertActionsV2SlackNotifyServicePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2SlackNotifyServicePtrOutput) ToSentryIssueAlertActionsV2SlackNotifyServicePtrOutputWithContext(ctx context.Context) SentryIssueAlertActionsV2SlackNotifyServicePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertActionsV2SlackNotifyServicePtrOutput) Elem() SentryIssueAlertActionsV2SlackNotifyServiceOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2SlackNotifyService) SentryIssueAlertActionsV2SlackNotifyService {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertActionsV2SlackNotifyService
+		return ret
+	}).(SentryIssueAlertActionsV2SlackNotifyServiceOutput)
+}
+
+// The name of the channel to send the notification to (e.g., #critical, Jane Schmidt).
+func (o SentryIssueAlertActionsV2SlackNotifyServicePtrOutput) Channel() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2SlackNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Channel
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ID of the channel to send the notification to.
+func (o SentryIssueAlertActionsV2SlackNotifyServicePtrOutput) ChannelId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2SlackNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ChannelId
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertActionsV2SlackNotifyServicePtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2SlackNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Text to show alongside the notification. To @ a user, include their user id like `@<USER_ID>`. To include a clickable link, format the link and title like `<http://example.com|Click Here>`.
+func (o SentryIssueAlertActionsV2SlackNotifyServicePtrOutput) Notes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2SlackNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Notes
+	}).(pulumi.StringPtrOutput)
+}
+
+// A string of tags to show in the notification.
+func (o SentryIssueAlertActionsV2SlackNotifyServicePtrOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2SlackNotifyService) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Tags
+	}).(pulumi.StringArrayOutput)
+}
+
+// The integration ID associated with the Slack workspace.
+func (o SentryIssueAlertActionsV2SlackNotifyServicePtrOutput) Workspace() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertActionsV2SlackNotifyService) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Workspace
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2 struct {
+	// When the `comparisonType` is `count`, the number of events in an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of events in an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+	EventFrequency *SentryIssueAlertConditionsV2EventFrequency `pulumi:"eventFrequency"`
+	// When the `comparisonType` is `count`, the percent of sessions affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the percent of sessions affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+	EventFrequencyPercent *SentryIssueAlertConditionsV2EventFrequencyPercent `pulumi:"eventFrequencyPercent"`
+	// When the `comparisonType` is `count`, the number of users affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of users affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+	EventUniqueUserFrequency *SentryIssueAlertConditionsV2EventUniqueUserFrequency `pulumi:"eventUniqueUserFrequency"`
+	// Sentry marks an existing issue as high priority.
+	ExistingHighPriorityIssue *SentryIssueAlertConditionsV2ExistingHighPriorityIssue `pulumi:"existingHighPriorityIssue"`
+	// A new issue is created.
+	FirstSeenEvent *SentryIssueAlertConditionsV2FirstSeenEvent `pulumi:"firstSeenEvent"`
+	// Sentry marks a new issue as high priority.
+	NewHighPriorityIssue *SentryIssueAlertConditionsV2NewHighPriorityIssue `pulumi:"newHighPriorityIssue"`
+	// The issue changes state from ignored to unresolved.
+	ReappearedEvent *SentryIssueAlertConditionsV2ReappearedEvent `pulumi:"reappearedEvent"`
+	// The issue changes state from resolved to unresolved.
+	RegressionEvent *SentryIssueAlertConditionsV2RegressionEvent `pulumi:"regressionEvent"`
+}
+
+// SentryIssueAlertConditionsV2Input is an input type that accepts SentryIssueAlertConditionsV2Args and SentryIssueAlertConditionsV2Output values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2Input` via:
+//
+//	SentryIssueAlertConditionsV2Args{...}
+type SentryIssueAlertConditionsV2Input interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2Output() SentryIssueAlertConditionsV2Output
+	ToSentryIssueAlertConditionsV2OutputWithContext(context.Context) SentryIssueAlertConditionsV2Output
+}
+
+type SentryIssueAlertConditionsV2Args struct {
+	// When the `comparisonType` is `count`, the number of events in an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of events in an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+	EventFrequency SentryIssueAlertConditionsV2EventFrequencyPtrInput `pulumi:"eventFrequency"`
+	// When the `comparisonType` is `count`, the percent of sessions affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the percent of sessions affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+	EventFrequencyPercent SentryIssueAlertConditionsV2EventFrequencyPercentPtrInput `pulumi:"eventFrequencyPercent"`
+	// When the `comparisonType` is `count`, the number of users affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of users affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+	EventUniqueUserFrequency SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrInput `pulumi:"eventUniqueUserFrequency"`
+	// Sentry marks an existing issue as high priority.
+	ExistingHighPriorityIssue SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrInput `pulumi:"existingHighPriorityIssue"`
+	// A new issue is created.
+	FirstSeenEvent SentryIssueAlertConditionsV2FirstSeenEventPtrInput `pulumi:"firstSeenEvent"`
+	// Sentry marks a new issue as high priority.
+	NewHighPriorityIssue SentryIssueAlertConditionsV2NewHighPriorityIssuePtrInput `pulumi:"newHighPriorityIssue"`
+	// The issue changes state from ignored to unresolved.
+	ReappearedEvent SentryIssueAlertConditionsV2ReappearedEventPtrInput `pulumi:"reappearedEvent"`
+	// The issue changes state from resolved to unresolved.
+	RegressionEvent SentryIssueAlertConditionsV2RegressionEventPtrInput `pulumi:"regressionEvent"`
+}
+
+func (SentryIssueAlertConditionsV2Args) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2)(nil)).Elem()
+}
+
+func (i SentryIssueAlertConditionsV2Args) ToSentryIssueAlertConditionsV2Output() SentryIssueAlertConditionsV2Output {
+	return i.ToSentryIssueAlertConditionsV2OutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2Args) ToSentryIssueAlertConditionsV2OutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2Output {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2Output)
+}
+
+// SentryIssueAlertConditionsV2ArrayInput is an input type that accepts SentryIssueAlertConditionsV2Array and SentryIssueAlertConditionsV2ArrayOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2ArrayInput` via:
+//
+//	SentryIssueAlertConditionsV2Array{ SentryIssueAlertConditionsV2Args{...} }
+type SentryIssueAlertConditionsV2ArrayInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2ArrayOutput() SentryIssueAlertConditionsV2ArrayOutput
+	ToSentryIssueAlertConditionsV2ArrayOutputWithContext(context.Context) SentryIssueAlertConditionsV2ArrayOutput
+}
+
+type SentryIssueAlertConditionsV2Array []SentryIssueAlertConditionsV2Input
+
+func (SentryIssueAlertConditionsV2Array) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SentryIssueAlertConditionsV2)(nil)).Elem()
+}
+
+func (i SentryIssueAlertConditionsV2Array) ToSentryIssueAlertConditionsV2ArrayOutput() SentryIssueAlertConditionsV2ArrayOutput {
+	return i.ToSentryIssueAlertConditionsV2ArrayOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2Array) ToSentryIssueAlertConditionsV2ArrayOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2ArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2ArrayOutput)
+}
+
+type SentryIssueAlertConditionsV2Output struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2Output) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2Output) ToSentryIssueAlertConditionsV2Output() SentryIssueAlertConditionsV2Output {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2Output) ToSentryIssueAlertConditionsV2OutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2Output {
+	return o
+}
+
+// When the `comparisonType` is `count`, the number of events in an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of events in an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+func (o SentryIssueAlertConditionsV2Output) EventFrequency() SentryIssueAlertConditionsV2EventFrequencyPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2) *SentryIssueAlertConditionsV2EventFrequency {
+		return v.EventFrequency
+	}).(SentryIssueAlertConditionsV2EventFrequencyPtrOutput)
+}
+
+// When the `comparisonType` is `count`, the percent of sessions affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the percent of sessions affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+func (o SentryIssueAlertConditionsV2Output) EventFrequencyPercent() SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2) *SentryIssueAlertConditionsV2EventFrequencyPercent {
+		return v.EventFrequencyPercent
+	}).(SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput)
+}
+
+// When the `comparisonType` is `count`, the number of users affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of users affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+func (o SentryIssueAlertConditionsV2Output) EventUniqueUserFrequency() SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2) *SentryIssueAlertConditionsV2EventUniqueUserFrequency {
+		return v.EventUniqueUserFrequency
+	}).(SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput)
+}
+
+// Sentry marks an existing issue as high priority.
+func (o SentryIssueAlertConditionsV2Output) ExistingHighPriorityIssue() SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2) *SentryIssueAlertConditionsV2ExistingHighPriorityIssue {
+		return v.ExistingHighPriorityIssue
+	}).(SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput)
+}
+
+// A new issue is created.
+func (o SentryIssueAlertConditionsV2Output) FirstSeenEvent() SentryIssueAlertConditionsV2FirstSeenEventPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2) *SentryIssueAlertConditionsV2FirstSeenEvent {
+		return v.FirstSeenEvent
+	}).(SentryIssueAlertConditionsV2FirstSeenEventPtrOutput)
+}
+
+// Sentry marks a new issue as high priority.
+func (o SentryIssueAlertConditionsV2Output) NewHighPriorityIssue() SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2) *SentryIssueAlertConditionsV2NewHighPriorityIssue {
+		return v.NewHighPriorityIssue
+	}).(SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput)
+}
+
+// The issue changes state from ignored to unresolved.
+func (o SentryIssueAlertConditionsV2Output) ReappearedEvent() SentryIssueAlertConditionsV2ReappearedEventPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2) *SentryIssueAlertConditionsV2ReappearedEvent {
+		return v.ReappearedEvent
+	}).(SentryIssueAlertConditionsV2ReappearedEventPtrOutput)
+}
+
+// The issue changes state from resolved to unresolved.
+func (o SentryIssueAlertConditionsV2Output) RegressionEvent() SentryIssueAlertConditionsV2RegressionEventPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2) *SentryIssueAlertConditionsV2RegressionEvent {
+		return v.RegressionEvent
+	}).(SentryIssueAlertConditionsV2RegressionEventPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2ArrayOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2ArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SentryIssueAlertConditionsV2)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2ArrayOutput) ToSentryIssueAlertConditionsV2ArrayOutput() SentryIssueAlertConditionsV2ArrayOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2ArrayOutput) ToSentryIssueAlertConditionsV2ArrayOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2ArrayOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2ArrayOutput) Index(i pulumi.IntInput) SentryIssueAlertConditionsV2Output {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SentryIssueAlertConditionsV2 {
+		return vs[0].([]SentryIssueAlertConditionsV2)[vs[1].(int)]
+	}).(SentryIssueAlertConditionsV2Output)
+}
+
+type SentryIssueAlertConditionsV2EventFrequency struct {
+	// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+	ComparisonInterval *string `pulumi:"comparisonInterval"`
+	// Valid values are: `count`, and `percent`.
+	ComparisonType string `pulumi:"comparisonType"`
+	// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+	Interval *string `pulumi:"interval"`
+	Name     *string `pulumi:"name"`
+	Value    int     `pulumi:"value"`
+}
+
+// SentryIssueAlertConditionsV2EventFrequencyInput is an input type that accepts SentryIssueAlertConditionsV2EventFrequencyArgs and SentryIssueAlertConditionsV2EventFrequencyOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2EventFrequencyInput` via:
+//
+//	SentryIssueAlertConditionsV2EventFrequencyArgs{...}
+type SentryIssueAlertConditionsV2EventFrequencyInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2EventFrequencyOutput() SentryIssueAlertConditionsV2EventFrequencyOutput
+	ToSentryIssueAlertConditionsV2EventFrequencyOutputWithContext(context.Context) SentryIssueAlertConditionsV2EventFrequencyOutput
+}
+
+type SentryIssueAlertConditionsV2EventFrequencyArgs struct {
+	// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+	ComparisonInterval pulumi.StringPtrInput `pulumi:"comparisonInterval"`
+	// Valid values are: `count`, and `percent`.
+	ComparisonType pulumi.StringInput `pulumi:"comparisonType"`
+	// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+	Interval pulumi.StringPtrInput `pulumi:"interval"`
+	Name     pulumi.StringPtrInput `pulumi:"name"`
+	Value    pulumi.IntInput       `pulumi:"value"`
+}
+
+func (SentryIssueAlertConditionsV2EventFrequencyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2EventFrequency)(nil)).Elem()
+}
+
+func (i SentryIssueAlertConditionsV2EventFrequencyArgs) ToSentryIssueAlertConditionsV2EventFrequencyOutput() SentryIssueAlertConditionsV2EventFrequencyOutput {
+	return i.ToSentryIssueAlertConditionsV2EventFrequencyOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2EventFrequencyArgs) ToSentryIssueAlertConditionsV2EventFrequencyOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventFrequencyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2EventFrequencyOutput)
+}
+
+func (i SentryIssueAlertConditionsV2EventFrequencyArgs) ToSentryIssueAlertConditionsV2EventFrequencyPtrOutput() SentryIssueAlertConditionsV2EventFrequencyPtrOutput {
+	return i.ToSentryIssueAlertConditionsV2EventFrequencyPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2EventFrequencyArgs) ToSentryIssueAlertConditionsV2EventFrequencyPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventFrequencyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2EventFrequencyOutput).ToSentryIssueAlertConditionsV2EventFrequencyPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertConditionsV2EventFrequencyPtrInput is an input type that accepts SentryIssueAlertConditionsV2EventFrequencyArgs, SentryIssueAlertConditionsV2EventFrequencyPtr and SentryIssueAlertConditionsV2EventFrequencyPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2EventFrequencyPtrInput` via:
+//
+//	        SentryIssueAlertConditionsV2EventFrequencyArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertConditionsV2EventFrequencyPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2EventFrequencyPtrOutput() SentryIssueAlertConditionsV2EventFrequencyPtrOutput
+	ToSentryIssueAlertConditionsV2EventFrequencyPtrOutputWithContext(context.Context) SentryIssueAlertConditionsV2EventFrequencyPtrOutput
+}
+
+type sentryIssueAlertConditionsV2EventFrequencyPtrType SentryIssueAlertConditionsV2EventFrequencyArgs
+
+func SentryIssueAlertConditionsV2EventFrequencyPtr(v *SentryIssueAlertConditionsV2EventFrequencyArgs) SentryIssueAlertConditionsV2EventFrequencyPtrInput {
+	return (*sentryIssueAlertConditionsV2EventFrequencyPtrType)(v)
+}
+
+func (*sentryIssueAlertConditionsV2EventFrequencyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2EventFrequency)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertConditionsV2EventFrequencyPtrType) ToSentryIssueAlertConditionsV2EventFrequencyPtrOutput() SentryIssueAlertConditionsV2EventFrequencyPtrOutput {
+	return i.ToSentryIssueAlertConditionsV2EventFrequencyPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertConditionsV2EventFrequencyPtrType) ToSentryIssueAlertConditionsV2EventFrequencyPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventFrequencyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2EventFrequencyPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2EventFrequencyOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2EventFrequencyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2EventFrequency)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyOutput) ToSentryIssueAlertConditionsV2EventFrequencyOutput() SentryIssueAlertConditionsV2EventFrequencyOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyOutput) ToSentryIssueAlertConditionsV2EventFrequencyOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventFrequencyOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyOutput) ToSentryIssueAlertConditionsV2EventFrequencyPtrOutput() SentryIssueAlertConditionsV2EventFrequencyPtrOutput {
+	return o.ToSentryIssueAlertConditionsV2EventFrequencyPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyOutput) ToSentryIssueAlertConditionsV2EventFrequencyPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventFrequencyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertConditionsV2EventFrequency) *SentryIssueAlertConditionsV2EventFrequency {
+		return &v
+	}).(SentryIssueAlertConditionsV2EventFrequencyPtrOutput)
+}
+
+// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+func (o SentryIssueAlertConditionsV2EventFrequencyOutput) ComparisonInterval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2EventFrequency) *string { return v.ComparisonInterval }).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `count`, and `percent`.
+func (o SentryIssueAlertConditionsV2EventFrequencyOutput) ComparisonType() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2EventFrequency) string { return v.ComparisonType }).(pulumi.StringOutput)
+}
+
+// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+func (o SentryIssueAlertConditionsV2EventFrequencyOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2EventFrequency) *string { return v.Interval }).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2EventFrequency) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2EventFrequency) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type SentryIssueAlertConditionsV2EventFrequencyPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2EventFrequencyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2EventFrequency)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPtrOutput) ToSentryIssueAlertConditionsV2EventFrequencyPtrOutput() SentryIssueAlertConditionsV2EventFrequencyPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPtrOutput) ToSentryIssueAlertConditionsV2EventFrequencyPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventFrequencyPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPtrOutput) Elem() SentryIssueAlertConditionsV2EventFrequencyOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventFrequency) SentryIssueAlertConditionsV2EventFrequency {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertConditionsV2EventFrequency
+		return ret
+	}).(SentryIssueAlertConditionsV2EventFrequencyOutput)
+}
+
+// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+func (o SentryIssueAlertConditionsV2EventFrequencyPtrOutput) ComparisonInterval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventFrequency) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ComparisonInterval
+	}).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `count`, and `percent`.
+func (o SentryIssueAlertConditionsV2EventFrequencyPtrOutput) ComparisonType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventFrequency) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ComparisonType
+	}).(pulumi.StringPtrOutput)
+}
+
+// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+func (o SentryIssueAlertConditionsV2EventFrequencyPtrOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventFrequency) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Interval
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventFrequency) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPtrOutput) Value() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventFrequency) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Value
+	}).(pulumi.IntPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2EventFrequencyPercent struct {
+	// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+	ComparisonInterval *string `pulumi:"comparisonInterval"`
+	// Valid values are: `count`, and `percent`.
+	ComparisonType string `pulumi:"comparisonType"`
+	// `m` for minutes, `h` for hours. Valid values are: `5m`, `10m`, `30m`, and `1h`.
+	Interval string  `pulumi:"interval"`
+	Name     *string `pulumi:"name"`
+	Value    float64 `pulumi:"value"`
+}
+
+// SentryIssueAlertConditionsV2EventFrequencyPercentInput is an input type that accepts SentryIssueAlertConditionsV2EventFrequencyPercentArgs and SentryIssueAlertConditionsV2EventFrequencyPercentOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2EventFrequencyPercentInput` via:
+//
+//	SentryIssueAlertConditionsV2EventFrequencyPercentArgs{...}
+type SentryIssueAlertConditionsV2EventFrequencyPercentInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2EventFrequencyPercentOutput() SentryIssueAlertConditionsV2EventFrequencyPercentOutput
+	ToSentryIssueAlertConditionsV2EventFrequencyPercentOutputWithContext(context.Context) SentryIssueAlertConditionsV2EventFrequencyPercentOutput
+}
+
+type SentryIssueAlertConditionsV2EventFrequencyPercentArgs struct {
+	// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+	ComparisonInterval pulumi.StringPtrInput `pulumi:"comparisonInterval"`
+	// Valid values are: `count`, and `percent`.
+	ComparisonType pulumi.StringInput `pulumi:"comparisonType"`
+	// `m` for minutes, `h` for hours. Valid values are: `5m`, `10m`, `30m`, and `1h`.
+	Interval pulumi.StringInput    `pulumi:"interval"`
+	Name     pulumi.StringPtrInput `pulumi:"name"`
+	Value    pulumi.Float64Input   `pulumi:"value"`
+}
+
+func (SentryIssueAlertConditionsV2EventFrequencyPercentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2EventFrequencyPercent)(nil)).Elem()
+}
+
+func (i SentryIssueAlertConditionsV2EventFrequencyPercentArgs) ToSentryIssueAlertConditionsV2EventFrequencyPercentOutput() SentryIssueAlertConditionsV2EventFrequencyPercentOutput {
+	return i.ToSentryIssueAlertConditionsV2EventFrequencyPercentOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2EventFrequencyPercentArgs) ToSentryIssueAlertConditionsV2EventFrequencyPercentOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventFrequencyPercentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2EventFrequencyPercentOutput)
+}
+
+func (i SentryIssueAlertConditionsV2EventFrequencyPercentArgs) ToSentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput() SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput {
+	return i.ToSentryIssueAlertConditionsV2EventFrequencyPercentPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2EventFrequencyPercentArgs) ToSentryIssueAlertConditionsV2EventFrequencyPercentPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2EventFrequencyPercentOutput).ToSentryIssueAlertConditionsV2EventFrequencyPercentPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertConditionsV2EventFrequencyPercentPtrInput is an input type that accepts SentryIssueAlertConditionsV2EventFrequencyPercentArgs, SentryIssueAlertConditionsV2EventFrequencyPercentPtr and SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2EventFrequencyPercentPtrInput` via:
+//
+//	        SentryIssueAlertConditionsV2EventFrequencyPercentArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertConditionsV2EventFrequencyPercentPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput() SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput
+	ToSentryIssueAlertConditionsV2EventFrequencyPercentPtrOutputWithContext(context.Context) SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput
+}
+
+type sentryIssueAlertConditionsV2EventFrequencyPercentPtrType SentryIssueAlertConditionsV2EventFrequencyPercentArgs
+
+func SentryIssueAlertConditionsV2EventFrequencyPercentPtr(v *SentryIssueAlertConditionsV2EventFrequencyPercentArgs) SentryIssueAlertConditionsV2EventFrequencyPercentPtrInput {
+	return (*sentryIssueAlertConditionsV2EventFrequencyPercentPtrType)(v)
+}
+
+func (*sentryIssueAlertConditionsV2EventFrequencyPercentPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2EventFrequencyPercent)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertConditionsV2EventFrequencyPercentPtrType) ToSentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput() SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput {
+	return i.ToSentryIssueAlertConditionsV2EventFrequencyPercentPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertConditionsV2EventFrequencyPercentPtrType) ToSentryIssueAlertConditionsV2EventFrequencyPercentPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2EventFrequencyPercentOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2EventFrequencyPercentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2EventFrequencyPercent)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentOutput) ToSentryIssueAlertConditionsV2EventFrequencyPercentOutput() SentryIssueAlertConditionsV2EventFrequencyPercentOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentOutput) ToSentryIssueAlertConditionsV2EventFrequencyPercentOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventFrequencyPercentOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentOutput) ToSentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput() SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput {
+	return o.ToSentryIssueAlertConditionsV2EventFrequencyPercentPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentOutput) ToSentryIssueAlertConditionsV2EventFrequencyPercentPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertConditionsV2EventFrequencyPercent) *SentryIssueAlertConditionsV2EventFrequencyPercent {
+		return &v
+	}).(SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput)
+}
+
+// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentOutput) ComparisonInterval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2EventFrequencyPercent) *string { return v.ComparisonInterval }).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `count`, and `percent`.
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentOutput) ComparisonType() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2EventFrequencyPercent) string { return v.ComparisonType }).(pulumi.StringOutput)
+}
+
+// `m` for minutes, `h` for hours. Valid values are: `5m`, `10m`, `30m`, and `1h`.
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentOutput) Interval() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2EventFrequencyPercent) string { return v.Interval }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2EventFrequencyPercent) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentOutput) Value() pulumi.Float64Output {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2EventFrequencyPercent) float64 { return v.Value }).(pulumi.Float64Output)
+}
+
+type SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2EventFrequencyPercent)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput) ToSentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput() SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput) ToSentryIssueAlertConditionsV2EventFrequencyPercentPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput) Elem() SentryIssueAlertConditionsV2EventFrequencyPercentOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventFrequencyPercent) SentryIssueAlertConditionsV2EventFrequencyPercent {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertConditionsV2EventFrequencyPercent
+		return ret
+	}).(SentryIssueAlertConditionsV2EventFrequencyPercentOutput)
+}
+
+// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput) ComparisonInterval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventFrequencyPercent) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ComparisonInterval
+	}).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `count`, and `percent`.
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput) ComparisonType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventFrequencyPercent) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ComparisonType
+	}).(pulumi.StringPtrOutput)
+}
+
+// `m` for minutes, `h` for hours. Valid values are: `5m`, `10m`, `30m`, and `1h`.
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventFrequencyPercent) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Interval
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventFrequencyPercent) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput) Value() pulumi.Float64PtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventFrequencyPercent) *float64 {
+		if v == nil {
+			return nil
+		}
+		return &v.Value
+	}).(pulumi.Float64PtrOutput)
+}
+
+type SentryIssueAlertConditionsV2EventUniqueUserFrequency struct {
+	// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+	ComparisonInterval *string `pulumi:"comparisonInterval"`
+	// Valid values are: `count`, and `percent`.
+	ComparisonType string `pulumi:"comparisonType"`
+	// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+	Interval *string `pulumi:"interval"`
+	Name     *string `pulumi:"name"`
+	Value    int     `pulumi:"value"`
+}
+
+// SentryIssueAlertConditionsV2EventUniqueUserFrequencyInput is an input type that accepts SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs and SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2EventUniqueUserFrequencyInput` via:
+//
+//	SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs{...}
+type SentryIssueAlertConditionsV2EventUniqueUserFrequencyInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput() SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput
+	ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutputWithContext(context.Context) SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput
+}
+
+type SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs struct {
+	// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+	ComparisonInterval pulumi.StringPtrInput `pulumi:"comparisonInterval"`
+	// Valid values are: `count`, and `percent`.
+	ComparisonType pulumi.StringInput `pulumi:"comparisonType"`
+	// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+	Interval pulumi.StringPtrInput `pulumi:"interval"`
+	Name     pulumi.StringPtrInput `pulumi:"name"`
+	Value    pulumi.IntInput       `pulumi:"value"`
+}
+
+func (SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2EventUniqueUserFrequency)(nil)).Elem()
+}
+
+func (i SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs) ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput() SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput {
+	return i.ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs) ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput)
+}
+
+func (i SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs) ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput() SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput {
+	return i.ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs) ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput).ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrInput is an input type that accepts SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs, SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtr and SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrInput` via:
+//
+//	        SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput() SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput
+	ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutputWithContext(context.Context) SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput
+}
+
+type sentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrType SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs
+
+func SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtr(v *SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs) SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrInput {
+	return (*sentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrType)(v)
+}
+
+func (*sentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2EventUniqueUserFrequency)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrType) ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput() SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput {
+	return i.ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrType) ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2EventUniqueUserFrequency)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput() SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput() SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput {
+	return o.ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertConditionsV2EventUniqueUserFrequency) *SentryIssueAlertConditionsV2EventUniqueUserFrequency {
+		return &v
+	}).(SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput)
+}
+
+// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) ComparisonInterval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2EventUniqueUserFrequency) *string { return v.ComparisonInterval }).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `count`, and `percent`.
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) ComparisonType() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2EventUniqueUserFrequency) string { return v.ComparisonType }).(pulumi.StringOutput)
+}
+
+// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2EventUniqueUserFrequency) *string { return v.Interval }).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2EventUniqueUserFrequency) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2EventUniqueUserFrequency) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2EventUniqueUserFrequency)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput) ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput() SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput) ToSentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput) Elem() SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventUniqueUserFrequency) SentryIssueAlertConditionsV2EventUniqueUserFrequency {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertConditionsV2EventUniqueUserFrequency
+		return ret
+	}).(SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput)
+}
+
+// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput) ComparisonInterval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventUniqueUserFrequency) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ComparisonInterval
+	}).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `count`, and `percent`.
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput) ComparisonType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventUniqueUserFrequency) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ComparisonType
+	}).(pulumi.StringPtrOutput)
+}
+
+// `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventUniqueUserFrequency) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Interval
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventUniqueUserFrequency) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput) Value() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2EventUniqueUserFrequency) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Value
+	}).(pulumi.IntPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2ExistingHighPriorityIssue struct {
+	Name *string `pulumi:"name"`
+}
+
+// SentryIssueAlertConditionsV2ExistingHighPriorityIssueInput is an input type that accepts SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs and SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2ExistingHighPriorityIssueInput` via:
+//
+//	SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs{...}
+type SentryIssueAlertConditionsV2ExistingHighPriorityIssueInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput() SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput
+	ToSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutputWithContext(context.Context) SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput
+}
+
+type SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs struct {
+	Name pulumi.StringPtrInput `pulumi:"name"`
+}
+
+func (SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2ExistingHighPriorityIssue)(nil)).Elem()
+}
+
+func (i SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs) ToSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput() SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput {
+	return i.ToSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs) ToSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput)
+}
+
+func (i SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs) ToSentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput() SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput {
+	return i.ToSentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs) ToSentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput).ToSentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrInput is an input type that accepts SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs, SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtr and SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrInput` via:
+//
+//	        SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput() SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput
+	ToSentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutputWithContext(context.Context) SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput
+}
+
+type sentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrType SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs
+
+func SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtr(v *SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs) SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrInput {
+	return (*sentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrType)(v)
+}
+
+func (*sentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2ExistingHighPriorityIssue)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrType) ToSentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput() SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput {
+	return i.ToSentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrType) ToSentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput)
+}
+
+type SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2ExistingHighPriorityIssue)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput) ToSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput() SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput) ToSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput) ToSentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput() SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput {
+	return o.ToSentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput) ToSentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertConditionsV2ExistingHighPriorityIssue) *SentryIssueAlertConditionsV2ExistingHighPriorityIssue {
+		return &v
+	}).(SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2ExistingHighPriorityIssue) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2ExistingHighPriorityIssue)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput) ToSentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput() SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput) ToSentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput) Elem() SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2ExistingHighPriorityIssue) SentryIssueAlertConditionsV2ExistingHighPriorityIssue {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertConditionsV2ExistingHighPriorityIssue
+		return ret
+	}).(SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput)
+}
+
+func (o SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2ExistingHighPriorityIssue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2FirstSeenEvent struct {
+	Name *string `pulumi:"name"`
+}
+
+// SentryIssueAlertConditionsV2FirstSeenEventInput is an input type that accepts SentryIssueAlertConditionsV2FirstSeenEventArgs and SentryIssueAlertConditionsV2FirstSeenEventOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2FirstSeenEventInput` via:
+//
+//	SentryIssueAlertConditionsV2FirstSeenEventArgs{...}
+type SentryIssueAlertConditionsV2FirstSeenEventInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2FirstSeenEventOutput() SentryIssueAlertConditionsV2FirstSeenEventOutput
+	ToSentryIssueAlertConditionsV2FirstSeenEventOutputWithContext(context.Context) SentryIssueAlertConditionsV2FirstSeenEventOutput
+}
+
+type SentryIssueAlertConditionsV2FirstSeenEventArgs struct {
+	Name pulumi.StringPtrInput `pulumi:"name"`
+}
+
+func (SentryIssueAlertConditionsV2FirstSeenEventArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2FirstSeenEvent)(nil)).Elem()
+}
+
+func (i SentryIssueAlertConditionsV2FirstSeenEventArgs) ToSentryIssueAlertConditionsV2FirstSeenEventOutput() SentryIssueAlertConditionsV2FirstSeenEventOutput {
+	return i.ToSentryIssueAlertConditionsV2FirstSeenEventOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2FirstSeenEventArgs) ToSentryIssueAlertConditionsV2FirstSeenEventOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2FirstSeenEventOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2FirstSeenEventOutput)
+}
+
+func (i SentryIssueAlertConditionsV2FirstSeenEventArgs) ToSentryIssueAlertConditionsV2FirstSeenEventPtrOutput() SentryIssueAlertConditionsV2FirstSeenEventPtrOutput {
+	return i.ToSentryIssueAlertConditionsV2FirstSeenEventPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2FirstSeenEventArgs) ToSentryIssueAlertConditionsV2FirstSeenEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2FirstSeenEventPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2FirstSeenEventOutput).ToSentryIssueAlertConditionsV2FirstSeenEventPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertConditionsV2FirstSeenEventPtrInput is an input type that accepts SentryIssueAlertConditionsV2FirstSeenEventArgs, SentryIssueAlertConditionsV2FirstSeenEventPtr and SentryIssueAlertConditionsV2FirstSeenEventPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2FirstSeenEventPtrInput` via:
+//
+//	        SentryIssueAlertConditionsV2FirstSeenEventArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertConditionsV2FirstSeenEventPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2FirstSeenEventPtrOutput() SentryIssueAlertConditionsV2FirstSeenEventPtrOutput
+	ToSentryIssueAlertConditionsV2FirstSeenEventPtrOutputWithContext(context.Context) SentryIssueAlertConditionsV2FirstSeenEventPtrOutput
+}
+
+type sentryIssueAlertConditionsV2FirstSeenEventPtrType SentryIssueAlertConditionsV2FirstSeenEventArgs
+
+func SentryIssueAlertConditionsV2FirstSeenEventPtr(v *SentryIssueAlertConditionsV2FirstSeenEventArgs) SentryIssueAlertConditionsV2FirstSeenEventPtrInput {
+	return (*sentryIssueAlertConditionsV2FirstSeenEventPtrType)(v)
+}
+
+func (*sentryIssueAlertConditionsV2FirstSeenEventPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2FirstSeenEvent)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertConditionsV2FirstSeenEventPtrType) ToSentryIssueAlertConditionsV2FirstSeenEventPtrOutput() SentryIssueAlertConditionsV2FirstSeenEventPtrOutput {
+	return i.ToSentryIssueAlertConditionsV2FirstSeenEventPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertConditionsV2FirstSeenEventPtrType) ToSentryIssueAlertConditionsV2FirstSeenEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2FirstSeenEventPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2FirstSeenEventPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2FirstSeenEventOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2FirstSeenEventOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2FirstSeenEvent)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2FirstSeenEventOutput) ToSentryIssueAlertConditionsV2FirstSeenEventOutput() SentryIssueAlertConditionsV2FirstSeenEventOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2FirstSeenEventOutput) ToSentryIssueAlertConditionsV2FirstSeenEventOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2FirstSeenEventOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2FirstSeenEventOutput) ToSentryIssueAlertConditionsV2FirstSeenEventPtrOutput() SentryIssueAlertConditionsV2FirstSeenEventPtrOutput {
+	return o.ToSentryIssueAlertConditionsV2FirstSeenEventPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertConditionsV2FirstSeenEventOutput) ToSentryIssueAlertConditionsV2FirstSeenEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2FirstSeenEventPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertConditionsV2FirstSeenEvent) *SentryIssueAlertConditionsV2FirstSeenEvent {
+		return &v
+	}).(SentryIssueAlertConditionsV2FirstSeenEventPtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2FirstSeenEventOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2FirstSeenEvent) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2FirstSeenEventPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2FirstSeenEventPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2FirstSeenEvent)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2FirstSeenEventPtrOutput) ToSentryIssueAlertConditionsV2FirstSeenEventPtrOutput() SentryIssueAlertConditionsV2FirstSeenEventPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2FirstSeenEventPtrOutput) ToSentryIssueAlertConditionsV2FirstSeenEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2FirstSeenEventPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2FirstSeenEventPtrOutput) Elem() SentryIssueAlertConditionsV2FirstSeenEventOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2FirstSeenEvent) SentryIssueAlertConditionsV2FirstSeenEvent {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertConditionsV2FirstSeenEvent
+		return ret
+	}).(SentryIssueAlertConditionsV2FirstSeenEventOutput)
+}
+
+func (o SentryIssueAlertConditionsV2FirstSeenEventPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2FirstSeenEvent) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2NewHighPriorityIssue struct {
+	Name *string `pulumi:"name"`
+}
+
+// SentryIssueAlertConditionsV2NewHighPriorityIssueInput is an input type that accepts SentryIssueAlertConditionsV2NewHighPriorityIssueArgs and SentryIssueAlertConditionsV2NewHighPriorityIssueOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2NewHighPriorityIssueInput` via:
+//
+//	SentryIssueAlertConditionsV2NewHighPriorityIssueArgs{...}
+type SentryIssueAlertConditionsV2NewHighPriorityIssueInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2NewHighPriorityIssueOutput() SentryIssueAlertConditionsV2NewHighPriorityIssueOutput
+	ToSentryIssueAlertConditionsV2NewHighPriorityIssueOutputWithContext(context.Context) SentryIssueAlertConditionsV2NewHighPriorityIssueOutput
+}
+
+type SentryIssueAlertConditionsV2NewHighPriorityIssueArgs struct {
+	Name pulumi.StringPtrInput `pulumi:"name"`
+}
+
+func (SentryIssueAlertConditionsV2NewHighPriorityIssueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2NewHighPriorityIssue)(nil)).Elem()
+}
+
+func (i SentryIssueAlertConditionsV2NewHighPriorityIssueArgs) ToSentryIssueAlertConditionsV2NewHighPriorityIssueOutput() SentryIssueAlertConditionsV2NewHighPriorityIssueOutput {
+	return i.ToSentryIssueAlertConditionsV2NewHighPriorityIssueOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2NewHighPriorityIssueArgs) ToSentryIssueAlertConditionsV2NewHighPriorityIssueOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2NewHighPriorityIssueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2NewHighPriorityIssueOutput)
+}
+
+func (i SentryIssueAlertConditionsV2NewHighPriorityIssueArgs) ToSentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput() SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput {
+	return i.ToSentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2NewHighPriorityIssueArgs) ToSentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2NewHighPriorityIssueOutput).ToSentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertConditionsV2NewHighPriorityIssuePtrInput is an input type that accepts SentryIssueAlertConditionsV2NewHighPriorityIssueArgs, SentryIssueAlertConditionsV2NewHighPriorityIssuePtr and SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2NewHighPriorityIssuePtrInput` via:
+//
+//	        SentryIssueAlertConditionsV2NewHighPriorityIssueArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertConditionsV2NewHighPriorityIssuePtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput() SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput
+	ToSentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutputWithContext(context.Context) SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput
+}
+
+type sentryIssueAlertConditionsV2NewHighPriorityIssuePtrType SentryIssueAlertConditionsV2NewHighPriorityIssueArgs
+
+func SentryIssueAlertConditionsV2NewHighPriorityIssuePtr(v *SentryIssueAlertConditionsV2NewHighPriorityIssueArgs) SentryIssueAlertConditionsV2NewHighPriorityIssuePtrInput {
+	return (*sentryIssueAlertConditionsV2NewHighPriorityIssuePtrType)(v)
+}
+
+func (*sentryIssueAlertConditionsV2NewHighPriorityIssuePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2NewHighPriorityIssue)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertConditionsV2NewHighPriorityIssuePtrType) ToSentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput() SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput {
+	return i.ToSentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertConditionsV2NewHighPriorityIssuePtrType) ToSentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput)
+}
+
+type SentryIssueAlertConditionsV2NewHighPriorityIssueOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2NewHighPriorityIssueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2NewHighPriorityIssue)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2NewHighPriorityIssueOutput) ToSentryIssueAlertConditionsV2NewHighPriorityIssueOutput() SentryIssueAlertConditionsV2NewHighPriorityIssueOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2NewHighPriorityIssueOutput) ToSentryIssueAlertConditionsV2NewHighPriorityIssueOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2NewHighPriorityIssueOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2NewHighPriorityIssueOutput) ToSentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput() SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput {
+	return o.ToSentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertConditionsV2NewHighPriorityIssueOutput) ToSentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertConditionsV2NewHighPriorityIssue) *SentryIssueAlertConditionsV2NewHighPriorityIssue {
+		return &v
+	}).(SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2NewHighPriorityIssueOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2NewHighPriorityIssue) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2NewHighPriorityIssue)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput) ToSentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput() SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput) ToSentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput) Elem() SentryIssueAlertConditionsV2NewHighPriorityIssueOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2NewHighPriorityIssue) SentryIssueAlertConditionsV2NewHighPriorityIssue {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertConditionsV2NewHighPriorityIssue
+		return ret
+	}).(SentryIssueAlertConditionsV2NewHighPriorityIssueOutput)
+}
+
+func (o SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2NewHighPriorityIssue) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2ReappearedEvent struct {
+	Name *string `pulumi:"name"`
+}
+
+// SentryIssueAlertConditionsV2ReappearedEventInput is an input type that accepts SentryIssueAlertConditionsV2ReappearedEventArgs and SentryIssueAlertConditionsV2ReappearedEventOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2ReappearedEventInput` via:
+//
+//	SentryIssueAlertConditionsV2ReappearedEventArgs{...}
+type SentryIssueAlertConditionsV2ReappearedEventInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2ReappearedEventOutput() SentryIssueAlertConditionsV2ReappearedEventOutput
+	ToSentryIssueAlertConditionsV2ReappearedEventOutputWithContext(context.Context) SentryIssueAlertConditionsV2ReappearedEventOutput
+}
+
+type SentryIssueAlertConditionsV2ReappearedEventArgs struct {
+	Name pulumi.StringPtrInput `pulumi:"name"`
+}
+
+func (SentryIssueAlertConditionsV2ReappearedEventArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2ReappearedEvent)(nil)).Elem()
+}
+
+func (i SentryIssueAlertConditionsV2ReappearedEventArgs) ToSentryIssueAlertConditionsV2ReappearedEventOutput() SentryIssueAlertConditionsV2ReappearedEventOutput {
+	return i.ToSentryIssueAlertConditionsV2ReappearedEventOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2ReappearedEventArgs) ToSentryIssueAlertConditionsV2ReappearedEventOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2ReappearedEventOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2ReappearedEventOutput)
+}
+
+func (i SentryIssueAlertConditionsV2ReappearedEventArgs) ToSentryIssueAlertConditionsV2ReappearedEventPtrOutput() SentryIssueAlertConditionsV2ReappearedEventPtrOutput {
+	return i.ToSentryIssueAlertConditionsV2ReappearedEventPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2ReappearedEventArgs) ToSentryIssueAlertConditionsV2ReappearedEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2ReappearedEventPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2ReappearedEventOutput).ToSentryIssueAlertConditionsV2ReappearedEventPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertConditionsV2ReappearedEventPtrInput is an input type that accepts SentryIssueAlertConditionsV2ReappearedEventArgs, SentryIssueAlertConditionsV2ReappearedEventPtr and SentryIssueAlertConditionsV2ReappearedEventPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2ReappearedEventPtrInput` via:
+//
+//	        SentryIssueAlertConditionsV2ReappearedEventArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertConditionsV2ReappearedEventPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2ReappearedEventPtrOutput() SentryIssueAlertConditionsV2ReappearedEventPtrOutput
+	ToSentryIssueAlertConditionsV2ReappearedEventPtrOutputWithContext(context.Context) SentryIssueAlertConditionsV2ReappearedEventPtrOutput
+}
+
+type sentryIssueAlertConditionsV2ReappearedEventPtrType SentryIssueAlertConditionsV2ReappearedEventArgs
+
+func SentryIssueAlertConditionsV2ReappearedEventPtr(v *SentryIssueAlertConditionsV2ReappearedEventArgs) SentryIssueAlertConditionsV2ReappearedEventPtrInput {
+	return (*sentryIssueAlertConditionsV2ReappearedEventPtrType)(v)
+}
+
+func (*sentryIssueAlertConditionsV2ReappearedEventPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2ReappearedEvent)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertConditionsV2ReappearedEventPtrType) ToSentryIssueAlertConditionsV2ReappearedEventPtrOutput() SentryIssueAlertConditionsV2ReappearedEventPtrOutput {
+	return i.ToSentryIssueAlertConditionsV2ReappearedEventPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertConditionsV2ReappearedEventPtrType) ToSentryIssueAlertConditionsV2ReappearedEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2ReappearedEventPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2ReappearedEventPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2ReappearedEventOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2ReappearedEventOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2ReappearedEvent)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2ReappearedEventOutput) ToSentryIssueAlertConditionsV2ReappearedEventOutput() SentryIssueAlertConditionsV2ReappearedEventOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2ReappearedEventOutput) ToSentryIssueAlertConditionsV2ReappearedEventOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2ReappearedEventOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2ReappearedEventOutput) ToSentryIssueAlertConditionsV2ReappearedEventPtrOutput() SentryIssueAlertConditionsV2ReappearedEventPtrOutput {
+	return o.ToSentryIssueAlertConditionsV2ReappearedEventPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertConditionsV2ReappearedEventOutput) ToSentryIssueAlertConditionsV2ReappearedEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2ReappearedEventPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertConditionsV2ReappearedEvent) *SentryIssueAlertConditionsV2ReappearedEvent {
+		return &v
+	}).(SentryIssueAlertConditionsV2ReappearedEventPtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2ReappearedEventOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2ReappearedEvent) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2ReappearedEventPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2ReappearedEventPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2ReappearedEvent)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2ReappearedEventPtrOutput) ToSentryIssueAlertConditionsV2ReappearedEventPtrOutput() SentryIssueAlertConditionsV2ReappearedEventPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2ReappearedEventPtrOutput) ToSentryIssueAlertConditionsV2ReappearedEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2ReappearedEventPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2ReappearedEventPtrOutput) Elem() SentryIssueAlertConditionsV2ReappearedEventOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2ReappearedEvent) SentryIssueAlertConditionsV2ReappearedEvent {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertConditionsV2ReappearedEvent
+		return ret
+	}).(SentryIssueAlertConditionsV2ReappearedEventOutput)
+}
+
+func (o SentryIssueAlertConditionsV2ReappearedEventPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2ReappearedEvent) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2RegressionEvent struct {
+	Name *string `pulumi:"name"`
+}
+
+// SentryIssueAlertConditionsV2RegressionEventInput is an input type that accepts SentryIssueAlertConditionsV2RegressionEventArgs and SentryIssueAlertConditionsV2RegressionEventOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2RegressionEventInput` via:
+//
+//	SentryIssueAlertConditionsV2RegressionEventArgs{...}
+type SentryIssueAlertConditionsV2RegressionEventInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2RegressionEventOutput() SentryIssueAlertConditionsV2RegressionEventOutput
+	ToSentryIssueAlertConditionsV2RegressionEventOutputWithContext(context.Context) SentryIssueAlertConditionsV2RegressionEventOutput
+}
+
+type SentryIssueAlertConditionsV2RegressionEventArgs struct {
+	Name pulumi.StringPtrInput `pulumi:"name"`
+}
+
+func (SentryIssueAlertConditionsV2RegressionEventArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2RegressionEvent)(nil)).Elem()
+}
+
+func (i SentryIssueAlertConditionsV2RegressionEventArgs) ToSentryIssueAlertConditionsV2RegressionEventOutput() SentryIssueAlertConditionsV2RegressionEventOutput {
+	return i.ToSentryIssueAlertConditionsV2RegressionEventOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2RegressionEventArgs) ToSentryIssueAlertConditionsV2RegressionEventOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2RegressionEventOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2RegressionEventOutput)
+}
+
+func (i SentryIssueAlertConditionsV2RegressionEventArgs) ToSentryIssueAlertConditionsV2RegressionEventPtrOutput() SentryIssueAlertConditionsV2RegressionEventPtrOutput {
+	return i.ToSentryIssueAlertConditionsV2RegressionEventPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertConditionsV2RegressionEventArgs) ToSentryIssueAlertConditionsV2RegressionEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2RegressionEventPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2RegressionEventOutput).ToSentryIssueAlertConditionsV2RegressionEventPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertConditionsV2RegressionEventPtrInput is an input type that accepts SentryIssueAlertConditionsV2RegressionEventArgs, SentryIssueAlertConditionsV2RegressionEventPtr and SentryIssueAlertConditionsV2RegressionEventPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertConditionsV2RegressionEventPtrInput` via:
+//
+//	        SentryIssueAlertConditionsV2RegressionEventArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertConditionsV2RegressionEventPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertConditionsV2RegressionEventPtrOutput() SentryIssueAlertConditionsV2RegressionEventPtrOutput
+	ToSentryIssueAlertConditionsV2RegressionEventPtrOutputWithContext(context.Context) SentryIssueAlertConditionsV2RegressionEventPtrOutput
+}
+
+type sentryIssueAlertConditionsV2RegressionEventPtrType SentryIssueAlertConditionsV2RegressionEventArgs
+
+func SentryIssueAlertConditionsV2RegressionEventPtr(v *SentryIssueAlertConditionsV2RegressionEventArgs) SentryIssueAlertConditionsV2RegressionEventPtrInput {
+	return (*sentryIssueAlertConditionsV2RegressionEventPtrType)(v)
+}
+
+func (*sentryIssueAlertConditionsV2RegressionEventPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2RegressionEvent)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertConditionsV2RegressionEventPtrType) ToSentryIssueAlertConditionsV2RegressionEventPtrOutput() SentryIssueAlertConditionsV2RegressionEventPtrOutput {
+	return i.ToSentryIssueAlertConditionsV2RegressionEventPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertConditionsV2RegressionEventPtrType) ToSentryIssueAlertConditionsV2RegressionEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2RegressionEventPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertConditionsV2RegressionEventPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2RegressionEventOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2RegressionEventOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertConditionsV2RegressionEvent)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2RegressionEventOutput) ToSentryIssueAlertConditionsV2RegressionEventOutput() SentryIssueAlertConditionsV2RegressionEventOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2RegressionEventOutput) ToSentryIssueAlertConditionsV2RegressionEventOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2RegressionEventOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2RegressionEventOutput) ToSentryIssueAlertConditionsV2RegressionEventPtrOutput() SentryIssueAlertConditionsV2RegressionEventPtrOutput {
+	return o.ToSentryIssueAlertConditionsV2RegressionEventPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertConditionsV2RegressionEventOutput) ToSentryIssueAlertConditionsV2RegressionEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2RegressionEventPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertConditionsV2RegressionEvent) *SentryIssueAlertConditionsV2RegressionEvent {
+		return &v
+	}).(SentryIssueAlertConditionsV2RegressionEventPtrOutput)
+}
+
+func (o SentryIssueAlertConditionsV2RegressionEventOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertConditionsV2RegressionEvent) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertConditionsV2RegressionEventPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertConditionsV2RegressionEventPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertConditionsV2RegressionEvent)(nil)).Elem()
+}
+
+func (o SentryIssueAlertConditionsV2RegressionEventPtrOutput) ToSentryIssueAlertConditionsV2RegressionEventPtrOutput() SentryIssueAlertConditionsV2RegressionEventPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2RegressionEventPtrOutput) ToSentryIssueAlertConditionsV2RegressionEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertConditionsV2RegressionEventPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertConditionsV2RegressionEventPtrOutput) Elem() SentryIssueAlertConditionsV2RegressionEventOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2RegressionEvent) SentryIssueAlertConditionsV2RegressionEvent {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertConditionsV2RegressionEvent
+		return ret
+	}).(SentryIssueAlertConditionsV2RegressionEventOutput)
+}
+
+func (o SentryIssueAlertConditionsV2RegressionEventPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertConditionsV2RegressionEvent) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2 struct {
+	// The issue is older or newer than `value` `time`.
+	AgeComparison *SentryIssueAlertFiltersV2AgeComparison `pulumi:"ageComparison"`
+	// The issue is assigned to no one, team, or member.
+	AssignedTo *SentryIssueAlertFiltersV2AssignedTo `pulumi:"assignedTo"`
+	// The event's `attribute` value `match` `value`.
+	EventAttribute *SentryIssueAlertFiltersV2EventAttribute `pulumi:"eventAttribute"`
+	// The issue's category is equal to `value`.
+	IssueCategory *SentryIssueAlertFiltersV2IssueCategory `pulumi:"issueCategory"`
+	// The issue has happened at least `value` times (Note: this is approximate).
+	IssueOccurrences *SentryIssueAlertFiltersV2IssueOccurrences `pulumi:"issueOccurrences"`
+	// The {oldest*or*newest} adopted release associated with the event's issue is {older*or*newer} than the latest adopted release in {environment}.
+	LatestAdoptedRelease *SentryIssueAlertFiltersV2LatestAdoptedRelease `pulumi:"latestAdoptedRelease"`
+	// The event is from the latest release.
+	LatestRelease *SentryIssueAlertFiltersV2LatestRelease `pulumi:"latestRelease"`
+	// The event's level is `match` `level`.
+	Level *SentryIssueAlertFiltersV2Level `pulumi:"level"`
+	// The event's tags match `key` `match` `value`.
+	TaggedEvent *SentryIssueAlertFiltersV2TaggedEvent `pulumi:"taggedEvent"`
+}
+
+// SentryIssueAlertFiltersV2Input is an input type that accepts SentryIssueAlertFiltersV2Args and SentryIssueAlertFiltersV2Output values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2Input` via:
+//
+//	SentryIssueAlertFiltersV2Args{...}
+type SentryIssueAlertFiltersV2Input interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2Output() SentryIssueAlertFiltersV2Output
+	ToSentryIssueAlertFiltersV2OutputWithContext(context.Context) SentryIssueAlertFiltersV2Output
+}
+
+type SentryIssueAlertFiltersV2Args struct {
+	// The issue is older or newer than `value` `time`.
+	AgeComparison SentryIssueAlertFiltersV2AgeComparisonPtrInput `pulumi:"ageComparison"`
+	// The issue is assigned to no one, team, or member.
+	AssignedTo SentryIssueAlertFiltersV2AssignedToPtrInput `pulumi:"assignedTo"`
+	// The event's `attribute` value `match` `value`.
+	EventAttribute SentryIssueAlertFiltersV2EventAttributePtrInput `pulumi:"eventAttribute"`
+	// The issue's category is equal to `value`.
+	IssueCategory SentryIssueAlertFiltersV2IssueCategoryPtrInput `pulumi:"issueCategory"`
+	// The issue has happened at least `value` times (Note: this is approximate).
+	IssueOccurrences SentryIssueAlertFiltersV2IssueOccurrencesPtrInput `pulumi:"issueOccurrences"`
+	// The {oldest*or*newest} adopted release associated with the event's issue is {older*or*newer} than the latest adopted release in {environment}.
+	LatestAdoptedRelease SentryIssueAlertFiltersV2LatestAdoptedReleasePtrInput `pulumi:"latestAdoptedRelease"`
+	// The event is from the latest release.
+	LatestRelease SentryIssueAlertFiltersV2LatestReleasePtrInput `pulumi:"latestRelease"`
+	// The event's level is `match` `level`.
+	Level SentryIssueAlertFiltersV2LevelPtrInput `pulumi:"level"`
+	// The event's tags match `key` `match` `value`.
+	TaggedEvent SentryIssueAlertFiltersV2TaggedEventPtrInput `pulumi:"taggedEvent"`
+}
+
+func (SentryIssueAlertFiltersV2Args) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2)(nil)).Elem()
+}
+
+func (i SentryIssueAlertFiltersV2Args) ToSentryIssueAlertFiltersV2Output() SentryIssueAlertFiltersV2Output {
+	return i.ToSentryIssueAlertFiltersV2OutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2Args) ToSentryIssueAlertFiltersV2OutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2Output {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2Output)
+}
+
+// SentryIssueAlertFiltersV2ArrayInput is an input type that accepts SentryIssueAlertFiltersV2Array and SentryIssueAlertFiltersV2ArrayOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2ArrayInput` via:
+//
+//	SentryIssueAlertFiltersV2Array{ SentryIssueAlertFiltersV2Args{...} }
+type SentryIssueAlertFiltersV2ArrayInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2ArrayOutput() SentryIssueAlertFiltersV2ArrayOutput
+	ToSentryIssueAlertFiltersV2ArrayOutputWithContext(context.Context) SentryIssueAlertFiltersV2ArrayOutput
+}
+
+type SentryIssueAlertFiltersV2Array []SentryIssueAlertFiltersV2Input
+
+func (SentryIssueAlertFiltersV2Array) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SentryIssueAlertFiltersV2)(nil)).Elem()
+}
+
+func (i SentryIssueAlertFiltersV2Array) ToSentryIssueAlertFiltersV2ArrayOutput() SentryIssueAlertFiltersV2ArrayOutput {
+	return i.ToSentryIssueAlertFiltersV2ArrayOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2Array) ToSentryIssueAlertFiltersV2ArrayOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2ArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2ArrayOutput)
+}
+
+type SentryIssueAlertFiltersV2Output struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2Output) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2Output) ToSentryIssueAlertFiltersV2Output() SentryIssueAlertFiltersV2Output {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2Output) ToSentryIssueAlertFiltersV2OutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2Output {
+	return o
+}
+
+// The issue is older or newer than `value` `time`.
+func (o SentryIssueAlertFiltersV2Output) AgeComparison() SentryIssueAlertFiltersV2AgeComparisonPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2) *SentryIssueAlertFiltersV2AgeComparison { return v.AgeComparison }).(SentryIssueAlertFiltersV2AgeComparisonPtrOutput)
+}
+
+// The issue is assigned to no one, team, or member.
+func (o SentryIssueAlertFiltersV2Output) AssignedTo() SentryIssueAlertFiltersV2AssignedToPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2) *SentryIssueAlertFiltersV2AssignedTo { return v.AssignedTo }).(SentryIssueAlertFiltersV2AssignedToPtrOutput)
+}
+
+// The event's `attribute` value `match` `value`.
+func (o SentryIssueAlertFiltersV2Output) EventAttribute() SentryIssueAlertFiltersV2EventAttributePtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2) *SentryIssueAlertFiltersV2EventAttribute { return v.EventAttribute }).(SentryIssueAlertFiltersV2EventAttributePtrOutput)
+}
+
+// The issue's category is equal to `value`.
+func (o SentryIssueAlertFiltersV2Output) IssueCategory() SentryIssueAlertFiltersV2IssueCategoryPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2) *SentryIssueAlertFiltersV2IssueCategory { return v.IssueCategory }).(SentryIssueAlertFiltersV2IssueCategoryPtrOutput)
+}
+
+// The issue has happened at least `value` times (Note: this is approximate).
+func (o SentryIssueAlertFiltersV2Output) IssueOccurrences() SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2) *SentryIssueAlertFiltersV2IssueOccurrences {
+		return v.IssueOccurrences
+	}).(SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput)
+}
+
+// The {oldest*or*newest} adopted release associated with the event's issue is {older*or*newer} than the latest adopted release in {environment}.
+func (o SentryIssueAlertFiltersV2Output) LatestAdoptedRelease() SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2) *SentryIssueAlertFiltersV2LatestAdoptedRelease {
+		return v.LatestAdoptedRelease
+	}).(SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput)
+}
+
+// The event is from the latest release.
+func (o SentryIssueAlertFiltersV2Output) LatestRelease() SentryIssueAlertFiltersV2LatestReleasePtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2) *SentryIssueAlertFiltersV2LatestRelease { return v.LatestRelease }).(SentryIssueAlertFiltersV2LatestReleasePtrOutput)
+}
+
+// The event's level is `match` `level`.
+func (o SentryIssueAlertFiltersV2Output) Level() SentryIssueAlertFiltersV2LevelPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2) *SentryIssueAlertFiltersV2Level { return v.Level }).(SentryIssueAlertFiltersV2LevelPtrOutput)
+}
+
+// The event's tags match `key` `match` `value`.
+func (o SentryIssueAlertFiltersV2Output) TaggedEvent() SentryIssueAlertFiltersV2TaggedEventPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2) *SentryIssueAlertFiltersV2TaggedEvent { return v.TaggedEvent }).(SentryIssueAlertFiltersV2TaggedEventPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2ArrayOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2ArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SentryIssueAlertFiltersV2)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2ArrayOutput) ToSentryIssueAlertFiltersV2ArrayOutput() SentryIssueAlertFiltersV2ArrayOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2ArrayOutput) ToSentryIssueAlertFiltersV2ArrayOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2ArrayOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2ArrayOutput) Index(i pulumi.IntInput) SentryIssueAlertFiltersV2Output {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SentryIssueAlertFiltersV2 {
+		return vs[0].([]SentryIssueAlertFiltersV2)[vs[1].(int)]
+	}).(SentryIssueAlertFiltersV2Output)
+}
+
+type SentryIssueAlertFiltersV2AgeComparison struct {
+	// Valid values are: `older`, and `newer`.
+	ComparisonType string  `pulumi:"comparisonType"`
+	Name           *string `pulumi:"name"`
+	// Valid values are: `minute`, `hour`, `day`, and `week`.
+	Time  string `pulumi:"time"`
+	Value int    `pulumi:"value"`
+}
+
+// SentryIssueAlertFiltersV2AgeComparisonInput is an input type that accepts SentryIssueAlertFiltersV2AgeComparisonArgs and SentryIssueAlertFiltersV2AgeComparisonOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2AgeComparisonInput` via:
+//
+//	SentryIssueAlertFiltersV2AgeComparisonArgs{...}
+type SentryIssueAlertFiltersV2AgeComparisonInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2AgeComparisonOutput() SentryIssueAlertFiltersV2AgeComparisonOutput
+	ToSentryIssueAlertFiltersV2AgeComparisonOutputWithContext(context.Context) SentryIssueAlertFiltersV2AgeComparisonOutput
+}
+
+type SentryIssueAlertFiltersV2AgeComparisonArgs struct {
+	// Valid values are: `older`, and `newer`.
+	ComparisonType pulumi.StringInput    `pulumi:"comparisonType"`
+	Name           pulumi.StringPtrInput `pulumi:"name"`
+	// Valid values are: `minute`, `hour`, `day`, and `week`.
+	Time  pulumi.StringInput `pulumi:"time"`
+	Value pulumi.IntInput    `pulumi:"value"`
+}
+
+func (SentryIssueAlertFiltersV2AgeComparisonArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2AgeComparison)(nil)).Elem()
+}
+
+func (i SentryIssueAlertFiltersV2AgeComparisonArgs) ToSentryIssueAlertFiltersV2AgeComparisonOutput() SentryIssueAlertFiltersV2AgeComparisonOutput {
+	return i.ToSentryIssueAlertFiltersV2AgeComparisonOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2AgeComparisonArgs) ToSentryIssueAlertFiltersV2AgeComparisonOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2AgeComparisonOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2AgeComparisonOutput)
+}
+
+func (i SentryIssueAlertFiltersV2AgeComparisonArgs) ToSentryIssueAlertFiltersV2AgeComparisonPtrOutput() SentryIssueAlertFiltersV2AgeComparisonPtrOutput {
+	return i.ToSentryIssueAlertFiltersV2AgeComparisonPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2AgeComparisonArgs) ToSentryIssueAlertFiltersV2AgeComparisonPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2AgeComparisonPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2AgeComparisonOutput).ToSentryIssueAlertFiltersV2AgeComparisonPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertFiltersV2AgeComparisonPtrInput is an input type that accepts SentryIssueAlertFiltersV2AgeComparisonArgs, SentryIssueAlertFiltersV2AgeComparisonPtr and SentryIssueAlertFiltersV2AgeComparisonPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2AgeComparisonPtrInput` via:
+//
+//	        SentryIssueAlertFiltersV2AgeComparisonArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertFiltersV2AgeComparisonPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2AgeComparisonPtrOutput() SentryIssueAlertFiltersV2AgeComparisonPtrOutput
+	ToSentryIssueAlertFiltersV2AgeComparisonPtrOutputWithContext(context.Context) SentryIssueAlertFiltersV2AgeComparisonPtrOutput
+}
+
+type sentryIssueAlertFiltersV2AgeComparisonPtrType SentryIssueAlertFiltersV2AgeComparisonArgs
+
+func SentryIssueAlertFiltersV2AgeComparisonPtr(v *SentryIssueAlertFiltersV2AgeComparisonArgs) SentryIssueAlertFiltersV2AgeComparisonPtrInput {
+	return (*sentryIssueAlertFiltersV2AgeComparisonPtrType)(v)
+}
+
+func (*sentryIssueAlertFiltersV2AgeComparisonPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2AgeComparison)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertFiltersV2AgeComparisonPtrType) ToSentryIssueAlertFiltersV2AgeComparisonPtrOutput() SentryIssueAlertFiltersV2AgeComparisonPtrOutput {
+	return i.ToSentryIssueAlertFiltersV2AgeComparisonPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertFiltersV2AgeComparisonPtrType) ToSentryIssueAlertFiltersV2AgeComparisonPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2AgeComparisonPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2AgeComparisonPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2AgeComparisonOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2AgeComparisonOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2AgeComparison)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2AgeComparisonOutput) ToSentryIssueAlertFiltersV2AgeComparisonOutput() SentryIssueAlertFiltersV2AgeComparisonOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2AgeComparisonOutput) ToSentryIssueAlertFiltersV2AgeComparisonOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2AgeComparisonOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2AgeComparisonOutput) ToSentryIssueAlertFiltersV2AgeComparisonPtrOutput() SentryIssueAlertFiltersV2AgeComparisonPtrOutput {
+	return o.ToSentryIssueAlertFiltersV2AgeComparisonPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertFiltersV2AgeComparisonOutput) ToSentryIssueAlertFiltersV2AgeComparisonPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2AgeComparisonPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertFiltersV2AgeComparison) *SentryIssueAlertFiltersV2AgeComparison {
+		return &v
+	}).(SentryIssueAlertFiltersV2AgeComparisonPtrOutput)
+}
+
+// Valid values are: `older`, and `newer`.
+func (o SentryIssueAlertFiltersV2AgeComparisonOutput) ComparisonType() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2AgeComparison) string { return v.ComparisonType }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertFiltersV2AgeComparisonOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2AgeComparison) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `minute`, `hour`, `day`, and `week`.
+func (o SentryIssueAlertFiltersV2AgeComparisonOutput) Time() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2AgeComparison) string { return v.Time }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertFiltersV2AgeComparisonOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2AgeComparison) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type SentryIssueAlertFiltersV2AgeComparisonPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2AgeComparisonPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2AgeComparison)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2AgeComparisonPtrOutput) ToSentryIssueAlertFiltersV2AgeComparisonPtrOutput() SentryIssueAlertFiltersV2AgeComparisonPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2AgeComparisonPtrOutput) ToSentryIssueAlertFiltersV2AgeComparisonPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2AgeComparisonPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2AgeComparisonPtrOutput) Elem() SentryIssueAlertFiltersV2AgeComparisonOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2AgeComparison) SentryIssueAlertFiltersV2AgeComparison {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertFiltersV2AgeComparison
+		return ret
+	}).(SentryIssueAlertFiltersV2AgeComparisonOutput)
+}
+
+// Valid values are: `older`, and `newer`.
+func (o SentryIssueAlertFiltersV2AgeComparisonPtrOutput) ComparisonType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2AgeComparison) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ComparisonType
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2AgeComparisonPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2AgeComparison) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `minute`, `hour`, `day`, and `week`.
+func (o SentryIssueAlertFiltersV2AgeComparisonPtrOutput) Time() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2AgeComparison) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Time
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2AgeComparisonPtrOutput) Value() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2AgeComparison) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Value
+	}).(pulumi.IntPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2AssignedTo struct {
+	Name *string `pulumi:"name"`
+	// The target's ID. Only required when `targetType` is `Team` or `Member`.
+	TargetIdentifier *string `pulumi:"targetIdentifier"`
+	// Valid values are: `Unassigned`, `Team`, and `Member`.
+	TargetType string `pulumi:"targetType"`
+}
+
+// SentryIssueAlertFiltersV2AssignedToInput is an input type that accepts SentryIssueAlertFiltersV2AssignedToArgs and SentryIssueAlertFiltersV2AssignedToOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2AssignedToInput` via:
+//
+//	SentryIssueAlertFiltersV2AssignedToArgs{...}
+type SentryIssueAlertFiltersV2AssignedToInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2AssignedToOutput() SentryIssueAlertFiltersV2AssignedToOutput
+	ToSentryIssueAlertFiltersV2AssignedToOutputWithContext(context.Context) SentryIssueAlertFiltersV2AssignedToOutput
+}
+
+type SentryIssueAlertFiltersV2AssignedToArgs struct {
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// The target's ID. Only required when `targetType` is `Team` or `Member`.
+	TargetIdentifier pulumi.StringPtrInput `pulumi:"targetIdentifier"`
+	// Valid values are: `Unassigned`, `Team`, and `Member`.
+	TargetType pulumi.StringInput `pulumi:"targetType"`
+}
+
+func (SentryIssueAlertFiltersV2AssignedToArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2AssignedTo)(nil)).Elem()
+}
+
+func (i SentryIssueAlertFiltersV2AssignedToArgs) ToSentryIssueAlertFiltersV2AssignedToOutput() SentryIssueAlertFiltersV2AssignedToOutput {
+	return i.ToSentryIssueAlertFiltersV2AssignedToOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2AssignedToArgs) ToSentryIssueAlertFiltersV2AssignedToOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2AssignedToOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2AssignedToOutput)
+}
+
+func (i SentryIssueAlertFiltersV2AssignedToArgs) ToSentryIssueAlertFiltersV2AssignedToPtrOutput() SentryIssueAlertFiltersV2AssignedToPtrOutput {
+	return i.ToSentryIssueAlertFiltersV2AssignedToPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2AssignedToArgs) ToSentryIssueAlertFiltersV2AssignedToPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2AssignedToPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2AssignedToOutput).ToSentryIssueAlertFiltersV2AssignedToPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertFiltersV2AssignedToPtrInput is an input type that accepts SentryIssueAlertFiltersV2AssignedToArgs, SentryIssueAlertFiltersV2AssignedToPtr and SentryIssueAlertFiltersV2AssignedToPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2AssignedToPtrInput` via:
+//
+//	        SentryIssueAlertFiltersV2AssignedToArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertFiltersV2AssignedToPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2AssignedToPtrOutput() SentryIssueAlertFiltersV2AssignedToPtrOutput
+	ToSentryIssueAlertFiltersV2AssignedToPtrOutputWithContext(context.Context) SentryIssueAlertFiltersV2AssignedToPtrOutput
+}
+
+type sentryIssueAlertFiltersV2AssignedToPtrType SentryIssueAlertFiltersV2AssignedToArgs
+
+func SentryIssueAlertFiltersV2AssignedToPtr(v *SentryIssueAlertFiltersV2AssignedToArgs) SentryIssueAlertFiltersV2AssignedToPtrInput {
+	return (*sentryIssueAlertFiltersV2AssignedToPtrType)(v)
+}
+
+func (*sentryIssueAlertFiltersV2AssignedToPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2AssignedTo)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertFiltersV2AssignedToPtrType) ToSentryIssueAlertFiltersV2AssignedToPtrOutput() SentryIssueAlertFiltersV2AssignedToPtrOutput {
+	return i.ToSentryIssueAlertFiltersV2AssignedToPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertFiltersV2AssignedToPtrType) ToSentryIssueAlertFiltersV2AssignedToPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2AssignedToPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2AssignedToPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2AssignedToOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2AssignedToOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2AssignedTo)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2AssignedToOutput) ToSentryIssueAlertFiltersV2AssignedToOutput() SentryIssueAlertFiltersV2AssignedToOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2AssignedToOutput) ToSentryIssueAlertFiltersV2AssignedToOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2AssignedToOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2AssignedToOutput) ToSentryIssueAlertFiltersV2AssignedToPtrOutput() SentryIssueAlertFiltersV2AssignedToPtrOutput {
+	return o.ToSentryIssueAlertFiltersV2AssignedToPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertFiltersV2AssignedToOutput) ToSentryIssueAlertFiltersV2AssignedToPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2AssignedToPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertFiltersV2AssignedTo) *SentryIssueAlertFiltersV2AssignedTo {
+		return &v
+	}).(SentryIssueAlertFiltersV2AssignedToPtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2AssignedToOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2AssignedTo) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// The target's ID. Only required when `targetType` is `Team` or `Member`.
+func (o SentryIssueAlertFiltersV2AssignedToOutput) TargetIdentifier() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2AssignedTo) *string { return v.TargetIdentifier }).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `Unassigned`, `Team`, and `Member`.
+func (o SentryIssueAlertFiltersV2AssignedToOutput) TargetType() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2AssignedTo) string { return v.TargetType }).(pulumi.StringOutput)
+}
+
+type SentryIssueAlertFiltersV2AssignedToPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2AssignedToPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2AssignedTo)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2AssignedToPtrOutput) ToSentryIssueAlertFiltersV2AssignedToPtrOutput() SentryIssueAlertFiltersV2AssignedToPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2AssignedToPtrOutput) ToSentryIssueAlertFiltersV2AssignedToPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2AssignedToPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2AssignedToPtrOutput) Elem() SentryIssueAlertFiltersV2AssignedToOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2AssignedTo) SentryIssueAlertFiltersV2AssignedTo {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertFiltersV2AssignedTo
+		return ret
+	}).(SentryIssueAlertFiltersV2AssignedToOutput)
+}
+
+func (o SentryIssueAlertFiltersV2AssignedToPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2AssignedTo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// The target's ID. Only required when `targetType` is `Team` or `Member`.
+func (o SentryIssueAlertFiltersV2AssignedToPtrOutput) TargetIdentifier() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2AssignedTo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TargetIdentifier
+	}).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `Unassigned`, `Team`, and `Member`.
+func (o SentryIssueAlertFiltersV2AssignedToPtrOutput) TargetType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2AssignedTo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TargetType
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2EventAttribute struct {
+	// Valid values are: `message`, `platform`, `environment`, `type`, `error.handled`, `error.unhandled`, `error.main_thread`, `exception.type`, `exception.value`, `user.id`, `user.email`, `user.username`, `user.ip_address`, `http.method`, `http.url`, `http.status_code`, `sdk.name`, `stacktrace.code`, `stacktrace.module`, `stacktrace.filename`, `stacktrace.abs_path`, `stacktrace.package`, `unreal.crashtype`, `app.in_foreground`, `os.distribution_name`, and `os.distribution_version`.
+	Attribute string `pulumi:"attribute"`
+	// The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+	Match string  `pulumi:"match"`
+	Name  *string `pulumi:"name"`
+	Value *string `pulumi:"value"`
+}
+
+// SentryIssueAlertFiltersV2EventAttributeInput is an input type that accepts SentryIssueAlertFiltersV2EventAttributeArgs and SentryIssueAlertFiltersV2EventAttributeOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2EventAttributeInput` via:
+//
+//	SentryIssueAlertFiltersV2EventAttributeArgs{...}
+type SentryIssueAlertFiltersV2EventAttributeInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2EventAttributeOutput() SentryIssueAlertFiltersV2EventAttributeOutput
+	ToSentryIssueAlertFiltersV2EventAttributeOutputWithContext(context.Context) SentryIssueAlertFiltersV2EventAttributeOutput
+}
+
+type SentryIssueAlertFiltersV2EventAttributeArgs struct {
+	// Valid values are: `message`, `platform`, `environment`, `type`, `error.handled`, `error.unhandled`, `error.main_thread`, `exception.type`, `exception.value`, `user.id`, `user.email`, `user.username`, `user.ip_address`, `http.method`, `http.url`, `http.status_code`, `sdk.name`, `stacktrace.code`, `stacktrace.module`, `stacktrace.filename`, `stacktrace.abs_path`, `stacktrace.package`, `unreal.crashtype`, `app.in_foreground`, `os.distribution_name`, and `os.distribution_version`.
+	Attribute pulumi.StringInput `pulumi:"attribute"`
+	// The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+	Match pulumi.StringInput    `pulumi:"match"`
+	Name  pulumi.StringPtrInput `pulumi:"name"`
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (SentryIssueAlertFiltersV2EventAttributeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2EventAttribute)(nil)).Elem()
+}
+
+func (i SentryIssueAlertFiltersV2EventAttributeArgs) ToSentryIssueAlertFiltersV2EventAttributeOutput() SentryIssueAlertFiltersV2EventAttributeOutput {
+	return i.ToSentryIssueAlertFiltersV2EventAttributeOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2EventAttributeArgs) ToSentryIssueAlertFiltersV2EventAttributeOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2EventAttributeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2EventAttributeOutput)
+}
+
+func (i SentryIssueAlertFiltersV2EventAttributeArgs) ToSentryIssueAlertFiltersV2EventAttributePtrOutput() SentryIssueAlertFiltersV2EventAttributePtrOutput {
+	return i.ToSentryIssueAlertFiltersV2EventAttributePtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2EventAttributeArgs) ToSentryIssueAlertFiltersV2EventAttributePtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2EventAttributePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2EventAttributeOutput).ToSentryIssueAlertFiltersV2EventAttributePtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertFiltersV2EventAttributePtrInput is an input type that accepts SentryIssueAlertFiltersV2EventAttributeArgs, SentryIssueAlertFiltersV2EventAttributePtr and SentryIssueAlertFiltersV2EventAttributePtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2EventAttributePtrInput` via:
+//
+//	        SentryIssueAlertFiltersV2EventAttributeArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertFiltersV2EventAttributePtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2EventAttributePtrOutput() SentryIssueAlertFiltersV2EventAttributePtrOutput
+	ToSentryIssueAlertFiltersV2EventAttributePtrOutputWithContext(context.Context) SentryIssueAlertFiltersV2EventAttributePtrOutput
+}
+
+type sentryIssueAlertFiltersV2EventAttributePtrType SentryIssueAlertFiltersV2EventAttributeArgs
+
+func SentryIssueAlertFiltersV2EventAttributePtr(v *SentryIssueAlertFiltersV2EventAttributeArgs) SentryIssueAlertFiltersV2EventAttributePtrInput {
+	return (*sentryIssueAlertFiltersV2EventAttributePtrType)(v)
+}
+
+func (*sentryIssueAlertFiltersV2EventAttributePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2EventAttribute)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertFiltersV2EventAttributePtrType) ToSentryIssueAlertFiltersV2EventAttributePtrOutput() SentryIssueAlertFiltersV2EventAttributePtrOutput {
+	return i.ToSentryIssueAlertFiltersV2EventAttributePtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertFiltersV2EventAttributePtrType) ToSentryIssueAlertFiltersV2EventAttributePtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2EventAttributePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2EventAttributePtrOutput)
+}
+
+type SentryIssueAlertFiltersV2EventAttributeOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2EventAttributeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2EventAttribute)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2EventAttributeOutput) ToSentryIssueAlertFiltersV2EventAttributeOutput() SentryIssueAlertFiltersV2EventAttributeOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2EventAttributeOutput) ToSentryIssueAlertFiltersV2EventAttributeOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2EventAttributeOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2EventAttributeOutput) ToSentryIssueAlertFiltersV2EventAttributePtrOutput() SentryIssueAlertFiltersV2EventAttributePtrOutput {
+	return o.ToSentryIssueAlertFiltersV2EventAttributePtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertFiltersV2EventAttributeOutput) ToSentryIssueAlertFiltersV2EventAttributePtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2EventAttributePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertFiltersV2EventAttribute) *SentryIssueAlertFiltersV2EventAttribute {
+		return &v
+	}).(SentryIssueAlertFiltersV2EventAttributePtrOutput)
+}
+
+// Valid values are: `message`, `platform`, `environment`, `type`, `error.handled`, `error.unhandled`, `error.main_thread`, `exception.type`, `exception.value`, `user.id`, `user.email`, `user.username`, `user.ip_address`, `http.method`, `http.url`, `http.status_code`, `sdk.name`, `stacktrace.code`, `stacktrace.module`, `stacktrace.filename`, `stacktrace.abs_path`, `stacktrace.package`, `unreal.crashtype`, `app.in_foreground`, `os.distribution_name`, and `os.distribution_version`.
+func (o SentryIssueAlertFiltersV2EventAttributeOutput) Attribute() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2EventAttribute) string { return v.Attribute }).(pulumi.StringOutput)
+}
+
+// The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+func (o SentryIssueAlertFiltersV2EventAttributeOutput) Match() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2EventAttribute) string { return v.Match }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertFiltersV2EventAttributeOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2EventAttribute) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2EventAttributeOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2EventAttribute) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2EventAttributePtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2EventAttributePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2EventAttribute)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2EventAttributePtrOutput) ToSentryIssueAlertFiltersV2EventAttributePtrOutput() SentryIssueAlertFiltersV2EventAttributePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2EventAttributePtrOutput) ToSentryIssueAlertFiltersV2EventAttributePtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2EventAttributePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2EventAttributePtrOutput) Elem() SentryIssueAlertFiltersV2EventAttributeOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2EventAttribute) SentryIssueAlertFiltersV2EventAttribute {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertFiltersV2EventAttribute
+		return ret
+	}).(SentryIssueAlertFiltersV2EventAttributeOutput)
+}
+
+// Valid values are: `message`, `platform`, `environment`, `type`, `error.handled`, `error.unhandled`, `error.main_thread`, `exception.type`, `exception.value`, `user.id`, `user.email`, `user.username`, `user.ip_address`, `http.method`, `http.url`, `http.status_code`, `sdk.name`, `stacktrace.code`, `stacktrace.module`, `stacktrace.filename`, `stacktrace.abs_path`, `stacktrace.package`, `unreal.crashtype`, `app.in_foreground`, `os.distribution_name`, and `os.distribution_version`.
+func (o SentryIssueAlertFiltersV2EventAttributePtrOutput) Attribute() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2EventAttribute) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Attribute
+	}).(pulumi.StringPtrOutput)
+}
+
+// The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+func (o SentryIssueAlertFiltersV2EventAttributePtrOutput) Match() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2EventAttribute) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Match
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2EventAttributePtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2EventAttribute) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2EventAttributePtrOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2EventAttribute) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Value
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2IssueCategory struct {
+	Name *string `pulumi:"name"`
+	// Valid values are: `Error`, `Performance`, `Profile`, `Cron`, `Replay`, `Feedback`, `Uptime`, and `Metric_Alert`.
+	Value string `pulumi:"value"`
+}
+
+// SentryIssueAlertFiltersV2IssueCategoryInput is an input type that accepts SentryIssueAlertFiltersV2IssueCategoryArgs and SentryIssueAlertFiltersV2IssueCategoryOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2IssueCategoryInput` via:
+//
+//	SentryIssueAlertFiltersV2IssueCategoryArgs{...}
+type SentryIssueAlertFiltersV2IssueCategoryInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2IssueCategoryOutput() SentryIssueAlertFiltersV2IssueCategoryOutput
+	ToSentryIssueAlertFiltersV2IssueCategoryOutputWithContext(context.Context) SentryIssueAlertFiltersV2IssueCategoryOutput
+}
+
+type SentryIssueAlertFiltersV2IssueCategoryArgs struct {
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Valid values are: `Error`, `Performance`, `Profile`, `Cron`, `Replay`, `Feedback`, `Uptime`, and `Metric_Alert`.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (SentryIssueAlertFiltersV2IssueCategoryArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2IssueCategory)(nil)).Elem()
+}
+
+func (i SentryIssueAlertFiltersV2IssueCategoryArgs) ToSentryIssueAlertFiltersV2IssueCategoryOutput() SentryIssueAlertFiltersV2IssueCategoryOutput {
+	return i.ToSentryIssueAlertFiltersV2IssueCategoryOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2IssueCategoryArgs) ToSentryIssueAlertFiltersV2IssueCategoryOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2IssueCategoryOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2IssueCategoryOutput)
+}
+
+func (i SentryIssueAlertFiltersV2IssueCategoryArgs) ToSentryIssueAlertFiltersV2IssueCategoryPtrOutput() SentryIssueAlertFiltersV2IssueCategoryPtrOutput {
+	return i.ToSentryIssueAlertFiltersV2IssueCategoryPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2IssueCategoryArgs) ToSentryIssueAlertFiltersV2IssueCategoryPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2IssueCategoryPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2IssueCategoryOutput).ToSentryIssueAlertFiltersV2IssueCategoryPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertFiltersV2IssueCategoryPtrInput is an input type that accepts SentryIssueAlertFiltersV2IssueCategoryArgs, SentryIssueAlertFiltersV2IssueCategoryPtr and SentryIssueAlertFiltersV2IssueCategoryPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2IssueCategoryPtrInput` via:
+//
+//	        SentryIssueAlertFiltersV2IssueCategoryArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertFiltersV2IssueCategoryPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2IssueCategoryPtrOutput() SentryIssueAlertFiltersV2IssueCategoryPtrOutput
+	ToSentryIssueAlertFiltersV2IssueCategoryPtrOutputWithContext(context.Context) SentryIssueAlertFiltersV2IssueCategoryPtrOutput
+}
+
+type sentryIssueAlertFiltersV2IssueCategoryPtrType SentryIssueAlertFiltersV2IssueCategoryArgs
+
+func SentryIssueAlertFiltersV2IssueCategoryPtr(v *SentryIssueAlertFiltersV2IssueCategoryArgs) SentryIssueAlertFiltersV2IssueCategoryPtrInput {
+	return (*sentryIssueAlertFiltersV2IssueCategoryPtrType)(v)
+}
+
+func (*sentryIssueAlertFiltersV2IssueCategoryPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2IssueCategory)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertFiltersV2IssueCategoryPtrType) ToSentryIssueAlertFiltersV2IssueCategoryPtrOutput() SentryIssueAlertFiltersV2IssueCategoryPtrOutput {
+	return i.ToSentryIssueAlertFiltersV2IssueCategoryPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertFiltersV2IssueCategoryPtrType) ToSentryIssueAlertFiltersV2IssueCategoryPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2IssueCategoryPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2IssueCategoryPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2IssueCategoryOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2IssueCategoryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2IssueCategory)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2IssueCategoryOutput) ToSentryIssueAlertFiltersV2IssueCategoryOutput() SentryIssueAlertFiltersV2IssueCategoryOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2IssueCategoryOutput) ToSentryIssueAlertFiltersV2IssueCategoryOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2IssueCategoryOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2IssueCategoryOutput) ToSentryIssueAlertFiltersV2IssueCategoryPtrOutput() SentryIssueAlertFiltersV2IssueCategoryPtrOutput {
+	return o.ToSentryIssueAlertFiltersV2IssueCategoryPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertFiltersV2IssueCategoryOutput) ToSentryIssueAlertFiltersV2IssueCategoryPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2IssueCategoryPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertFiltersV2IssueCategory) *SentryIssueAlertFiltersV2IssueCategory {
+		return &v
+	}).(SentryIssueAlertFiltersV2IssueCategoryPtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2IssueCategoryOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2IssueCategory) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `Error`, `Performance`, `Profile`, `Cron`, `Replay`, `Feedback`, `Uptime`, and `Metric_Alert`.
+func (o SentryIssueAlertFiltersV2IssueCategoryOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2IssueCategory) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type SentryIssueAlertFiltersV2IssueCategoryPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2IssueCategoryPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2IssueCategory)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2IssueCategoryPtrOutput) ToSentryIssueAlertFiltersV2IssueCategoryPtrOutput() SentryIssueAlertFiltersV2IssueCategoryPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2IssueCategoryPtrOutput) ToSentryIssueAlertFiltersV2IssueCategoryPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2IssueCategoryPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2IssueCategoryPtrOutput) Elem() SentryIssueAlertFiltersV2IssueCategoryOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2IssueCategory) SentryIssueAlertFiltersV2IssueCategory {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertFiltersV2IssueCategory
+		return ret
+	}).(SentryIssueAlertFiltersV2IssueCategoryOutput)
+}
+
+func (o SentryIssueAlertFiltersV2IssueCategoryPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2IssueCategory) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `Error`, `Performance`, `Profile`, `Cron`, `Replay`, `Feedback`, `Uptime`, and `Metric_Alert`.
+func (o SentryIssueAlertFiltersV2IssueCategoryPtrOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2IssueCategory) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Value
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2IssueOccurrences struct {
+	Name  *string `pulumi:"name"`
+	Value int     `pulumi:"value"`
+}
+
+// SentryIssueAlertFiltersV2IssueOccurrencesInput is an input type that accepts SentryIssueAlertFiltersV2IssueOccurrencesArgs and SentryIssueAlertFiltersV2IssueOccurrencesOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2IssueOccurrencesInput` via:
+//
+//	SentryIssueAlertFiltersV2IssueOccurrencesArgs{...}
+type SentryIssueAlertFiltersV2IssueOccurrencesInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2IssueOccurrencesOutput() SentryIssueAlertFiltersV2IssueOccurrencesOutput
+	ToSentryIssueAlertFiltersV2IssueOccurrencesOutputWithContext(context.Context) SentryIssueAlertFiltersV2IssueOccurrencesOutput
+}
+
+type SentryIssueAlertFiltersV2IssueOccurrencesArgs struct {
+	Name  pulumi.StringPtrInput `pulumi:"name"`
+	Value pulumi.IntInput       `pulumi:"value"`
+}
+
+func (SentryIssueAlertFiltersV2IssueOccurrencesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2IssueOccurrences)(nil)).Elem()
+}
+
+func (i SentryIssueAlertFiltersV2IssueOccurrencesArgs) ToSentryIssueAlertFiltersV2IssueOccurrencesOutput() SentryIssueAlertFiltersV2IssueOccurrencesOutput {
+	return i.ToSentryIssueAlertFiltersV2IssueOccurrencesOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2IssueOccurrencesArgs) ToSentryIssueAlertFiltersV2IssueOccurrencesOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2IssueOccurrencesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2IssueOccurrencesOutput)
+}
+
+func (i SentryIssueAlertFiltersV2IssueOccurrencesArgs) ToSentryIssueAlertFiltersV2IssueOccurrencesPtrOutput() SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput {
+	return i.ToSentryIssueAlertFiltersV2IssueOccurrencesPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2IssueOccurrencesArgs) ToSentryIssueAlertFiltersV2IssueOccurrencesPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2IssueOccurrencesOutput).ToSentryIssueAlertFiltersV2IssueOccurrencesPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertFiltersV2IssueOccurrencesPtrInput is an input type that accepts SentryIssueAlertFiltersV2IssueOccurrencesArgs, SentryIssueAlertFiltersV2IssueOccurrencesPtr and SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2IssueOccurrencesPtrInput` via:
+//
+//	        SentryIssueAlertFiltersV2IssueOccurrencesArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertFiltersV2IssueOccurrencesPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2IssueOccurrencesPtrOutput() SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput
+	ToSentryIssueAlertFiltersV2IssueOccurrencesPtrOutputWithContext(context.Context) SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput
+}
+
+type sentryIssueAlertFiltersV2IssueOccurrencesPtrType SentryIssueAlertFiltersV2IssueOccurrencesArgs
+
+func SentryIssueAlertFiltersV2IssueOccurrencesPtr(v *SentryIssueAlertFiltersV2IssueOccurrencesArgs) SentryIssueAlertFiltersV2IssueOccurrencesPtrInput {
+	return (*sentryIssueAlertFiltersV2IssueOccurrencesPtrType)(v)
+}
+
+func (*sentryIssueAlertFiltersV2IssueOccurrencesPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2IssueOccurrences)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertFiltersV2IssueOccurrencesPtrType) ToSentryIssueAlertFiltersV2IssueOccurrencesPtrOutput() SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput {
+	return i.ToSentryIssueAlertFiltersV2IssueOccurrencesPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertFiltersV2IssueOccurrencesPtrType) ToSentryIssueAlertFiltersV2IssueOccurrencesPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2IssueOccurrencesOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2IssueOccurrencesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2IssueOccurrences)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2IssueOccurrencesOutput) ToSentryIssueAlertFiltersV2IssueOccurrencesOutput() SentryIssueAlertFiltersV2IssueOccurrencesOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2IssueOccurrencesOutput) ToSentryIssueAlertFiltersV2IssueOccurrencesOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2IssueOccurrencesOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2IssueOccurrencesOutput) ToSentryIssueAlertFiltersV2IssueOccurrencesPtrOutput() SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput {
+	return o.ToSentryIssueAlertFiltersV2IssueOccurrencesPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertFiltersV2IssueOccurrencesOutput) ToSentryIssueAlertFiltersV2IssueOccurrencesPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertFiltersV2IssueOccurrences) *SentryIssueAlertFiltersV2IssueOccurrences {
+		return &v
+	}).(SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2IssueOccurrencesOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2IssueOccurrences) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2IssueOccurrencesOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2IssueOccurrences) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2IssueOccurrences)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput) ToSentryIssueAlertFiltersV2IssueOccurrencesPtrOutput() SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput) ToSentryIssueAlertFiltersV2IssueOccurrencesPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput) Elem() SentryIssueAlertFiltersV2IssueOccurrencesOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2IssueOccurrences) SentryIssueAlertFiltersV2IssueOccurrences {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertFiltersV2IssueOccurrences
+		return ret
+	}).(SentryIssueAlertFiltersV2IssueOccurrencesOutput)
+}
+
+func (o SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2IssueOccurrences) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput) Value() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2IssueOccurrences) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Value
+	}).(pulumi.IntPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2LatestAdoptedRelease struct {
+	Environment string  `pulumi:"environment"`
+	Name        *string `pulumi:"name"`
+	// Valid values are: `older`, and `newer`.
+	OlderOrNewer string `pulumi:"olderOrNewer"`
+	// Valid values are: `oldest`, and `newest`.
+	OldestOrNewest string `pulumi:"oldestOrNewest"`
+}
+
+// SentryIssueAlertFiltersV2LatestAdoptedReleaseInput is an input type that accepts SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs and SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2LatestAdoptedReleaseInput` via:
+//
+//	SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs{...}
+type SentryIssueAlertFiltersV2LatestAdoptedReleaseInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput() SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput
+	ToSentryIssueAlertFiltersV2LatestAdoptedReleaseOutputWithContext(context.Context) SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput
+}
+
+type SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs struct {
+	Environment pulumi.StringInput    `pulumi:"environment"`
+	Name        pulumi.StringPtrInput `pulumi:"name"`
+	// Valid values are: `older`, and `newer`.
+	OlderOrNewer pulumi.StringInput `pulumi:"olderOrNewer"`
+	// Valid values are: `oldest`, and `newest`.
+	OldestOrNewest pulumi.StringInput `pulumi:"oldestOrNewest"`
+}
+
+func (SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2LatestAdoptedRelease)(nil)).Elem()
+}
+
+func (i SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs) ToSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput() SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput {
+	return i.ToSentryIssueAlertFiltersV2LatestAdoptedReleaseOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs) ToSentryIssueAlertFiltersV2LatestAdoptedReleaseOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput)
+}
+
+func (i SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs) ToSentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput() SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput {
+	return i.ToSentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs) ToSentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput).ToSentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertFiltersV2LatestAdoptedReleasePtrInput is an input type that accepts SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs, SentryIssueAlertFiltersV2LatestAdoptedReleasePtr and SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2LatestAdoptedReleasePtrInput` via:
+//
+//	        SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertFiltersV2LatestAdoptedReleasePtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput() SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput
+	ToSentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutputWithContext(context.Context) SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput
+}
+
+type sentryIssueAlertFiltersV2LatestAdoptedReleasePtrType SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs
+
+func SentryIssueAlertFiltersV2LatestAdoptedReleasePtr(v *SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs) SentryIssueAlertFiltersV2LatestAdoptedReleasePtrInput {
+	return (*sentryIssueAlertFiltersV2LatestAdoptedReleasePtrType)(v)
+}
+
+func (*sentryIssueAlertFiltersV2LatestAdoptedReleasePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2LatestAdoptedRelease)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertFiltersV2LatestAdoptedReleasePtrType) ToSentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput() SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput {
+	return i.ToSentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertFiltersV2LatestAdoptedReleasePtrType) ToSentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput)
+}
+
+type SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2LatestAdoptedRelease)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) ToSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput() SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) ToSentryIssueAlertFiltersV2LatestAdoptedReleaseOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) ToSentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput() SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput {
+	return o.ToSentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) ToSentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertFiltersV2LatestAdoptedRelease) *SentryIssueAlertFiltersV2LatestAdoptedRelease {
+		return &v
+	}).(SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) Environment() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2LatestAdoptedRelease) string { return v.Environment }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2LatestAdoptedRelease) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `older`, and `newer`.
+func (o SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) OlderOrNewer() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2LatestAdoptedRelease) string { return v.OlderOrNewer }).(pulumi.StringOutput)
+}
+
+// Valid values are: `oldest`, and `newest`.
+func (o SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) OldestOrNewest() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2LatestAdoptedRelease) string { return v.OldestOrNewest }).(pulumi.StringOutput)
+}
+
+type SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2LatestAdoptedRelease)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput) ToSentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput() SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput) ToSentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput) Elem() SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2LatestAdoptedRelease) SentryIssueAlertFiltersV2LatestAdoptedRelease {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertFiltersV2LatestAdoptedRelease
+		return ret
+	}).(SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput)
+}
+
+func (o SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput) Environment() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2LatestAdoptedRelease) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Environment
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2LatestAdoptedRelease) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `older`, and `newer`.
+func (o SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput) OlderOrNewer() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2LatestAdoptedRelease) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.OlderOrNewer
+	}).(pulumi.StringPtrOutput)
+}
+
+// Valid values are: `oldest`, and `newest`.
+func (o SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput) OldestOrNewest() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2LatestAdoptedRelease) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.OldestOrNewest
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2LatestRelease struct {
+	Name *string `pulumi:"name"`
+}
+
+// SentryIssueAlertFiltersV2LatestReleaseInput is an input type that accepts SentryIssueAlertFiltersV2LatestReleaseArgs and SentryIssueAlertFiltersV2LatestReleaseOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2LatestReleaseInput` via:
+//
+//	SentryIssueAlertFiltersV2LatestReleaseArgs{...}
+type SentryIssueAlertFiltersV2LatestReleaseInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2LatestReleaseOutput() SentryIssueAlertFiltersV2LatestReleaseOutput
+	ToSentryIssueAlertFiltersV2LatestReleaseOutputWithContext(context.Context) SentryIssueAlertFiltersV2LatestReleaseOutput
+}
+
+type SentryIssueAlertFiltersV2LatestReleaseArgs struct {
+	Name pulumi.StringPtrInput `pulumi:"name"`
+}
+
+func (SentryIssueAlertFiltersV2LatestReleaseArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2LatestRelease)(nil)).Elem()
+}
+
+func (i SentryIssueAlertFiltersV2LatestReleaseArgs) ToSentryIssueAlertFiltersV2LatestReleaseOutput() SentryIssueAlertFiltersV2LatestReleaseOutput {
+	return i.ToSentryIssueAlertFiltersV2LatestReleaseOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2LatestReleaseArgs) ToSentryIssueAlertFiltersV2LatestReleaseOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LatestReleaseOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2LatestReleaseOutput)
+}
+
+func (i SentryIssueAlertFiltersV2LatestReleaseArgs) ToSentryIssueAlertFiltersV2LatestReleasePtrOutput() SentryIssueAlertFiltersV2LatestReleasePtrOutput {
+	return i.ToSentryIssueAlertFiltersV2LatestReleasePtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2LatestReleaseArgs) ToSentryIssueAlertFiltersV2LatestReleasePtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LatestReleasePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2LatestReleaseOutput).ToSentryIssueAlertFiltersV2LatestReleasePtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertFiltersV2LatestReleasePtrInput is an input type that accepts SentryIssueAlertFiltersV2LatestReleaseArgs, SentryIssueAlertFiltersV2LatestReleasePtr and SentryIssueAlertFiltersV2LatestReleasePtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2LatestReleasePtrInput` via:
+//
+//	        SentryIssueAlertFiltersV2LatestReleaseArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertFiltersV2LatestReleasePtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2LatestReleasePtrOutput() SentryIssueAlertFiltersV2LatestReleasePtrOutput
+	ToSentryIssueAlertFiltersV2LatestReleasePtrOutputWithContext(context.Context) SentryIssueAlertFiltersV2LatestReleasePtrOutput
+}
+
+type sentryIssueAlertFiltersV2LatestReleasePtrType SentryIssueAlertFiltersV2LatestReleaseArgs
+
+func SentryIssueAlertFiltersV2LatestReleasePtr(v *SentryIssueAlertFiltersV2LatestReleaseArgs) SentryIssueAlertFiltersV2LatestReleasePtrInput {
+	return (*sentryIssueAlertFiltersV2LatestReleasePtrType)(v)
+}
+
+func (*sentryIssueAlertFiltersV2LatestReleasePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2LatestRelease)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertFiltersV2LatestReleasePtrType) ToSentryIssueAlertFiltersV2LatestReleasePtrOutput() SentryIssueAlertFiltersV2LatestReleasePtrOutput {
+	return i.ToSentryIssueAlertFiltersV2LatestReleasePtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertFiltersV2LatestReleasePtrType) ToSentryIssueAlertFiltersV2LatestReleasePtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LatestReleasePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2LatestReleasePtrOutput)
+}
+
+type SentryIssueAlertFiltersV2LatestReleaseOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2LatestReleaseOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2LatestRelease)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2LatestReleaseOutput) ToSentryIssueAlertFiltersV2LatestReleaseOutput() SentryIssueAlertFiltersV2LatestReleaseOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2LatestReleaseOutput) ToSentryIssueAlertFiltersV2LatestReleaseOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LatestReleaseOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2LatestReleaseOutput) ToSentryIssueAlertFiltersV2LatestReleasePtrOutput() SentryIssueAlertFiltersV2LatestReleasePtrOutput {
+	return o.ToSentryIssueAlertFiltersV2LatestReleasePtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertFiltersV2LatestReleaseOutput) ToSentryIssueAlertFiltersV2LatestReleasePtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LatestReleasePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertFiltersV2LatestRelease) *SentryIssueAlertFiltersV2LatestRelease {
+		return &v
+	}).(SentryIssueAlertFiltersV2LatestReleasePtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2LatestReleaseOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2LatestRelease) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2LatestReleasePtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2LatestReleasePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2LatestRelease)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2LatestReleasePtrOutput) ToSentryIssueAlertFiltersV2LatestReleasePtrOutput() SentryIssueAlertFiltersV2LatestReleasePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2LatestReleasePtrOutput) ToSentryIssueAlertFiltersV2LatestReleasePtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LatestReleasePtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2LatestReleasePtrOutput) Elem() SentryIssueAlertFiltersV2LatestReleaseOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2LatestRelease) SentryIssueAlertFiltersV2LatestRelease {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertFiltersV2LatestRelease
+		return ret
+	}).(SentryIssueAlertFiltersV2LatestReleaseOutput)
+}
+
+func (o SentryIssueAlertFiltersV2LatestReleasePtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2LatestRelease) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2Level struct {
+	// Valid values are: `sample`, `debug`, `info`, `warning`, `error`, and `fatal`.
+	Level string `pulumi:"level"`
+	// The comparison operator. Valid values are: `EQUAL`, `GREATER_OR_EQUAL`, and `LESS_OR_EQUAL`.
+	Match string  `pulumi:"match"`
+	Name  *string `pulumi:"name"`
+}
+
+// SentryIssueAlertFiltersV2LevelInput is an input type that accepts SentryIssueAlertFiltersV2LevelArgs and SentryIssueAlertFiltersV2LevelOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2LevelInput` via:
+//
+//	SentryIssueAlertFiltersV2LevelArgs{...}
+type SentryIssueAlertFiltersV2LevelInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2LevelOutput() SentryIssueAlertFiltersV2LevelOutput
+	ToSentryIssueAlertFiltersV2LevelOutputWithContext(context.Context) SentryIssueAlertFiltersV2LevelOutput
+}
+
+type SentryIssueAlertFiltersV2LevelArgs struct {
+	// Valid values are: `sample`, `debug`, `info`, `warning`, `error`, and `fatal`.
+	Level pulumi.StringInput `pulumi:"level"`
+	// The comparison operator. Valid values are: `EQUAL`, `GREATER_OR_EQUAL`, and `LESS_OR_EQUAL`.
+	Match pulumi.StringInput    `pulumi:"match"`
+	Name  pulumi.StringPtrInput `pulumi:"name"`
+}
+
+func (SentryIssueAlertFiltersV2LevelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2Level)(nil)).Elem()
+}
+
+func (i SentryIssueAlertFiltersV2LevelArgs) ToSentryIssueAlertFiltersV2LevelOutput() SentryIssueAlertFiltersV2LevelOutput {
+	return i.ToSentryIssueAlertFiltersV2LevelOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2LevelArgs) ToSentryIssueAlertFiltersV2LevelOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LevelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2LevelOutput)
+}
+
+func (i SentryIssueAlertFiltersV2LevelArgs) ToSentryIssueAlertFiltersV2LevelPtrOutput() SentryIssueAlertFiltersV2LevelPtrOutput {
+	return i.ToSentryIssueAlertFiltersV2LevelPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2LevelArgs) ToSentryIssueAlertFiltersV2LevelPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LevelPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2LevelOutput).ToSentryIssueAlertFiltersV2LevelPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertFiltersV2LevelPtrInput is an input type that accepts SentryIssueAlertFiltersV2LevelArgs, SentryIssueAlertFiltersV2LevelPtr and SentryIssueAlertFiltersV2LevelPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2LevelPtrInput` via:
+//
+//	        SentryIssueAlertFiltersV2LevelArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertFiltersV2LevelPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2LevelPtrOutput() SentryIssueAlertFiltersV2LevelPtrOutput
+	ToSentryIssueAlertFiltersV2LevelPtrOutputWithContext(context.Context) SentryIssueAlertFiltersV2LevelPtrOutput
+}
+
+type sentryIssueAlertFiltersV2LevelPtrType SentryIssueAlertFiltersV2LevelArgs
+
+func SentryIssueAlertFiltersV2LevelPtr(v *SentryIssueAlertFiltersV2LevelArgs) SentryIssueAlertFiltersV2LevelPtrInput {
+	return (*sentryIssueAlertFiltersV2LevelPtrType)(v)
+}
+
+func (*sentryIssueAlertFiltersV2LevelPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2Level)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertFiltersV2LevelPtrType) ToSentryIssueAlertFiltersV2LevelPtrOutput() SentryIssueAlertFiltersV2LevelPtrOutput {
+	return i.ToSentryIssueAlertFiltersV2LevelPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertFiltersV2LevelPtrType) ToSentryIssueAlertFiltersV2LevelPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LevelPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2LevelPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2LevelOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2LevelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2Level)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2LevelOutput) ToSentryIssueAlertFiltersV2LevelOutput() SentryIssueAlertFiltersV2LevelOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2LevelOutput) ToSentryIssueAlertFiltersV2LevelOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LevelOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2LevelOutput) ToSentryIssueAlertFiltersV2LevelPtrOutput() SentryIssueAlertFiltersV2LevelPtrOutput {
+	return o.ToSentryIssueAlertFiltersV2LevelPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertFiltersV2LevelOutput) ToSentryIssueAlertFiltersV2LevelPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LevelPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertFiltersV2Level) *SentryIssueAlertFiltersV2Level {
+		return &v
+	}).(SentryIssueAlertFiltersV2LevelPtrOutput)
+}
+
+// Valid values are: `sample`, `debug`, `info`, `warning`, `error`, and `fatal`.
+func (o SentryIssueAlertFiltersV2LevelOutput) Level() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2Level) string { return v.Level }).(pulumi.StringOutput)
+}
+
+// The comparison operator. Valid values are: `EQUAL`, `GREATER_OR_EQUAL`, and `LESS_OR_EQUAL`.
+func (o SentryIssueAlertFiltersV2LevelOutput) Match() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2Level) string { return v.Match }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertFiltersV2LevelOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2Level) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2LevelPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2LevelPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2Level)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2LevelPtrOutput) ToSentryIssueAlertFiltersV2LevelPtrOutput() SentryIssueAlertFiltersV2LevelPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2LevelPtrOutput) ToSentryIssueAlertFiltersV2LevelPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2LevelPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2LevelPtrOutput) Elem() SentryIssueAlertFiltersV2LevelOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2Level) SentryIssueAlertFiltersV2Level {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertFiltersV2Level
+		return ret
+	}).(SentryIssueAlertFiltersV2LevelOutput)
+}
+
+// Valid values are: `sample`, `debug`, `info`, `warning`, `error`, and `fatal`.
+func (o SentryIssueAlertFiltersV2LevelPtrOutput) Level() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2Level) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Level
+	}).(pulumi.StringPtrOutput)
+}
+
+// The comparison operator. Valid values are: `EQUAL`, `GREATER_OR_EQUAL`, and `LESS_OR_EQUAL`.
+func (o SentryIssueAlertFiltersV2LevelPtrOutput) Match() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2Level) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Match
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2LevelPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2Level) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2TaggedEvent struct {
+	// The tag.
+	Key string `pulumi:"key"`
+	// The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+	Match string  `pulumi:"match"`
+	Name  *string `pulumi:"name"`
+	Value *string `pulumi:"value"`
+}
+
+// SentryIssueAlertFiltersV2TaggedEventInput is an input type that accepts SentryIssueAlertFiltersV2TaggedEventArgs and SentryIssueAlertFiltersV2TaggedEventOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2TaggedEventInput` via:
+//
+//	SentryIssueAlertFiltersV2TaggedEventArgs{...}
+type SentryIssueAlertFiltersV2TaggedEventInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2TaggedEventOutput() SentryIssueAlertFiltersV2TaggedEventOutput
+	ToSentryIssueAlertFiltersV2TaggedEventOutputWithContext(context.Context) SentryIssueAlertFiltersV2TaggedEventOutput
+}
+
+type SentryIssueAlertFiltersV2TaggedEventArgs struct {
+	// The tag.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+	Match pulumi.StringInput    `pulumi:"match"`
+	Name  pulumi.StringPtrInput `pulumi:"name"`
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (SentryIssueAlertFiltersV2TaggedEventArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2TaggedEvent)(nil)).Elem()
+}
+
+func (i SentryIssueAlertFiltersV2TaggedEventArgs) ToSentryIssueAlertFiltersV2TaggedEventOutput() SentryIssueAlertFiltersV2TaggedEventOutput {
+	return i.ToSentryIssueAlertFiltersV2TaggedEventOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2TaggedEventArgs) ToSentryIssueAlertFiltersV2TaggedEventOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2TaggedEventOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2TaggedEventOutput)
+}
+
+func (i SentryIssueAlertFiltersV2TaggedEventArgs) ToSentryIssueAlertFiltersV2TaggedEventPtrOutput() SentryIssueAlertFiltersV2TaggedEventPtrOutput {
+	return i.ToSentryIssueAlertFiltersV2TaggedEventPtrOutputWithContext(context.Background())
+}
+
+func (i SentryIssueAlertFiltersV2TaggedEventArgs) ToSentryIssueAlertFiltersV2TaggedEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2TaggedEventPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2TaggedEventOutput).ToSentryIssueAlertFiltersV2TaggedEventPtrOutputWithContext(ctx)
+}
+
+// SentryIssueAlertFiltersV2TaggedEventPtrInput is an input type that accepts SentryIssueAlertFiltersV2TaggedEventArgs, SentryIssueAlertFiltersV2TaggedEventPtr and SentryIssueAlertFiltersV2TaggedEventPtrOutput values.
+// You can construct a concrete instance of `SentryIssueAlertFiltersV2TaggedEventPtrInput` via:
+//
+//	        SentryIssueAlertFiltersV2TaggedEventArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryIssueAlertFiltersV2TaggedEventPtrInput interface {
+	pulumi.Input
+
+	ToSentryIssueAlertFiltersV2TaggedEventPtrOutput() SentryIssueAlertFiltersV2TaggedEventPtrOutput
+	ToSentryIssueAlertFiltersV2TaggedEventPtrOutputWithContext(context.Context) SentryIssueAlertFiltersV2TaggedEventPtrOutput
+}
+
+type sentryIssueAlertFiltersV2TaggedEventPtrType SentryIssueAlertFiltersV2TaggedEventArgs
+
+func SentryIssueAlertFiltersV2TaggedEventPtr(v *SentryIssueAlertFiltersV2TaggedEventArgs) SentryIssueAlertFiltersV2TaggedEventPtrInput {
+	return (*sentryIssueAlertFiltersV2TaggedEventPtrType)(v)
+}
+
+func (*sentryIssueAlertFiltersV2TaggedEventPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2TaggedEvent)(nil)).Elem()
+}
+
+func (i *sentryIssueAlertFiltersV2TaggedEventPtrType) ToSentryIssueAlertFiltersV2TaggedEventPtrOutput() SentryIssueAlertFiltersV2TaggedEventPtrOutput {
+	return i.ToSentryIssueAlertFiltersV2TaggedEventPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryIssueAlertFiltersV2TaggedEventPtrType) ToSentryIssueAlertFiltersV2TaggedEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2TaggedEventPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryIssueAlertFiltersV2TaggedEventPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2TaggedEventOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2TaggedEventOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryIssueAlertFiltersV2TaggedEvent)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2TaggedEventOutput) ToSentryIssueAlertFiltersV2TaggedEventOutput() SentryIssueAlertFiltersV2TaggedEventOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2TaggedEventOutput) ToSentryIssueAlertFiltersV2TaggedEventOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2TaggedEventOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2TaggedEventOutput) ToSentryIssueAlertFiltersV2TaggedEventPtrOutput() SentryIssueAlertFiltersV2TaggedEventPtrOutput {
+	return o.ToSentryIssueAlertFiltersV2TaggedEventPtrOutputWithContext(context.Background())
+}
+
+func (o SentryIssueAlertFiltersV2TaggedEventOutput) ToSentryIssueAlertFiltersV2TaggedEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2TaggedEventPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryIssueAlertFiltersV2TaggedEvent) *SentryIssueAlertFiltersV2TaggedEvent {
+		return &v
+	}).(SentryIssueAlertFiltersV2TaggedEventPtrOutput)
+}
+
+// The tag.
+func (o SentryIssueAlertFiltersV2TaggedEventOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2TaggedEvent) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+func (o SentryIssueAlertFiltersV2TaggedEventOutput) Match() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2TaggedEvent) string { return v.Match }).(pulumi.StringOutput)
+}
+
+func (o SentryIssueAlertFiltersV2TaggedEventOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2TaggedEvent) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2TaggedEventOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryIssueAlertFiltersV2TaggedEvent) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type SentryIssueAlertFiltersV2TaggedEventPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryIssueAlertFiltersV2TaggedEventPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryIssueAlertFiltersV2TaggedEvent)(nil)).Elem()
+}
+
+func (o SentryIssueAlertFiltersV2TaggedEventPtrOutput) ToSentryIssueAlertFiltersV2TaggedEventPtrOutput() SentryIssueAlertFiltersV2TaggedEventPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2TaggedEventPtrOutput) ToSentryIssueAlertFiltersV2TaggedEventPtrOutputWithContext(ctx context.Context) SentryIssueAlertFiltersV2TaggedEventPtrOutput {
+	return o
+}
+
+func (o SentryIssueAlertFiltersV2TaggedEventPtrOutput) Elem() SentryIssueAlertFiltersV2TaggedEventOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2TaggedEvent) SentryIssueAlertFiltersV2TaggedEvent {
+		if v != nil {
+			return *v
+		}
+		var ret SentryIssueAlertFiltersV2TaggedEvent
+		return ret
+	}).(SentryIssueAlertFiltersV2TaggedEventOutput)
+}
+
+// The tag.
+func (o SentryIssueAlertFiltersV2TaggedEventPtrOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2TaggedEvent) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Key
+	}).(pulumi.StringPtrOutput)
+}
+
+// The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+func (o SentryIssueAlertFiltersV2TaggedEventPtrOutput) Match() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2TaggedEvent) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Match
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2TaggedEventPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2TaggedEvent) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+func (o SentryIssueAlertFiltersV2TaggedEventPtrOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlertFiltersV2TaggedEvent) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Value
+	}).(pulumi.StringPtrOutput)
+}
+
+type SentryKeyJavascriptLoaderScript struct {
+	// The version of the browser SDK to load.
+	BrowserSdkVersion *string `pulumi:"browserSdkVersion"`
+	// Whether debug bundles & logging are enabled for this key.
+	DebugEnabled *bool `pulumi:"debugEnabled"`
+	// Whether performance monitoring is enabled for this key.
+	PerformanceMonitoringEnabled *bool `pulumi:"performanceMonitoringEnabled"`
+	// Whether session replay is enabled for this key.
+	SessionReplayEnabled *bool `pulumi:"sessionReplayEnabled"`
+}
+
+// SentryKeyJavascriptLoaderScriptInput is an input type that accepts SentryKeyJavascriptLoaderScriptArgs and SentryKeyJavascriptLoaderScriptOutput values.
+// You can construct a concrete instance of `SentryKeyJavascriptLoaderScriptInput` via:
+//
+//	SentryKeyJavascriptLoaderScriptArgs{...}
+type SentryKeyJavascriptLoaderScriptInput interface {
+	pulumi.Input
+
+	ToSentryKeyJavascriptLoaderScriptOutput() SentryKeyJavascriptLoaderScriptOutput
+	ToSentryKeyJavascriptLoaderScriptOutputWithContext(context.Context) SentryKeyJavascriptLoaderScriptOutput
+}
+
+type SentryKeyJavascriptLoaderScriptArgs struct {
+	// The version of the browser SDK to load.
+	BrowserSdkVersion pulumi.StringPtrInput `pulumi:"browserSdkVersion"`
+	// Whether debug bundles & logging are enabled for this key.
+	DebugEnabled pulumi.BoolPtrInput `pulumi:"debugEnabled"`
+	// Whether performance monitoring is enabled for this key.
+	PerformanceMonitoringEnabled pulumi.BoolPtrInput `pulumi:"performanceMonitoringEnabled"`
+	// Whether session replay is enabled for this key.
+	SessionReplayEnabled pulumi.BoolPtrInput `pulumi:"sessionReplayEnabled"`
+}
+
+func (SentryKeyJavascriptLoaderScriptArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryKeyJavascriptLoaderScript)(nil)).Elem()
+}
+
+func (i SentryKeyJavascriptLoaderScriptArgs) ToSentryKeyJavascriptLoaderScriptOutput() SentryKeyJavascriptLoaderScriptOutput {
+	return i.ToSentryKeyJavascriptLoaderScriptOutputWithContext(context.Background())
+}
+
+func (i SentryKeyJavascriptLoaderScriptArgs) ToSentryKeyJavascriptLoaderScriptOutputWithContext(ctx context.Context) SentryKeyJavascriptLoaderScriptOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryKeyJavascriptLoaderScriptOutput)
+}
+
+func (i SentryKeyJavascriptLoaderScriptArgs) ToSentryKeyJavascriptLoaderScriptPtrOutput() SentryKeyJavascriptLoaderScriptPtrOutput {
+	return i.ToSentryKeyJavascriptLoaderScriptPtrOutputWithContext(context.Background())
+}
+
+func (i SentryKeyJavascriptLoaderScriptArgs) ToSentryKeyJavascriptLoaderScriptPtrOutputWithContext(ctx context.Context) SentryKeyJavascriptLoaderScriptPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryKeyJavascriptLoaderScriptOutput).ToSentryKeyJavascriptLoaderScriptPtrOutputWithContext(ctx)
+}
+
+// SentryKeyJavascriptLoaderScriptPtrInput is an input type that accepts SentryKeyJavascriptLoaderScriptArgs, SentryKeyJavascriptLoaderScriptPtr and SentryKeyJavascriptLoaderScriptPtrOutput values.
+// You can construct a concrete instance of `SentryKeyJavascriptLoaderScriptPtrInput` via:
+//
+//	        SentryKeyJavascriptLoaderScriptArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryKeyJavascriptLoaderScriptPtrInput interface {
+	pulumi.Input
+
+	ToSentryKeyJavascriptLoaderScriptPtrOutput() SentryKeyJavascriptLoaderScriptPtrOutput
+	ToSentryKeyJavascriptLoaderScriptPtrOutputWithContext(context.Context) SentryKeyJavascriptLoaderScriptPtrOutput
+}
+
+type sentryKeyJavascriptLoaderScriptPtrType SentryKeyJavascriptLoaderScriptArgs
+
+func SentryKeyJavascriptLoaderScriptPtr(v *SentryKeyJavascriptLoaderScriptArgs) SentryKeyJavascriptLoaderScriptPtrInput {
+	return (*sentryKeyJavascriptLoaderScriptPtrType)(v)
+}
+
+func (*sentryKeyJavascriptLoaderScriptPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryKeyJavascriptLoaderScript)(nil)).Elem()
+}
+
+func (i *sentryKeyJavascriptLoaderScriptPtrType) ToSentryKeyJavascriptLoaderScriptPtrOutput() SentryKeyJavascriptLoaderScriptPtrOutput {
+	return i.ToSentryKeyJavascriptLoaderScriptPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryKeyJavascriptLoaderScriptPtrType) ToSentryKeyJavascriptLoaderScriptPtrOutputWithContext(ctx context.Context) SentryKeyJavascriptLoaderScriptPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryKeyJavascriptLoaderScriptPtrOutput)
+}
+
+type SentryKeyJavascriptLoaderScriptOutput struct{ *pulumi.OutputState }
+
+func (SentryKeyJavascriptLoaderScriptOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryKeyJavascriptLoaderScript)(nil)).Elem()
+}
+
+func (o SentryKeyJavascriptLoaderScriptOutput) ToSentryKeyJavascriptLoaderScriptOutput() SentryKeyJavascriptLoaderScriptOutput {
+	return o
+}
+
+func (o SentryKeyJavascriptLoaderScriptOutput) ToSentryKeyJavascriptLoaderScriptOutputWithContext(ctx context.Context) SentryKeyJavascriptLoaderScriptOutput {
+	return o
+}
+
+func (o SentryKeyJavascriptLoaderScriptOutput) ToSentryKeyJavascriptLoaderScriptPtrOutput() SentryKeyJavascriptLoaderScriptPtrOutput {
+	return o.ToSentryKeyJavascriptLoaderScriptPtrOutputWithContext(context.Background())
+}
+
+func (o SentryKeyJavascriptLoaderScriptOutput) ToSentryKeyJavascriptLoaderScriptPtrOutputWithContext(ctx context.Context) SentryKeyJavascriptLoaderScriptPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryKeyJavascriptLoaderScript) *SentryKeyJavascriptLoaderScript {
+		return &v
+	}).(SentryKeyJavascriptLoaderScriptPtrOutput)
+}
+
+// The version of the browser SDK to load.
+func (o SentryKeyJavascriptLoaderScriptOutput) BrowserSdkVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryKeyJavascriptLoaderScript) *string { return v.BrowserSdkVersion }).(pulumi.StringPtrOutput)
+}
+
+// Whether debug bundles & logging are enabled for this key.
+func (o SentryKeyJavascriptLoaderScriptOutput) DebugEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SentryKeyJavascriptLoaderScript) *bool { return v.DebugEnabled }).(pulumi.BoolPtrOutput)
+}
+
+// Whether performance monitoring is enabled for this key.
+func (o SentryKeyJavascriptLoaderScriptOutput) PerformanceMonitoringEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SentryKeyJavascriptLoaderScript) *bool { return v.PerformanceMonitoringEnabled }).(pulumi.BoolPtrOutput)
+}
+
+// Whether session replay is enabled for this key.
+func (o SentryKeyJavascriptLoaderScriptOutput) SessionReplayEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SentryKeyJavascriptLoaderScript) *bool { return v.SessionReplayEnabled }).(pulumi.BoolPtrOutput)
+}
+
+type SentryKeyJavascriptLoaderScriptPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryKeyJavascriptLoaderScriptPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryKeyJavascriptLoaderScript)(nil)).Elem()
+}
+
+func (o SentryKeyJavascriptLoaderScriptPtrOutput) ToSentryKeyJavascriptLoaderScriptPtrOutput() SentryKeyJavascriptLoaderScriptPtrOutput {
+	return o
+}
+
+func (o SentryKeyJavascriptLoaderScriptPtrOutput) ToSentryKeyJavascriptLoaderScriptPtrOutputWithContext(ctx context.Context) SentryKeyJavascriptLoaderScriptPtrOutput {
+	return o
+}
+
+func (o SentryKeyJavascriptLoaderScriptPtrOutput) Elem() SentryKeyJavascriptLoaderScriptOutput {
+	return o.ApplyT(func(v *SentryKeyJavascriptLoaderScript) SentryKeyJavascriptLoaderScript {
+		if v != nil {
+			return *v
+		}
+		var ret SentryKeyJavascriptLoaderScript
+		return ret
+	}).(SentryKeyJavascriptLoaderScriptOutput)
+}
+
+// The version of the browser SDK to load.
+func (o SentryKeyJavascriptLoaderScriptPtrOutput) BrowserSdkVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryKeyJavascriptLoaderScript) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BrowserSdkVersion
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether debug bundles & logging are enabled for this key.
+func (o SentryKeyJavascriptLoaderScriptPtrOutput) DebugEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SentryKeyJavascriptLoaderScript) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.DebugEnabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether performance monitoring is enabled for this key.
+func (o SentryKeyJavascriptLoaderScriptPtrOutput) PerformanceMonitoringEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SentryKeyJavascriptLoaderScript) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.PerformanceMonitoringEnabled
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether session replay is enabled for this key.
+func (o SentryKeyJavascriptLoaderScriptPtrOutput) SessionReplayEnabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SentryKeyJavascriptLoaderScript) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.SessionReplayEnabled
+	}).(pulumi.BoolPtrOutput)
+}
+
 type SentryMetricAlertTrigger struct {
 	Actions        []SentryMetricAlertTriggerAction `pulumi:"actions"`
 	AlertThreshold float64                          `pulumi:"alertThreshold"`
-	// The ID of this resource.
+	// The ID of the trigger.
 	Id               *string  `pulumi:"id"`
 	Label            string   `pulumi:"label"`
 	ResolveThreshold *float64 `pulumi:"resolveThreshold"`
@@ -388,7 +6550,7 @@ type SentryMetricAlertTriggerInput interface {
 type SentryMetricAlertTriggerArgs struct {
 	Actions        SentryMetricAlertTriggerActionArrayInput `pulumi:"actions"`
 	AlertThreshold pulumi.Float64Input                      `pulumi:"alertThreshold"`
-	// The ID of this resource.
+	// The ID of the trigger.
 	Id               pulumi.StringPtrInput  `pulumi:"id"`
 	Label            pulumi.StringInput     `pulumi:"label"`
 	ResolveThreshold pulumi.Float64PtrInput `pulumi:"resolveThreshold"`
@@ -454,7 +6616,7 @@ func (o SentryMetricAlertTriggerOutput) AlertThreshold() pulumi.Float64Output {
 	return o.ApplyT(func(v SentryMetricAlertTrigger) float64 { return v.AlertThreshold }).(pulumi.Float64Output)
 }
 
-// The ID of this resource.
+// The ID of the trigger.
 func (o SentryMetricAlertTriggerOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SentryMetricAlertTrigger) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -492,8 +6654,10 @@ func (o SentryMetricAlertTriggerArrayOutput) Index(i pulumi.IntInput) SentryMetr
 }
 
 type SentryMetricAlertTriggerAction struct {
-	// The ID of this resource.
-	Id               *string `pulumi:"id"`
+	// The ID of the action.
+	Id *string `pulumi:"id"`
+	// Slack channel ID to avoid rate-limiting, see [here](https://docs.sentry.io/product/integrations/notification-incidents/slack/#rate-limiting-error)
+	InputChannelId   *string `pulumi:"inputChannelId"`
 	IntegrationId    *int    `pulumi:"integrationId"`
 	TargetIdentifier *string `pulumi:"targetIdentifier"`
 	TargetType       string  `pulumi:"targetType"`
@@ -512,8 +6676,10 @@ type SentryMetricAlertTriggerActionInput interface {
 }
 
 type SentryMetricAlertTriggerActionArgs struct {
-	// The ID of this resource.
-	Id               pulumi.StringPtrInput `pulumi:"id"`
+	// The ID of the action.
+	Id pulumi.StringPtrInput `pulumi:"id"`
+	// Slack channel ID to avoid rate-limiting, see [here](https://docs.sentry.io/product/integrations/notification-incidents/slack/#rate-limiting-error)
+	InputChannelId   pulumi.StringPtrInput `pulumi:"inputChannelId"`
 	IntegrationId    pulumi.IntPtrInput    `pulumi:"integrationId"`
 	TargetIdentifier pulumi.StringPtrInput `pulumi:"targetIdentifier"`
 	TargetType       pulumi.StringInput    `pulumi:"targetType"`
@@ -571,9 +6737,14 @@ func (o SentryMetricAlertTriggerActionOutput) ToSentryMetricAlertTriggerActionOu
 	return o
 }
 
-// The ID of this resource.
+// The ID of the action.
 func (o SentryMetricAlertTriggerActionOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v SentryMetricAlertTriggerAction) *string { return v.Id }).(pulumi.StringPtrOutput)
+}
+
+// Slack channel ID to avoid rate-limiting, see [here](https://docs.sentry.io/product/integrations/notification-incidents/slack/#rate-limiting-error)
+func (o SentryMetricAlertTriggerActionOutput) InputChannelId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryMetricAlertTriggerAction) *string { return v.InputChannelId }).(pulumi.StringPtrOutput)
 }
 
 func (o SentryMetricAlertTriggerActionOutput) IntegrationId() pulumi.IntPtrOutput {
@@ -610,6 +6781,1127 @@ func (o SentryMetricAlertTriggerActionArrayOutput) Index(i pulumi.IntInput) Sent
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SentryMetricAlertTriggerAction {
 		return vs[0].([]SentryMetricAlertTriggerAction)[vs[1].(int)]
 	}).(SentryMetricAlertTriggerActionOutput)
+}
+
+type SentryProjectClientSecurity struct {
+	// A list of allowed domains. Examples: https://example.com, *, *.example.com, *:80.
+	AllowedDomains []string `pulumi:"allowedDomains"`
+	// Enable JavaScript source fetching. Allow Sentry to scrape missing JavaScript source context when possible.
+	ScrapeJavascript *bool `pulumi:"scrapeJavascript"`
+	// Security Token. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+	SecurityToken *string `pulumi:"securityToken"`
+	// Security Token Header. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+	SecurityTokenHeader *string `pulumi:"securityTokenHeader"`
+	// Verify TLS/SSL. Outbound requests will verify TLS (sometimes known as SSL) connections.
+	VerifyTlsSsl *bool `pulumi:"verifyTlsSsl"`
+}
+
+// SentryProjectClientSecurityInput is an input type that accepts SentryProjectClientSecurityArgs and SentryProjectClientSecurityOutput values.
+// You can construct a concrete instance of `SentryProjectClientSecurityInput` via:
+//
+//	SentryProjectClientSecurityArgs{...}
+type SentryProjectClientSecurityInput interface {
+	pulumi.Input
+
+	ToSentryProjectClientSecurityOutput() SentryProjectClientSecurityOutput
+	ToSentryProjectClientSecurityOutputWithContext(context.Context) SentryProjectClientSecurityOutput
+}
+
+type SentryProjectClientSecurityArgs struct {
+	// A list of allowed domains. Examples: https://example.com, *, *.example.com, *:80.
+	AllowedDomains pulumi.StringArrayInput `pulumi:"allowedDomains"`
+	// Enable JavaScript source fetching. Allow Sentry to scrape missing JavaScript source context when possible.
+	ScrapeJavascript pulumi.BoolPtrInput `pulumi:"scrapeJavascript"`
+	// Security Token. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+	SecurityToken pulumi.StringPtrInput `pulumi:"securityToken"`
+	// Security Token Header. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+	SecurityTokenHeader pulumi.StringPtrInput `pulumi:"securityTokenHeader"`
+	// Verify TLS/SSL. Outbound requests will verify TLS (sometimes known as SSL) connections.
+	VerifyTlsSsl pulumi.BoolPtrInput `pulumi:"verifyTlsSsl"`
+}
+
+func (SentryProjectClientSecurityArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryProjectClientSecurity)(nil)).Elem()
+}
+
+func (i SentryProjectClientSecurityArgs) ToSentryProjectClientSecurityOutput() SentryProjectClientSecurityOutput {
+	return i.ToSentryProjectClientSecurityOutputWithContext(context.Background())
+}
+
+func (i SentryProjectClientSecurityArgs) ToSentryProjectClientSecurityOutputWithContext(ctx context.Context) SentryProjectClientSecurityOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryProjectClientSecurityOutput)
+}
+
+func (i SentryProjectClientSecurityArgs) ToSentryProjectClientSecurityPtrOutput() SentryProjectClientSecurityPtrOutput {
+	return i.ToSentryProjectClientSecurityPtrOutputWithContext(context.Background())
+}
+
+func (i SentryProjectClientSecurityArgs) ToSentryProjectClientSecurityPtrOutputWithContext(ctx context.Context) SentryProjectClientSecurityPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryProjectClientSecurityOutput).ToSentryProjectClientSecurityPtrOutputWithContext(ctx)
+}
+
+// SentryProjectClientSecurityPtrInput is an input type that accepts SentryProjectClientSecurityArgs, SentryProjectClientSecurityPtr and SentryProjectClientSecurityPtrOutput values.
+// You can construct a concrete instance of `SentryProjectClientSecurityPtrInput` via:
+//
+//	        SentryProjectClientSecurityArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryProjectClientSecurityPtrInput interface {
+	pulumi.Input
+
+	ToSentryProjectClientSecurityPtrOutput() SentryProjectClientSecurityPtrOutput
+	ToSentryProjectClientSecurityPtrOutputWithContext(context.Context) SentryProjectClientSecurityPtrOutput
+}
+
+type sentryProjectClientSecurityPtrType SentryProjectClientSecurityArgs
+
+func SentryProjectClientSecurityPtr(v *SentryProjectClientSecurityArgs) SentryProjectClientSecurityPtrInput {
+	return (*sentryProjectClientSecurityPtrType)(v)
+}
+
+func (*sentryProjectClientSecurityPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryProjectClientSecurity)(nil)).Elem()
+}
+
+func (i *sentryProjectClientSecurityPtrType) ToSentryProjectClientSecurityPtrOutput() SentryProjectClientSecurityPtrOutput {
+	return i.ToSentryProjectClientSecurityPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryProjectClientSecurityPtrType) ToSentryProjectClientSecurityPtrOutputWithContext(ctx context.Context) SentryProjectClientSecurityPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryProjectClientSecurityPtrOutput)
+}
+
+type SentryProjectClientSecurityOutput struct{ *pulumi.OutputState }
+
+func (SentryProjectClientSecurityOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryProjectClientSecurity)(nil)).Elem()
+}
+
+func (o SentryProjectClientSecurityOutput) ToSentryProjectClientSecurityOutput() SentryProjectClientSecurityOutput {
+	return o
+}
+
+func (o SentryProjectClientSecurityOutput) ToSentryProjectClientSecurityOutputWithContext(ctx context.Context) SentryProjectClientSecurityOutput {
+	return o
+}
+
+func (o SentryProjectClientSecurityOutput) ToSentryProjectClientSecurityPtrOutput() SentryProjectClientSecurityPtrOutput {
+	return o.ToSentryProjectClientSecurityPtrOutputWithContext(context.Background())
+}
+
+func (o SentryProjectClientSecurityOutput) ToSentryProjectClientSecurityPtrOutputWithContext(ctx context.Context) SentryProjectClientSecurityPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryProjectClientSecurity) *SentryProjectClientSecurity {
+		return &v
+	}).(SentryProjectClientSecurityPtrOutput)
+}
+
+// A list of allowed domains. Examples: https://example.com, *, *.example.com, *:80.
+func (o SentryProjectClientSecurityOutput) AllowedDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SentryProjectClientSecurity) []string { return v.AllowedDomains }).(pulumi.StringArrayOutput)
+}
+
+// Enable JavaScript source fetching. Allow Sentry to scrape missing JavaScript source context when possible.
+func (o SentryProjectClientSecurityOutput) ScrapeJavascript() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SentryProjectClientSecurity) *bool { return v.ScrapeJavascript }).(pulumi.BoolPtrOutput)
+}
+
+// Security Token. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+func (o SentryProjectClientSecurityOutput) SecurityToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryProjectClientSecurity) *string { return v.SecurityToken }).(pulumi.StringPtrOutput)
+}
+
+// Security Token Header. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+func (o SentryProjectClientSecurityOutput) SecurityTokenHeader() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SentryProjectClientSecurity) *string { return v.SecurityTokenHeader }).(pulumi.StringPtrOutput)
+}
+
+// Verify TLS/SSL. Outbound requests will verify TLS (sometimes known as SSL) connections.
+func (o SentryProjectClientSecurityOutput) VerifyTlsSsl() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SentryProjectClientSecurity) *bool { return v.VerifyTlsSsl }).(pulumi.BoolPtrOutput)
+}
+
+type SentryProjectClientSecurityPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryProjectClientSecurityPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryProjectClientSecurity)(nil)).Elem()
+}
+
+func (o SentryProjectClientSecurityPtrOutput) ToSentryProjectClientSecurityPtrOutput() SentryProjectClientSecurityPtrOutput {
+	return o
+}
+
+func (o SentryProjectClientSecurityPtrOutput) ToSentryProjectClientSecurityPtrOutputWithContext(ctx context.Context) SentryProjectClientSecurityPtrOutput {
+	return o
+}
+
+func (o SentryProjectClientSecurityPtrOutput) Elem() SentryProjectClientSecurityOutput {
+	return o.ApplyT(func(v *SentryProjectClientSecurity) SentryProjectClientSecurity {
+		if v != nil {
+			return *v
+		}
+		var ret SentryProjectClientSecurity
+		return ret
+	}).(SentryProjectClientSecurityOutput)
+}
+
+// A list of allowed domains. Examples: https://example.com, *, *.example.com, *:80.
+func (o SentryProjectClientSecurityPtrOutput) AllowedDomains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SentryProjectClientSecurity) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AllowedDomains
+	}).(pulumi.StringArrayOutput)
+}
+
+// Enable JavaScript source fetching. Allow Sentry to scrape missing JavaScript source context when possible.
+func (o SentryProjectClientSecurityPtrOutput) ScrapeJavascript() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SentryProjectClientSecurity) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.ScrapeJavascript
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Security Token. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+func (o SentryProjectClientSecurityPtrOutput) SecurityToken() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryProjectClientSecurity) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SecurityToken
+	}).(pulumi.StringPtrOutput)
+}
+
+// Security Token Header. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+func (o SentryProjectClientSecurityPtrOutput) SecurityTokenHeader() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryProjectClientSecurity) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SecurityTokenHeader
+	}).(pulumi.StringPtrOutput)
+}
+
+// Verify TLS/SSL. Outbound requests will verify TLS (sometimes known as SSL) connections.
+func (o SentryProjectClientSecurityPtrOutput) VerifyTlsSsl() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SentryProjectClientSecurity) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.VerifyTlsSsl
+	}).(pulumi.BoolPtrOutput)
+}
+
+type SentryProjectFilters struct {
+	// Filter events from these IP addresses. (e.g. 127.0.0.1 or 10.0.0.0/8)
+	BlacklistedIps []string `pulumi:"blacklistedIps"`
+	// Filter events by error messages. Allows [glob pattern matching](<https://en.wikipedia.org/wiki/Glob_(programming)>). (e.g. TypeError* or *: integer division or modulo by zero)
+	ErrorMessages []string `pulumi:"errorMessages"`
+	// Filter events from these releases. Allows [glob pattern matching](<https://en.wikipedia.org/wiki/Glob_(programming)>). (e.g. 1.* or [!3].[0-9].*)
+	Releases []string `pulumi:"releases"`
+}
+
+// SentryProjectFiltersInput is an input type that accepts SentryProjectFiltersArgs and SentryProjectFiltersOutput values.
+// You can construct a concrete instance of `SentryProjectFiltersInput` via:
+//
+//	SentryProjectFiltersArgs{...}
+type SentryProjectFiltersInput interface {
+	pulumi.Input
+
+	ToSentryProjectFiltersOutput() SentryProjectFiltersOutput
+	ToSentryProjectFiltersOutputWithContext(context.Context) SentryProjectFiltersOutput
+}
+
+type SentryProjectFiltersArgs struct {
+	// Filter events from these IP addresses. (e.g. 127.0.0.1 or 10.0.0.0/8)
+	BlacklistedIps pulumi.StringArrayInput `pulumi:"blacklistedIps"`
+	// Filter events by error messages. Allows [glob pattern matching](<https://en.wikipedia.org/wiki/Glob_(programming)>). (e.g. TypeError* or *: integer division or modulo by zero)
+	ErrorMessages pulumi.StringArrayInput `pulumi:"errorMessages"`
+	// Filter events from these releases. Allows [glob pattern matching](<https://en.wikipedia.org/wiki/Glob_(programming)>). (e.g. 1.* or [!3].[0-9].*)
+	Releases pulumi.StringArrayInput `pulumi:"releases"`
+}
+
+func (SentryProjectFiltersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryProjectFilters)(nil)).Elem()
+}
+
+func (i SentryProjectFiltersArgs) ToSentryProjectFiltersOutput() SentryProjectFiltersOutput {
+	return i.ToSentryProjectFiltersOutputWithContext(context.Background())
+}
+
+func (i SentryProjectFiltersArgs) ToSentryProjectFiltersOutputWithContext(ctx context.Context) SentryProjectFiltersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryProjectFiltersOutput)
+}
+
+func (i SentryProjectFiltersArgs) ToSentryProjectFiltersPtrOutput() SentryProjectFiltersPtrOutput {
+	return i.ToSentryProjectFiltersPtrOutputWithContext(context.Background())
+}
+
+func (i SentryProjectFiltersArgs) ToSentryProjectFiltersPtrOutputWithContext(ctx context.Context) SentryProjectFiltersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryProjectFiltersOutput).ToSentryProjectFiltersPtrOutputWithContext(ctx)
+}
+
+// SentryProjectFiltersPtrInput is an input type that accepts SentryProjectFiltersArgs, SentryProjectFiltersPtr and SentryProjectFiltersPtrOutput values.
+// You can construct a concrete instance of `SentryProjectFiltersPtrInput` via:
+//
+//	        SentryProjectFiltersArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryProjectFiltersPtrInput interface {
+	pulumi.Input
+
+	ToSentryProjectFiltersPtrOutput() SentryProjectFiltersPtrOutput
+	ToSentryProjectFiltersPtrOutputWithContext(context.Context) SentryProjectFiltersPtrOutput
+}
+
+type sentryProjectFiltersPtrType SentryProjectFiltersArgs
+
+func SentryProjectFiltersPtr(v *SentryProjectFiltersArgs) SentryProjectFiltersPtrInput {
+	return (*sentryProjectFiltersPtrType)(v)
+}
+
+func (*sentryProjectFiltersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryProjectFilters)(nil)).Elem()
+}
+
+func (i *sentryProjectFiltersPtrType) ToSentryProjectFiltersPtrOutput() SentryProjectFiltersPtrOutput {
+	return i.ToSentryProjectFiltersPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryProjectFiltersPtrType) ToSentryProjectFiltersPtrOutputWithContext(ctx context.Context) SentryProjectFiltersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryProjectFiltersPtrOutput)
+}
+
+type SentryProjectFiltersOutput struct{ *pulumi.OutputState }
+
+func (SentryProjectFiltersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryProjectFilters)(nil)).Elem()
+}
+
+func (o SentryProjectFiltersOutput) ToSentryProjectFiltersOutput() SentryProjectFiltersOutput {
+	return o
+}
+
+func (o SentryProjectFiltersOutput) ToSentryProjectFiltersOutputWithContext(ctx context.Context) SentryProjectFiltersOutput {
+	return o
+}
+
+func (o SentryProjectFiltersOutput) ToSentryProjectFiltersPtrOutput() SentryProjectFiltersPtrOutput {
+	return o.ToSentryProjectFiltersPtrOutputWithContext(context.Background())
+}
+
+func (o SentryProjectFiltersOutput) ToSentryProjectFiltersPtrOutputWithContext(ctx context.Context) SentryProjectFiltersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryProjectFilters) *SentryProjectFilters {
+		return &v
+	}).(SentryProjectFiltersPtrOutput)
+}
+
+// Filter events from these IP addresses. (e.g. 127.0.0.1 or 10.0.0.0/8)
+func (o SentryProjectFiltersOutput) BlacklistedIps() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SentryProjectFilters) []string { return v.BlacklistedIps }).(pulumi.StringArrayOutput)
+}
+
+// Filter events by error messages. Allows [glob pattern matching](<https://en.wikipedia.org/wiki/Glob_(programming)>). (e.g. TypeError* or *: integer division or modulo by zero)
+func (o SentryProjectFiltersOutput) ErrorMessages() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SentryProjectFilters) []string { return v.ErrorMessages }).(pulumi.StringArrayOutput)
+}
+
+// Filter events from these releases. Allows [glob pattern matching](<https://en.wikipedia.org/wiki/Glob_(programming)>). (e.g. 1.* or [!3].[0-9].*)
+func (o SentryProjectFiltersOutput) Releases() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SentryProjectFilters) []string { return v.Releases }).(pulumi.StringArrayOutput)
+}
+
+type SentryProjectFiltersPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryProjectFiltersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryProjectFilters)(nil)).Elem()
+}
+
+func (o SentryProjectFiltersPtrOutput) ToSentryProjectFiltersPtrOutput() SentryProjectFiltersPtrOutput {
+	return o
+}
+
+func (o SentryProjectFiltersPtrOutput) ToSentryProjectFiltersPtrOutputWithContext(ctx context.Context) SentryProjectFiltersPtrOutput {
+	return o
+}
+
+func (o SentryProjectFiltersPtrOutput) Elem() SentryProjectFiltersOutput {
+	return o.ApplyT(func(v *SentryProjectFilters) SentryProjectFilters {
+		if v != nil {
+			return *v
+		}
+		var ret SentryProjectFilters
+		return ret
+	}).(SentryProjectFiltersOutput)
+}
+
+// Filter events from these IP addresses. (e.g. 127.0.0.1 or 10.0.0.0/8)
+func (o SentryProjectFiltersPtrOutput) BlacklistedIps() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SentryProjectFilters) []string {
+		if v == nil {
+			return nil
+		}
+		return v.BlacklistedIps
+	}).(pulumi.StringArrayOutput)
+}
+
+// Filter events by error messages. Allows [glob pattern matching](<https://en.wikipedia.org/wiki/Glob_(programming)>). (e.g. TypeError* or *: integer division or modulo by zero)
+func (o SentryProjectFiltersPtrOutput) ErrorMessages() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SentryProjectFilters) []string {
+		if v == nil {
+			return nil
+		}
+		return v.ErrorMessages
+	}).(pulumi.StringArrayOutput)
+}
+
+// Filter events from these releases. Allows [glob pattern matching](<https://en.wikipedia.org/wiki/Glob_(programming)>). (e.g. 1.* or [!3].[0-9].*)
+func (o SentryProjectFiltersPtrOutput) Releases() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SentryProjectFilters) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Releases
+	}).(pulumi.StringArrayOutput)
+}
+
+type SentryProjectSymbolSourceLayout struct {
+	// The casing of the symbol source layout. The layout of the folder structure. The options are: `default` - Default (mixed case), `uppercase` - Uppercase, `lowercase` - Lowercase.
+	Casing string `pulumi:"casing"`
+	// The layout of the folder structure. The options are: `native` - Platform-Specific (SymStore / GDB / LLVM), `symstore` - Microsoft SymStore, `symstoreIndex2` - Microsoft SymStore (with index2.txt), `ssqp` - Microsoft SSQP, `unified` - Unified Symbol Server Layout, `debuginfod` - debuginfod.
+	Type string `pulumi:"type"`
+}
+
+// SentryProjectSymbolSourceLayoutInput is an input type that accepts SentryProjectSymbolSourceLayoutArgs and SentryProjectSymbolSourceLayoutOutput values.
+// You can construct a concrete instance of `SentryProjectSymbolSourceLayoutInput` via:
+//
+//	SentryProjectSymbolSourceLayoutArgs{...}
+type SentryProjectSymbolSourceLayoutInput interface {
+	pulumi.Input
+
+	ToSentryProjectSymbolSourceLayoutOutput() SentryProjectSymbolSourceLayoutOutput
+	ToSentryProjectSymbolSourceLayoutOutputWithContext(context.Context) SentryProjectSymbolSourceLayoutOutput
+}
+
+type SentryProjectSymbolSourceLayoutArgs struct {
+	// The casing of the symbol source layout. The layout of the folder structure. The options are: `default` - Default (mixed case), `uppercase` - Uppercase, `lowercase` - Lowercase.
+	Casing pulumi.StringInput `pulumi:"casing"`
+	// The layout of the folder structure. The options are: `native` - Platform-Specific (SymStore / GDB / LLVM), `symstore` - Microsoft SymStore, `symstoreIndex2` - Microsoft SymStore (with index2.txt), `ssqp` - Microsoft SSQP, `unified` - Unified Symbol Server Layout, `debuginfod` - debuginfod.
+	Type pulumi.StringInput `pulumi:"type"`
+}
+
+func (SentryProjectSymbolSourceLayoutArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryProjectSymbolSourceLayout)(nil)).Elem()
+}
+
+func (i SentryProjectSymbolSourceLayoutArgs) ToSentryProjectSymbolSourceLayoutOutput() SentryProjectSymbolSourceLayoutOutput {
+	return i.ToSentryProjectSymbolSourceLayoutOutputWithContext(context.Background())
+}
+
+func (i SentryProjectSymbolSourceLayoutArgs) ToSentryProjectSymbolSourceLayoutOutputWithContext(ctx context.Context) SentryProjectSymbolSourceLayoutOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryProjectSymbolSourceLayoutOutput)
+}
+
+func (i SentryProjectSymbolSourceLayoutArgs) ToSentryProjectSymbolSourceLayoutPtrOutput() SentryProjectSymbolSourceLayoutPtrOutput {
+	return i.ToSentryProjectSymbolSourceLayoutPtrOutputWithContext(context.Background())
+}
+
+func (i SentryProjectSymbolSourceLayoutArgs) ToSentryProjectSymbolSourceLayoutPtrOutputWithContext(ctx context.Context) SentryProjectSymbolSourceLayoutPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryProjectSymbolSourceLayoutOutput).ToSentryProjectSymbolSourceLayoutPtrOutputWithContext(ctx)
+}
+
+// SentryProjectSymbolSourceLayoutPtrInput is an input type that accepts SentryProjectSymbolSourceLayoutArgs, SentryProjectSymbolSourceLayoutPtr and SentryProjectSymbolSourceLayoutPtrOutput values.
+// You can construct a concrete instance of `SentryProjectSymbolSourceLayoutPtrInput` via:
+//
+//	        SentryProjectSymbolSourceLayoutArgs{...}
+//
+//	or:
+//
+//	        nil
+type SentryProjectSymbolSourceLayoutPtrInput interface {
+	pulumi.Input
+
+	ToSentryProjectSymbolSourceLayoutPtrOutput() SentryProjectSymbolSourceLayoutPtrOutput
+	ToSentryProjectSymbolSourceLayoutPtrOutputWithContext(context.Context) SentryProjectSymbolSourceLayoutPtrOutput
+}
+
+type sentryProjectSymbolSourceLayoutPtrType SentryProjectSymbolSourceLayoutArgs
+
+func SentryProjectSymbolSourceLayoutPtr(v *SentryProjectSymbolSourceLayoutArgs) SentryProjectSymbolSourceLayoutPtrInput {
+	return (*sentryProjectSymbolSourceLayoutPtrType)(v)
+}
+
+func (*sentryProjectSymbolSourceLayoutPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryProjectSymbolSourceLayout)(nil)).Elem()
+}
+
+func (i *sentryProjectSymbolSourceLayoutPtrType) ToSentryProjectSymbolSourceLayoutPtrOutput() SentryProjectSymbolSourceLayoutPtrOutput {
+	return i.ToSentryProjectSymbolSourceLayoutPtrOutputWithContext(context.Background())
+}
+
+func (i *sentryProjectSymbolSourceLayoutPtrType) ToSentryProjectSymbolSourceLayoutPtrOutputWithContext(ctx context.Context) SentryProjectSymbolSourceLayoutPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SentryProjectSymbolSourceLayoutPtrOutput)
+}
+
+type SentryProjectSymbolSourceLayoutOutput struct{ *pulumi.OutputState }
+
+func (SentryProjectSymbolSourceLayoutOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SentryProjectSymbolSourceLayout)(nil)).Elem()
+}
+
+func (o SentryProjectSymbolSourceLayoutOutput) ToSentryProjectSymbolSourceLayoutOutput() SentryProjectSymbolSourceLayoutOutput {
+	return o
+}
+
+func (o SentryProjectSymbolSourceLayoutOutput) ToSentryProjectSymbolSourceLayoutOutputWithContext(ctx context.Context) SentryProjectSymbolSourceLayoutOutput {
+	return o
+}
+
+func (o SentryProjectSymbolSourceLayoutOutput) ToSentryProjectSymbolSourceLayoutPtrOutput() SentryProjectSymbolSourceLayoutPtrOutput {
+	return o.ToSentryProjectSymbolSourceLayoutPtrOutputWithContext(context.Background())
+}
+
+func (o SentryProjectSymbolSourceLayoutOutput) ToSentryProjectSymbolSourceLayoutPtrOutputWithContext(ctx context.Context) SentryProjectSymbolSourceLayoutPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SentryProjectSymbolSourceLayout) *SentryProjectSymbolSourceLayout {
+		return &v
+	}).(SentryProjectSymbolSourceLayoutPtrOutput)
+}
+
+// The casing of the symbol source layout. The layout of the folder structure. The options are: `default` - Default (mixed case), `uppercase` - Uppercase, `lowercase` - Lowercase.
+func (o SentryProjectSymbolSourceLayoutOutput) Casing() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryProjectSymbolSourceLayout) string { return v.Casing }).(pulumi.StringOutput)
+}
+
+// The layout of the folder structure. The options are: `native` - Platform-Specific (SymStore / GDB / LLVM), `symstore` - Microsoft SymStore, `symstoreIndex2` - Microsoft SymStore (with index2.txt), `ssqp` - Microsoft SSQP, `unified` - Unified Symbol Server Layout, `debuginfod` - debuginfod.
+func (o SentryProjectSymbolSourceLayoutOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v SentryProjectSymbolSourceLayout) string { return v.Type }).(pulumi.StringOutput)
+}
+
+type SentryProjectSymbolSourceLayoutPtrOutput struct{ *pulumi.OutputState }
+
+func (SentryProjectSymbolSourceLayoutPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SentryProjectSymbolSourceLayout)(nil)).Elem()
+}
+
+func (o SentryProjectSymbolSourceLayoutPtrOutput) ToSentryProjectSymbolSourceLayoutPtrOutput() SentryProjectSymbolSourceLayoutPtrOutput {
+	return o
+}
+
+func (o SentryProjectSymbolSourceLayoutPtrOutput) ToSentryProjectSymbolSourceLayoutPtrOutputWithContext(ctx context.Context) SentryProjectSymbolSourceLayoutPtrOutput {
+	return o
+}
+
+func (o SentryProjectSymbolSourceLayoutPtrOutput) Elem() SentryProjectSymbolSourceLayoutOutput {
+	return o.ApplyT(func(v *SentryProjectSymbolSourceLayout) SentryProjectSymbolSourceLayout {
+		if v != nil {
+			return *v
+		}
+		var ret SentryProjectSymbolSourceLayout
+		return ret
+	}).(SentryProjectSymbolSourceLayoutOutput)
+}
+
+// The casing of the symbol source layout. The layout of the folder structure. The options are: `default` - Default (mixed case), `uppercase` - Uppercase, `lowercase` - Lowercase.
+func (o SentryProjectSymbolSourceLayoutPtrOutput) Casing() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryProjectSymbolSourceLayout) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Casing
+	}).(pulumi.StringPtrOutput)
+}
+
+// The layout of the folder structure. The options are: `native` - Platform-Specific (SymStore / GDB / LLVM), `symstore` - Microsoft SymStore, `symstoreIndex2` - Microsoft SymStore (with index2.txt), `ssqp` - Microsoft SSQP, `unified` - Unified Symbol Server Layout, `debuginfod` - debuginfod.
+func (o SentryProjectSymbolSourceLayoutPtrOutput) Type() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryProjectSymbolSourceLayout) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Type
+	}).(pulumi.StringPtrOutput)
+}
+
+type GetSentryAllKeysKey struct {
+	// This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+	Dsn map[string]string `pulumi:"dsn"`
+	// Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
+	//
+	// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["csp"]` instead.
+	DsnCsp string `pulumi:"dsnCsp"`
+	// The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
+	//
+	// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["public"]` instead.
+	DsnPublic string `pulumi:"dsnPublic"`
+	// Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+	//
+	// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["secret"]` instead.
+	DsnSecret string `pulumi:"dsnSecret"`
+	// The ID of this resource.
+	Id string `pulumi:"id"`
+	// The JavaScript loader script configuration.
+	JavascriptLoaderScript GetSentryAllKeysKeyJavascriptLoaderScript `pulumi:"javascriptLoaderScript"`
+	// The name of the client key.
+	Name string `pulumi:"name"`
+	// The slug of the organization the resource belongs to.
+	Organization string `pulumi:"organization"`
+	// The slug of the project the resource belongs to.
+	Project string `pulumi:"project"`
+	// The ID of the project that the key belongs to.
+	ProjectId string `pulumi:"projectId"`
+	// The public key.
+	Public string `pulumi:"public"`
+	// Number of events that can be reported within the rate limit window.
+	RateLimitCount int `pulumi:"rateLimitCount"`
+	// Length of time in seconds that will be considered when checking the rate limit.
+	RateLimitWindow int `pulumi:"rateLimitWindow"`
+	// The secret key.
+	Secret string `pulumi:"secret"`
+}
+
+// GetSentryAllKeysKeyInput is an input type that accepts GetSentryAllKeysKeyArgs and GetSentryAllKeysKeyOutput values.
+// You can construct a concrete instance of `GetSentryAllKeysKeyInput` via:
+//
+//	GetSentryAllKeysKeyArgs{...}
+type GetSentryAllKeysKeyInput interface {
+	pulumi.Input
+
+	ToGetSentryAllKeysKeyOutput() GetSentryAllKeysKeyOutput
+	ToGetSentryAllKeysKeyOutputWithContext(context.Context) GetSentryAllKeysKeyOutput
+}
+
+type GetSentryAllKeysKeyArgs struct {
+	// This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+	Dsn pulumi.StringMapInput `pulumi:"dsn"`
+	// Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
+	//
+	// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["csp"]` instead.
+	DsnCsp pulumi.StringInput `pulumi:"dsnCsp"`
+	// The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
+	//
+	// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["public"]` instead.
+	DsnPublic pulumi.StringInput `pulumi:"dsnPublic"`
+	// Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+	//
+	// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["secret"]` instead.
+	DsnSecret pulumi.StringInput `pulumi:"dsnSecret"`
+	// The ID of this resource.
+	Id pulumi.StringInput `pulumi:"id"`
+	// The JavaScript loader script configuration.
+	JavascriptLoaderScript GetSentryAllKeysKeyJavascriptLoaderScriptInput `pulumi:"javascriptLoaderScript"`
+	// The name of the client key.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The slug of the organization the resource belongs to.
+	Organization pulumi.StringInput `pulumi:"organization"`
+	// The slug of the project the resource belongs to.
+	Project pulumi.StringInput `pulumi:"project"`
+	// The ID of the project that the key belongs to.
+	ProjectId pulumi.StringInput `pulumi:"projectId"`
+	// The public key.
+	Public pulumi.StringInput `pulumi:"public"`
+	// Number of events that can be reported within the rate limit window.
+	RateLimitCount pulumi.IntInput `pulumi:"rateLimitCount"`
+	// Length of time in seconds that will be considered when checking the rate limit.
+	RateLimitWindow pulumi.IntInput `pulumi:"rateLimitWindow"`
+	// The secret key.
+	Secret pulumi.StringInput `pulumi:"secret"`
+}
+
+func (GetSentryAllKeysKeyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryAllKeysKey)(nil)).Elem()
+}
+
+func (i GetSentryAllKeysKeyArgs) ToGetSentryAllKeysKeyOutput() GetSentryAllKeysKeyOutput {
+	return i.ToGetSentryAllKeysKeyOutputWithContext(context.Background())
+}
+
+func (i GetSentryAllKeysKeyArgs) ToGetSentryAllKeysKeyOutputWithContext(ctx context.Context) GetSentryAllKeysKeyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryAllKeysKeyOutput)
+}
+
+// GetSentryAllKeysKeyArrayInput is an input type that accepts GetSentryAllKeysKeyArray and GetSentryAllKeysKeyArrayOutput values.
+// You can construct a concrete instance of `GetSentryAllKeysKeyArrayInput` via:
+//
+//	GetSentryAllKeysKeyArray{ GetSentryAllKeysKeyArgs{...} }
+type GetSentryAllKeysKeyArrayInput interface {
+	pulumi.Input
+
+	ToGetSentryAllKeysKeyArrayOutput() GetSentryAllKeysKeyArrayOutput
+	ToGetSentryAllKeysKeyArrayOutputWithContext(context.Context) GetSentryAllKeysKeyArrayOutput
+}
+
+type GetSentryAllKeysKeyArray []GetSentryAllKeysKeyInput
+
+func (GetSentryAllKeysKeyArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSentryAllKeysKey)(nil)).Elem()
+}
+
+func (i GetSentryAllKeysKeyArray) ToGetSentryAllKeysKeyArrayOutput() GetSentryAllKeysKeyArrayOutput {
+	return i.ToGetSentryAllKeysKeyArrayOutputWithContext(context.Background())
+}
+
+func (i GetSentryAllKeysKeyArray) ToGetSentryAllKeysKeyArrayOutputWithContext(ctx context.Context) GetSentryAllKeysKeyArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryAllKeysKeyArrayOutput)
+}
+
+type GetSentryAllKeysKeyOutput struct{ *pulumi.OutputState }
+
+func (GetSentryAllKeysKeyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryAllKeysKey)(nil)).Elem()
+}
+
+func (o GetSentryAllKeysKeyOutput) ToGetSentryAllKeysKeyOutput() GetSentryAllKeysKeyOutput {
+	return o
+}
+
+func (o GetSentryAllKeysKeyOutput) ToGetSentryAllKeysKeyOutputWithContext(ctx context.Context) GetSentryAllKeysKeyOutput {
+	return o
+}
+
+// This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+func (o GetSentryAllKeysKeyOutput) Dsn() pulumi.StringMapOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKey) map[string]string { return v.Dsn }).(pulumi.StringMapOutput)
+}
+
+// Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
+//
+// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["csp"]` instead.
+func (o GetSentryAllKeysKeyOutput) DsnCsp() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKey) string { return v.DsnCsp }).(pulumi.StringOutput)
+}
+
+// The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
+//
+// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["public"]` instead.
+func (o GetSentryAllKeysKeyOutput) DsnPublic() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKey) string { return v.DsnPublic }).(pulumi.StringOutput)
+}
+
+// Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+//
+// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["secret"]` instead.
+func (o GetSentryAllKeysKeyOutput) DsnSecret() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKey) string { return v.DsnSecret }).(pulumi.StringOutput)
+}
+
+// The ID of this resource.
+func (o GetSentryAllKeysKeyOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKey) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// The JavaScript loader script configuration.
+func (o GetSentryAllKeysKeyOutput) JavascriptLoaderScript() GetSentryAllKeysKeyJavascriptLoaderScriptOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKey) GetSentryAllKeysKeyJavascriptLoaderScript { return v.JavascriptLoaderScript }).(GetSentryAllKeysKeyJavascriptLoaderScriptOutput)
+}
+
+// The name of the client key.
+func (o GetSentryAllKeysKeyOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKey) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The slug of the organization the resource belongs to.
+func (o GetSentryAllKeysKeyOutput) Organization() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKey) string { return v.Organization }).(pulumi.StringOutput)
+}
+
+// The slug of the project the resource belongs to.
+func (o GetSentryAllKeysKeyOutput) Project() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKey) string { return v.Project }).(pulumi.StringOutput)
+}
+
+// The ID of the project that the key belongs to.
+func (o GetSentryAllKeysKeyOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKey) string { return v.ProjectId }).(pulumi.StringOutput)
+}
+
+// The public key.
+func (o GetSentryAllKeysKeyOutput) Public() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKey) string { return v.Public }).(pulumi.StringOutput)
+}
+
+// Number of events that can be reported within the rate limit window.
+func (o GetSentryAllKeysKeyOutput) RateLimitCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKey) int { return v.RateLimitCount }).(pulumi.IntOutput)
+}
+
+// Length of time in seconds that will be considered when checking the rate limit.
+func (o GetSentryAllKeysKeyOutput) RateLimitWindow() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKey) int { return v.RateLimitWindow }).(pulumi.IntOutput)
+}
+
+// The secret key.
+func (o GetSentryAllKeysKeyOutput) Secret() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKey) string { return v.Secret }).(pulumi.StringOutput)
+}
+
+type GetSentryAllKeysKeyArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSentryAllKeysKeyArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSentryAllKeysKey)(nil)).Elem()
+}
+
+func (o GetSentryAllKeysKeyArrayOutput) ToGetSentryAllKeysKeyArrayOutput() GetSentryAllKeysKeyArrayOutput {
+	return o
+}
+
+func (o GetSentryAllKeysKeyArrayOutput) ToGetSentryAllKeysKeyArrayOutputWithContext(ctx context.Context) GetSentryAllKeysKeyArrayOutput {
+	return o
+}
+
+func (o GetSentryAllKeysKeyArrayOutput) Index(i pulumi.IntInput) GetSentryAllKeysKeyOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSentryAllKeysKey {
+		return vs[0].([]GetSentryAllKeysKey)[vs[1].(int)]
+	}).(GetSentryAllKeysKeyOutput)
+}
+
+type GetSentryAllKeysKeyJavascriptLoaderScript struct {
+	// The version of the browser SDK to load.
+	BrowserSdkVersion string `pulumi:"browserSdkVersion"`
+	// Whether debug bundles & logging are enabled for this key.
+	DebugEnabled bool `pulumi:"debugEnabled"`
+	// Whether performance monitoring is enabled for this key.
+	PerformanceMonitoringEnabled bool `pulumi:"performanceMonitoringEnabled"`
+	// Whether session replay is enabled for this key.
+	SessionReplayEnabled bool `pulumi:"sessionReplayEnabled"`
+}
+
+// GetSentryAllKeysKeyJavascriptLoaderScriptInput is an input type that accepts GetSentryAllKeysKeyJavascriptLoaderScriptArgs and GetSentryAllKeysKeyJavascriptLoaderScriptOutput values.
+// You can construct a concrete instance of `GetSentryAllKeysKeyJavascriptLoaderScriptInput` via:
+//
+//	GetSentryAllKeysKeyJavascriptLoaderScriptArgs{...}
+type GetSentryAllKeysKeyJavascriptLoaderScriptInput interface {
+	pulumi.Input
+
+	ToGetSentryAllKeysKeyJavascriptLoaderScriptOutput() GetSentryAllKeysKeyJavascriptLoaderScriptOutput
+	ToGetSentryAllKeysKeyJavascriptLoaderScriptOutputWithContext(context.Context) GetSentryAllKeysKeyJavascriptLoaderScriptOutput
+}
+
+type GetSentryAllKeysKeyJavascriptLoaderScriptArgs struct {
+	// The version of the browser SDK to load.
+	BrowserSdkVersion pulumi.StringInput `pulumi:"browserSdkVersion"`
+	// Whether debug bundles & logging are enabled for this key.
+	DebugEnabled pulumi.BoolInput `pulumi:"debugEnabled"`
+	// Whether performance monitoring is enabled for this key.
+	PerformanceMonitoringEnabled pulumi.BoolInput `pulumi:"performanceMonitoringEnabled"`
+	// Whether session replay is enabled for this key.
+	SessionReplayEnabled pulumi.BoolInput `pulumi:"sessionReplayEnabled"`
+}
+
+func (GetSentryAllKeysKeyJavascriptLoaderScriptArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryAllKeysKeyJavascriptLoaderScript)(nil)).Elem()
+}
+
+func (i GetSentryAllKeysKeyJavascriptLoaderScriptArgs) ToGetSentryAllKeysKeyJavascriptLoaderScriptOutput() GetSentryAllKeysKeyJavascriptLoaderScriptOutput {
+	return i.ToGetSentryAllKeysKeyJavascriptLoaderScriptOutputWithContext(context.Background())
+}
+
+func (i GetSentryAllKeysKeyJavascriptLoaderScriptArgs) ToGetSentryAllKeysKeyJavascriptLoaderScriptOutputWithContext(ctx context.Context) GetSentryAllKeysKeyJavascriptLoaderScriptOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryAllKeysKeyJavascriptLoaderScriptOutput)
+}
+
+type GetSentryAllKeysKeyJavascriptLoaderScriptOutput struct{ *pulumi.OutputState }
+
+func (GetSentryAllKeysKeyJavascriptLoaderScriptOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryAllKeysKeyJavascriptLoaderScript)(nil)).Elem()
+}
+
+func (o GetSentryAllKeysKeyJavascriptLoaderScriptOutput) ToGetSentryAllKeysKeyJavascriptLoaderScriptOutput() GetSentryAllKeysKeyJavascriptLoaderScriptOutput {
+	return o
+}
+
+func (o GetSentryAllKeysKeyJavascriptLoaderScriptOutput) ToGetSentryAllKeysKeyJavascriptLoaderScriptOutputWithContext(ctx context.Context) GetSentryAllKeysKeyJavascriptLoaderScriptOutput {
+	return o
+}
+
+// The version of the browser SDK to load.
+func (o GetSentryAllKeysKeyJavascriptLoaderScriptOutput) BrowserSdkVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKeyJavascriptLoaderScript) string { return v.BrowserSdkVersion }).(pulumi.StringOutput)
+}
+
+// Whether debug bundles & logging are enabled for this key.
+func (o GetSentryAllKeysKeyJavascriptLoaderScriptOutput) DebugEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKeyJavascriptLoaderScript) bool { return v.DebugEnabled }).(pulumi.BoolOutput)
+}
+
+// Whether performance monitoring is enabled for this key.
+func (o GetSentryAllKeysKeyJavascriptLoaderScriptOutput) PerformanceMonitoringEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKeyJavascriptLoaderScript) bool { return v.PerformanceMonitoringEnabled }).(pulumi.BoolOutput)
+}
+
+// Whether session replay is enabled for this key.
+func (o GetSentryAllKeysKeyJavascriptLoaderScriptOutput) SessionReplayEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSentryAllKeysKeyJavascriptLoaderScript) bool { return v.SessionReplayEnabled }).(pulumi.BoolOutput)
+}
+
+type GetSentryAllOrganizationMembersMember struct {
+	// The email of the organization member.
+	Email string `pulumi:"email"`
+	// The ID of of the organization member.
+	Id string `pulumi:"id"`
+	// This is the role of the organization member.
+	Role string `pulumi:"role"`
+}
+
+// GetSentryAllOrganizationMembersMemberInput is an input type that accepts GetSentryAllOrganizationMembersMemberArgs and GetSentryAllOrganizationMembersMemberOutput values.
+// You can construct a concrete instance of `GetSentryAllOrganizationMembersMemberInput` via:
+//
+//	GetSentryAllOrganizationMembersMemberArgs{...}
+type GetSentryAllOrganizationMembersMemberInput interface {
+	pulumi.Input
+
+	ToGetSentryAllOrganizationMembersMemberOutput() GetSentryAllOrganizationMembersMemberOutput
+	ToGetSentryAllOrganizationMembersMemberOutputWithContext(context.Context) GetSentryAllOrganizationMembersMemberOutput
+}
+
+type GetSentryAllOrganizationMembersMemberArgs struct {
+	// The email of the organization member.
+	Email pulumi.StringInput `pulumi:"email"`
+	// The ID of of the organization member.
+	Id pulumi.StringInput `pulumi:"id"`
+	// This is the role of the organization member.
+	Role pulumi.StringInput `pulumi:"role"`
+}
+
+func (GetSentryAllOrganizationMembersMemberArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryAllOrganizationMembersMember)(nil)).Elem()
+}
+
+func (i GetSentryAllOrganizationMembersMemberArgs) ToGetSentryAllOrganizationMembersMemberOutput() GetSentryAllOrganizationMembersMemberOutput {
+	return i.ToGetSentryAllOrganizationMembersMemberOutputWithContext(context.Background())
+}
+
+func (i GetSentryAllOrganizationMembersMemberArgs) ToGetSentryAllOrganizationMembersMemberOutputWithContext(ctx context.Context) GetSentryAllOrganizationMembersMemberOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryAllOrganizationMembersMemberOutput)
+}
+
+// GetSentryAllOrganizationMembersMemberArrayInput is an input type that accepts GetSentryAllOrganizationMembersMemberArray and GetSentryAllOrganizationMembersMemberArrayOutput values.
+// You can construct a concrete instance of `GetSentryAllOrganizationMembersMemberArrayInput` via:
+//
+//	GetSentryAllOrganizationMembersMemberArray{ GetSentryAllOrganizationMembersMemberArgs{...} }
+type GetSentryAllOrganizationMembersMemberArrayInput interface {
+	pulumi.Input
+
+	ToGetSentryAllOrganizationMembersMemberArrayOutput() GetSentryAllOrganizationMembersMemberArrayOutput
+	ToGetSentryAllOrganizationMembersMemberArrayOutputWithContext(context.Context) GetSentryAllOrganizationMembersMemberArrayOutput
+}
+
+type GetSentryAllOrganizationMembersMemberArray []GetSentryAllOrganizationMembersMemberInput
+
+func (GetSentryAllOrganizationMembersMemberArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSentryAllOrganizationMembersMember)(nil)).Elem()
+}
+
+func (i GetSentryAllOrganizationMembersMemberArray) ToGetSentryAllOrganizationMembersMemberArrayOutput() GetSentryAllOrganizationMembersMemberArrayOutput {
+	return i.ToGetSentryAllOrganizationMembersMemberArrayOutputWithContext(context.Background())
+}
+
+func (i GetSentryAllOrganizationMembersMemberArray) ToGetSentryAllOrganizationMembersMemberArrayOutputWithContext(ctx context.Context) GetSentryAllOrganizationMembersMemberArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryAllOrganizationMembersMemberArrayOutput)
+}
+
+type GetSentryAllOrganizationMembersMemberOutput struct{ *pulumi.OutputState }
+
+func (GetSentryAllOrganizationMembersMemberOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryAllOrganizationMembersMember)(nil)).Elem()
+}
+
+func (o GetSentryAllOrganizationMembersMemberOutput) ToGetSentryAllOrganizationMembersMemberOutput() GetSentryAllOrganizationMembersMemberOutput {
+	return o
+}
+
+func (o GetSentryAllOrganizationMembersMemberOutput) ToGetSentryAllOrganizationMembersMemberOutputWithContext(ctx context.Context) GetSentryAllOrganizationMembersMemberOutput {
+	return o
+}
+
+// The email of the organization member.
+func (o GetSentryAllOrganizationMembersMemberOutput) Email() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllOrganizationMembersMember) string { return v.Email }).(pulumi.StringOutput)
+}
+
+// The ID of of the organization member.
+func (o GetSentryAllOrganizationMembersMemberOutput) Id() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllOrganizationMembersMember) string { return v.Id }).(pulumi.StringOutput)
+}
+
+// This is the role of the organization member.
+func (o GetSentryAllOrganizationMembersMemberOutput) Role() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllOrganizationMembersMember) string { return v.Role }).(pulumi.StringOutput)
+}
+
+type GetSentryAllOrganizationMembersMemberArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSentryAllOrganizationMembersMemberArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSentryAllOrganizationMembersMember)(nil)).Elem()
+}
+
+func (o GetSentryAllOrganizationMembersMemberArrayOutput) ToGetSentryAllOrganizationMembersMemberArrayOutput() GetSentryAllOrganizationMembersMemberArrayOutput {
+	return o
+}
+
+func (o GetSentryAllOrganizationMembersMemberArrayOutput) ToGetSentryAllOrganizationMembersMemberArrayOutputWithContext(ctx context.Context) GetSentryAllOrganizationMembersMemberArrayOutput {
+	return o
+}
+
+func (o GetSentryAllOrganizationMembersMemberArrayOutput) Index(i pulumi.IntInput) GetSentryAllOrganizationMembersMemberOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSentryAllOrganizationMembersMember {
+		return vs[0].([]GetSentryAllOrganizationMembersMember)[vs[1].(int)]
+	}).(GetSentryAllOrganizationMembersMemberOutput)
+}
+
+type GetSentryAllProjectsProject struct {
+	// The color of this project.
+	Color string `pulumi:"color"`
+	// The date this project was created.
+	DateCreated string `pulumi:"dateCreated"`
+	// The features of this project.
+	Features []string `pulumi:"features"`
+	// The internal ID of this project.
+	InternalId string `pulumi:"internalId"`
+	// The name of this project.
+	Name string `pulumi:"name"`
+	// The platform of this project.
+	Platform string `pulumi:"platform"`
+	// The slug of this project.
+	Slug string `pulumi:"slug"`
+}
+
+// GetSentryAllProjectsProjectInput is an input type that accepts GetSentryAllProjectsProjectArgs and GetSentryAllProjectsProjectOutput values.
+// You can construct a concrete instance of `GetSentryAllProjectsProjectInput` via:
+//
+//	GetSentryAllProjectsProjectArgs{...}
+type GetSentryAllProjectsProjectInput interface {
+	pulumi.Input
+
+	ToGetSentryAllProjectsProjectOutput() GetSentryAllProjectsProjectOutput
+	ToGetSentryAllProjectsProjectOutputWithContext(context.Context) GetSentryAllProjectsProjectOutput
+}
+
+type GetSentryAllProjectsProjectArgs struct {
+	// The color of this project.
+	Color pulumi.StringInput `pulumi:"color"`
+	// The date this project was created.
+	DateCreated pulumi.StringInput `pulumi:"dateCreated"`
+	// The features of this project.
+	Features pulumi.StringArrayInput `pulumi:"features"`
+	// The internal ID of this project.
+	InternalId pulumi.StringInput `pulumi:"internalId"`
+	// The name of this project.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The platform of this project.
+	Platform pulumi.StringInput `pulumi:"platform"`
+	// The slug of this project.
+	Slug pulumi.StringInput `pulumi:"slug"`
+}
+
+func (GetSentryAllProjectsProjectArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryAllProjectsProject)(nil)).Elem()
+}
+
+func (i GetSentryAllProjectsProjectArgs) ToGetSentryAllProjectsProjectOutput() GetSentryAllProjectsProjectOutput {
+	return i.ToGetSentryAllProjectsProjectOutputWithContext(context.Background())
+}
+
+func (i GetSentryAllProjectsProjectArgs) ToGetSentryAllProjectsProjectOutputWithContext(ctx context.Context) GetSentryAllProjectsProjectOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryAllProjectsProjectOutput)
+}
+
+// GetSentryAllProjectsProjectArrayInput is an input type that accepts GetSentryAllProjectsProjectArray and GetSentryAllProjectsProjectArrayOutput values.
+// You can construct a concrete instance of `GetSentryAllProjectsProjectArrayInput` via:
+//
+//	GetSentryAllProjectsProjectArray{ GetSentryAllProjectsProjectArgs{...} }
+type GetSentryAllProjectsProjectArrayInput interface {
+	pulumi.Input
+
+	ToGetSentryAllProjectsProjectArrayOutput() GetSentryAllProjectsProjectArrayOutput
+	ToGetSentryAllProjectsProjectArrayOutputWithContext(context.Context) GetSentryAllProjectsProjectArrayOutput
+}
+
+type GetSentryAllProjectsProjectArray []GetSentryAllProjectsProjectInput
+
+func (GetSentryAllProjectsProjectArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSentryAllProjectsProject)(nil)).Elem()
+}
+
+func (i GetSentryAllProjectsProjectArray) ToGetSentryAllProjectsProjectArrayOutput() GetSentryAllProjectsProjectArrayOutput {
+	return i.ToGetSentryAllProjectsProjectArrayOutputWithContext(context.Background())
+}
+
+func (i GetSentryAllProjectsProjectArray) ToGetSentryAllProjectsProjectArrayOutputWithContext(ctx context.Context) GetSentryAllProjectsProjectArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryAllProjectsProjectArrayOutput)
+}
+
+type GetSentryAllProjectsProjectOutput struct{ *pulumi.OutputState }
+
+func (GetSentryAllProjectsProjectOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryAllProjectsProject)(nil)).Elem()
+}
+
+func (o GetSentryAllProjectsProjectOutput) ToGetSentryAllProjectsProjectOutput() GetSentryAllProjectsProjectOutput {
+	return o
+}
+
+func (o GetSentryAllProjectsProjectOutput) ToGetSentryAllProjectsProjectOutputWithContext(ctx context.Context) GetSentryAllProjectsProjectOutput {
+	return o
+}
+
+// The color of this project.
+func (o GetSentryAllProjectsProjectOutput) Color() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllProjectsProject) string { return v.Color }).(pulumi.StringOutput)
+}
+
+// The date this project was created.
+func (o GetSentryAllProjectsProjectOutput) DateCreated() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllProjectsProject) string { return v.DateCreated }).(pulumi.StringOutput)
+}
+
+// The features of this project.
+func (o GetSentryAllProjectsProjectOutput) Features() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetSentryAllProjectsProject) []string { return v.Features }).(pulumi.StringArrayOutput)
+}
+
+// The internal ID of this project.
+func (o GetSentryAllProjectsProjectOutput) InternalId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllProjectsProject) string { return v.InternalId }).(pulumi.StringOutput)
+}
+
+// The name of this project.
+func (o GetSentryAllProjectsProjectOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllProjectsProject) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The platform of this project.
+func (o GetSentryAllProjectsProjectOutput) Platform() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllProjectsProject) string { return v.Platform }).(pulumi.StringOutput)
+}
+
+// The slug of this project.
+func (o GetSentryAllProjectsProjectOutput) Slug() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryAllProjectsProject) string { return v.Slug }).(pulumi.StringOutput)
+}
+
+type GetSentryAllProjectsProjectArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSentryAllProjectsProjectArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSentryAllProjectsProject)(nil)).Elem()
+}
+
+func (o GetSentryAllProjectsProjectArrayOutput) ToGetSentryAllProjectsProjectArrayOutput() GetSentryAllProjectsProjectArrayOutput {
+	return o
+}
+
+func (o GetSentryAllProjectsProjectArrayOutput) ToGetSentryAllProjectsProjectArrayOutputWithContext(ctx context.Context) GetSentryAllProjectsProjectArrayOutput {
+	return o
+}
+
+func (o GetSentryAllProjectsProjectArrayOutput) Index(i pulumi.IntInput) GetSentryAllProjectsProjectOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSentryAllProjectsProject {
+		return vs[0].([]GetSentryAllProjectsProject)[vs[1].(int)]
+	}).(GetSentryAllProjectsProjectOutput)
 }
 
 type GetSentryDashboardWidget struct {
@@ -1002,6 +8294,2607 @@ func (o GetSentryDashboardWidgetQueryArrayOutput) Index(i pulumi.IntInput) GetSe
 	}).(GetSentryDashboardWidgetQueryOutput)
 }
 
+type GetSentryIssueAlertActionsV2 struct {
+	// Create an Azure DevOps work item in `integration`.
+	AzureDevopsCreateTicket GetSentryIssueAlertActionsV2AzureDevopsCreateTicket `pulumi:"azureDevopsCreateTicket"`
+	// Send a notification to the `server` Discord server in the channel with ID or URL: `channelId` and show tags `tags` in the notification.
+	DiscordNotifyService GetSentryIssueAlertActionsV2DiscordNotifyService `pulumi:"discordNotifyService"`
+	// Create a GitHub issue in `integration`.
+	GithubCreateTicket GetSentryIssueAlertActionsV2GithubCreateTicket `pulumi:"githubCreateTicket"`
+	// Create a GitHub Enterprise issue in `integration`.
+	GithubEnterpriseCreateTicket GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicket `pulumi:"githubEnterpriseCreateTicket"`
+	// Create a Jira issue in `integration`.
+	JiraCreateTicket GetSentryIssueAlertActionsV2JiraCreateTicket `pulumi:"jiraCreateTicket"`
+	// Create a Jira Server issue in `integration`.
+	JiraServerCreateTicket GetSentryIssueAlertActionsV2JiraServerCreateTicket `pulumi:"jiraServerCreateTicket"`
+	// Send a notification to the `team` Team to `channel`.
+	MsteamsNotifyService GetSentryIssueAlertActionsV2MsteamsNotifyService `pulumi:"msteamsNotifyService"`
+	// Send a notification to `targetType` and if none can be found then send a notification to `fallthroughType`.
+	NotifyEmail GetSentryIssueAlertActionsV2NotifyEmail `pulumi:"notifyEmail"`
+	// Send a notification to all legacy integrations.
+	NotifyEvent GetSentryIssueAlertActionsV2NotifyEvent `pulumi:"notifyEvent"`
+	// Send a notification to a Sentry app.
+	NotifyEventSentryApp GetSentryIssueAlertActionsV2NotifyEventSentryApp `pulumi:"notifyEventSentryApp"`
+	// Send a notification via an integration.
+	NotifyEventService GetSentryIssueAlertActionsV2NotifyEventService `pulumi:"notifyEventService"`
+	// Send a notification to Opsgenie account `account` and team `team` with `priority` priority.
+	OpsgenieNotifyTeam GetSentryIssueAlertActionsV2OpsgenieNotifyTeam `pulumi:"opsgenieNotifyTeam"`
+	// Send a notification to PagerDuty account `account` and service `service` with `severity` severity.
+	PagerdutyNotifyService GetSentryIssueAlertActionsV2PagerdutyNotifyService `pulumi:"pagerdutyNotifyService"`
+	// Send a notification to the `workspace` Slack workspace to `channel` (optionally, an ID: `channelId`) and show tags `tags` and notes `notes` in notification.
+	SlackNotifyService GetSentryIssueAlertActionsV2SlackNotifyService `pulumi:"slackNotifyService"`
+}
+
+// GetSentryIssueAlertActionsV2Input is an input type that accepts GetSentryIssueAlertActionsV2Args and GetSentryIssueAlertActionsV2Output values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2Input` via:
+//
+//	GetSentryIssueAlertActionsV2Args{...}
+type GetSentryIssueAlertActionsV2Input interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2Output() GetSentryIssueAlertActionsV2Output
+	ToGetSentryIssueAlertActionsV2OutputWithContext(context.Context) GetSentryIssueAlertActionsV2Output
+}
+
+type GetSentryIssueAlertActionsV2Args struct {
+	// Create an Azure DevOps work item in `integration`.
+	AzureDevopsCreateTicket GetSentryIssueAlertActionsV2AzureDevopsCreateTicketInput `pulumi:"azureDevopsCreateTicket"`
+	// Send a notification to the `server` Discord server in the channel with ID or URL: `channelId` and show tags `tags` in the notification.
+	DiscordNotifyService GetSentryIssueAlertActionsV2DiscordNotifyServiceInput `pulumi:"discordNotifyService"`
+	// Create a GitHub issue in `integration`.
+	GithubCreateTicket GetSentryIssueAlertActionsV2GithubCreateTicketInput `pulumi:"githubCreateTicket"`
+	// Create a GitHub Enterprise issue in `integration`.
+	GithubEnterpriseCreateTicket GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketInput `pulumi:"githubEnterpriseCreateTicket"`
+	// Create a Jira issue in `integration`.
+	JiraCreateTicket GetSentryIssueAlertActionsV2JiraCreateTicketInput `pulumi:"jiraCreateTicket"`
+	// Create a Jira Server issue in `integration`.
+	JiraServerCreateTicket GetSentryIssueAlertActionsV2JiraServerCreateTicketInput `pulumi:"jiraServerCreateTicket"`
+	// Send a notification to the `team` Team to `channel`.
+	MsteamsNotifyService GetSentryIssueAlertActionsV2MsteamsNotifyServiceInput `pulumi:"msteamsNotifyService"`
+	// Send a notification to `targetType` and if none can be found then send a notification to `fallthroughType`.
+	NotifyEmail GetSentryIssueAlertActionsV2NotifyEmailInput `pulumi:"notifyEmail"`
+	// Send a notification to all legacy integrations.
+	NotifyEvent GetSentryIssueAlertActionsV2NotifyEventInput `pulumi:"notifyEvent"`
+	// Send a notification to a Sentry app.
+	NotifyEventSentryApp GetSentryIssueAlertActionsV2NotifyEventSentryAppInput `pulumi:"notifyEventSentryApp"`
+	// Send a notification via an integration.
+	NotifyEventService GetSentryIssueAlertActionsV2NotifyEventServiceInput `pulumi:"notifyEventService"`
+	// Send a notification to Opsgenie account `account` and team `team` with `priority` priority.
+	OpsgenieNotifyTeam GetSentryIssueAlertActionsV2OpsgenieNotifyTeamInput `pulumi:"opsgenieNotifyTeam"`
+	// Send a notification to PagerDuty account `account` and service `service` with `severity` severity.
+	PagerdutyNotifyService GetSentryIssueAlertActionsV2PagerdutyNotifyServiceInput `pulumi:"pagerdutyNotifyService"`
+	// Send a notification to the `workspace` Slack workspace to `channel` (optionally, an ID: `channelId`) and show tags `tags` and notes `notes` in notification.
+	SlackNotifyService GetSentryIssueAlertActionsV2SlackNotifyServiceInput `pulumi:"slackNotifyService"`
+}
+
+func (GetSentryIssueAlertActionsV2Args) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2Args) ToGetSentryIssueAlertActionsV2Output() GetSentryIssueAlertActionsV2Output {
+	return i.ToGetSentryIssueAlertActionsV2OutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2Args) ToGetSentryIssueAlertActionsV2OutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2Output {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2Output)
+}
+
+// GetSentryIssueAlertActionsV2ArrayInput is an input type that accepts GetSentryIssueAlertActionsV2Array and GetSentryIssueAlertActionsV2ArrayOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2ArrayInput` via:
+//
+//	GetSentryIssueAlertActionsV2Array{ GetSentryIssueAlertActionsV2Args{...} }
+type GetSentryIssueAlertActionsV2ArrayInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2ArrayOutput() GetSentryIssueAlertActionsV2ArrayOutput
+	ToGetSentryIssueAlertActionsV2ArrayOutputWithContext(context.Context) GetSentryIssueAlertActionsV2ArrayOutput
+}
+
+type GetSentryIssueAlertActionsV2Array []GetSentryIssueAlertActionsV2Input
+
+func (GetSentryIssueAlertActionsV2Array) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSentryIssueAlertActionsV2)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2Array) ToGetSentryIssueAlertActionsV2ArrayOutput() GetSentryIssueAlertActionsV2ArrayOutput {
+	return i.ToGetSentryIssueAlertActionsV2ArrayOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2Array) ToGetSentryIssueAlertActionsV2ArrayOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2ArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2ArrayOutput)
+}
+
+type GetSentryIssueAlertActionsV2Output struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2Output) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2Output) ToGetSentryIssueAlertActionsV2Output() GetSentryIssueAlertActionsV2Output {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2Output) ToGetSentryIssueAlertActionsV2OutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2Output {
+	return o
+}
+
+// Create an Azure DevOps work item in `integration`.
+func (o GetSentryIssueAlertActionsV2Output) AzureDevopsCreateTicket() GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2) GetSentryIssueAlertActionsV2AzureDevopsCreateTicket {
+		return v.AzureDevopsCreateTicket
+	}).(GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput)
+}
+
+// Send a notification to the `server` Discord server in the channel with ID or URL: `channelId` and show tags `tags` in the notification.
+func (o GetSentryIssueAlertActionsV2Output) DiscordNotifyService() GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2) GetSentryIssueAlertActionsV2DiscordNotifyService {
+		return v.DiscordNotifyService
+	}).(GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput)
+}
+
+// Create a GitHub issue in `integration`.
+func (o GetSentryIssueAlertActionsV2Output) GithubCreateTicket() GetSentryIssueAlertActionsV2GithubCreateTicketOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2) GetSentryIssueAlertActionsV2GithubCreateTicket {
+		return v.GithubCreateTicket
+	}).(GetSentryIssueAlertActionsV2GithubCreateTicketOutput)
+}
+
+// Create a GitHub Enterprise issue in `integration`.
+func (o GetSentryIssueAlertActionsV2Output) GithubEnterpriseCreateTicket() GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2) GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicket {
+		return v.GithubEnterpriseCreateTicket
+	}).(GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput)
+}
+
+// Create a Jira issue in `integration`.
+func (o GetSentryIssueAlertActionsV2Output) JiraCreateTicket() GetSentryIssueAlertActionsV2JiraCreateTicketOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2) GetSentryIssueAlertActionsV2JiraCreateTicket {
+		return v.JiraCreateTicket
+	}).(GetSentryIssueAlertActionsV2JiraCreateTicketOutput)
+}
+
+// Create a Jira Server issue in `integration`.
+func (o GetSentryIssueAlertActionsV2Output) JiraServerCreateTicket() GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2) GetSentryIssueAlertActionsV2JiraServerCreateTicket {
+		return v.JiraServerCreateTicket
+	}).(GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput)
+}
+
+// Send a notification to the `team` Team to `channel`.
+func (o GetSentryIssueAlertActionsV2Output) MsteamsNotifyService() GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2) GetSentryIssueAlertActionsV2MsteamsNotifyService {
+		return v.MsteamsNotifyService
+	}).(GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput)
+}
+
+// Send a notification to `targetType` and if none can be found then send a notification to `fallthroughType`.
+func (o GetSentryIssueAlertActionsV2Output) NotifyEmail() GetSentryIssueAlertActionsV2NotifyEmailOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2) GetSentryIssueAlertActionsV2NotifyEmail { return v.NotifyEmail }).(GetSentryIssueAlertActionsV2NotifyEmailOutput)
+}
+
+// Send a notification to all legacy integrations.
+func (o GetSentryIssueAlertActionsV2Output) NotifyEvent() GetSentryIssueAlertActionsV2NotifyEventOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2) GetSentryIssueAlertActionsV2NotifyEvent { return v.NotifyEvent }).(GetSentryIssueAlertActionsV2NotifyEventOutput)
+}
+
+// Send a notification to a Sentry app.
+func (o GetSentryIssueAlertActionsV2Output) NotifyEventSentryApp() GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2) GetSentryIssueAlertActionsV2NotifyEventSentryApp {
+		return v.NotifyEventSentryApp
+	}).(GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput)
+}
+
+// Send a notification via an integration.
+func (o GetSentryIssueAlertActionsV2Output) NotifyEventService() GetSentryIssueAlertActionsV2NotifyEventServiceOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2) GetSentryIssueAlertActionsV2NotifyEventService {
+		return v.NotifyEventService
+	}).(GetSentryIssueAlertActionsV2NotifyEventServiceOutput)
+}
+
+// Send a notification to Opsgenie account `account` and team `team` with `priority` priority.
+func (o GetSentryIssueAlertActionsV2Output) OpsgenieNotifyTeam() GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2) GetSentryIssueAlertActionsV2OpsgenieNotifyTeam {
+		return v.OpsgenieNotifyTeam
+	}).(GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput)
+}
+
+// Send a notification to PagerDuty account `account` and service `service` with `severity` severity.
+func (o GetSentryIssueAlertActionsV2Output) PagerdutyNotifyService() GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2) GetSentryIssueAlertActionsV2PagerdutyNotifyService {
+		return v.PagerdutyNotifyService
+	}).(GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput)
+}
+
+// Send a notification to the `workspace` Slack workspace to `channel` (optionally, an ID: `channelId`) and show tags `tags` and notes `notes` in notification.
+func (o GetSentryIssueAlertActionsV2Output) SlackNotifyService() GetSentryIssueAlertActionsV2SlackNotifyServiceOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2) GetSentryIssueAlertActionsV2SlackNotifyService {
+		return v.SlackNotifyService
+	}).(GetSentryIssueAlertActionsV2SlackNotifyServiceOutput)
+}
+
+type GetSentryIssueAlertActionsV2ArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2ArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSentryIssueAlertActionsV2)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2ArrayOutput) ToGetSentryIssueAlertActionsV2ArrayOutput() GetSentryIssueAlertActionsV2ArrayOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2ArrayOutput) ToGetSentryIssueAlertActionsV2ArrayOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2ArrayOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2ArrayOutput) Index(i pulumi.IntInput) GetSentryIssueAlertActionsV2Output {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSentryIssueAlertActionsV2 {
+		return vs[0].([]GetSentryIssueAlertActionsV2)[vs[1].(int)]
+	}).(GetSentryIssueAlertActionsV2Output)
+}
+
+type GetSentryIssueAlertActionsV2AzureDevopsCreateTicket struct {
+	Integration  string `pulumi:"integration"`
+	Name         string `pulumi:"name"`
+	WorkItemType string `pulumi:"workItemType"`
+}
+
+// GetSentryIssueAlertActionsV2AzureDevopsCreateTicketInput is an input type that accepts GetSentryIssueAlertActionsV2AzureDevopsCreateTicketArgs and GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2AzureDevopsCreateTicketInput` via:
+//
+//	GetSentryIssueAlertActionsV2AzureDevopsCreateTicketArgs{...}
+type GetSentryIssueAlertActionsV2AzureDevopsCreateTicketInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput() GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput
+	ToGetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutputWithContext(context.Context) GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput
+}
+
+type GetSentryIssueAlertActionsV2AzureDevopsCreateTicketArgs struct {
+	Integration  pulumi.StringInput `pulumi:"integration"`
+	Name         pulumi.StringInput `pulumi:"name"`
+	WorkItemType pulumi.StringInput `pulumi:"workItemType"`
+}
+
+func (GetSentryIssueAlertActionsV2AzureDevopsCreateTicketArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2AzureDevopsCreateTicket)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2AzureDevopsCreateTicketArgs) ToGetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput() GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput {
+	return i.ToGetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2AzureDevopsCreateTicketArgs) ToGetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput)
+}
+
+type GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2AzureDevopsCreateTicket)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput) ToGetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput() GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput) ToGetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput) Integration() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2AzureDevopsCreateTicket) string { return v.Integration }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2AzureDevopsCreateTicket) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput) WorkItemType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2AzureDevopsCreateTicket) string { return v.WorkItemType }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertActionsV2DiscordNotifyService struct {
+	ChannelId string   `pulumi:"channelId"`
+	Name      string   `pulumi:"name"`
+	Server    string   `pulumi:"server"`
+	Tags      []string `pulumi:"tags"`
+}
+
+// GetSentryIssueAlertActionsV2DiscordNotifyServiceInput is an input type that accepts GetSentryIssueAlertActionsV2DiscordNotifyServiceArgs and GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2DiscordNotifyServiceInput` via:
+//
+//	GetSentryIssueAlertActionsV2DiscordNotifyServiceArgs{...}
+type GetSentryIssueAlertActionsV2DiscordNotifyServiceInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2DiscordNotifyServiceOutput() GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput
+	ToGetSentryIssueAlertActionsV2DiscordNotifyServiceOutputWithContext(context.Context) GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput
+}
+
+type GetSentryIssueAlertActionsV2DiscordNotifyServiceArgs struct {
+	ChannelId pulumi.StringInput      `pulumi:"channelId"`
+	Name      pulumi.StringInput      `pulumi:"name"`
+	Server    pulumi.StringInput      `pulumi:"server"`
+	Tags      pulumi.StringArrayInput `pulumi:"tags"`
+}
+
+func (GetSentryIssueAlertActionsV2DiscordNotifyServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2DiscordNotifyService)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2DiscordNotifyServiceArgs) ToGetSentryIssueAlertActionsV2DiscordNotifyServiceOutput() GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput {
+	return i.ToGetSentryIssueAlertActionsV2DiscordNotifyServiceOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2DiscordNotifyServiceArgs) ToGetSentryIssueAlertActionsV2DiscordNotifyServiceOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput)
+}
+
+type GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2DiscordNotifyService)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput) ToGetSentryIssueAlertActionsV2DiscordNotifyServiceOutput() GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput) ToGetSentryIssueAlertActionsV2DiscordNotifyServiceOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput) ChannelId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2DiscordNotifyService) string { return v.ChannelId }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2DiscordNotifyService) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput) Server() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2DiscordNotifyService) string { return v.Server }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2DiscordNotifyService) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+type GetSentryIssueAlertActionsV2GithubCreateTicket struct {
+	Assignee    string   `pulumi:"assignee"`
+	Integration string   `pulumi:"integration"`
+	Labels      []string `pulumi:"labels"`
+	Name        string   `pulumi:"name"`
+	Repo        string   `pulumi:"repo"`
+}
+
+// GetSentryIssueAlertActionsV2GithubCreateTicketInput is an input type that accepts GetSentryIssueAlertActionsV2GithubCreateTicketArgs and GetSentryIssueAlertActionsV2GithubCreateTicketOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2GithubCreateTicketInput` via:
+//
+//	GetSentryIssueAlertActionsV2GithubCreateTicketArgs{...}
+type GetSentryIssueAlertActionsV2GithubCreateTicketInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2GithubCreateTicketOutput() GetSentryIssueAlertActionsV2GithubCreateTicketOutput
+	ToGetSentryIssueAlertActionsV2GithubCreateTicketOutputWithContext(context.Context) GetSentryIssueAlertActionsV2GithubCreateTicketOutput
+}
+
+type GetSentryIssueAlertActionsV2GithubCreateTicketArgs struct {
+	Assignee    pulumi.StringInput      `pulumi:"assignee"`
+	Integration pulumi.StringInput      `pulumi:"integration"`
+	Labels      pulumi.StringArrayInput `pulumi:"labels"`
+	Name        pulumi.StringInput      `pulumi:"name"`
+	Repo        pulumi.StringInput      `pulumi:"repo"`
+}
+
+func (GetSentryIssueAlertActionsV2GithubCreateTicketArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2GithubCreateTicket)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2GithubCreateTicketArgs) ToGetSentryIssueAlertActionsV2GithubCreateTicketOutput() GetSentryIssueAlertActionsV2GithubCreateTicketOutput {
+	return i.ToGetSentryIssueAlertActionsV2GithubCreateTicketOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2GithubCreateTicketArgs) ToGetSentryIssueAlertActionsV2GithubCreateTicketOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2GithubCreateTicketOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2GithubCreateTicketOutput)
+}
+
+type GetSentryIssueAlertActionsV2GithubCreateTicketOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2GithubCreateTicketOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2GithubCreateTicket)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2GithubCreateTicketOutput) ToGetSentryIssueAlertActionsV2GithubCreateTicketOutput() GetSentryIssueAlertActionsV2GithubCreateTicketOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2GithubCreateTicketOutput) ToGetSentryIssueAlertActionsV2GithubCreateTicketOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2GithubCreateTicketOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2GithubCreateTicketOutput) Assignee() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2GithubCreateTicket) string { return v.Assignee }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2GithubCreateTicketOutput) Integration() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2GithubCreateTicket) string { return v.Integration }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2GithubCreateTicketOutput) Labels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2GithubCreateTicket) []string { return v.Labels }).(pulumi.StringArrayOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2GithubCreateTicketOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2GithubCreateTicket) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2GithubCreateTicketOutput) Repo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2GithubCreateTicket) string { return v.Repo }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicket struct {
+	Assignee    string   `pulumi:"assignee"`
+	Integration string   `pulumi:"integration"`
+	Labels      []string `pulumi:"labels"`
+	Name        string   `pulumi:"name"`
+	Repo        string   `pulumi:"repo"`
+}
+
+// GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketInput is an input type that accepts GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs and GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketInput` via:
+//
+//	GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs{...}
+type GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput() GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput
+	ToGetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutputWithContext(context.Context) GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput
+}
+
+type GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs struct {
+	Assignee    pulumi.StringInput      `pulumi:"assignee"`
+	Integration pulumi.StringInput      `pulumi:"integration"`
+	Labels      pulumi.StringArrayInput `pulumi:"labels"`
+	Name        pulumi.StringInput      `pulumi:"name"`
+	Repo        pulumi.StringInput      `pulumi:"repo"`
+}
+
+func (GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicket)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs) ToGetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput() GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput {
+	return i.ToGetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs) ToGetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput)
+}
+
+type GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicket)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) ToGetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput() GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) ToGetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) Assignee() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicket) string { return v.Assignee }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) Integration() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicket) string { return v.Integration }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) Labels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicket) []string { return v.Labels }).(pulumi.StringArrayOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicket) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput) Repo() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicket) string { return v.Repo }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertActionsV2JiraCreateTicket struct {
+	Integration string `pulumi:"integration"`
+	IssueType   string `pulumi:"issueType"`
+	Name        string `pulumi:"name"`
+	Project     string `pulumi:"project"`
+}
+
+// GetSentryIssueAlertActionsV2JiraCreateTicketInput is an input type that accepts GetSentryIssueAlertActionsV2JiraCreateTicketArgs and GetSentryIssueAlertActionsV2JiraCreateTicketOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2JiraCreateTicketInput` via:
+//
+//	GetSentryIssueAlertActionsV2JiraCreateTicketArgs{...}
+type GetSentryIssueAlertActionsV2JiraCreateTicketInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2JiraCreateTicketOutput() GetSentryIssueAlertActionsV2JiraCreateTicketOutput
+	ToGetSentryIssueAlertActionsV2JiraCreateTicketOutputWithContext(context.Context) GetSentryIssueAlertActionsV2JiraCreateTicketOutput
+}
+
+type GetSentryIssueAlertActionsV2JiraCreateTicketArgs struct {
+	Integration pulumi.StringInput `pulumi:"integration"`
+	IssueType   pulumi.StringInput `pulumi:"issueType"`
+	Name        pulumi.StringInput `pulumi:"name"`
+	Project     pulumi.StringInput `pulumi:"project"`
+}
+
+func (GetSentryIssueAlertActionsV2JiraCreateTicketArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2JiraCreateTicket)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2JiraCreateTicketArgs) ToGetSentryIssueAlertActionsV2JiraCreateTicketOutput() GetSentryIssueAlertActionsV2JiraCreateTicketOutput {
+	return i.ToGetSentryIssueAlertActionsV2JiraCreateTicketOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2JiraCreateTicketArgs) ToGetSentryIssueAlertActionsV2JiraCreateTicketOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2JiraCreateTicketOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2JiraCreateTicketOutput)
+}
+
+type GetSentryIssueAlertActionsV2JiraCreateTicketOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2JiraCreateTicketOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2JiraCreateTicket)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2JiraCreateTicketOutput) ToGetSentryIssueAlertActionsV2JiraCreateTicketOutput() GetSentryIssueAlertActionsV2JiraCreateTicketOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2JiraCreateTicketOutput) ToGetSentryIssueAlertActionsV2JiraCreateTicketOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2JiraCreateTicketOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2JiraCreateTicketOutput) Integration() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2JiraCreateTicket) string { return v.Integration }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2JiraCreateTicketOutput) IssueType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2JiraCreateTicket) string { return v.IssueType }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2JiraCreateTicketOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2JiraCreateTicket) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2JiraCreateTicketOutput) Project() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2JiraCreateTicket) string { return v.Project }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertActionsV2JiraServerCreateTicket struct {
+	Integration string `pulumi:"integration"`
+	IssueType   string `pulumi:"issueType"`
+	Name        string `pulumi:"name"`
+	Project     string `pulumi:"project"`
+}
+
+// GetSentryIssueAlertActionsV2JiraServerCreateTicketInput is an input type that accepts GetSentryIssueAlertActionsV2JiraServerCreateTicketArgs and GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2JiraServerCreateTicketInput` via:
+//
+//	GetSentryIssueAlertActionsV2JiraServerCreateTicketArgs{...}
+type GetSentryIssueAlertActionsV2JiraServerCreateTicketInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2JiraServerCreateTicketOutput() GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput
+	ToGetSentryIssueAlertActionsV2JiraServerCreateTicketOutputWithContext(context.Context) GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput
+}
+
+type GetSentryIssueAlertActionsV2JiraServerCreateTicketArgs struct {
+	Integration pulumi.StringInput `pulumi:"integration"`
+	IssueType   pulumi.StringInput `pulumi:"issueType"`
+	Name        pulumi.StringInput `pulumi:"name"`
+	Project     pulumi.StringInput `pulumi:"project"`
+}
+
+func (GetSentryIssueAlertActionsV2JiraServerCreateTicketArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2JiraServerCreateTicket)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2JiraServerCreateTicketArgs) ToGetSentryIssueAlertActionsV2JiraServerCreateTicketOutput() GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput {
+	return i.ToGetSentryIssueAlertActionsV2JiraServerCreateTicketOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2JiraServerCreateTicketArgs) ToGetSentryIssueAlertActionsV2JiraServerCreateTicketOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput)
+}
+
+type GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2JiraServerCreateTicket)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput) ToGetSentryIssueAlertActionsV2JiraServerCreateTicketOutput() GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput) ToGetSentryIssueAlertActionsV2JiraServerCreateTicketOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput) Integration() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2JiraServerCreateTicket) string { return v.Integration }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput) IssueType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2JiraServerCreateTicket) string { return v.IssueType }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2JiraServerCreateTicket) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput) Project() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2JiraServerCreateTicket) string { return v.Project }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertActionsV2MsteamsNotifyService struct {
+	Channel   string `pulumi:"channel"`
+	ChannelId string `pulumi:"channelId"`
+	Name      string `pulumi:"name"`
+	Team      string `pulumi:"team"`
+}
+
+// GetSentryIssueAlertActionsV2MsteamsNotifyServiceInput is an input type that accepts GetSentryIssueAlertActionsV2MsteamsNotifyServiceArgs and GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2MsteamsNotifyServiceInput` via:
+//
+//	GetSentryIssueAlertActionsV2MsteamsNotifyServiceArgs{...}
+type GetSentryIssueAlertActionsV2MsteamsNotifyServiceInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput() GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput
+	ToGetSentryIssueAlertActionsV2MsteamsNotifyServiceOutputWithContext(context.Context) GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput
+}
+
+type GetSentryIssueAlertActionsV2MsteamsNotifyServiceArgs struct {
+	Channel   pulumi.StringInput `pulumi:"channel"`
+	ChannelId pulumi.StringInput `pulumi:"channelId"`
+	Name      pulumi.StringInput `pulumi:"name"`
+	Team      pulumi.StringInput `pulumi:"team"`
+}
+
+func (GetSentryIssueAlertActionsV2MsteamsNotifyServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2MsteamsNotifyService)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2MsteamsNotifyServiceArgs) ToGetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput() GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput {
+	return i.ToGetSentryIssueAlertActionsV2MsteamsNotifyServiceOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2MsteamsNotifyServiceArgs) ToGetSentryIssueAlertActionsV2MsteamsNotifyServiceOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput)
+}
+
+type GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2MsteamsNotifyService)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput) ToGetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput() GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput) ToGetSentryIssueAlertActionsV2MsteamsNotifyServiceOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput) Channel() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2MsteamsNotifyService) string { return v.Channel }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput) ChannelId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2MsteamsNotifyService) string { return v.ChannelId }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2MsteamsNotifyService) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput) Team() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2MsteamsNotifyService) string { return v.Team }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertActionsV2NotifyEmail struct {
+	FallthroughType  string `pulumi:"fallthroughType"`
+	Name             string `pulumi:"name"`
+	TargetIdentifier string `pulumi:"targetIdentifier"`
+	TargetType       string `pulumi:"targetType"`
+}
+
+// GetSentryIssueAlertActionsV2NotifyEmailInput is an input type that accepts GetSentryIssueAlertActionsV2NotifyEmailArgs and GetSentryIssueAlertActionsV2NotifyEmailOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2NotifyEmailInput` via:
+//
+//	GetSentryIssueAlertActionsV2NotifyEmailArgs{...}
+type GetSentryIssueAlertActionsV2NotifyEmailInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2NotifyEmailOutput() GetSentryIssueAlertActionsV2NotifyEmailOutput
+	ToGetSentryIssueAlertActionsV2NotifyEmailOutputWithContext(context.Context) GetSentryIssueAlertActionsV2NotifyEmailOutput
+}
+
+type GetSentryIssueAlertActionsV2NotifyEmailArgs struct {
+	FallthroughType  pulumi.StringInput `pulumi:"fallthroughType"`
+	Name             pulumi.StringInput `pulumi:"name"`
+	TargetIdentifier pulumi.StringInput `pulumi:"targetIdentifier"`
+	TargetType       pulumi.StringInput `pulumi:"targetType"`
+}
+
+func (GetSentryIssueAlertActionsV2NotifyEmailArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2NotifyEmail)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2NotifyEmailArgs) ToGetSentryIssueAlertActionsV2NotifyEmailOutput() GetSentryIssueAlertActionsV2NotifyEmailOutput {
+	return i.ToGetSentryIssueAlertActionsV2NotifyEmailOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2NotifyEmailArgs) ToGetSentryIssueAlertActionsV2NotifyEmailOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2NotifyEmailOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2NotifyEmailOutput)
+}
+
+type GetSentryIssueAlertActionsV2NotifyEmailOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2NotifyEmailOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2NotifyEmail)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEmailOutput) ToGetSentryIssueAlertActionsV2NotifyEmailOutput() GetSentryIssueAlertActionsV2NotifyEmailOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEmailOutput) ToGetSentryIssueAlertActionsV2NotifyEmailOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2NotifyEmailOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEmailOutput) FallthroughType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2NotifyEmail) string { return v.FallthroughType }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEmailOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2NotifyEmail) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEmailOutput) TargetIdentifier() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2NotifyEmail) string { return v.TargetIdentifier }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEmailOutput) TargetType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2NotifyEmail) string { return v.TargetType }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertActionsV2NotifyEvent struct {
+	Name string `pulumi:"name"`
+}
+
+// GetSentryIssueAlertActionsV2NotifyEventInput is an input type that accepts GetSentryIssueAlertActionsV2NotifyEventArgs and GetSentryIssueAlertActionsV2NotifyEventOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2NotifyEventInput` via:
+//
+//	GetSentryIssueAlertActionsV2NotifyEventArgs{...}
+type GetSentryIssueAlertActionsV2NotifyEventInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2NotifyEventOutput() GetSentryIssueAlertActionsV2NotifyEventOutput
+	ToGetSentryIssueAlertActionsV2NotifyEventOutputWithContext(context.Context) GetSentryIssueAlertActionsV2NotifyEventOutput
+}
+
+type GetSentryIssueAlertActionsV2NotifyEventArgs struct {
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetSentryIssueAlertActionsV2NotifyEventArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2NotifyEvent)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2NotifyEventArgs) ToGetSentryIssueAlertActionsV2NotifyEventOutput() GetSentryIssueAlertActionsV2NotifyEventOutput {
+	return i.ToGetSentryIssueAlertActionsV2NotifyEventOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2NotifyEventArgs) ToGetSentryIssueAlertActionsV2NotifyEventOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2NotifyEventOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2NotifyEventOutput)
+}
+
+type GetSentryIssueAlertActionsV2NotifyEventOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2NotifyEventOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2NotifyEvent)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEventOutput) ToGetSentryIssueAlertActionsV2NotifyEventOutput() GetSentryIssueAlertActionsV2NotifyEventOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEventOutput) ToGetSentryIssueAlertActionsV2NotifyEventOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2NotifyEventOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEventOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2NotifyEvent) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertActionsV2NotifyEventSentryApp struct {
+	Name                      string            `pulumi:"name"`
+	SentryAppInstallationUuid string            `pulumi:"sentryAppInstallationUuid"`
+	Settings                  map[string]string `pulumi:"settings"`
+}
+
+// GetSentryIssueAlertActionsV2NotifyEventSentryAppInput is an input type that accepts GetSentryIssueAlertActionsV2NotifyEventSentryAppArgs and GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2NotifyEventSentryAppInput` via:
+//
+//	GetSentryIssueAlertActionsV2NotifyEventSentryAppArgs{...}
+type GetSentryIssueAlertActionsV2NotifyEventSentryAppInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2NotifyEventSentryAppOutput() GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput
+	ToGetSentryIssueAlertActionsV2NotifyEventSentryAppOutputWithContext(context.Context) GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput
+}
+
+type GetSentryIssueAlertActionsV2NotifyEventSentryAppArgs struct {
+	Name                      pulumi.StringInput    `pulumi:"name"`
+	SentryAppInstallationUuid pulumi.StringInput    `pulumi:"sentryAppInstallationUuid"`
+	Settings                  pulumi.StringMapInput `pulumi:"settings"`
+}
+
+func (GetSentryIssueAlertActionsV2NotifyEventSentryAppArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2NotifyEventSentryApp)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2NotifyEventSentryAppArgs) ToGetSentryIssueAlertActionsV2NotifyEventSentryAppOutput() GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput {
+	return i.ToGetSentryIssueAlertActionsV2NotifyEventSentryAppOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2NotifyEventSentryAppArgs) ToGetSentryIssueAlertActionsV2NotifyEventSentryAppOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput)
+}
+
+type GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2NotifyEventSentryApp)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput) ToGetSentryIssueAlertActionsV2NotifyEventSentryAppOutput() GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput) ToGetSentryIssueAlertActionsV2NotifyEventSentryAppOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2NotifyEventSentryApp) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput) SentryAppInstallationUuid() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2NotifyEventSentryApp) string { return v.SentryAppInstallationUuid }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput) Settings() pulumi.StringMapOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2NotifyEventSentryApp) map[string]string { return v.Settings }).(pulumi.StringMapOutput)
+}
+
+type GetSentryIssueAlertActionsV2NotifyEventService struct {
+	Name    string `pulumi:"name"`
+	Service string `pulumi:"service"`
+}
+
+// GetSentryIssueAlertActionsV2NotifyEventServiceInput is an input type that accepts GetSentryIssueAlertActionsV2NotifyEventServiceArgs and GetSentryIssueAlertActionsV2NotifyEventServiceOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2NotifyEventServiceInput` via:
+//
+//	GetSentryIssueAlertActionsV2NotifyEventServiceArgs{...}
+type GetSentryIssueAlertActionsV2NotifyEventServiceInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2NotifyEventServiceOutput() GetSentryIssueAlertActionsV2NotifyEventServiceOutput
+	ToGetSentryIssueAlertActionsV2NotifyEventServiceOutputWithContext(context.Context) GetSentryIssueAlertActionsV2NotifyEventServiceOutput
+}
+
+type GetSentryIssueAlertActionsV2NotifyEventServiceArgs struct {
+	Name    pulumi.StringInput `pulumi:"name"`
+	Service pulumi.StringInput `pulumi:"service"`
+}
+
+func (GetSentryIssueAlertActionsV2NotifyEventServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2NotifyEventService)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2NotifyEventServiceArgs) ToGetSentryIssueAlertActionsV2NotifyEventServiceOutput() GetSentryIssueAlertActionsV2NotifyEventServiceOutput {
+	return i.ToGetSentryIssueAlertActionsV2NotifyEventServiceOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2NotifyEventServiceArgs) ToGetSentryIssueAlertActionsV2NotifyEventServiceOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2NotifyEventServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2NotifyEventServiceOutput)
+}
+
+type GetSentryIssueAlertActionsV2NotifyEventServiceOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2NotifyEventServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2NotifyEventService)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEventServiceOutput) ToGetSentryIssueAlertActionsV2NotifyEventServiceOutput() GetSentryIssueAlertActionsV2NotifyEventServiceOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEventServiceOutput) ToGetSentryIssueAlertActionsV2NotifyEventServiceOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2NotifyEventServiceOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEventServiceOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2NotifyEventService) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2NotifyEventServiceOutput) Service() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2NotifyEventService) string { return v.Service }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertActionsV2OpsgenieNotifyTeam struct {
+	Account  string `pulumi:"account"`
+	Name     string `pulumi:"name"`
+	Priority string `pulumi:"priority"`
+	Team     string `pulumi:"team"`
+}
+
+// GetSentryIssueAlertActionsV2OpsgenieNotifyTeamInput is an input type that accepts GetSentryIssueAlertActionsV2OpsgenieNotifyTeamArgs and GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2OpsgenieNotifyTeamInput` via:
+//
+//	GetSentryIssueAlertActionsV2OpsgenieNotifyTeamArgs{...}
+type GetSentryIssueAlertActionsV2OpsgenieNotifyTeamInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput() GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput
+	ToGetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutputWithContext(context.Context) GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput
+}
+
+type GetSentryIssueAlertActionsV2OpsgenieNotifyTeamArgs struct {
+	Account  pulumi.StringInput `pulumi:"account"`
+	Name     pulumi.StringInput `pulumi:"name"`
+	Priority pulumi.StringInput `pulumi:"priority"`
+	Team     pulumi.StringInput `pulumi:"team"`
+}
+
+func (GetSentryIssueAlertActionsV2OpsgenieNotifyTeamArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2OpsgenieNotifyTeam)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2OpsgenieNotifyTeamArgs) ToGetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput() GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput {
+	return i.ToGetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2OpsgenieNotifyTeamArgs) ToGetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput)
+}
+
+type GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2OpsgenieNotifyTeam)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) ToGetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput() GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) ToGetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) Account() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2OpsgenieNotifyTeam) string { return v.Account }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2OpsgenieNotifyTeam) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) Priority() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2OpsgenieNotifyTeam) string { return v.Priority }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput) Team() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2OpsgenieNotifyTeam) string { return v.Team }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertActionsV2PagerdutyNotifyService struct {
+	Account  string `pulumi:"account"`
+	Name     string `pulumi:"name"`
+	Service  string `pulumi:"service"`
+	Severity string `pulumi:"severity"`
+}
+
+// GetSentryIssueAlertActionsV2PagerdutyNotifyServiceInput is an input type that accepts GetSentryIssueAlertActionsV2PagerdutyNotifyServiceArgs and GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2PagerdutyNotifyServiceInput` via:
+//
+//	GetSentryIssueAlertActionsV2PagerdutyNotifyServiceArgs{...}
+type GetSentryIssueAlertActionsV2PagerdutyNotifyServiceInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput() GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput
+	ToGetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutputWithContext(context.Context) GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput
+}
+
+type GetSentryIssueAlertActionsV2PagerdutyNotifyServiceArgs struct {
+	Account  pulumi.StringInput `pulumi:"account"`
+	Name     pulumi.StringInput `pulumi:"name"`
+	Service  pulumi.StringInput `pulumi:"service"`
+	Severity pulumi.StringInput `pulumi:"severity"`
+}
+
+func (GetSentryIssueAlertActionsV2PagerdutyNotifyServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2PagerdutyNotifyService)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2PagerdutyNotifyServiceArgs) ToGetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput() GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput {
+	return i.ToGetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2PagerdutyNotifyServiceArgs) ToGetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput)
+}
+
+type GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2PagerdutyNotifyService)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) ToGetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput() GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) ToGetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) Account() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2PagerdutyNotifyService) string { return v.Account }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2PagerdutyNotifyService) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) Service() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2PagerdutyNotifyService) string { return v.Service }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput) Severity() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2PagerdutyNotifyService) string { return v.Severity }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertActionsV2SlackNotifyService struct {
+	Channel   string   `pulumi:"channel"`
+	ChannelId string   `pulumi:"channelId"`
+	Name      string   `pulumi:"name"`
+	Notes     string   `pulumi:"notes"`
+	Tags      []string `pulumi:"tags"`
+	Workspace string   `pulumi:"workspace"`
+}
+
+// GetSentryIssueAlertActionsV2SlackNotifyServiceInput is an input type that accepts GetSentryIssueAlertActionsV2SlackNotifyServiceArgs and GetSentryIssueAlertActionsV2SlackNotifyServiceOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertActionsV2SlackNotifyServiceInput` via:
+//
+//	GetSentryIssueAlertActionsV2SlackNotifyServiceArgs{...}
+type GetSentryIssueAlertActionsV2SlackNotifyServiceInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertActionsV2SlackNotifyServiceOutput() GetSentryIssueAlertActionsV2SlackNotifyServiceOutput
+	ToGetSentryIssueAlertActionsV2SlackNotifyServiceOutputWithContext(context.Context) GetSentryIssueAlertActionsV2SlackNotifyServiceOutput
+}
+
+type GetSentryIssueAlertActionsV2SlackNotifyServiceArgs struct {
+	Channel   pulumi.StringInput      `pulumi:"channel"`
+	ChannelId pulumi.StringInput      `pulumi:"channelId"`
+	Name      pulumi.StringInput      `pulumi:"name"`
+	Notes     pulumi.StringInput      `pulumi:"notes"`
+	Tags      pulumi.StringArrayInput `pulumi:"tags"`
+	Workspace pulumi.StringInput      `pulumi:"workspace"`
+}
+
+func (GetSentryIssueAlertActionsV2SlackNotifyServiceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2SlackNotifyService)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertActionsV2SlackNotifyServiceArgs) ToGetSentryIssueAlertActionsV2SlackNotifyServiceOutput() GetSentryIssueAlertActionsV2SlackNotifyServiceOutput {
+	return i.ToGetSentryIssueAlertActionsV2SlackNotifyServiceOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertActionsV2SlackNotifyServiceArgs) ToGetSentryIssueAlertActionsV2SlackNotifyServiceOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2SlackNotifyServiceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertActionsV2SlackNotifyServiceOutput)
+}
+
+type GetSentryIssueAlertActionsV2SlackNotifyServiceOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertActionsV2SlackNotifyServiceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertActionsV2SlackNotifyService)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertActionsV2SlackNotifyServiceOutput) ToGetSentryIssueAlertActionsV2SlackNotifyServiceOutput() GetSentryIssueAlertActionsV2SlackNotifyServiceOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2SlackNotifyServiceOutput) ToGetSentryIssueAlertActionsV2SlackNotifyServiceOutputWithContext(ctx context.Context) GetSentryIssueAlertActionsV2SlackNotifyServiceOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertActionsV2SlackNotifyServiceOutput) Channel() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2SlackNotifyService) string { return v.Channel }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2SlackNotifyServiceOutput) ChannelId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2SlackNotifyService) string { return v.ChannelId }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2SlackNotifyServiceOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2SlackNotifyService) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2SlackNotifyServiceOutput) Notes() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2SlackNotifyService) string { return v.Notes }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2SlackNotifyServiceOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2SlackNotifyService) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+func (o GetSentryIssueAlertActionsV2SlackNotifyServiceOutput) Workspace() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertActionsV2SlackNotifyService) string { return v.Workspace }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertConditionsV2 struct {
+	// When the `comparisonType` is `count`, the number of events in an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of events in an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+	EventFrequency GetSentryIssueAlertConditionsV2EventFrequency `pulumi:"eventFrequency"`
+	// When the `comparisonType` is `count`, the percent of sessions affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the percent of sessions affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+	EventFrequencyPercent GetSentryIssueAlertConditionsV2EventFrequencyPercent `pulumi:"eventFrequencyPercent"`
+	// When the `comparisonType` is `count`, the number of users affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of users affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+	EventUniqueUserFrequency GetSentryIssueAlertConditionsV2EventUniqueUserFrequency `pulumi:"eventUniqueUserFrequency"`
+	// Sentry marks an existing issue as high priority.
+	ExistingHighPriorityIssue GetSentryIssueAlertConditionsV2ExistingHighPriorityIssue `pulumi:"existingHighPriorityIssue"`
+	// A new issue is created.
+	FirstSeenEvent GetSentryIssueAlertConditionsV2FirstSeenEvent `pulumi:"firstSeenEvent"`
+	// Sentry marks a new issue as high priority.
+	NewHighPriorityIssue GetSentryIssueAlertConditionsV2NewHighPriorityIssue `pulumi:"newHighPriorityIssue"`
+	// The issue changes state from ignored to unresolved.
+	ReappearedEvent GetSentryIssueAlertConditionsV2ReappearedEvent `pulumi:"reappearedEvent"`
+	// The issue changes state from resolved to unresolved.
+	RegressionEvent GetSentryIssueAlertConditionsV2RegressionEvent `pulumi:"regressionEvent"`
+}
+
+// GetSentryIssueAlertConditionsV2Input is an input type that accepts GetSentryIssueAlertConditionsV2Args and GetSentryIssueAlertConditionsV2Output values.
+// You can construct a concrete instance of `GetSentryIssueAlertConditionsV2Input` via:
+//
+//	GetSentryIssueAlertConditionsV2Args{...}
+type GetSentryIssueAlertConditionsV2Input interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertConditionsV2Output() GetSentryIssueAlertConditionsV2Output
+	ToGetSentryIssueAlertConditionsV2OutputWithContext(context.Context) GetSentryIssueAlertConditionsV2Output
+}
+
+type GetSentryIssueAlertConditionsV2Args struct {
+	// When the `comparisonType` is `count`, the number of events in an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of events in an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+	EventFrequency GetSentryIssueAlertConditionsV2EventFrequencyInput `pulumi:"eventFrequency"`
+	// When the `comparisonType` is `count`, the percent of sessions affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the percent of sessions affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+	EventFrequencyPercent GetSentryIssueAlertConditionsV2EventFrequencyPercentInput `pulumi:"eventFrequencyPercent"`
+	// When the `comparisonType` is `count`, the number of users affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of users affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+	EventUniqueUserFrequency GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyInput `pulumi:"eventUniqueUserFrequency"`
+	// Sentry marks an existing issue as high priority.
+	ExistingHighPriorityIssue GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueInput `pulumi:"existingHighPriorityIssue"`
+	// A new issue is created.
+	FirstSeenEvent GetSentryIssueAlertConditionsV2FirstSeenEventInput `pulumi:"firstSeenEvent"`
+	// Sentry marks a new issue as high priority.
+	NewHighPriorityIssue GetSentryIssueAlertConditionsV2NewHighPriorityIssueInput `pulumi:"newHighPriorityIssue"`
+	// The issue changes state from ignored to unresolved.
+	ReappearedEvent GetSentryIssueAlertConditionsV2ReappearedEventInput `pulumi:"reappearedEvent"`
+	// The issue changes state from resolved to unresolved.
+	RegressionEvent GetSentryIssueAlertConditionsV2RegressionEventInput `pulumi:"regressionEvent"`
+}
+
+func (GetSentryIssueAlertConditionsV2Args) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertConditionsV2Args) ToGetSentryIssueAlertConditionsV2Output() GetSentryIssueAlertConditionsV2Output {
+	return i.ToGetSentryIssueAlertConditionsV2OutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertConditionsV2Args) ToGetSentryIssueAlertConditionsV2OutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2Output {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertConditionsV2Output)
+}
+
+// GetSentryIssueAlertConditionsV2ArrayInput is an input type that accepts GetSentryIssueAlertConditionsV2Array and GetSentryIssueAlertConditionsV2ArrayOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertConditionsV2ArrayInput` via:
+//
+//	GetSentryIssueAlertConditionsV2Array{ GetSentryIssueAlertConditionsV2Args{...} }
+type GetSentryIssueAlertConditionsV2ArrayInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertConditionsV2ArrayOutput() GetSentryIssueAlertConditionsV2ArrayOutput
+	ToGetSentryIssueAlertConditionsV2ArrayOutputWithContext(context.Context) GetSentryIssueAlertConditionsV2ArrayOutput
+}
+
+type GetSentryIssueAlertConditionsV2Array []GetSentryIssueAlertConditionsV2Input
+
+func (GetSentryIssueAlertConditionsV2Array) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSentryIssueAlertConditionsV2)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertConditionsV2Array) ToGetSentryIssueAlertConditionsV2ArrayOutput() GetSentryIssueAlertConditionsV2ArrayOutput {
+	return i.ToGetSentryIssueAlertConditionsV2ArrayOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertConditionsV2Array) ToGetSentryIssueAlertConditionsV2ArrayOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2ArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertConditionsV2ArrayOutput)
+}
+
+type GetSentryIssueAlertConditionsV2Output struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertConditionsV2Output) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertConditionsV2Output) ToGetSentryIssueAlertConditionsV2Output() GetSentryIssueAlertConditionsV2Output {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2Output) ToGetSentryIssueAlertConditionsV2OutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2Output {
+	return o
+}
+
+// When the `comparisonType` is `count`, the number of events in an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of events in an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+func (o GetSentryIssueAlertConditionsV2Output) EventFrequency() GetSentryIssueAlertConditionsV2EventFrequencyOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2) GetSentryIssueAlertConditionsV2EventFrequency {
+		return v.EventFrequency
+	}).(GetSentryIssueAlertConditionsV2EventFrequencyOutput)
+}
+
+// When the `comparisonType` is `count`, the percent of sessions affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the percent of sessions affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+func (o GetSentryIssueAlertConditionsV2Output) EventFrequencyPercent() GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2) GetSentryIssueAlertConditionsV2EventFrequencyPercent {
+		return v.EventFrequencyPercent
+	}).(GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput)
+}
+
+// When the `comparisonType` is `count`, the number of users affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of users affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+func (o GetSentryIssueAlertConditionsV2Output) EventUniqueUserFrequency() GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2) GetSentryIssueAlertConditionsV2EventUniqueUserFrequency {
+		return v.EventUniqueUserFrequency
+	}).(GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput)
+}
+
+// Sentry marks an existing issue as high priority.
+func (o GetSentryIssueAlertConditionsV2Output) ExistingHighPriorityIssue() GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2) GetSentryIssueAlertConditionsV2ExistingHighPriorityIssue {
+		return v.ExistingHighPriorityIssue
+	}).(GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput)
+}
+
+// A new issue is created.
+func (o GetSentryIssueAlertConditionsV2Output) FirstSeenEvent() GetSentryIssueAlertConditionsV2FirstSeenEventOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2) GetSentryIssueAlertConditionsV2FirstSeenEvent {
+		return v.FirstSeenEvent
+	}).(GetSentryIssueAlertConditionsV2FirstSeenEventOutput)
+}
+
+// Sentry marks a new issue as high priority.
+func (o GetSentryIssueAlertConditionsV2Output) NewHighPriorityIssue() GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2) GetSentryIssueAlertConditionsV2NewHighPriorityIssue {
+		return v.NewHighPriorityIssue
+	}).(GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput)
+}
+
+// The issue changes state from ignored to unresolved.
+func (o GetSentryIssueAlertConditionsV2Output) ReappearedEvent() GetSentryIssueAlertConditionsV2ReappearedEventOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2) GetSentryIssueAlertConditionsV2ReappearedEvent {
+		return v.ReappearedEvent
+	}).(GetSentryIssueAlertConditionsV2ReappearedEventOutput)
+}
+
+// The issue changes state from resolved to unresolved.
+func (o GetSentryIssueAlertConditionsV2Output) RegressionEvent() GetSentryIssueAlertConditionsV2RegressionEventOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2) GetSentryIssueAlertConditionsV2RegressionEvent {
+		return v.RegressionEvent
+	}).(GetSentryIssueAlertConditionsV2RegressionEventOutput)
+}
+
+type GetSentryIssueAlertConditionsV2ArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertConditionsV2ArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSentryIssueAlertConditionsV2)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertConditionsV2ArrayOutput) ToGetSentryIssueAlertConditionsV2ArrayOutput() GetSentryIssueAlertConditionsV2ArrayOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2ArrayOutput) ToGetSentryIssueAlertConditionsV2ArrayOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2ArrayOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2ArrayOutput) Index(i pulumi.IntInput) GetSentryIssueAlertConditionsV2Output {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSentryIssueAlertConditionsV2 {
+		return vs[0].([]GetSentryIssueAlertConditionsV2)[vs[1].(int)]
+	}).(GetSentryIssueAlertConditionsV2Output)
+}
+
+type GetSentryIssueAlertConditionsV2EventFrequency struct {
+	ComparisonInterval string `pulumi:"comparisonInterval"`
+	ComparisonType     string `pulumi:"comparisonType"`
+	Interval           string `pulumi:"interval"`
+	Name               string `pulumi:"name"`
+	Value              int    `pulumi:"value"`
+}
+
+// GetSentryIssueAlertConditionsV2EventFrequencyInput is an input type that accepts GetSentryIssueAlertConditionsV2EventFrequencyArgs and GetSentryIssueAlertConditionsV2EventFrequencyOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertConditionsV2EventFrequencyInput` via:
+//
+//	GetSentryIssueAlertConditionsV2EventFrequencyArgs{...}
+type GetSentryIssueAlertConditionsV2EventFrequencyInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertConditionsV2EventFrequencyOutput() GetSentryIssueAlertConditionsV2EventFrequencyOutput
+	ToGetSentryIssueAlertConditionsV2EventFrequencyOutputWithContext(context.Context) GetSentryIssueAlertConditionsV2EventFrequencyOutput
+}
+
+type GetSentryIssueAlertConditionsV2EventFrequencyArgs struct {
+	ComparisonInterval pulumi.StringInput `pulumi:"comparisonInterval"`
+	ComparisonType     pulumi.StringInput `pulumi:"comparisonType"`
+	Interval           pulumi.StringInput `pulumi:"interval"`
+	Name               pulumi.StringInput `pulumi:"name"`
+	Value              pulumi.IntInput    `pulumi:"value"`
+}
+
+func (GetSentryIssueAlertConditionsV2EventFrequencyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2EventFrequency)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertConditionsV2EventFrequencyArgs) ToGetSentryIssueAlertConditionsV2EventFrequencyOutput() GetSentryIssueAlertConditionsV2EventFrequencyOutput {
+	return i.ToGetSentryIssueAlertConditionsV2EventFrequencyOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertConditionsV2EventFrequencyArgs) ToGetSentryIssueAlertConditionsV2EventFrequencyOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2EventFrequencyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertConditionsV2EventFrequencyOutput)
+}
+
+type GetSentryIssueAlertConditionsV2EventFrequencyOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertConditionsV2EventFrequencyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2EventFrequency)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertConditionsV2EventFrequencyOutput) ToGetSentryIssueAlertConditionsV2EventFrequencyOutput() GetSentryIssueAlertConditionsV2EventFrequencyOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2EventFrequencyOutput) ToGetSentryIssueAlertConditionsV2EventFrequencyOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2EventFrequencyOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2EventFrequencyOutput) ComparisonInterval() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2EventFrequency) string { return v.ComparisonInterval }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertConditionsV2EventFrequencyOutput) ComparisonType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2EventFrequency) string { return v.ComparisonType }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertConditionsV2EventFrequencyOutput) Interval() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2EventFrequency) string { return v.Interval }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertConditionsV2EventFrequencyOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2EventFrequency) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertConditionsV2EventFrequencyOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2EventFrequency) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type GetSentryIssueAlertConditionsV2EventFrequencyPercent struct {
+	ComparisonInterval string  `pulumi:"comparisonInterval"`
+	ComparisonType     string  `pulumi:"comparisonType"`
+	Interval           string  `pulumi:"interval"`
+	Name               string  `pulumi:"name"`
+	Value              float64 `pulumi:"value"`
+}
+
+// GetSentryIssueAlertConditionsV2EventFrequencyPercentInput is an input type that accepts GetSentryIssueAlertConditionsV2EventFrequencyPercentArgs and GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertConditionsV2EventFrequencyPercentInput` via:
+//
+//	GetSentryIssueAlertConditionsV2EventFrequencyPercentArgs{...}
+type GetSentryIssueAlertConditionsV2EventFrequencyPercentInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertConditionsV2EventFrequencyPercentOutput() GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput
+	ToGetSentryIssueAlertConditionsV2EventFrequencyPercentOutputWithContext(context.Context) GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput
+}
+
+type GetSentryIssueAlertConditionsV2EventFrequencyPercentArgs struct {
+	ComparisonInterval pulumi.StringInput  `pulumi:"comparisonInterval"`
+	ComparisonType     pulumi.StringInput  `pulumi:"comparisonType"`
+	Interval           pulumi.StringInput  `pulumi:"interval"`
+	Name               pulumi.StringInput  `pulumi:"name"`
+	Value              pulumi.Float64Input `pulumi:"value"`
+}
+
+func (GetSentryIssueAlertConditionsV2EventFrequencyPercentArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2EventFrequencyPercent)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertConditionsV2EventFrequencyPercentArgs) ToGetSentryIssueAlertConditionsV2EventFrequencyPercentOutput() GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput {
+	return i.ToGetSentryIssueAlertConditionsV2EventFrequencyPercentOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertConditionsV2EventFrequencyPercentArgs) ToGetSentryIssueAlertConditionsV2EventFrequencyPercentOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput)
+}
+
+type GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2EventFrequencyPercent)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput) ToGetSentryIssueAlertConditionsV2EventFrequencyPercentOutput() GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput) ToGetSentryIssueAlertConditionsV2EventFrequencyPercentOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput) ComparisonInterval() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2EventFrequencyPercent) string { return v.ComparisonInterval }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput) ComparisonType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2EventFrequencyPercent) string { return v.ComparisonType }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput) Interval() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2EventFrequencyPercent) string { return v.Interval }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2EventFrequencyPercent) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput) Value() pulumi.Float64Output {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2EventFrequencyPercent) float64 { return v.Value }).(pulumi.Float64Output)
+}
+
+type GetSentryIssueAlertConditionsV2EventUniqueUserFrequency struct {
+	ComparisonInterval string `pulumi:"comparisonInterval"`
+	ComparisonType     string `pulumi:"comparisonType"`
+	Interval           string `pulumi:"interval"`
+	Name               string `pulumi:"name"`
+	Value              int    `pulumi:"value"`
+}
+
+// GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyInput is an input type that accepts GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs and GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyInput` via:
+//
+//	GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs{...}
+type GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput() GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput
+	ToGetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutputWithContext(context.Context) GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput
+}
+
+type GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs struct {
+	ComparisonInterval pulumi.StringInput `pulumi:"comparisonInterval"`
+	ComparisonType     pulumi.StringInput `pulumi:"comparisonType"`
+	Interval           pulumi.StringInput `pulumi:"interval"`
+	Name               pulumi.StringInput `pulumi:"name"`
+	Value              pulumi.IntInput    `pulumi:"value"`
+}
+
+func (GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2EventUniqueUserFrequency)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs) ToGetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput() GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput {
+	return i.ToGetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs) ToGetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput)
+}
+
+type GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2EventUniqueUserFrequency)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) ToGetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput() GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) ToGetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) ComparisonInterval() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2EventUniqueUserFrequency) string { return v.ComparisonInterval }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) ComparisonType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2EventUniqueUserFrequency) string { return v.ComparisonType }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) Interval() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2EventUniqueUserFrequency) string { return v.Interval }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2EventUniqueUserFrequency) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2EventUniqueUserFrequency) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type GetSentryIssueAlertConditionsV2ExistingHighPriorityIssue struct {
+	Name string `pulumi:"name"`
+}
+
+// GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueInput is an input type that accepts GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs and GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueInput` via:
+//
+//	GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs{...}
+type GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput() GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput
+	ToGetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutputWithContext(context.Context) GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput
+}
+
+type GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs struct {
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2ExistingHighPriorityIssue)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs) ToGetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput() GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput {
+	return i.ToGetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs) ToGetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput)
+}
+
+type GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2ExistingHighPriorityIssue)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput) ToGetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput() GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput) ToGetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2ExistingHighPriorityIssue) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertConditionsV2FirstSeenEvent struct {
+	Name string `pulumi:"name"`
+}
+
+// GetSentryIssueAlertConditionsV2FirstSeenEventInput is an input type that accepts GetSentryIssueAlertConditionsV2FirstSeenEventArgs and GetSentryIssueAlertConditionsV2FirstSeenEventOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertConditionsV2FirstSeenEventInput` via:
+//
+//	GetSentryIssueAlertConditionsV2FirstSeenEventArgs{...}
+type GetSentryIssueAlertConditionsV2FirstSeenEventInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertConditionsV2FirstSeenEventOutput() GetSentryIssueAlertConditionsV2FirstSeenEventOutput
+	ToGetSentryIssueAlertConditionsV2FirstSeenEventOutputWithContext(context.Context) GetSentryIssueAlertConditionsV2FirstSeenEventOutput
+}
+
+type GetSentryIssueAlertConditionsV2FirstSeenEventArgs struct {
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetSentryIssueAlertConditionsV2FirstSeenEventArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2FirstSeenEvent)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertConditionsV2FirstSeenEventArgs) ToGetSentryIssueAlertConditionsV2FirstSeenEventOutput() GetSentryIssueAlertConditionsV2FirstSeenEventOutput {
+	return i.ToGetSentryIssueAlertConditionsV2FirstSeenEventOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertConditionsV2FirstSeenEventArgs) ToGetSentryIssueAlertConditionsV2FirstSeenEventOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2FirstSeenEventOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertConditionsV2FirstSeenEventOutput)
+}
+
+type GetSentryIssueAlertConditionsV2FirstSeenEventOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertConditionsV2FirstSeenEventOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2FirstSeenEvent)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertConditionsV2FirstSeenEventOutput) ToGetSentryIssueAlertConditionsV2FirstSeenEventOutput() GetSentryIssueAlertConditionsV2FirstSeenEventOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2FirstSeenEventOutput) ToGetSentryIssueAlertConditionsV2FirstSeenEventOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2FirstSeenEventOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2FirstSeenEventOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2FirstSeenEvent) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertConditionsV2NewHighPriorityIssue struct {
+	Name string `pulumi:"name"`
+}
+
+// GetSentryIssueAlertConditionsV2NewHighPriorityIssueInput is an input type that accepts GetSentryIssueAlertConditionsV2NewHighPriorityIssueArgs and GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertConditionsV2NewHighPriorityIssueInput` via:
+//
+//	GetSentryIssueAlertConditionsV2NewHighPriorityIssueArgs{...}
+type GetSentryIssueAlertConditionsV2NewHighPriorityIssueInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput() GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput
+	ToGetSentryIssueAlertConditionsV2NewHighPriorityIssueOutputWithContext(context.Context) GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput
+}
+
+type GetSentryIssueAlertConditionsV2NewHighPriorityIssueArgs struct {
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetSentryIssueAlertConditionsV2NewHighPriorityIssueArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2NewHighPriorityIssue)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertConditionsV2NewHighPriorityIssueArgs) ToGetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput() GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput {
+	return i.ToGetSentryIssueAlertConditionsV2NewHighPriorityIssueOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertConditionsV2NewHighPriorityIssueArgs) ToGetSentryIssueAlertConditionsV2NewHighPriorityIssueOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput)
+}
+
+type GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2NewHighPriorityIssue)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput) ToGetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput() GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput) ToGetSentryIssueAlertConditionsV2NewHighPriorityIssueOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2NewHighPriorityIssue) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertConditionsV2ReappearedEvent struct {
+	Name string `pulumi:"name"`
+}
+
+// GetSentryIssueAlertConditionsV2ReappearedEventInput is an input type that accepts GetSentryIssueAlertConditionsV2ReappearedEventArgs and GetSentryIssueAlertConditionsV2ReappearedEventOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertConditionsV2ReappearedEventInput` via:
+//
+//	GetSentryIssueAlertConditionsV2ReappearedEventArgs{...}
+type GetSentryIssueAlertConditionsV2ReappearedEventInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertConditionsV2ReappearedEventOutput() GetSentryIssueAlertConditionsV2ReappearedEventOutput
+	ToGetSentryIssueAlertConditionsV2ReappearedEventOutputWithContext(context.Context) GetSentryIssueAlertConditionsV2ReappearedEventOutput
+}
+
+type GetSentryIssueAlertConditionsV2ReappearedEventArgs struct {
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetSentryIssueAlertConditionsV2ReappearedEventArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2ReappearedEvent)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertConditionsV2ReappearedEventArgs) ToGetSentryIssueAlertConditionsV2ReappearedEventOutput() GetSentryIssueAlertConditionsV2ReappearedEventOutput {
+	return i.ToGetSentryIssueAlertConditionsV2ReappearedEventOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertConditionsV2ReappearedEventArgs) ToGetSentryIssueAlertConditionsV2ReappearedEventOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2ReappearedEventOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertConditionsV2ReappearedEventOutput)
+}
+
+type GetSentryIssueAlertConditionsV2ReappearedEventOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertConditionsV2ReappearedEventOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2ReappearedEvent)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertConditionsV2ReappearedEventOutput) ToGetSentryIssueAlertConditionsV2ReappearedEventOutput() GetSentryIssueAlertConditionsV2ReappearedEventOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2ReappearedEventOutput) ToGetSentryIssueAlertConditionsV2ReappearedEventOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2ReappearedEventOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2ReappearedEventOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2ReappearedEvent) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertConditionsV2RegressionEvent struct {
+	Name string `pulumi:"name"`
+}
+
+// GetSentryIssueAlertConditionsV2RegressionEventInput is an input type that accepts GetSentryIssueAlertConditionsV2RegressionEventArgs and GetSentryIssueAlertConditionsV2RegressionEventOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertConditionsV2RegressionEventInput` via:
+//
+//	GetSentryIssueAlertConditionsV2RegressionEventArgs{...}
+type GetSentryIssueAlertConditionsV2RegressionEventInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertConditionsV2RegressionEventOutput() GetSentryIssueAlertConditionsV2RegressionEventOutput
+	ToGetSentryIssueAlertConditionsV2RegressionEventOutputWithContext(context.Context) GetSentryIssueAlertConditionsV2RegressionEventOutput
+}
+
+type GetSentryIssueAlertConditionsV2RegressionEventArgs struct {
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetSentryIssueAlertConditionsV2RegressionEventArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2RegressionEvent)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertConditionsV2RegressionEventArgs) ToGetSentryIssueAlertConditionsV2RegressionEventOutput() GetSentryIssueAlertConditionsV2RegressionEventOutput {
+	return i.ToGetSentryIssueAlertConditionsV2RegressionEventOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertConditionsV2RegressionEventArgs) ToGetSentryIssueAlertConditionsV2RegressionEventOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2RegressionEventOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertConditionsV2RegressionEventOutput)
+}
+
+type GetSentryIssueAlertConditionsV2RegressionEventOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertConditionsV2RegressionEventOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertConditionsV2RegressionEvent)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertConditionsV2RegressionEventOutput) ToGetSentryIssueAlertConditionsV2RegressionEventOutput() GetSentryIssueAlertConditionsV2RegressionEventOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2RegressionEventOutput) ToGetSentryIssueAlertConditionsV2RegressionEventOutputWithContext(ctx context.Context) GetSentryIssueAlertConditionsV2RegressionEventOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertConditionsV2RegressionEventOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertConditionsV2RegressionEvent) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertFiltersV2 struct {
+	// The issue is older or newer than `value` `time`.
+	AgeComparison GetSentryIssueAlertFiltersV2AgeComparison `pulumi:"ageComparison"`
+	// The issue is assigned to no one, team, or member.
+	AssignedTo GetSentryIssueAlertFiltersV2AssignedTo `pulumi:"assignedTo"`
+	// The event's `attribute` value `match` `value`.
+	EventAttribute GetSentryIssueAlertFiltersV2EventAttribute `pulumi:"eventAttribute"`
+	// The issue's category is equal to `value`.
+	IssueCategory GetSentryIssueAlertFiltersV2IssueCategory `pulumi:"issueCategory"`
+	// The issue has happened at least `value` times (Note: this is approximate).
+	IssueOccurrences GetSentryIssueAlertFiltersV2IssueOccurrences `pulumi:"issueOccurrences"`
+	// The {oldest*or*newest} adopted release associated with the event's issue is {older*or*newer} than the latest adopted release in {environment}.
+	LatestAdoptedRelease GetSentryIssueAlertFiltersV2LatestAdoptedRelease `pulumi:"latestAdoptedRelease"`
+	// The event is from the latest release.
+	LatestRelease GetSentryIssueAlertFiltersV2LatestRelease `pulumi:"latestRelease"`
+	// The event's level is `match` `level`.
+	Level GetSentryIssueAlertFiltersV2Level `pulumi:"level"`
+	// The event's tags match `key` `match` `value`.
+	TaggedEvent GetSentryIssueAlertFiltersV2TaggedEvent `pulumi:"taggedEvent"`
+}
+
+// GetSentryIssueAlertFiltersV2Input is an input type that accepts GetSentryIssueAlertFiltersV2Args and GetSentryIssueAlertFiltersV2Output values.
+// You can construct a concrete instance of `GetSentryIssueAlertFiltersV2Input` via:
+//
+//	GetSentryIssueAlertFiltersV2Args{...}
+type GetSentryIssueAlertFiltersV2Input interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertFiltersV2Output() GetSentryIssueAlertFiltersV2Output
+	ToGetSentryIssueAlertFiltersV2OutputWithContext(context.Context) GetSentryIssueAlertFiltersV2Output
+}
+
+type GetSentryIssueAlertFiltersV2Args struct {
+	// The issue is older or newer than `value` `time`.
+	AgeComparison GetSentryIssueAlertFiltersV2AgeComparisonInput `pulumi:"ageComparison"`
+	// The issue is assigned to no one, team, or member.
+	AssignedTo GetSentryIssueAlertFiltersV2AssignedToInput `pulumi:"assignedTo"`
+	// The event's `attribute` value `match` `value`.
+	EventAttribute GetSentryIssueAlertFiltersV2EventAttributeInput `pulumi:"eventAttribute"`
+	// The issue's category is equal to `value`.
+	IssueCategory GetSentryIssueAlertFiltersV2IssueCategoryInput `pulumi:"issueCategory"`
+	// The issue has happened at least `value` times (Note: this is approximate).
+	IssueOccurrences GetSentryIssueAlertFiltersV2IssueOccurrencesInput `pulumi:"issueOccurrences"`
+	// The {oldest*or*newest} adopted release associated with the event's issue is {older*or*newer} than the latest adopted release in {environment}.
+	LatestAdoptedRelease GetSentryIssueAlertFiltersV2LatestAdoptedReleaseInput `pulumi:"latestAdoptedRelease"`
+	// The event is from the latest release.
+	LatestRelease GetSentryIssueAlertFiltersV2LatestReleaseInput `pulumi:"latestRelease"`
+	// The event's level is `match` `level`.
+	Level GetSentryIssueAlertFiltersV2LevelInput `pulumi:"level"`
+	// The event's tags match `key` `match` `value`.
+	TaggedEvent GetSentryIssueAlertFiltersV2TaggedEventInput `pulumi:"taggedEvent"`
+}
+
+func (GetSentryIssueAlertFiltersV2Args) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertFiltersV2Args) ToGetSentryIssueAlertFiltersV2Output() GetSentryIssueAlertFiltersV2Output {
+	return i.ToGetSentryIssueAlertFiltersV2OutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertFiltersV2Args) ToGetSentryIssueAlertFiltersV2OutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2Output {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertFiltersV2Output)
+}
+
+// GetSentryIssueAlertFiltersV2ArrayInput is an input type that accepts GetSentryIssueAlertFiltersV2Array and GetSentryIssueAlertFiltersV2ArrayOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertFiltersV2ArrayInput` via:
+//
+//	GetSentryIssueAlertFiltersV2Array{ GetSentryIssueAlertFiltersV2Args{...} }
+type GetSentryIssueAlertFiltersV2ArrayInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertFiltersV2ArrayOutput() GetSentryIssueAlertFiltersV2ArrayOutput
+	ToGetSentryIssueAlertFiltersV2ArrayOutputWithContext(context.Context) GetSentryIssueAlertFiltersV2ArrayOutput
+}
+
+type GetSentryIssueAlertFiltersV2Array []GetSentryIssueAlertFiltersV2Input
+
+func (GetSentryIssueAlertFiltersV2Array) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSentryIssueAlertFiltersV2)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertFiltersV2Array) ToGetSentryIssueAlertFiltersV2ArrayOutput() GetSentryIssueAlertFiltersV2ArrayOutput {
+	return i.ToGetSentryIssueAlertFiltersV2ArrayOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertFiltersV2Array) ToGetSentryIssueAlertFiltersV2ArrayOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2ArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertFiltersV2ArrayOutput)
+}
+
+type GetSentryIssueAlertFiltersV2Output struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertFiltersV2Output) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertFiltersV2Output) ToGetSentryIssueAlertFiltersV2Output() GetSentryIssueAlertFiltersV2Output {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2Output) ToGetSentryIssueAlertFiltersV2OutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2Output {
+	return o
+}
+
+// The issue is older or newer than `value` `time`.
+func (o GetSentryIssueAlertFiltersV2Output) AgeComparison() GetSentryIssueAlertFiltersV2AgeComparisonOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2) GetSentryIssueAlertFiltersV2AgeComparison { return v.AgeComparison }).(GetSentryIssueAlertFiltersV2AgeComparisonOutput)
+}
+
+// The issue is assigned to no one, team, or member.
+func (o GetSentryIssueAlertFiltersV2Output) AssignedTo() GetSentryIssueAlertFiltersV2AssignedToOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2) GetSentryIssueAlertFiltersV2AssignedTo { return v.AssignedTo }).(GetSentryIssueAlertFiltersV2AssignedToOutput)
+}
+
+// The event's `attribute` value `match` `value`.
+func (o GetSentryIssueAlertFiltersV2Output) EventAttribute() GetSentryIssueAlertFiltersV2EventAttributeOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2) GetSentryIssueAlertFiltersV2EventAttribute {
+		return v.EventAttribute
+	}).(GetSentryIssueAlertFiltersV2EventAttributeOutput)
+}
+
+// The issue's category is equal to `value`.
+func (o GetSentryIssueAlertFiltersV2Output) IssueCategory() GetSentryIssueAlertFiltersV2IssueCategoryOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2) GetSentryIssueAlertFiltersV2IssueCategory { return v.IssueCategory }).(GetSentryIssueAlertFiltersV2IssueCategoryOutput)
+}
+
+// The issue has happened at least `value` times (Note: this is approximate).
+func (o GetSentryIssueAlertFiltersV2Output) IssueOccurrences() GetSentryIssueAlertFiltersV2IssueOccurrencesOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2) GetSentryIssueAlertFiltersV2IssueOccurrences {
+		return v.IssueOccurrences
+	}).(GetSentryIssueAlertFiltersV2IssueOccurrencesOutput)
+}
+
+// The {oldest*or*newest} adopted release associated with the event's issue is {older*or*newer} than the latest adopted release in {environment}.
+func (o GetSentryIssueAlertFiltersV2Output) LatestAdoptedRelease() GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2) GetSentryIssueAlertFiltersV2LatestAdoptedRelease {
+		return v.LatestAdoptedRelease
+	}).(GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput)
+}
+
+// The event is from the latest release.
+func (o GetSentryIssueAlertFiltersV2Output) LatestRelease() GetSentryIssueAlertFiltersV2LatestReleaseOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2) GetSentryIssueAlertFiltersV2LatestRelease { return v.LatestRelease }).(GetSentryIssueAlertFiltersV2LatestReleaseOutput)
+}
+
+// The event's level is `match` `level`.
+func (o GetSentryIssueAlertFiltersV2Output) Level() GetSentryIssueAlertFiltersV2LevelOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2) GetSentryIssueAlertFiltersV2Level { return v.Level }).(GetSentryIssueAlertFiltersV2LevelOutput)
+}
+
+// The event's tags match `key` `match` `value`.
+func (o GetSentryIssueAlertFiltersV2Output) TaggedEvent() GetSentryIssueAlertFiltersV2TaggedEventOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2) GetSentryIssueAlertFiltersV2TaggedEvent { return v.TaggedEvent }).(GetSentryIssueAlertFiltersV2TaggedEventOutput)
+}
+
+type GetSentryIssueAlertFiltersV2ArrayOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertFiltersV2ArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetSentryIssueAlertFiltersV2)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertFiltersV2ArrayOutput) ToGetSentryIssueAlertFiltersV2ArrayOutput() GetSentryIssueAlertFiltersV2ArrayOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2ArrayOutput) ToGetSentryIssueAlertFiltersV2ArrayOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2ArrayOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2ArrayOutput) Index(i pulumi.IntInput) GetSentryIssueAlertFiltersV2Output {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetSentryIssueAlertFiltersV2 {
+		return vs[0].([]GetSentryIssueAlertFiltersV2)[vs[1].(int)]
+	}).(GetSentryIssueAlertFiltersV2Output)
+}
+
+type GetSentryIssueAlertFiltersV2AgeComparison struct {
+	ComparisonType string `pulumi:"comparisonType"`
+	Name           string `pulumi:"name"`
+	Time           string `pulumi:"time"`
+	Value          int    `pulumi:"value"`
+}
+
+// GetSentryIssueAlertFiltersV2AgeComparisonInput is an input type that accepts GetSentryIssueAlertFiltersV2AgeComparisonArgs and GetSentryIssueAlertFiltersV2AgeComparisonOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertFiltersV2AgeComparisonInput` via:
+//
+//	GetSentryIssueAlertFiltersV2AgeComparisonArgs{...}
+type GetSentryIssueAlertFiltersV2AgeComparisonInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertFiltersV2AgeComparisonOutput() GetSentryIssueAlertFiltersV2AgeComparisonOutput
+	ToGetSentryIssueAlertFiltersV2AgeComparisonOutputWithContext(context.Context) GetSentryIssueAlertFiltersV2AgeComparisonOutput
+}
+
+type GetSentryIssueAlertFiltersV2AgeComparisonArgs struct {
+	ComparisonType pulumi.StringInput `pulumi:"comparisonType"`
+	Name           pulumi.StringInput `pulumi:"name"`
+	Time           pulumi.StringInput `pulumi:"time"`
+	Value          pulumi.IntInput    `pulumi:"value"`
+}
+
+func (GetSentryIssueAlertFiltersV2AgeComparisonArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2AgeComparison)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertFiltersV2AgeComparisonArgs) ToGetSentryIssueAlertFiltersV2AgeComparisonOutput() GetSentryIssueAlertFiltersV2AgeComparisonOutput {
+	return i.ToGetSentryIssueAlertFiltersV2AgeComparisonOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertFiltersV2AgeComparisonArgs) ToGetSentryIssueAlertFiltersV2AgeComparisonOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2AgeComparisonOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertFiltersV2AgeComparisonOutput)
+}
+
+type GetSentryIssueAlertFiltersV2AgeComparisonOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertFiltersV2AgeComparisonOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2AgeComparison)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertFiltersV2AgeComparisonOutput) ToGetSentryIssueAlertFiltersV2AgeComparisonOutput() GetSentryIssueAlertFiltersV2AgeComparisonOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2AgeComparisonOutput) ToGetSentryIssueAlertFiltersV2AgeComparisonOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2AgeComparisonOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2AgeComparisonOutput) ComparisonType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2AgeComparison) string { return v.ComparisonType }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2AgeComparisonOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2AgeComparison) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2AgeComparisonOutput) Time() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2AgeComparison) string { return v.Time }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2AgeComparisonOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2AgeComparison) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type GetSentryIssueAlertFiltersV2AssignedTo struct {
+	Name             string `pulumi:"name"`
+	TargetIdentifier int    `pulumi:"targetIdentifier"`
+	TargetType       int    `pulumi:"targetType"`
+}
+
+// GetSentryIssueAlertFiltersV2AssignedToInput is an input type that accepts GetSentryIssueAlertFiltersV2AssignedToArgs and GetSentryIssueAlertFiltersV2AssignedToOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertFiltersV2AssignedToInput` via:
+//
+//	GetSentryIssueAlertFiltersV2AssignedToArgs{...}
+type GetSentryIssueAlertFiltersV2AssignedToInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertFiltersV2AssignedToOutput() GetSentryIssueAlertFiltersV2AssignedToOutput
+	ToGetSentryIssueAlertFiltersV2AssignedToOutputWithContext(context.Context) GetSentryIssueAlertFiltersV2AssignedToOutput
+}
+
+type GetSentryIssueAlertFiltersV2AssignedToArgs struct {
+	Name             pulumi.StringInput `pulumi:"name"`
+	TargetIdentifier pulumi.IntInput    `pulumi:"targetIdentifier"`
+	TargetType       pulumi.IntInput    `pulumi:"targetType"`
+}
+
+func (GetSentryIssueAlertFiltersV2AssignedToArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2AssignedTo)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertFiltersV2AssignedToArgs) ToGetSentryIssueAlertFiltersV2AssignedToOutput() GetSentryIssueAlertFiltersV2AssignedToOutput {
+	return i.ToGetSentryIssueAlertFiltersV2AssignedToOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertFiltersV2AssignedToArgs) ToGetSentryIssueAlertFiltersV2AssignedToOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2AssignedToOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertFiltersV2AssignedToOutput)
+}
+
+type GetSentryIssueAlertFiltersV2AssignedToOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertFiltersV2AssignedToOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2AssignedTo)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertFiltersV2AssignedToOutput) ToGetSentryIssueAlertFiltersV2AssignedToOutput() GetSentryIssueAlertFiltersV2AssignedToOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2AssignedToOutput) ToGetSentryIssueAlertFiltersV2AssignedToOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2AssignedToOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2AssignedToOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2AssignedTo) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2AssignedToOutput) TargetIdentifier() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2AssignedTo) int { return v.TargetIdentifier }).(pulumi.IntOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2AssignedToOutput) TargetType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2AssignedTo) int { return v.TargetType }).(pulumi.IntOutput)
+}
+
+type GetSentryIssueAlertFiltersV2EventAttribute struct {
+	Attribute string `pulumi:"attribute"`
+	Match     string `pulumi:"match"`
+	Name      string `pulumi:"name"`
+	Value     string `pulumi:"value"`
+}
+
+// GetSentryIssueAlertFiltersV2EventAttributeInput is an input type that accepts GetSentryIssueAlertFiltersV2EventAttributeArgs and GetSentryIssueAlertFiltersV2EventAttributeOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertFiltersV2EventAttributeInput` via:
+//
+//	GetSentryIssueAlertFiltersV2EventAttributeArgs{...}
+type GetSentryIssueAlertFiltersV2EventAttributeInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertFiltersV2EventAttributeOutput() GetSentryIssueAlertFiltersV2EventAttributeOutput
+	ToGetSentryIssueAlertFiltersV2EventAttributeOutputWithContext(context.Context) GetSentryIssueAlertFiltersV2EventAttributeOutput
+}
+
+type GetSentryIssueAlertFiltersV2EventAttributeArgs struct {
+	Attribute pulumi.StringInput `pulumi:"attribute"`
+	Match     pulumi.StringInput `pulumi:"match"`
+	Name      pulumi.StringInput `pulumi:"name"`
+	Value     pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetSentryIssueAlertFiltersV2EventAttributeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2EventAttribute)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertFiltersV2EventAttributeArgs) ToGetSentryIssueAlertFiltersV2EventAttributeOutput() GetSentryIssueAlertFiltersV2EventAttributeOutput {
+	return i.ToGetSentryIssueAlertFiltersV2EventAttributeOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertFiltersV2EventAttributeArgs) ToGetSentryIssueAlertFiltersV2EventAttributeOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2EventAttributeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertFiltersV2EventAttributeOutput)
+}
+
+type GetSentryIssueAlertFiltersV2EventAttributeOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertFiltersV2EventAttributeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2EventAttribute)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertFiltersV2EventAttributeOutput) ToGetSentryIssueAlertFiltersV2EventAttributeOutput() GetSentryIssueAlertFiltersV2EventAttributeOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2EventAttributeOutput) ToGetSentryIssueAlertFiltersV2EventAttributeOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2EventAttributeOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2EventAttributeOutput) Attribute() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2EventAttribute) string { return v.Attribute }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2EventAttributeOutput) Match() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2EventAttribute) string { return v.Match }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2EventAttributeOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2EventAttribute) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2EventAttributeOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2EventAttribute) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertFiltersV2IssueCategory struct {
+	Name  string `pulumi:"name"`
+	Value string `pulumi:"value"`
+}
+
+// GetSentryIssueAlertFiltersV2IssueCategoryInput is an input type that accepts GetSentryIssueAlertFiltersV2IssueCategoryArgs and GetSentryIssueAlertFiltersV2IssueCategoryOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertFiltersV2IssueCategoryInput` via:
+//
+//	GetSentryIssueAlertFiltersV2IssueCategoryArgs{...}
+type GetSentryIssueAlertFiltersV2IssueCategoryInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertFiltersV2IssueCategoryOutput() GetSentryIssueAlertFiltersV2IssueCategoryOutput
+	ToGetSentryIssueAlertFiltersV2IssueCategoryOutputWithContext(context.Context) GetSentryIssueAlertFiltersV2IssueCategoryOutput
+}
+
+type GetSentryIssueAlertFiltersV2IssueCategoryArgs struct {
+	Name  pulumi.StringInput `pulumi:"name"`
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetSentryIssueAlertFiltersV2IssueCategoryArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2IssueCategory)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertFiltersV2IssueCategoryArgs) ToGetSentryIssueAlertFiltersV2IssueCategoryOutput() GetSentryIssueAlertFiltersV2IssueCategoryOutput {
+	return i.ToGetSentryIssueAlertFiltersV2IssueCategoryOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertFiltersV2IssueCategoryArgs) ToGetSentryIssueAlertFiltersV2IssueCategoryOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2IssueCategoryOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertFiltersV2IssueCategoryOutput)
+}
+
+type GetSentryIssueAlertFiltersV2IssueCategoryOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertFiltersV2IssueCategoryOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2IssueCategory)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertFiltersV2IssueCategoryOutput) ToGetSentryIssueAlertFiltersV2IssueCategoryOutput() GetSentryIssueAlertFiltersV2IssueCategoryOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2IssueCategoryOutput) ToGetSentryIssueAlertFiltersV2IssueCategoryOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2IssueCategoryOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2IssueCategoryOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2IssueCategory) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2IssueCategoryOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2IssueCategory) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertFiltersV2IssueOccurrences struct {
+	Name  string `pulumi:"name"`
+	Value int    `pulumi:"value"`
+}
+
+// GetSentryIssueAlertFiltersV2IssueOccurrencesInput is an input type that accepts GetSentryIssueAlertFiltersV2IssueOccurrencesArgs and GetSentryIssueAlertFiltersV2IssueOccurrencesOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertFiltersV2IssueOccurrencesInput` via:
+//
+//	GetSentryIssueAlertFiltersV2IssueOccurrencesArgs{...}
+type GetSentryIssueAlertFiltersV2IssueOccurrencesInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertFiltersV2IssueOccurrencesOutput() GetSentryIssueAlertFiltersV2IssueOccurrencesOutput
+	ToGetSentryIssueAlertFiltersV2IssueOccurrencesOutputWithContext(context.Context) GetSentryIssueAlertFiltersV2IssueOccurrencesOutput
+}
+
+type GetSentryIssueAlertFiltersV2IssueOccurrencesArgs struct {
+	Name  pulumi.StringInput `pulumi:"name"`
+	Value pulumi.IntInput    `pulumi:"value"`
+}
+
+func (GetSentryIssueAlertFiltersV2IssueOccurrencesArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2IssueOccurrences)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertFiltersV2IssueOccurrencesArgs) ToGetSentryIssueAlertFiltersV2IssueOccurrencesOutput() GetSentryIssueAlertFiltersV2IssueOccurrencesOutput {
+	return i.ToGetSentryIssueAlertFiltersV2IssueOccurrencesOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertFiltersV2IssueOccurrencesArgs) ToGetSentryIssueAlertFiltersV2IssueOccurrencesOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2IssueOccurrencesOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertFiltersV2IssueOccurrencesOutput)
+}
+
+type GetSentryIssueAlertFiltersV2IssueOccurrencesOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertFiltersV2IssueOccurrencesOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2IssueOccurrences)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertFiltersV2IssueOccurrencesOutput) ToGetSentryIssueAlertFiltersV2IssueOccurrencesOutput() GetSentryIssueAlertFiltersV2IssueOccurrencesOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2IssueOccurrencesOutput) ToGetSentryIssueAlertFiltersV2IssueOccurrencesOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2IssueOccurrencesOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2IssueOccurrencesOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2IssueOccurrences) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2IssueOccurrencesOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2IssueOccurrences) int { return v.Value }).(pulumi.IntOutput)
+}
+
+type GetSentryIssueAlertFiltersV2LatestAdoptedRelease struct {
+	Environment    int    `pulumi:"environment"`
+	Name           string `pulumi:"name"`
+	OlderOrNewer   int    `pulumi:"olderOrNewer"`
+	OldestOrNewest int    `pulumi:"oldestOrNewest"`
+}
+
+// GetSentryIssueAlertFiltersV2LatestAdoptedReleaseInput is an input type that accepts GetSentryIssueAlertFiltersV2LatestAdoptedReleaseArgs and GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertFiltersV2LatestAdoptedReleaseInput` via:
+//
+//	GetSentryIssueAlertFiltersV2LatestAdoptedReleaseArgs{...}
+type GetSentryIssueAlertFiltersV2LatestAdoptedReleaseInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput() GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput
+	ToGetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutputWithContext(context.Context) GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput
+}
+
+type GetSentryIssueAlertFiltersV2LatestAdoptedReleaseArgs struct {
+	Environment    pulumi.IntInput    `pulumi:"environment"`
+	Name           pulumi.StringInput `pulumi:"name"`
+	OlderOrNewer   pulumi.IntInput    `pulumi:"olderOrNewer"`
+	OldestOrNewest pulumi.IntInput    `pulumi:"oldestOrNewest"`
+}
+
+func (GetSentryIssueAlertFiltersV2LatestAdoptedReleaseArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2LatestAdoptedRelease)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertFiltersV2LatestAdoptedReleaseArgs) ToGetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput() GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput {
+	return i.ToGetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertFiltersV2LatestAdoptedReleaseArgs) ToGetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput)
+}
+
+type GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2LatestAdoptedRelease)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) ToGetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput() GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) ToGetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) Environment() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2LatestAdoptedRelease) int { return v.Environment }).(pulumi.IntOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2LatestAdoptedRelease) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) OlderOrNewer() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2LatestAdoptedRelease) int { return v.OlderOrNewer }).(pulumi.IntOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput) OldestOrNewest() pulumi.IntOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2LatestAdoptedRelease) int { return v.OldestOrNewest }).(pulumi.IntOutput)
+}
+
+type GetSentryIssueAlertFiltersV2LatestRelease struct {
+	Name string `pulumi:"name"`
+}
+
+// GetSentryIssueAlertFiltersV2LatestReleaseInput is an input type that accepts GetSentryIssueAlertFiltersV2LatestReleaseArgs and GetSentryIssueAlertFiltersV2LatestReleaseOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertFiltersV2LatestReleaseInput` via:
+//
+//	GetSentryIssueAlertFiltersV2LatestReleaseArgs{...}
+type GetSentryIssueAlertFiltersV2LatestReleaseInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertFiltersV2LatestReleaseOutput() GetSentryIssueAlertFiltersV2LatestReleaseOutput
+	ToGetSentryIssueAlertFiltersV2LatestReleaseOutputWithContext(context.Context) GetSentryIssueAlertFiltersV2LatestReleaseOutput
+}
+
+type GetSentryIssueAlertFiltersV2LatestReleaseArgs struct {
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetSentryIssueAlertFiltersV2LatestReleaseArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2LatestRelease)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertFiltersV2LatestReleaseArgs) ToGetSentryIssueAlertFiltersV2LatestReleaseOutput() GetSentryIssueAlertFiltersV2LatestReleaseOutput {
+	return i.ToGetSentryIssueAlertFiltersV2LatestReleaseOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertFiltersV2LatestReleaseArgs) ToGetSentryIssueAlertFiltersV2LatestReleaseOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2LatestReleaseOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertFiltersV2LatestReleaseOutput)
+}
+
+type GetSentryIssueAlertFiltersV2LatestReleaseOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertFiltersV2LatestReleaseOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2LatestRelease)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertFiltersV2LatestReleaseOutput) ToGetSentryIssueAlertFiltersV2LatestReleaseOutput() GetSentryIssueAlertFiltersV2LatestReleaseOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2LatestReleaseOutput) ToGetSentryIssueAlertFiltersV2LatestReleaseOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2LatestReleaseOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2LatestReleaseOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2LatestRelease) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertFiltersV2Level struct {
+	Level string `pulumi:"level"`
+	Match string `pulumi:"match"`
+	Name  string `pulumi:"name"`
+}
+
+// GetSentryIssueAlertFiltersV2LevelInput is an input type that accepts GetSentryIssueAlertFiltersV2LevelArgs and GetSentryIssueAlertFiltersV2LevelOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertFiltersV2LevelInput` via:
+//
+//	GetSentryIssueAlertFiltersV2LevelArgs{...}
+type GetSentryIssueAlertFiltersV2LevelInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertFiltersV2LevelOutput() GetSentryIssueAlertFiltersV2LevelOutput
+	ToGetSentryIssueAlertFiltersV2LevelOutputWithContext(context.Context) GetSentryIssueAlertFiltersV2LevelOutput
+}
+
+type GetSentryIssueAlertFiltersV2LevelArgs struct {
+	Level pulumi.StringInput `pulumi:"level"`
+	Match pulumi.StringInput `pulumi:"match"`
+	Name  pulumi.StringInput `pulumi:"name"`
+}
+
+func (GetSentryIssueAlertFiltersV2LevelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2Level)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertFiltersV2LevelArgs) ToGetSentryIssueAlertFiltersV2LevelOutput() GetSentryIssueAlertFiltersV2LevelOutput {
+	return i.ToGetSentryIssueAlertFiltersV2LevelOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertFiltersV2LevelArgs) ToGetSentryIssueAlertFiltersV2LevelOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2LevelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertFiltersV2LevelOutput)
+}
+
+type GetSentryIssueAlertFiltersV2LevelOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertFiltersV2LevelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2Level)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertFiltersV2LevelOutput) ToGetSentryIssueAlertFiltersV2LevelOutput() GetSentryIssueAlertFiltersV2LevelOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2LevelOutput) ToGetSentryIssueAlertFiltersV2LevelOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2LevelOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2LevelOutput) Level() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2Level) string { return v.Level }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2LevelOutput) Match() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2Level) string { return v.Match }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2LevelOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2Level) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type GetSentryIssueAlertFiltersV2TaggedEvent struct {
+	Key   string `pulumi:"key"`
+	Match string `pulumi:"match"`
+	Name  string `pulumi:"name"`
+	Value string `pulumi:"value"`
+}
+
+// GetSentryIssueAlertFiltersV2TaggedEventInput is an input type that accepts GetSentryIssueAlertFiltersV2TaggedEventArgs and GetSentryIssueAlertFiltersV2TaggedEventOutput values.
+// You can construct a concrete instance of `GetSentryIssueAlertFiltersV2TaggedEventInput` via:
+//
+//	GetSentryIssueAlertFiltersV2TaggedEventArgs{...}
+type GetSentryIssueAlertFiltersV2TaggedEventInput interface {
+	pulumi.Input
+
+	ToGetSentryIssueAlertFiltersV2TaggedEventOutput() GetSentryIssueAlertFiltersV2TaggedEventOutput
+	ToGetSentryIssueAlertFiltersV2TaggedEventOutputWithContext(context.Context) GetSentryIssueAlertFiltersV2TaggedEventOutput
+}
+
+type GetSentryIssueAlertFiltersV2TaggedEventArgs struct {
+	Key   pulumi.StringInput `pulumi:"key"`
+	Match pulumi.StringInput `pulumi:"match"`
+	Name  pulumi.StringInput `pulumi:"name"`
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetSentryIssueAlertFiltersV2TaggedEventArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2TaggedEvent)(nil)).Elem()
+}
+
+func (i GetSentryIssueAlertFiltersV2TaggedEventArgs) ToGetSentryIssueAlertFiltersV2TaggedEventOutput() GetSentryIssueAlertFiltersV2TaggedEventOutput {
+	return i.ToGetSentryIssueAlertFiltersV2TaggedEventOutputWithContext(context.Background())
+}
+
+func (i GetSentryIssueAlertFiltersV2TaggedEventArgs) ToGetSentryIssueAlertFiltersV2TaggedEventOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2TaggedEventOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryIssueAlertFiltersV2TaggedEventOutput)
+}
+
+type GetSentryIssueAlertFiltersV2TaggedEventOutput struct{ *pulumi.OutputState }
+
+func (GetSentryIssueAlertFiltersV2TaggedEventOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryIssueAlertFiltersV2TaggedEvent)(nil)).Elem()
+}
+
+func (o GetSentryIssueAlertFiltersV2TaggedEventOutput) ToGetSentryIssueAlertFiltersV2TaggedEventOutput() GetSentryIssueAlertFiltersV2TaggedEventOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2TaggedEventOutput) ToGetSentryIssueAlertFiltersV2TaggedEventOutputWithContext(ctx context.Context) GetSentryIssueAlertFiltersV2TaggedEventOutput {
+	return o
+}
+
+func (o GetSentryIssueAlertFiltersV2TaggedEventOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2TaggedEvent) string { return v.Key }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2TaggedEventOutput) Match() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2TaggedEvent) string { return v.Match }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2TaggedEventOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2TaggedEvent) string { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o GetSentryIssueAlertFiltersV2TaggedEventOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryIssueAlertFiltersV2TaggedEvent) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetSentryKeyJavascriptLoaderScript struct {
+	// The version of the browser SDK to load.
+	BrowserSdkVersion string `pulumi:"browserSdkVersion"`
+	// Whether debug bundles & logging are enabled for this key.
+	DebugEnabled bool `pulumi:"debugEnabled"`
+	// Whether performance monitoring is enabled for this key.
+	PerformanceMonitoringEnabled bool `pulumi:"performanceMonitoringEnabled"`
+	// Whether session replay is enabled for this key.
+	SessionReplayEnabled bool `pulumi:"sessionReplayEnabled"`
+}
+
+// GetSentryKeyJavascriptLoaderScriptInput is an input type that accepts GetSentryKeyJavascriptLoaderScriptArgs and GetSentryKeyJavascriptLoaderScriptOutput values.
+// You can construct a concrete instance of `GetSentryKeyJavascriptLoaderScriptInput` via:
+//
+//	GetSentryKeyJavascriptLoaderScriptArgs{...}
+type GetSentryKeyJavascriptLoaderScriptInput interface {
+	pulumi.Input
+
+	ToGetSentryKeyJavascriptLoaderScriptOutput() GetSentryKeyJavascriptLoaderScriptOutput
+	ToGetSentryKeyJavascriptLoaderScriptOutputWithContext(context.Context) GetSentryKeyJavascriptLoaderScriptOutput
+}
+
+type GetSentryKeyJavascriptLoaderScriptArgs struct {
+	// The version of the browser SDK to load.
+	BrowserSdkVersion pulumi.StringInput `pulumi:"browserSdkVersion"`
+	// Whether debug bundles & logging are enabled for this key.
+	DebugEnabled pulumi.BoolInput `pulumi:"debugEnabled"`
+	// Whether performance monitoring is enabled for this key.
+	PerformanceMonitoringEnabled pulumi.BoolInput `pulumi:"performanceMonitoringEnabled"`
+	// Whether session replay is enabled for this key.
+	SessionReplayEnabled pulumi.BoolInput `pulumi:"sessionReplayEnabled"`
+}
+
+func (GetSentryKeyJavascriptLoaderScriptArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryKeyJavascriptLoaderScript)(nil)).Elem()
+}
+
+func (i GetSentryKeyJavascriptLoaderScriptArgs) ToGetSentryKeyJavascriptLoaderScriptOutput() GetSentryKeyJavascriptLoaderScriptOutput {
+	return i.ToGetSentryKeyJavascriptLoaderScriptOutputWithContext(context.Background())
+}
+
+func (i GetSentryKeyJavascriptLoaderScriptArgs) ToGetSentryKeyJavascriptLoaderScriptOutputWithContext(ctx context.Context) GetSentryKeyJavascriptLoaderScriptOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetSentryKeyJavascriptLoaderScriptOutput)
+}
+
+type GetSentryKeyJavascriptLoaderScriptOutput struct{ *pulumi.OutputState }
+
+func (GetSentryKeyJavascriptLoaderScriptOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetSentryKeyJavascriptLoaderScript)(nil)).Elem()
+}
+
+func (o GetSentryKeyJavascriptLoaderScriptOutput) ToGetSentryKeyJavascriptLoaderScriptOutput() GetSentryKeyJavascriptLoaderScriptOutput {
+	return o
+}
+
+func (o GetSentryKeyJavascriptLoaderScriptOutput) ToGetSentryKeyJavascriptLoaderScriptOutputWithContext(ctx context.Context) GetSentryKeyJavascriptLoaderScriptOutput {
+	return o
+}
+
+// The version of the browser SDK to load.
+func (o GetSentryKeyJavascriptLoaderScriptOutput) BrowserSdkVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryKeyJavascriptLoaderScript) string { return v.BrowserSdkVersion }).(pulumi.StringOutput)
+}
+
+// Whether debug bundles & logging are enabled for this key.
+func (o GetSentryKeyJavascriptLoaderScriptOutput) DebugEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSentryKeyJavascriptLoaderScript) bool { return v.DebugEnabled }).(pulumi.BoolOutput)
+}
+
+// Whether performance monitoring is enabled for this key.
+func (o GetSentryKeyJavascriptLoaderScriptOutput) PerformanceMonitoringEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSentryKeyJavascriptLoaderScript) bool { return v.PerformanceMonitoringEnabled }).(pulumi.BoolOutput)
+}
+
+// Whether session replay is enabled for this key.
+func (o GetSentryKeyJavascriptLoaderScriptOutput) SessionReplayEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetSentryKeyJavascriptLoaderScript) bool { return v.SessionReplayEnabled }).(pulumi.BoolOutput)
+}
+
 type GetSentryMetricAlertTrigger struct {
 	Actions          []GetSentryMetricAlertTriggerAction `pulumi:"actions"`
 	AlertThreshold   float64                             `pulumi:"alertThreshold"`
@@ -1128,6 +11021,7 @@ func (o GetSentryMetricAlertTriggerArrayOutput) Index(i pulumi.IntInput) GetSent
 
 type GetSentryMetricAlertTriggerAction struct {
 	Id               string `pulumi:"id"`
+	InputChannelId   string `pulumi:"inputChannelId"`
 	IntegrationId    int    `pulumi:"integrationId"`
 	TargetIdentifier string `pulumi:"targetIdentifier"`
 	TargetType       string `pulumi:"targetType"`
@@ -1147,6 +11041,7 @@ type GetSentryMetricAlertTriggerActionInput interface {
 
 type GetSentryMetricAlertTriggerActionArgs struct {
 	Id               pulumi.StringInput `pulumi:"id"`
+	InputChannelId   pulumi.StringInput `pulumi:"inputChannelId"`
 	IntegrationId    pulumi.IntInput    `pulumi:"integrationId"`
 	TargetIdentifier pulumi.StringInput `pulumi:"targetIdentifier"`
 	TargetType       pulumi.StringInput `pulumi:"targetType"`
@@ -1208,6 +11103,10 @@ func (o GetSentryMetricAlertTriggerActionOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSentryMetricAlertTriggerAction) string { return v.Id }).(pulumi.StringOutput)
 }
 
+func (o GetSentryMetricAlertTriggerActionOutput) InputChannelId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSentryMetricAlertTriggerAction) string { return v.InputChannelId }).(pulumi.StringOutput)
+}
+
 func (o GetSentryMetricAlertTriggerActionOutput) IntegrationId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetSentryMetricAlertTriggerAction) int { return v.IntegrationId }).(pulumi.IntOutput)
 }
@@ -1250,16 +11149,137 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SentryDashboardWidgetLayoutInput)(nil)).Elem(), SentryDashboardWidgetLayoutArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SentryDashboardWidgetQueryInput)(nil)).Elem(), SentryDashboardWidgetQueryArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SentryDashboardWidgetQueryArrayInput)(nil)).Elem(), SentryDashboardWidgetQueryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2Input)(nil)).Elem(), SentryIssueAlertActionsV2Args{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2ArrayInput)(nil)).Elem(), SentryIssueAlertActionsV2Array{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2AzureDevopsCreateTicketInput)(nil)).Elem(), SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrInput)(nil)).Elem(), SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2DiscordNotifyServiceInput)(nil)).Elem(), SentryIssueAlertActionsV2DiscordNotifyServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2DiscordNotifyServicePtrInput)(nil)).Elem(), SentryIssueAlertActionsV2DiscordNotifyServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2GithubCreateTicketInput)(nil)).Elem(), SentryIssueAlertActionsV2GithubCreateTicketArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2GithubCreateTicketPtrInput)(nil)).Elem(), SentryIssueAlertActionsV2GithubCreateTicketArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2GithubEnterpriseCreateTicketInput)(nil)).Elem(), SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrInput)(nil)).Elem(), SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2JiraCreateTicketInput)(nil)).Elem(), SentryIssueAlertActionsV2JiraCreateTicketArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2JiraCreateTicketPtrInput)(nil)).Elem(), SentryIssueAlertActionsV2JiraCreateTicketArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2JiraServerCreateTicketInput)(nil)).Elem(), SentryIssueAlertActionsV2JiraServerCreateTicketArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2JiraServerCreateTicketPtrInput)(nil)).Elem(), SentryIssueAlertActionsV2JiraServerCreateTicketArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2MsteamsNotifyServiceInput)(nil)).Elem(), SentryIssueAlertActionsV2MsteamsNotifyServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2MsteamsNotifyServicePtrInput)(nil)).Elem(), SentryIssueAlertActionsV2MsteamsNotifyServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEmailInput)(nil)).Elem(), SentryIssueAlertActionsV2NotifyEmailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEmailPtrInput)(nil)).Elem(), SentryIssueAlertActionsV2NotifyEmailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEventInput)(nil)).Elem(), SentryIssueAlertActionsV2NotifyEventArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEventPtrInput)(nil)).Elem(), SentryIssueAlertActionsV2NotifyEventArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEventSentryAppInput)(nil)).Elem(), SentryIssueAlertActionsV2NotifyEventSentryAppArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEventSentryAppPtrInput)(nil)).Elem(), SentryIssueAlertActionsV2NotifyEventSentryAppArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEventServiceInput)(nil)).Elem(), SentryIssueAlertActionsV2NotifyEventServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2NotifyEventServicePtrInput)(nil)).Elem(), SentryIssueAlertActionsV2NotifyEventServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2OpsgenieNotifyTeamInput)(nil)).Elem(), SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrInput)(nil)).Elem(), SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2PagerdutyNotifyServiceInput)(nil)).Elem(), SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2PagerdutyNotifyServicePtrInput)(nil)).Elem(), SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2SlackNotifyServiceInput)(nil)).Elem(), SentryIssueAlertActionsV2SlackNotifyServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertActionsV2SlackNotifyServicePtrInput)(nil)).Elem(), SentryIssueAlertActionsV2SlackNotifyServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2Input)(nil)).Elem(), SentryIssueAlertConditionsV2Args{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2ArrayInput)(nil)).Elem(), SentryIssueAlertConditionsV2Array{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2EventFrequencyInput)(nil)).Elem(), SentryIssueAlertConditionsV2EventFrequencyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2EventFrequencyPtrInput)(nil)).Elem(), SentryIssueAlertConditionsV2EventFrequencyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2EventFrequencyPercentInput)(nil)).Elem(), SentryIssueAlertConditionsV2EventFrequencyPercentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2EventFrequencyPercentPtrInput)(nil)).Elem(), SentryIssueAlertConditionsV2EventFrequencyPercentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2EventUniqueUserFrequencyInput)(nil)).Elem(), SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrInput)(nil)).Elem(), SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2ExistingHighPriorityIssueInput)(nil)).Elem(), SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrInput)(nil)).Elem(), SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2FirstSeenEventInput)(nil)).Elem(), SentryIssueAlertConditionsV2FirstSeenEventArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2FirstSeenEventPtrInput)(nil)).Elem(), SentryIssueAlertConditionsV2FirstSeenEventArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2NewHighPriorityIssueInput)(nil)).Elem(), SentryIssueAlertConditionsV2NewHighPriorityIssueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2NewHighPriorityIssuePtrInput)(nil)).Elem(), SentryIssueAlertConditionsV2NewHighPriorityIssueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2ReappearedEventInput)(nil)).Elem(), SentryIssueAlertConditionsV2ReappearedEventArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2ReappearedEventPtrInput)(nil)).Elem(), SentryIssueAlertConditionsV2ReappearedEventArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2RegressionEventInput)(nil)).Elem(), SentryIssueAlertConditionsV2RegressionEventArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertConditionsV2RegressionEventPtrInput)(nil)).Elem(), SentryIssueAlertConditionsV2RegressionEventArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2Input)(nil)).Elem(), SentryIssueAlertFiltersV2Args{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2ArrayInput)(nil)).Elem(), SentryIssueAlertFiltersV2Array{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2AgeComparisonInput)(nil)).Elem(), SentryIssueAlertFiltersV2AgeComparisonArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2AgeComparisonPtrInput)(nil)).Elem(), SentryIssueAlertFiltersV2AgeComparisonArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2AssignedToInput)(nil)).Elem(), SentryIssueAlertFiltersV2AssignedToArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2AssignedToPtrInput)(nil)).Elem(), SentryIssueAlertFiltersV2AssignedToArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2EventAttributeInput)(nil)).Elem(), SentryIssueAlertFiltersV2EventAttributeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2EventAttributePtrInput)(nil)).Elem(), SentryIssueAlertFiltersV2EventAttributeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2IssueCategoryInput)(nil)).Elem(), SentryIssueAlertFiltersV2IssueCategoryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2IssueCategoryPtrInput)(nil)).Elem(), SentryIssueAlertFiltersV2IssueCategoryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2IssueOccurrencesInput)(nil)).Elem(), SentryIssueAlertFiltersV2IssueOccurrencesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2IssueOccurrencesPtrInput)(nil)).Elem(), SentryIssueAlertFiltersV2IssueOccurrencesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2LatestAdoptedReleaseInput)(nil)).Elem(), SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2LatestAdoptedReleasePtrInput)(nil)).Elem(), SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2LatestReleaseInput)(nil)).Elem(), SentryIssueAlertFiltersV2LatestReleaseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2LatestReleasePtrInput)(nil)).Elem(), SentryIssueAlertFiltersV2LatestReleaseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2LevelInput)(nil)).Elem(), SentryIssueAlertFiltersV2LevelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2LevelPtrInput)(nil)).Elem(), SentryIssueAlertFiltersV2LevelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2TaggedEventInput)(nil)).Elem(), SentryIssueAlertFiltersV2TaggedEventArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryIssueAlertFiltersV2TaggedEventPtrInput)(nil)).Elem(), SentryIssueAlertFiltersV2TaggedEventArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryKeyJavascriptLoaderScriptInput)(nil)).Elem(), SentryKeyJavascriptLoaderScriptArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryKeyJavascriptLoaderScriptPtrInput)(nil)).Elem(), SentryKeyJavascriptLoaderScriptArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SentryMetricAlertTriggerInput)(nil)).Elem(), SentryMetricAlertTriggerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SentryMetricAlertTriggerArrayInput)(nil)).Elem(), SentryMetricAlertTriggerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SentryMetricAlertTriggerActionInput)(nil)).Elem(), SentryMetricAlertTriggerActionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SentryMetricAlertTriggerActionArrayInput)(nil)).Elem(), SentryMetricAlertTriggerActionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryProjectClientSecurityInput)(nil)).Elem(), SentryProjectClientSecurityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryProjectClientSecurityPtrInput)(nil)).Elem(), SentryProjectClientSecurityArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryProjectFiltersInput)(nil)).Elem(), SentryProjectFiltersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryProjectFiltersPtrInput)(nil)).Elem(), SentryProjectFiltersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryProjectSymbolSourceLayoutInput)(nil)).Elem(), SentryProjectSymbolSourceLayoutArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SentryProjectSymbolSourceLayoutPtrInput)(nil)).Elem(), SentryProjectSymbolSourceLayoutArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryAllKeysKeyInput)(nil)).Elem(), GetSentryAllKeysKeyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryAllKeysKeyArrayInput)(nil)).Elem(), GetSentryAllKeysKeyArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryAllKeysKeyJavascriptLoaderScriptInput)(nil)).Elem(), GetSentryAllKeysKeyJavascriptLoaderScriptArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryAllOrganizationMembersMemberInput)(nil)).Elem(), GetSentryAllOrganizationMembersMemberArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryAllOrganizationMembersMemberArrayInput)(nil)).Elem(), GetSentryAllOrganizationMembersMemberArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryAllProjectsProjectInput)(nil)).Elem(), GetSentryAllProjectsProjectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryAllProjectsProjectArrayInput)(nil)).Elem(), GetSentryAllProjectsProjectArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryDashboardWidgetInput)(nil)).Elem(), GetSentryDashboardWidgetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryDashboardWidgetArrayInput)(nil)).Elem(), GetSentryDashboardWidgetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryDashboardWidgetLayoutInput)(nil)).Elem(), GetSentryDashboardWidgetLayoutArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryDashboardWidgetLayoutArrayInput)(nil)).Elem(), GetSentryDashboardWidgetLayoutArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryDashboardWidgetQueryInput)(nil)).Elem(), GetSentryDashboardWidgetQueryArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryDashboardWidgetQueryArrayInput)(nil)).Elem(), GetSentryDashboardWidgetQueryArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2Input)(nil)).Elem(), GetSentryIssueAlertActionsV2Args{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2ArrayInput)(nil)).Elem(), GetSentryIssueAlertActionsV2Array{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2AzureDevopsCreateTicketInput)(nil)).Elem(), GetSentryIssueAlertActionsV2AzureDevopsCreateTicketArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2DiscordNotifyServiceInput)(nil)).Elem(), GetSentryIssueAlertActionsV2DiscordNotifyServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2GithubCreateTicketInput)(nil)).Elem(), GetSentryIssueAlertActionsV2GithubCreateTicketArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketInput)(nil)).Elem(), GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2JiraCreateTicketInput)(nil)).Elem(), GetSentryIssueAlertActionsV2JiraCreateTicketArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2JiraServerCreateTicketInput)(nil)).Elem(), GetSentryIssueAlertActionsV2JiraServerCreateTicketArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2MsteamsNotifyServiceInput)(nil)).Elem(), GetSentryIssueAlertActionsV2MsteamsNotifyServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2NotifyEmailInput)(nil)).Elem(), GetSentryIssueAlertActionsV2NotifyEmailArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2NotifyEventInput)(nil)).Elem(), GetSentryIssueAlertActionsV2NotifyEventArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2NotifyEventSentryAppInput)(nil)).Elem(), GetSentryIssueAlertActionsV2NotifyEventSentryAppArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2NotifyEventServiceInput)(nil)).Elem(), GetSentryIssueAlertActionsV2NotifyEventServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2OpsgenieNotifyTeamInput)(nil)).Elem(), GetSentryIssueAlertActionsV2OpsgenieNotifyTeamArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2PagerdutyNotifyServiceInput)(nil)).Elem(), GetSentryIssueAlertActionsV2PagerdutyNotifyServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertActionsV2SlackNotifyServiceInput)(nil)).Elem(), GetSentryIssueAlertActionsV2SlackNotifyServiceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertConditionsV2Input)(nil)).Elem(), GetSentryIssueAlertConditionsV2Args{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertConditionsV2ArrayInput)(nil)).Elem(), GetSentryIssueAlertConditionsV2Array{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertConditionsV2EventFrequencyInput)(nil)).Elem(), GetSentryIssueAlertConditionsV2EventFrequencyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertConditionsV2EventFrequencyPercentInput)(nil)).Elem(), GetSentryIssueAlertConditionsV2EventFrequencyPercentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyInput)(nil)).Elem(), GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueInput)(nil)).Elem(), GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertConditionsV2FirstSeenEventInput)(nil)).Elem(), GetSentryIssueAlertConditionsV2FirstSeenEventArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertConditionsV2NewHighPriorityIssueInput)(nil)).Elem(), GetSentryIssueAlertConditionsV2NewHighPriorityIssueArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertConditionsV2ReappearedEventInput)(nil)).Elem(), GetSentryIssueAlertConditionsV2ReappearedEventArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertConditionsV2RegressionEventInput)(nil)).Elem(), GetSentryIssueAlertConditionsV2RegressionEventArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertFiltersV2Input)(nil)).Elem(), GetSentryIssueAlertFiltersV2Args{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertFiltersV2ArrayInput)(nil)).Elem(), GetSentryIssueAlertFiltersV2Array{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertFiltersV2AgeComparisonInput)(nil)).Elem(), GetSentryIssueAlertFiltersV2AgeComparisonArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertFiltersV2AssignedToInput)(nil)).Elem(), GetSentryIssueAlertFiltersV2AssignedToArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertFiltersV2EventAttributeInput)(nil)).Elem(), GetSentryIssueAlertFiltersV2EventAttributeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertFiltersV2IssueCategoryInput)(nil)).Elem(), GetSentryIssueAlertFiltersV2IssueCategoryArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertFiltersV2IssueOccurrencesInput)(nil)).Elem(), GetSentryIssueAlertFiltersV2IssueOccurrencesArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertFiltersV2LatestAdoptedReleaseInput)(nil)).Elem(), GetSentryIssueAlertFiltersV2LatestAdoptedReleaseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertFiltersV2LatestReleaseInput)(nil)).Elem(), GetSentryIssueAlertFiltersV2LatestReleaseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertFiltersV2LevelInput)(nil)).Elem(), GetSentryIssueAlertFiltersV2LevelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryIssueAlertFiltersV2TaggedEventInput)(nil)).Elem(), GetSentryIssueAlertFiltersV2TaggedEventArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryKeyJavascriptLoaderScriptInput)(nil)).Elem(), GetSentryKeyJavascriptLoaderScriptArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryMetricAlertTriggerInput)(nil)).Elem(), GetSentryMetricAlertTriggerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryMetricAlertTriggerArrayInput)(nil)).Elem(), GetSentryMetricAlertTriggerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetSentryMetricAlertTriggerActionInput)(nil)).Elem(), GetSentryMetricAlertTriggerActionArgs{})
@@ -1269,16 +11289,137 @@ func init() {
 	pulumi.RegisterOutputType(SentryDashboardWidgetLayoutOutput{})
 	pulumi.RegisterOutputType(SentryDashboardWidgetQueryOutput{})
 	pulumi.RegisterOutputType(SentryDashboardWidgetQueryArrayOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2Output{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2ArrayOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2AzureDevopsCreateTicketOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2AzureDevopsCreateTicketPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2DiscordNotifyServiceOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2DiscordNotifyServicePtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2GithubCreateTicketOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2GithubCreateTicketPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2GithubEnterpriseCreateTicketPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2JiraCreateTicketOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2JiraCreateTicketPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2JiraServerCreateTicketOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2JiraServerCreateTicketPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2MsteamsNotifyServiceOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2MsteamsNotifyServicePtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2NotifyEmailOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2NotifyEmailPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2NotifyEventOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2NotifyEventPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2NotifyEventSentryAppOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2NotifyEventSentryAppPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2NotifyEventServiceOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2NotifyEventServicePtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2OpsgenieNotifyTeamOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2OpsgenieNotifyTeamPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2PagerdutyNotifyServiceOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2PagerdutyNotifyServicePtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2SlackNotifyServiceOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertActionsV2SlackNotifyServicePtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2Output{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2ArrayOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2EventFrequencyOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2EventFrequencyPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2EventFrequencyPercentOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2EventFrequencyPercentPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2EventUniqueUserFrequencyPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2ExistingHighPriorityIssuePtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2FirstSeenEventOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2FirstSeenEventPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2NewHighPriorityIssueOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2NewHighPriorityIssuePtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2ReappearedEventOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2ReappearedEventPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2RegressionEventOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertConditionsV2RegressionEventPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2Output{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2ArrayOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2AgeComparisonOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2AgeComparisonPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2AssignedToOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2AssignedToPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2EventAttributeOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2EventAttributePtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2IssueCategoryOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2IssueCategoryPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2IssueOccurrencesOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2IssueOccurrencesPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2LatestAdoptedReleaseOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2LatestAdoptedReleasePtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2LatestReleaseOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2LatestReleasePtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2LevelOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2LevelPtrOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2TaggedEventOutput{})
+	pulumi.RegisterOutputType(SentryIssueAlertFiltersV2TaggedEventPtrOutput{})
+	pulumi.RegisterOutputType(SentryKeyJavascriptLoaderScriptOutput{})
+	pulumi.RegisterOutputType(SentryKeyJavascriptLoaderScriptPtrOutput{})
 	pulumi.RegisterOutputType(SentryMetricAlertTriggerOutput{})
 	pulumi.RegisterOutputType(SentryMetricAlertTriggerArrayOutput{})
 	pulumi.RegisterOutputType(SentryMetricAlertTriggerActionOutput{})
 	pulumi.RegisterOutputType(SentryMetricAlertTriggerActionArrayOutput{})
+	pulumi.RegisterOutputType(SentryProjectClientSecurityOutput{})
+	pulumi.RegisterOutputType(SentryProjectClientSecurityPtrOutput{})
+	pulumi.RegisterOutputType(SentryProjectFiltersOutput{})
+	pulumi.RegisterOutputType(SentryProjectFiltersPtrOutput{})
+	pulumi.RegisterOutputType(SentryProjectSymbolSourceLayoutOutput{})
+	pulumi.RegisterOutputType(SentryProjectSymbolSourceLayoutPtrOutput{})
+	pulumi.RegisterOutputType(GetSentryAllKeysKeyOutput{})
+	pulumi.RegisterOutputType(GetSentryAllKeysKeyArrayOutput{})
+	pulumi.RegisterOutputType(GetSentryAllKeysKeyJavascriptLoaderScriptOutput{})
+	pulumi.RegisterOutputType(GetSentryAllOrganizationMembersMemberOutput{})
+	pulumi.RegisterOutputType(GetSentryAllOrganizationMembersMemberArrayOutput{})
+	pulumi.RegisterOutputType(GetSentryAllProjectsProjectOutput{})
+	pulumi.RegisterOutputType(GetSentryAllProjectsProjectArrayOutput{})
 	pulumi.RegisterOutputType(GetSentryDashboardWidgetOutput{})
 	pulumi.RegisterOutputType(GetSentryDashboardWidgetArrayOutput{})
 	pulumi.RegisterOutputType(GetSentryDashboardWidgetLayoutOutput{})
 	pulumi.RegisterOutputType(GetSentryDashboardWidgetLayoutArrayOutput{})
 	pulumi.RegisterOutputType(GetSentryDashboardWidgetQueryOutput{})
 	pulumi.RegisterOutputType(GetSentryDashboardWidgetQueryArrayOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2Output{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2ArrayOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2AzureDevopsCreateTicketOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2DiscordNotifyServiceOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2GithubCreateTicketOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2JiraCreateTicketOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2JiraServerCreateTicketOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2MsteamsNotifyServiceOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2NotifyEmailOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2NotifyEventOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2NotifyEventSentryAppOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2NotifyEventServiceOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2OpsgenieNotifyTeamOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2PagerdutyNotifyServiceOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertActionsV2SlackNotifyServiceOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertConditionsV2Output{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertConditionsV2ArrayOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertConditionsV2EventFrequencyOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertConditionsV2EventFrequencyPercentOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertConditionsV2FirstSeenEventOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertConditionsV2NewHighPriorityIssueOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertConditionsV2ReappearedEventOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertConditionsV2RegressionEventOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertFiltersV2Output{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertFiltersV2ArrayOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertFiltersV2AgeComparisonOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertFiltersV2AssignedToOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertFiltersV2EventAttributeOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertFiltersV2IssueCategoryOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertFiltersV2IssueOccurrencesOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertFiltersV2LatestAdoptedReleaseOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertFiltersV2LatestReleaseOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertFiltersV2LevelOutput{})
+	pulumi.RegisterOutputType(GetSentryIssueAlertFiltersV2TaggedEventOutput{})
+	pulumi.RegisterOutputType(GetSentryKeyJavascriptLoaderScriptOutput{})
 	pulumi.RegisterOutputType(GetSentryMetricAlertTriggerOutput{})
 	pulumi.RegisterOutputType(GetSentryMetricAlertTriggerArrayOutput{})
 	pulumi.RegisterOutputType(GetSentryMetricAlertTriggerActionOutput{})

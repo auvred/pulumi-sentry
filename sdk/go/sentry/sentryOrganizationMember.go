@@ -12,6 +12,8 @@ import (
 	"github.com/pulumiverse/pulumi-sentry/sdk/go/sentry/internal"
 )
 
+// Resource for managing Sentry organization members. To add a member to a team, use the `SentryTeamMember` resource.
+//
 // ## Example Usage
 //
 // ```go
@@ -31,9 +33,6 @@ import (
 //				Organization: pulumi.String("my-organization"),
 //				Email:        pulumi.String("test@example.com"),
 //				Role:         pulumi.String("member"),
-//				Teams: pulumi.StringArray{
-//					pulumi.String("my-team"),
-//				},
 //			})
 //			if err != nil {
 //				return err
@@ -68,8 +67,6 @@ type SentryOrganizationMember struct {
 	Pending pulumi.BoolOutput `pulumi:"pending"`
 	// This is the role of the organization member.
 	Role pulumi.StringOutput `pulumi:"role"`
-	// The teams the organization member should be added to.
-	Teams pulumi.StringArrayOutput `pulumi:"teams"`
 }
 
 // NewSentryOrganizationMember registers a new resource with the given unique name, arguments, and options.
@@ -123,8 +120,6 @@ type sentryOrganizationMemberState struct {
 	Pending *bool `pulumi:"pending"`
 	// This is the role of the organization member.
 	Role *string `pulumi:"role"`
-	// The teams the organization member should be added to.
-	Teams []string `pulumi:"teams"`
 }
 
 type SentryOrganizationMemberState struct {
@@ -140,8 +135,6 @@ type SentryOrganizationMemberState struct {
 	Pending pulumi.BoolPtrInput
 	// This is the role of the organization member.
 	Role pulumi.StringPtrInput
-	// The teams the organization member should be added to.
-	Teams pulumi.StringArrayInput
 }
 
 func (SentryOrganizationMemberState) ElementType() reflect.Type {
@@ -155,8 +148,6 @@ type sentryOrganizationMemberArgs struct {
 	Organization string `pulumi:"organization"`
 	// This is the role of the organization member.
 	Role string `pulumi:"role"`
-	// The teams the organization member should be added to.
-	Teams []string `pulumi:"teams"`
 }
 
 // The set of arguments for constructing a SentryOrganizationMember resource.
@@ -167,8 +158,6 @@ type SentryOrganizationMemberArgs struct {
 	Organization pulumi.StringInput
 	// This is the role of the organization member.
 	Role pulumi.StringInput
-	// The teams the organization member should be added to.
-	Teams pulumi.StringArrayInput
 }
 
 func (SentryOrganizationMemberArgs) ElementType() reflect.Type {
@@ -286,11 +275,6 @@ func (o SentryOrganizationMemberOutput) Pending() pulumi.BoolOutput {
 // This is the role of the organization member.
 func (o SentryOrganizationMemberOutput) Role() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryOrganizationMember) pulumi.StringOutput { return v.Role }).(pulumi.StringOutput)
-}
-
-// The teams the organization member should be added to.
-func (o SentryOrganizationMemberOutput) Teams() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *SentryOrganizationMember) pulumi.StringArrayOutput { return v.Teams }).(pulumi.StringArrayOutput)
 }
 
 type SentryOrganizationMemberArrayOutput struct{ *pulumi.OutputState }

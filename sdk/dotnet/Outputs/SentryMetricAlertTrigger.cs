@@ -17,7 +17,7 @@ namespace Pulumiverse.Sentry.Outputs
         public readonly ImmutableArray<Outputs.SentryMetricAlertTriggerAction> Actions;
         public readonly double AlertThreshold;
         /// <summary>
-        /// The ID of this resource.
+        /// The ID of the trigger.
         /// </summary>
         public readonly string? Id;
         public readonly string Label;

@@ -21,10 +21,86 @@ __all__ = [
     'SentryDashboardWidgetLayoutArgsDict',
     'SentryDashboardWidgetQueryArgs',
     'SentryDashboardWidgetQueryArgsDict',
+    'SentryIssueAlertActionsV2Args',
+    'SentryIssueAlertActionsV2ArgsDict',
+    'SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs',
+    'SentryIssueAlertActionsV2AzureDevopsCreateTicketArgsDict',
+    'SentryIssueAlertActionsV2DiscordNotifyServiceArgs',
+    'SentryIssueAlertActionsV2DiscordNotifyServiceArgsDict',
+    'SentryIssueAlertActionsV2GithubCreateTicketArgs',
+    'SentryIssueAlertActionsV2GithubCreateTicketArgsDict',
+    'SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs',
+    'SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgsDict',
+    'SentryIssueAlertActionsV2JiraCreateTicketArgs',
+    'SentryIssueAlertActionsV2JiraCreateTicketArgsDict',
+    'SentryIssueAlertActionsV2JiraServerCreateTicketArgs',
+    'SentryIssueAlertActionsV2JiraServerCreateTicketArgsDict',
+    'SentryIssueAlertActionsV2MsteamsNotifyServiceArgs',
+    'SentryIssueAlertActionsV2MsteamsNotifyServiceArgsDict',
+    'SentryIssueAlertActionsV2NotifyEmailArgs',
+    'SentryIssueAlertActionsV2NotifyEmailArgsDict',
+    'SentryIssueAlertActionsV2NotifyEventArgs',
+    'SentryIssueAlertActionsV2NotifyEventArgsDict',
+    'SentryIssueAlertActionsV2NotifyEventSentryAppArgs',
+    'SentryIssueAlertActionsV2NotifyEventSentryAppArgsDict',
+    'SentryIssueAlertActionsV2NotifyEventServiceArgs',
+    'SentryIssueAlertActionsV2NotifyEventServiceArgsDict',
+    'SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs',
+    'SentryIssueAlertActionsV2OpsgenieNotifyTeamArgsDict',
+    'SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs',
+    'SentryIssueAlertActionsV2PagerdutyNotifyServiceArgsDict',
+    'SentryIssueAlertActionsV2SlackNotifyServiceArgs',
+    'SentryIssueAlertActionsV2SlackNotifyServiceArgsDict',
+    'SentryIssueAlertConditionsV2Args',
+    'SentryIssueAlertConditionsV2ArgsDict',
+    'SentryIssueAlertConditionsV2EventFrequencyArgs',
+    'SentryIssueAlertConditionsV2EventFrequencyArgsDict',
+    'SentryIssueAlertConditionsV2EventFrequencyPercentArgs',
+    'SentryIssueAlertConditionsV2EventFrequencyPercentArgsDict',
+    'SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs',
+    'SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgsDict',
+    'SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs',
+    'SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgsDict',
+    'SentryIssueAlertConditionsV2FirstSeenEventArgs',
+    'SentryIssueAlertConditionsV2FirstSeenEventArgsDict',
+    'SentryIssueAlertConditionsV2NewHighPriorityIssueArgs',
+    'SentryIssueAlertConditionsV2NewHighPriorityIssueArgsDict',
+    'SentryIssueAlertConditionsV2ReappearedEventArgs',
+    'SentryIssueAlertConditionsV2ReappearedEventArgsDict',
+    'SentryIssueAlertConditionsV2RegressionEventArgs',
+    'SentryIssueAlertConditionsV2RegressionEventArgsDict',
+    'SentryIssueAlertFiltersV2Args',
+    'SentryIssueAlertFiltersV2ArgsDict',
+    'SentryIssueAlertFiltersV2AgeComparisonArgs',
+    'SentryIssueAlertFiltersV2AgeComparisonArgsDict',
+    'SentryIssueAlertFiltersV2AssignedToArgs',
+    'SentryIssueAlertFiltersV2AssignedToArgsDict',
+    'SentryIssueAlertFiltersV2EventAttributeArgs',
+    'SentryIssueAlertFiltersV2EventAttributeArgsDict',
+    'SentryIssueAlertFiltersV2IssueCategoryArgs',
+    'SentryIssueAlertFiltersV2IssueCategoryArgsDict',
+    'SentryIssueAlertFiltersV2IssueOccurrencesArgs',
+    'SentryIssueAlertFiltersV2IssueOccurrencesArgsDict',
+    'SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs',
+    'SentryIssueAlertFiltersV2LatestAdoptedReleaseArgsDict',
+    'SentryIssueAlertFiltersV2LatestReleaseArgs',
+    'SentryIssueAlertFiltersV2LatestReleaseArgsDict',
+    'SentryIssueAlertFiltersV2LevelArgs',
+    'SentryIssueAlertFiltersV2LevelArgsDict',
+    'SentryIssueAlertFiltersV2TaggedEventArgs',
+    'SentryIssueAlertFiltersV2TaggedEventArgsDict',
+    'SentryKeyJavascriptLoaderScriptArgs',
+    'SentryKeyJavascriptLoaderScriptArgsDict',
     'SentryMetricAlertTriggerArgs',
     'SentryMetricAlertTriggerArgsDict',
     'SentryMetricAlertTriggerActionArgs',
     'SentryMetricAlertTriggerActionArgsDict',
+    'SentryProjectClientSecurityArgs',
+    'SentryProjectClientSecurityArgsDict',
+    'SentryProjectFiltersArgs',
+    'SentryProjectFiltersArgsDict',
+    'SentryProjectSymbolSourceLayoutArgs',
+    'SentryProjectSymbolSourceLayoutArgsDict',
 ]
 
 MYPY = False
@@ -37,7 +113,7 @@ if not MYPY:
         title: pulumi.Input[str]
         id: NotRequired[pulumi.Input[str]]
         """
-        The ID of this resource.
+        The ID of the widget.
         """
         interval: NotRequired[pulumi.Input[str]]
         limit: NotRequired[pulumi.Input[int]]
@@ -57,7 +133,7 @@ class SentryDashboardWidgetArgs:
                  limit: Optional[pulumi.Input[int]] = None,
                  widget_type: Optional[pulumi.Input[str]] = None):
         """
-        :param pulumi.Input[str] id: The ID of this resource.
+        :param pulumi.Input[str] id: The ID of the widget.
         """
         pulumi.set(__self__, "display_type", display_type)
         pulumi.set(__self__, "layout", layout)
@@ -112,7 +188,7 @@ class SentryDashboardWidgetArgs:
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[str]]:
         """
-        The ID of this resource.
+        The ID of the widget.
         """
         return pulumi.get(self, "id")
 
@@ -227,7 +303,7 @@ if not MYPY:
         fields: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
         id: NotRequired[pulumi.Input[str]]
         """
-        The ID of this resource.
+        The ID of the query.
         """
         name: NotRequired[pulumi.Input[str]]
         order_by: NotRequired[pulumi.Input[str]]
@@ -246,7 +322,7 @@ class SentryDashboardWidgetQueryArgs:
                  name: Optional[pulumi.Input[str]] = None,
                  order_by: Optional[pulumi.Input[str]] = None):
         """
-        :param pulumi.Input[str] id: The ID of this resource.
+        :param pulumi.Input[str] id: The ID of the query.
         """
         if aggregates is not None:
             pulumi.set(__self__, "aggregates", aggregates)
@@ -314,7 +390,7 @@ class SentryDashboardWidgetQueryArgs:
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[str]]:
         """
-        The ID of this resource.
+        The ID of the query.
         """
         return pulumi.get(self, "id")
 
@@ -342,14 +418,2737 @@ class SentryDashboardWidgetQueryArgs:
 
 
 if not MYPY:
+    class SentryIssueAlertActionsV2ArgsDict(TypedDict):
+        azure_devops_create_ticket: NotRequired[pulumi.Input['SentryIssueAlertActionsV2AzureDevopsCreateTicketArgsDict']]
+        """
+        Create an Azure DevOps work item in `integration`.
+        """
+        discord_notify_service: NotRequired[pulumi.Input['SentryIssueAlertActionsV2DiscordNotifyServiceArgsDict']]
+        """
+        Send a notification to the `server` Discord server in the channel with ID or URL: `channel_id` and show tags `tags` in the notification.
+        """
+        github_create_ticket: NotRequired[pulumi.Input['SentryIssueAlertActionsV2GithubCreateTicketArgsDict']]
+        """
+        Create a GitHub issue in `integration`.
+        """
+        github_enterprise_create_ticket: NotRequired[pulumi.Input['SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgsDict']]
+        """
+        Create a GitHub Enterprise issue in `integration`.
+        """
+        jira_create_ticket: NotRequired[pulumi.Input['SentryIssueAlertActionsV2JiraCreateTicketArgsDict']]
+        """
+        Create a Jira issue in `integration`.
+        """
+        jira_server_create_ticket: NotRequired[pulumi.Input['SentryIssueAlertActionsV2JiraServerCreateTicketArgsDict']]
+        """
+        Create a Jira Server issue in `integration`.
+        """
+        msteams_notify_service: NotRequired[pulumi.Input['SentryIssueAlertActionsV2MsteamsNotifyServiceArgsDict']]
+        """
+        Send a notification to the `team` Team to `channel`.
+        """
+        notify_email: NotRequired[pulumi.Input['SentryIssueAlertActionsV2NotifyEmailArgsDict']]
+        """
+        Send a notification to `target_type` and if none can be found then send a notification to `fallthrough_type`.
+        """
+        notify_event: NotRequired[pulumi.Input['SentryIssueAlertActionsV2NotifyEventArgsDict']]
+        """
+        Send a notification to all legacy integrations.
+        """
+        notify_event_sentry_app: NotRequired[pulumi.Input['SentryIssueAlertActionsV2NotifyEventSentryAppArgsDict']]
+        """
+        Send a notification to a Sentry app.
+        """
+        notify_event_service: NotRequired[pulumi.Input['SentryIssueAlertActionsV2NotifyEventServiceArgsDict']]
+        """
+        Send a notification via an integration.
+        """
+        opsgenie_notify_team: NotRequired[pulumi.Input['SentryIssueAlertActionsV2OpsgenieNotifyTeamArgsDict']]
+        """
+        Send a notification to Opsgenie account `account` and team `team` with `priority` priority.
+        """
+        pagerduty_notify_service: NotRequired[pulumi.Input['SentryIssueAlertActionsV2PagerdutyNotifyServiceArgsDict']]
+        """
+        Send a notification to PagerDuty account `account` and service `service` with `severity` severity.
+        """
+        slack_notify_service: NotRequired[pulumi.Input['SentryIssueAlertActionsV2SlackNotifyServiceArgsDict']]
+        """
+        Send a notification to the `workspace` Slack workspace to `channel` (optionally, an ID: `channel_id`) and show tags `tags` and notes `notes` in notification.
+        """
+elif False:
+    SentryIssueAlertActionsV2ArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertActionsV2Args:
+    def __init__(__self__, *,
+                 azure_devops_create_ticket: Optional[pulumi.Input['SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs']] = None,
+                 discord_notify_service: Optional[pulumi.Input['SentryIssueAlertActionsV2DiscordNotifyServiceArgs']] = None,
+                 github_create_ticket: Optional[pulumi.Input['SentryIssueAlertActionsV2GithubCreateTicketArgs']] = None,
+                 github_enterprise_create_ticket: Optional[pulumi.Input['SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs']] = None,
+                 jira_create_ticket: Optional[pulumi.Input['SentryIssueAlertActionsV2JiraCreateTicketArgs']] = None,
+                 jira_server_create_ticket: Optional[pulumi.Input['SentryIssueAlertActionsV2JiraServerCreateTicketArgs']] = None,
+                 msteams_notify_service: Optional[pulumi.Input['SentryIssueAlertActionsV2MsteamsNotifyServiceArgs']] = None,
+                 notify_email: Optional[pulumi.Input['SentryIssueAlertActionsV2NotifyEmailArgs']] = None,
+                 notify_event: Optional[pulumi.Input['SentryIssueAlertActionsV2NotifyEventArgs']] = None,
+                 notify_event_sentry_app: Optional[pulumi.Input['SentryIssueAlertActionsV2NotifyEventSentryAppArgs']] = None,
+                 notify_event_service: Optional[pulumi.Input['SentryIssueAlertActionsV2NotifyEventServiceArgs']] = None,
+                 opsgenie_notify_team: Optional[pulumi.Input['SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs']] = None,
+                 pagerduty_notify_service: Optional[pulumi.Input['SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs']] = None,
+                 slack_notify_service: Optional[pulumi.Input['SentryIssueAlertActionsV2SlackNotifyServiceArgs']] = None):
+        """
+        :param pulumi.Input['SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs'] azure_devops_create_ticket: Create an Azure DevOps work item in `integration`.
+        :param pulumi.Input['SentryIssueAlertActionsV2DiscordNotifyServiceArgs'] discord_notify_service: Send a notification to the `server` Discord server in the channel with ID or URL: `channel_id` and show tags `tags` in the notification.
+        :param pulumi.Input['SentryIssueAlertActionsV2GithubCreateTicketArgs'] github_create_ticket: Create a GitHub issue in `integration`.
+        :param pulumi.Input['SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs'] github_enterprise_create_ticket: Create a GitHub Enterprise issue in `integration`.
+        :param pulumi.Input['SentryIssueAlertActionsV2JiraCreateTicketArgs'] jira_create_ticket: Create a Jira issue in `integration`.
+        :param pulumi.Input['SentryIssueAlertActionsV2JiraServerCreateTicketArgs'] jira_server_create_ticket: Create a Jira Server issue in `integration`.
+        :param pulumi.Input['SentryIssueAlertActionsV2MsteamsNotifyServiceArgs'] msteams_notify_service: Send a notification to the `team` Team to `channel`.
+        :param pulumi.Input['SentryIssueAlertActionsV2NotifyEmailArgs'] notify_email: Send a notification to `target_type` and if none can be found then send a notification to `fallthrough_type`.
+        :param pulumi.Input['SentryIssueAlertActionsV2NotifyEventArgs'] notify_event: Send a notification to all legacy integrations.
+        :param pulumi.Input['SentryIssueAlertActionsV2NotifyEventSentryAppArgs'] notify_event_sentry_app: Send a notification to a Sentry app.
+        :param pulumi.Input['SentryIssueAlertActionsV2NotifyEventServiceArgs'] notify_event_service: Send a notification via an integration.
+        :param pulumi.Input['SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs'] opsgenie_notify_team: Send a notification to Opsgenie account `account` and team `team` with `priority` priority.
+        :param pulumi.Input['SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs'] pagerduty_notify_service: Send a notification to PagerDuty account `account` and service `service` with `severity` severity.
+        :param pulumi.Input['SentryIssueAlertActionsV2SlackNotifyServiceArgs'] slack_notify_service: Send a notification to the `workspace` Slack workspace to `channel` (optionally, an ID: `channel_id`) and show tags `tags` and notes `notes` in notification.
+        """
+        if azure_devops_create_ticket is not None:
+            pulumi.set(__self__, "azure_devops_create_ticket", azure_devops_create_ticket)
+        if discord_notify_service is not None:
+            pulumi.set(__self__, "discord_notify_service", discord_notify_service)
+        if github_create_ticket is not None:
+            pulumi.set(__self__, "github_create_ticket", github_create_ticket)
+        if github_enterprise_create_ticket is not None:
+            pulumi.set(__self__, "github_enterprise_create_ticket", github_enterprise_create_ticket)
+        if jira_create_ticket is not None:
+            pulumi.set(__self__, "jira_create_ticket", jira_create_ticket)
+        if jira_server_create_ticket is not None:
+            pulumi.set(__self__, "jira_server_create_ticket", jira_server_create_ticket)
+        if msteams_notify_service is not None:
+            pulumi.set(__self__, "msteams_notify_service", msteams_notify_service)
+        if notify_email is not None:
+            pulumi.set(__self__, "notify_email", notify_email)
+        if notify_event is not None:
+            pulumi.set(__self__, "notify_event", notify_event)
+        if notify_event_sentry_app is not None:
+            pulumi.set(__self__, "notify_event_sentry_app", notify_event_sentry_app)
+        if notify_event_service is not None:
+            pulumi.set(__self__, "notify_event_service", notify_event_service)
+        if opsgenie_notify_team is not None:
+            pulumi.set(__self__, "opsgenie_notify_team", opsgenie_notify_team)
+        if pagerduty_notify_service is not None:
+            pulumi.set(__self__, "pagerduty_notify_service", pagerduty_notify_service)
+        if slack_notify_service is not None:
+            pulumi.set(__self__, "slack_notify_service", slack_notify_service)
+
+    @property
+    @pulumi.getter(name="azureDevopsCreateTicket")
+    def azure_devops_create_ticket(self) -> Optional[pulumi.Input['SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs']]:
+        """
+        Create an Azure DevOps work item in `integration`.
+        """
+        return pulumi.get(self, "azure_devops_create_ticket")
+
+    @azure_devops_create_ticket.setter
+    def azure_devops_create_ticket(self, value: Optional[pulumi.Input['SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs']]):
+        pulumi.set(self, "azure_devops_create_ticket", value)
+
+    @property
+    @pulumi.getter(name="discordNotifyService")
+    def discord_notify_service(self) -> Optional[pulumi.Input['SentryIssueAlertActionsV2DiscordNotifyServiceArgs']]:
+        """
+        Send a notification to the `server` Discord server in the channel with ID or URL: `channel_id` and show tags `tags` in the notification.
+        """
+        return pulumi.get(self, "discord_notify_service")
+
+    @discord_notify_service.setter
+    def discord_notify_service(self, value: Optional[pulumi.Input['SentryIssueAlertActionsV2DiscordNotifyServiceArgs']]):
+        pulumi.set(self, "discord_notify_service", value)
+
+    @property
+    @pulumi.getter(name="githubCreateTicket")
+    def github_create_ticket(self) -> Optional[pulumi.Input['SentryIssueAlertActionsV2GithubCreateTicketArgs']]:
+        """
+        Create a GitHub issue in `integration`.
+        """
+        return pulumi.get(self, "github_create_ticket")
+
+    @github_create_ticket.setter
+    def github_create_ticket(self, value: Optional[pulumi.Input['SentryIssueAlertActionsV2GithubCreateTicketArgs']]):
+        pulumi.set(self, "github_create_ticket", value)
+
+    @property
+    @pulumi.getter(name="githubEnterpriseCreateTicket")
+    def github_enterprise_create_ticket(self) -> Optional[pulumi.Input['SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs']]:
+        """
+        Create a GitHub Enterprise issue in `integration`.
+        """
+        return pulumi.get(self, "github_enterprise_create_ticket")
+
+    @github_enterprise_create_ticket.setter
+    def github_enterprise_create_ticket(self, value: Optional[pulumi.Input['SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs']]):
+        pulumi.set(self, "github_enterprise_create_ticket", value)
+
+    @property
+    @pulumi.getter(name="jiraCreateTicket")
+    def jira_create_ticket(self) -> Optional[pulumi.Input['SentryIssueAlertActionsV2JiraCreateTicketArgs']]:
+        """
+        Create a Jira issue in `integration`.
+        """
+        return pulumi.get(self, "jira_create_ticket")
+
+    @jira_create_ticket.setter
+    def jira_create_ticket(self, value: Optional[pulumi.Input['SentryIssueAlertActionsV2JiraCreateTicketArgs']]):
+        pulumi.set(self, "jira_create_ticket", value)
+
+    @property
+    @pulumi.getter(name="jiraServerCreateTicket")
+    def jira_server_create_ticket(self) -> Optional[pulumi.Input['SentryIssueAlertActionsV2JiraServerCreateTicketArgs']]:
+        """
+        Create a Jira Server issue in `integration`.
+        """
+        return pulumi.get(self, "jira_server_create_ticket")
+
+    @jira_server_create_ticket.setter
+    def jira_server_create_ticket(self, value: Optional[pulumi.Input['SentryIssueAlertActionsV2JiraServerCreateTicketArgs']]):
+        pulumi.set(self, "jira_server_create_ticket", value)
+
+    @property
+    @pulumi.getter(name="msteamsNotifyService")
+    def msteams_notify_service(self) -> Optional[pulumi.Input['SentryIssueAlertActionsV2MsteamsNotifyServiceArgs']]:
+        """
+        Send a notification to the `team` Team to `channel`.
+        """
+        return pulumi.get(self, "msteams_notify_service")
+
+    @msteams_notify_service.setter
+    def msteams_notify_service(self, value: Optional[pulumi.Input['SentryIssueAlertActionsV2MsteamsNotifyServiceArgs']]):
+        pulumi.set(self, "msteams_notify_service", value)
+
+    @property
+    @pulumi.getter(name="notifyEmail")
+    def notify_email(self) -> Optional[pulumi.Input['SentryIssueAlertActionsV2NotifyEmailArgs']]:
+        """
+        Send a notification to `target_type` and if none can be found then send a notification to `fallthrough_type`.
+        """
+        return pulumi.get(self, "notify_email")
+
+    @notify_email.setter
+    def notify_email(self, value: Optional[pulumi.Input['SentryIssueAlertActionsV2NotifyEmailArgs']]):
+        pulumi.set(self, "notify_email", value)
+
+    @property
+    @pulumi.getter(name="notifyEvent")
+    def notify_event(self) -> Optional[pulumi.Input['SentryIssueAlertActionsV2NotifyEventArgs']]:
+        """
+        Send a notification to all legacy integrations.
+        """
+        return pulumi.get(self, "notify_event")
+
+    @notify_event.setter
+    def notify_event(self, value: Optional[pulumi.Input['SentryIssueAlertActionsV2NotifyEventArgs']]):
+        pulumi.set(self, "notify_event", value)
+
+    @property
+    @pulumi.getter(name="notifyEventSentryApp")
+    def notify_event_sentry_app(self) -> Optional[pulumi.Input['SentryIssueAlertActionsV2NotifyEventSentryAppArgs']]:
+        """
+        Send a notification to a Sentry app.
+        """
+        return pulumi.get(self, "notify_event_sentry_app")
+
+    @notify_event_sentry_app.setter
+    def notify_event_sentry_app(self, value: Optional[pulumi.Input['SentryIssueAlertActionsV2NotifyEventSentryAppArgs']]):
+        pulumi.set(self, "notify_event_sentry_app", value)
+
+    @property
+    @pulumi.getter(name="notifyEventService")
+    def notify_event_service(self) -> Optional[pulumi.Input['SentryIssueAlertActionsV2NotifyEventServiceArgs']]:
+        """
+        Send a notification via an integration.
+        """
+        return pulumi.get(self, "notify_event_service")
+
+    @notify_event_service.setter
+    def notify_event_service(self, value: Optional[pulumi.Input['SentryIssueAlertActionsV2NotifyEventServiceArgs']]):
+        pulumi.set(self, "notify_event_service", value)
+
+    @property
+    @pulumi.getter(name="opsgenieNotifyTeam")
+    def opsgenie_notify_team(self) -> Optional[pulumi.Input['SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs']]:
+        """
+        Send a notification to Opsgenie account `account` and team `team` with `priority` priority.
+        """
+        return pulumi.get(self, "opsgenie_notify_team")
+
+    @opsgenie_notify_team.setter
+    def opsgenie_notify_team(self, value: Optional[pulumi.Input['SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs']]):
+        pulumi.set(self, "opsgenie_notify_team", value)
+
+    @property
+    @pulumi.getter(name="pagerdutyNotifyService")
+    def pagerduty_notify_service(self) -> Optional[pulumi.Input['SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs']]:
+        """
+        Send a notification to PagerDuty account `account` and service `service` with `severity` severity.
+        """
+        return pulumi.get(self, "pagerduty_notify_service")
+
+    @pagerduty_notify_service.setter
+    def pagerduty_notify_service(self, value: Optional[pulumi.Input['SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs']]):
+        pulumi.set(self, "pagerduty_notify_service", value)
+
+    @property
+    @pulumi.getter(name="slackNotifyService")
+    def slack_notify_service(self) -> Optional[pulumi.Input['SentryIssueAlertActionsV2SlackNotifyServiceArgs']]:
+        """
+        Send a notification to the `workspace` Slack workspace to `channel` (optionally, an ID: `channel_id`) and show tags `tags` and notes `notes` in notification.
+        """
+        return pulumi.get(self, "slack_notify_service")
+
+    @slack_notify_service.setter
+    def slack_notify_service(self, value: Optional[pulumi.Input['SentryIssueAlertActionsV2SlackNotifyServiceArgs']]):
+        pulumi.set(self, "slack_notify_service", value)
+
+
+if not MYPY:
+    class SentryIssueAlertActionsV2AzureDevopsCreateTicketArgsDict(TypedDict):
+        integration: pulumi.Input[str]
+        """
+        The integration ID.
+        """
+        project: pulumi.Input[str]
+        """
+        The ID of the Azure DevOps project.
+        """
+        work_item_type: pulumi.Input[str]
+        """
+        The type of work item to create.
+        """
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertActionsV2AzureDevopsCreateTicketArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs:
+    def __init__(__self__, *,
+                 integration: pulumi.Input[str],
+                 project: pulumi.Input[str],
+                 work_item_type: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] integration: The integration ID.
+        :param pulumi.Input[str] project: The ID of the Azure DevOps project.
+        :param pulumi.Input[str] work_item_type: The type of work item to create.
+        """
+        pulumi.set(__self__, "integration", integration)
+        pulumi.set(__self__, "project", project)
+        pulumi.set(__self__, "work_item_type", work_item_type)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def integration(self) -> pulumi.Input[str]:
+        """
+        The integration ID.
+        """
+        return pulumi.get(self, "integration")
+
+    @integration.setter
+    def integration(self, value: pulumi.Input[str]):
+        pulumi.set(self, "integration", value)
+
+    @property
+    @pulumi.getter
+    def project(self) -> pulumi.Input[str]:
+        """
+        The ID of the Azure DevOps project.
+        """
+        return pulumi.get(self, "project")
+
+    @project.setter
+    def project(self, value: pulumi.Input[str]):
+        pulumi.set(self, "project", value)
+
+    @property
+    @pulumi.getter(name="workItemType")
+    def work_item_type(self) -> pulumi.Input[str]:
+        """
+        The type of work item to create.
+        """
+        return pulumi.get(self, "work_item_type")
+
+    @work_item_type.setter
+    def work_item_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "work_item_type", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertActionsV2DiscordNotifyServiceArgsDict(TypedDict):
+        channel_id: pulumi.Input[str]
+        """
+        The ID of the channel to send the notification to. You must enter either a channel ID or a channel URL, not a channel name
+        """
+        server: pulumi.Input[str]
+        """
+        The integration ID associated with the Discord server.
+        """
+        name: NotRequired[pulumi.Input[str]]
+        tags: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        A string of tags to show in the notification.
+        """
+elif False:
+    SentryIssueAlertActionsV2DiscordNotifyServiceArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertActionsV2DiscordNotifyServiceArgs:
+    def __init__(__self__, *,
+                 channel_id: pulumi.Input[str],
+                 server: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[str] channel_id: The ID of the channel to send the notification to. You must enter either a channel ID or a channel URL, not a channel name
+        :param pulumi.Input[str] server: The integration ID associated with the Discord server.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A string of tags to show in the notification.
+        """
+        pulumi.set(__self__, "channel_id", channel_id)
+        pulumi.set(__self__, "server", server)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter(name="channelId")
+    def channel_id(self) -> pulumi.Input[str]:
+        """
+        The ID of the channel to send the notification to. You must enter either a channel ID or a channel URL, not a channel name
+        """
+        return pulumi.get(self, "channel_id")
+
+    @channel_id.setter
+    def channel_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "channel_id", value)
+
+    @property
+    @pulumi.getter
+    def server(self) -> pulumi.Input[str]:
+        """
+        The integration ID associated with the Discord server.
+        """
+        return pulumi.get(self, "server")
+
+    @server.setter
+    def server(self, value: pulumi.Input[str]):
+        pulumi.set(self, "server", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A string of tags to show in the notification.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+
+if not MYPY:
+    class SentryIssueAlertActionsV2GithubCreateTicketArgsDict(TypedDict):
+        integration: pulumi.Input[str]
+        """
+        The integration ID associated with GitHub.
+        """
+        repo: pulumi.Input[str]
+        """
+        The name of the repository to create the issue in.
+        """
+        assignee: NotRequired[pulumi.Input[str]]
+        """
+        The GitHub user to assign the issue to.
+        """
+        labels: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        A list of labels to assign to the issue.
+        """
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertActionsV2GithubCreateTicketArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertActionsV2GithubCreateTicketArgs:
+    def __init__(__self__, *,
+                 integration: pulumi.Input[str],
+                 repo: pulumi.Input[str],
+                 assignee: Optional[pulumi.Input[str]] = None,
+                 labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] integration: The integration ID associated with GitHub.
+        :param pulumi.Input[str] repo: The name of the repository to create the issue in.
+        :param pulumi.Input[str] assignee: The GitHub user to assign the issue to.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] labels: A list of labels to assign to the issue.
+        """
+        pulumi.set(__self__, "integration", integration)
+        pulumi.set(__self__, "repo", repo)
+        if assignee is not None:
+            pulumi.set(__self__, "assignee", assignee)
+        if labels is not None:
+            pulumi.set(__self__, "labels", labels)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def integration(self) -> pulumi.Input[str]:
+        """
+        The integration ID associated with GitHub.
+        """
+        return pulumi.get(self, "integration")
+
+    @integration.setter
+    def integration(self, value: pulumi.Input[str]):
+        pulumi.set(self, "integration", value)
+
+    @property
+    @pulumi.getter
+    def repo(self) -> pulumi.Input[str]:
+        """
+        The name of the repository to create the issue in.
+        """
+        return pulumi.get(self, "repo")
+
+    @repo.setter
+    def repo(self, value: pulumi.Input[str]):
+        pulumi.set(self, "repo", value)
+
+    @property
+    @pulumi.getter
+    def assignee(self) -> Optional[pulumi.Input[str]]:
+        """
+        The GitHub user to assign the issue to.
+        """
+        return pulumi.get(self, "assignee")
+
+    @assignee.setter
+    def assignee(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "assignee", value)
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of labels to assign to the issue.
+        """
+        return pulumi.get(self, "labels")
+
+    @labels.setter
+    def labels(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "labels", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgsDict(TypedDict):
+        integration: pulumi.Input[str]
+        """
+        The integration ID associated with GitHub Enterprise.
+        """
+        repo: pulumi.Input[str]
+        """
+        The name of the repository to create the issue in.
+        """
+        assignee: NotRequired[pulumi.Input[str]]
+        """
+        The GitHub user to assign the issue to.
+        """
+        labels: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        A list of labels to assign to the issue.
+        """
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs:
+    def __init__(__self__, *,
+                 integration: pulumi.Input[str],
+                 repo: pulumi.Input[str],
+                 assignee: Optional[pulumi.Input[str]] = None,
+                 labels: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] integration: The integration ID associated with GitHub Enterprise.
+        :param pulumi.Input[str] repo: The name of the repository to create the issue in.
+        :param pulumi.Input[str] assignee: The GitHub user to assign the issue to.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] labels: A list of labels to assign to the issue.
+        """
+        pulumi.set(__self__, "integration", integration)
+        pulumi.set(__self__, "repo", repo)
+        if assignee is not None:
+            pulumi.set(__self__, "assignee", assignee)
+        if labels is not None:
+            pulumi.set(__self__, "labels", labels)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def integration(self) -> pulumi.Input[str]:
+        """
+        The integration ID associated with GitHub Enterprise.
+        """
+        return pulumi.get(self, "integration")
+
+    @integration.setter
+    def integration(self, value: pulumi.Input[str]):
+        pulumi.set(self, "integration", value)
+
+    @property
+    @pulumi.getter
+    def repo(self) -> pulumi.Input[str]:
+        """
+        The name of the repository to create the issue in.
+        """
+        return pulumi.get(self, "repo")
+
+    @repo.setter
+    def repo(self, value: pulumi.Input[str]):
+        pulumi.set(self, "repo", value)
+
+    @property
+    @pulumi.getter
+    def assignee(self) -> Optional[pulumi.Input[str]]:
+        """
+        The GitHub user to assign the issue to.
+        """
+        return pulumi.get(self, "assignee")
+
+    @assignee.setter
+    def assignee(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "assignee", value)
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of labels to assign to the issue.
+        """
+        return pulumi.get(self, "labels")
+
+    @labels.setter
+    def labels(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "labels", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertActionsV2JiraCreateTicketArgsDict(TypedDict):
+        integration: pulumi.Input[str]
+        """
+        The integration ID associated with Jira.
+        """
+        issue_type: pulumi.Input[str]
+        """
+        The ID of the type of issue that the ticket should be created as.
+        """
+        project: pulumi.Input[str]
+        """
+        The ID of the Jira project.
+        """
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertActionsV2JiraCreateTicketArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertActionsV2JiraCreateTicketArgs:
+    def __init__(__self__, *,
+                 integration: pulumi.Input[str],
+                 issue_type: pulumi.Input[str],
+                 project: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] integration: The integration ID associated with Jira.
+        :param pulumi.Input[str] issue_type: The ID of the type of issue that the ticket should be created as.
+        :param pulumi.Input[str] project: The ID of the Jira project.
+        """
+        pulumi.set(__self__, "integration", integration)
+        pulumi.set(__self__, "issue_type", issue_type)
+        pulumi.set(__self__, "project", project)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def integration(self) -> pulumi.Input[str]:
+        """
+        The integration ID associated with Jira.
+        """
+        return pulumi.get(self, "integration")
+
+    @integration.setter
+    def integration(self, value: pulumi.Input[str]):
+        pulumi.set(self, "integration", value)
+
+    @property
+    @pulumi.getter(name="issueType")
+    def issue_type(self) -> pulumi.Input[str]:
+        """
+        The ID of the type of issue that the ticket should be created as.
+        """
+        return pulumi.get(self, "issue_type")
+
+    @issue_type.setter
+    def issue_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "issue_type", value)
+
+    @property
+    @pulumi.getter
+    def project(self) -> pulumi.Input[str]:
+        """
+        The ID of the Jira project.
+        """
+        return pulumi.get(self, "project")
+
+    @project.setter
+    def project(self, value: pulumi.Input[str]):
+        pulumi.set(self, "project", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertActionsV2JiraServerCreateTicketArgsDict(TypedDict):
+        integration: pulumi.Input[str]
+        """
+        The integration ID associated with Jira Server.
+        """
+        issue_type: pulumi.Input[str]
+        """
+        The ID of the type of issue that the ticket should be created as.
+        """
+        project: pulumi.Input[str]
+        """
+        The ID of the Jira Server project.
+        """
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertActionsV2JiraServerCreateTicketArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertActionsV2JiraServerCreateTicketArgs:
+    def __init__(__self__, *,
+                 integration: pulumi.Input[str],
+                 issue_type: pulumi.Input[str],
+                 project: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] integration: The integration ID associated with Jira Server.
+        :param pulumi.Input[str] issue_type: The ID of the type of issue that the ticket should be created as.
+        :param pulumi.Input[str] project: The ID of the Jira Server project.
+        """
+        pulumi.set(__self__, "integration", integration)
+        pulumi.set(__self__, "issue_type", issue_type)
+        pulumi.set(__self__, "project", project)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def integration(self) -> pulumi.Input[str]:
+        """
+        The integration ID associated with Jira Server.
+        """
+        return pulumi.get(self, "integration")
+
+    @integration.setter
+    def integration(self, value: pulumi.Input[str]):
+        pulumi.set(self, "integration", value)
+
+    @property
+    @pulumi.getter(name="issueType")
+    def issue_type(self) -> pulumi.Input[str]:
+        """
+        The ID of the type of issue that the ticket should be created as.
+        """
+        return pulumi.get(self, "issue_type")
+
+    @issue_type.setter
+    def issue_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "issue_type", value)
+
+    @property
+    @pulumi.getter
+    def project(self) -> pulumi.Input[str]:
+        """
+        The ID of the Jira Server project.
+        """
+        return pulumi.get(self, "project")
+
+    @project.setter
+    def project(self, value: pulumi.Input[str]):
+        pulumi.set(self, "project", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertActionsV2MsteamsNotifyServiceArgsDict(TypedDict):
+        channel: pulumi.Input[str]
+        """
+        The name of the channel to send the notification to.
+        """
+        team: pulumi.Input[str]
+        """
+        The integration ID associated with the Microsoft Teams team.
+        """
+        channel_id: NotRequired[pulumi.Input[str]]
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertActionsV2MsteamsNotifyServiceArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertActionsV2MsteamsNotifyServiceArgs:
+    def __init__(__self__, *,
+                 channel: pulumi.Input[str],
+                 team: pulumi.Input[str],
+                 channel_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] channel: The name of the channel to send the notification to.
+        :param pulumi.Input[str] team: The integration ID associated with the Microsoft Teams team.
+        """
+        pulumi.set(__self__, "channel", channel)
+        pulumi.set(__self__, "team", team)
+        if channel_id is not None:
+            pulumi.set(__self__, "channel_id", channel_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def channel(self) -> pulumi.Input[str]:
+        """
+        The name of the channel to send the notification to.
+        """
+        return pulumi.get(self, "channel")
+
+    @channel.setter
+    def channel(self, value: pulumi.Input[str]):
+        pulumi.set(self, "channel", value)
+
+    @property
+    @pulumi.getter
+    def team(self) -> pulumi.Input[str]:
+        """
+        The integration ID associated with the Microsoft Teams team.
+        """
+        return pulumi.get(self, "team")
+
+    @team.setter
+    def team(self, value: pulumi.Input[str]):
+        pulumi.set(self, "team", value)
+
+    @property
+    @pulumi.getter(name="channelId")
+    def channel_id(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "channel_id")
+
+    @channel_id.setter
+    def channel_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "channel_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertActionsV2NotifyEmailArgsDict(TypedDict):
+        target_type: pulumi.Input[str]
+        """
+        Valid values are: `IssueOwners`, `Team`, and `Member`.
+        """
+        fallthrough_type: NotRequired[pulumi.Input[str]]
+        """
+        Who the notification should be sent to if there are no suggested assignees. Valid values are: `AllMembers`, `ActiveMembers`, and `NoOne`.
+        """
+        name: NotRequired[pulumi.Input[str]]
+        target_identifier: NotRequired[pulumi.Input[str]]
+        """
+        The ID of the Member or Team the notification should be sent to. Only required when `target_type` is `Team` or `Member`.
+        """
+elif False:
+    SentryIssueAlertActionsV2NotifyEmailArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertActionsV2NotifyEmailArgs:
+    def __init__(__self__, *,
+                 target_type: pulumi.Input[str],
+                 fallthrough_type: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 target_identifier: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] target_type: Valid values are: `IssueOwners`, `Team`, and `Member`.
+        :param pulumi.Input[str] fallthrough_type: Who the notification should be sent to if there are no suggested assignees. Valid values are: `AllMembers`, `ActiveMembers`, and `NoOne`.
+        :param pulumi.Input[str] target_identifier: The ID of the Member or Team the notification should be sent to. Only required when `target_type` is `Team` or `Member`.
+        """
+        pulumi.set(__self__, "target_type", target_type)
+        if fallthrough_type is not None:
+            pulumi.set(__self__, "fallthrough_type", fallthrough_type)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if target_identifier is not None:
+            pulumi.set(__self__, "target_identifier", target_identifier)
+
+    @property
+    @pulumi.getter(name="targetType")
+    def target_type(self) -> pulumi.Input[str]:
+        """
+        Valid values are: `IssueOwners`, `Team`, and `Member`.
+        """
+        return pulumi.get(self, "target_type")
+
+    @target_type.setter
+    def target_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "target_type", value)
+
+    @property
+    @pulumi.getter(name="fallthroughType")
+    def fallthrough_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Who the notification should be sent to if there are no suggested assignees. Valid values are: `AllMembers`, `ActiveMembers`, and `NoOne`.
+        """
+        return pulumi.get(self, "fallthrough_type")
+
+    @fallthrough_type.setter
+    def fallthrough_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fallthrough_type", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="targetIdentifier")
+    def target_identifier(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the Member or Team the notification should be sent to. Only required when `target_type` is `Team` or `Member`.
+        """
+        return pulumi.get(self, "target_identifier")
+
+    @target_identifier.setter
+    def target_identifier(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "target_identifier", value)
+
+
+if not MYPY:
+    class SentryIssueAlertActionsV2NotifyEventArgsDict(TypedDict):
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertActionsV2NotifyEventArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertActionsV2NotifyEventArgs:
+    def __init__(__self__, *,
+                 name: Optional[pulumi.Input[str]] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertActionsV2NotifyEventSentryAppArgsDict(TypedDict):
+        sentry_app_installation_uuid: pulumi.Input[str]
+        name: NotRequired[pulumi.Input[str]]
+        settings: NotRequired[pulumi.Input[Mapping[str, pulumi.Input[str]]]]
+elif False:
+    SentryIssueAlertActionsV2NotifyEventSentryAppArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertActionsV2NotifyEventSentryAppArgs:
+    def __init__(__self__, *,
+                 sentry_app_installation_uuid: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None,
+                 settings: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None):
+        pulumi.set(__self__, "sentry_app_installation_uuid", sentry_app_installation_uuid)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if settings is not None:
+            pulumi.set(__self__, "settings", settings)
+
+    @property
+    @pulumi.getter(name="sentryAppInstallationUuid")
+    def sentry_app_installation_uuid(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "sentry_app_installation_uuid")
+
+    @sentry_app_installation_uuid.setter
+    def sentry_app_installation_uuid(self, value: pulumi.Input[str]):
+        pulumi.set(self, "sentry_app_installation_uuid", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def settings(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        return pulumi.get(self, "settings")
+
+    @settings.setter
+    def settings(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "settings", value)
+
+
+if not MYPY:
+    class SentryIssueAlertActionsV2NotifyEventServiceArgsDict(TypedDict):
+        service: pulumi.Input[str]
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertActionsV2NotifyEventServiceArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertActionsV2NotifyEventServiceArgs:
+    def __init__(__self__, *,
+                 service: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "service", service)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def service(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "service")
+
+    @service.setter
+    def service(self, value: pulumi.Input[str]):
+        pulumi.set(self, "service", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertActionsV2OpsgenieNotifyTeamArgsDict(TypedDict):
+        account: pulumi.Input[str]
+        priority: pulumi.Input[str]
+        team: pulumi.Input[str]
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertActionsV2OpsgenieNotifyTeamArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs:
+    def __init__(__self__, *,
+                 account: pulumi.Input[str],
+                 priority: pulumi.Input[str],
+                 team: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "account", account)
+        pulumi.set(__self__, "priority", priority)
+        pulumi.set(__self__, "team", team)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def account(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "account")
+
+    @account.setter
+    def account(self, value: pulumi.Input[str]):
+        pulumi.set(self, "account", value)
+
+    @property
+    @pulumi.getter
+    def priority(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "priority")
+
+    @priority.setter
+    def priority(self, value: pulumi.Input[str]):
+        pulumi.set(self, "priority", value)
+
+    @property
+    @pulumi.getter
+    def team(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "team")
+
+    @team.setter
+    def team(self, value: pulumi.Input[str]):
+        pulumi.set(self, "team", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertActionsV2PagerdutyNotifyServiceArgsDict(TypedDict):
+        account: pulumi.Input[str]
+        service: pulumi.Input[str]
+        severity: pulumi.Input[str]
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertActionsV2PagerdutyNotifyServiceArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs:
+    def __init__(__self__, *,
+                 account: pulumi.Input[str],
+                 service: pulumi.Input[str],
+                 severity: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "account", account)
+        pulumi.set(__self__, "service", service)
+        pulumi.set(__self__, "severity", severity)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def account(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "account")
+
+    @account.setter
+    def account(self, value: pulumi.Input[str]):
+        pulumi.set(self, "account", value)
+
+    @property
+    @pulumi.getter
+    def service(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "service")
+
+    @service.setter
+    def service(self, value: pulumi.Input[str]):
+        pulumi.set(self, "service", value)
+
+    @property
+    @pulumi.getter
+    def severity(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "severity")
+
+    @severity.setter
+    def severity(self, value: pulumi.Input[str]):
+        pulumi.set(self, "severity", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertActionsV2SlackNotifyServiceArgsDict(TypedDict):
+        channel: pulumi.Input[str]
+        """
+        The name of the channel to send the notification to (e.g., #critical, Jane Schmidt).
+        """
+        workspace: pulumi.Input[str]
+        """
+        The integration ID associated with the Slack workspace.
+        """
+        channel_id: NotRequired[pulumi.Input[str]]
+        """
+        The ID of the channel to send the notification to.
+        """
+        name: NotRequired[pulumi.Input[str]]
+        notes: NotRequired[pulumi.Input[str]]
+        """
+        Text to show alongside the notification. To @ a user, include their user id like `@<USER_ID>`. To include a clickable link, format the link and title like `<http://example.com|Click Here>`.
+        """
+        tags: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        A string of tags to show in the notification.
+        """
+elif False:
+    SentryIssueAlertActionsV2SlackNotifyServiceArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertActionsV2SlackNotifyServiceArgs:
+    def __init__(__self__, *,
+                 channel: pulumi.Input[str],
+                 workspace: pulumi.Input[str],
+                 channel_id: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None,
+                 notes: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[str] channel: The name of the channel to send the notification to (e.g., #critical, Jane Schmidt).
+        :param pulumi.Input[str] workspace: The integration ID associated with the Slack workspace.
+        :param pulumi.Input[str] channel_id: The ID of the channel to send the notification to.
+        :param pulumi.Input[str] notes: Text to show alongside the notification. To @ a user, include their user id like `@<USER_ID>`. To include a clickable link, format the link and title like `<http://example.com|Click Here>`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] tags: A string of tags to show in the notification.
+        """
+        pulumi.set(__self__, "channel", channel)
+        pulumi.set(__self__, "workspace", workspace)
+        if channel_id is not None:
+            pulumi.set(__self__, "channel_id", channel_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if notes is not None:
+            pulumi.set(__self__, "notes", notes)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter
+    def channel(self) -> pulumi.Input[str]:
+        """
+        The name of the channel to send the notification to (e.g., #critical, Jane Schmidt).
+        """
+        return pulumi.get(self, "channel")
+
+    @channel.setter
+    def channel(self, value: pulumi.Input[str]):
+        pulumi.set(self, "channel", value)
+
+    @property
+    @pulumi.getter
+    def workspace(self) -> pulumi.Input[str]:
+        """
+        The integration ID associated with the Slack workspace.
+        """
+        return pulumi.get(self, "workspace")
+
+    @workspace.setter
+    def workspace(self, value: pulumi.Input[str]):
+        pulumi.set(self, "workspace", value)
+
+    @property
+    @pulumi.getter(name="channelId")
+    def channel_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        The ID of the channel to send the notification to.
+        """
+        return pulumi.get(self, "channel_id")
+
+    @channel_id.setter
+    def channel_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "channel_id", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def notes(self) -> Optional[pulumi.Input[str]]:
+        """
+        Text to show alongside the notification. To @ a user, include their user id like `@<USER_ID>`. To include a clickable link, format the link and title like `<http://example.com|Click Here>`.
+        """
+        return pulumi.get(self, "notes")
+
+    @notes.setter
+    def notes(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "notes", value)
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A string of tags to show in the notification.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "tags", value)
+
+
+if not MYPY:
+    class SentryIssueAlertConditionsV2ArgsDict(TypedDict):
+        event_frequency: NotRequired[pulumi.Input['SentryIssueAlertConditionsV2EventFrequencyArgsDict']]
+        """
+        When the `comparison_type` is `count`, the number of events in an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the number of events in an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        """
+        event_frequency_percent: NotRequired[pulumi.Input['SentryIssueAlertConditionsV2EventFrequencyPercentArgsDict']]
+        """
+        When the `comparison_type` is `count`, the percent of sessions affected by an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the percent of sessions affected by an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        """
+        event_unique_user_frequency: NotRequired[pulumi.Input['SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgsDict']]
+        """
+        When the `comparison_type` is `count`, the number of users affected by an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the number of users affected by an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        """
+        existing_high_priority_issue: NotRequired[pulumi.Input['SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgsDict']]
+        """
+        Sentry marks an existing issue as high priority.
+        """
+        first_seen_event: NotRequired[pulumi.Input['SentryIssueAlertConditionsV2FirstSeenEventArgsDict']]
+        """
+        A new issue is created.
+        """
+        new_high_priority_issue: NotRequired[pulumi.Input['SentryIssueAlertConditionsV2NewHighPriorityIssueArgsDict']]
+        """
+        Sentry marks a new issue as high priority.
+        """
+        reappeared_event: NotRequired[pulumi.Input['SentryIssueAlertConditionsV2ReappearedEventArgsDict']]
+        """
+        The issue changes state from ignored to unresolved.
+        """
+        regression_event: NotRequired[pulumi.Input['SentryIssueAlertConditionsV2RegressionEventArgsDict']]
+        """
+        The issue changes state from resolved to unresolved.
+        """
+elif False:
+    SentryIssueAlertConditionsV2ArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertConditionsV2Args:
+    def __init__(__self__, *,
+                 event_frequency: Optional[pulumi.Input['SentryIssueAlertConditionsV2EventFrequencyArgs']] = None,
+                 event_frequency_percent: Optional[pulumi.Input['SentryIssueAlertConditionsV2EventFrequencyPercentArgs']] = None,
+                 event_unique_user_frequency: Optional[pulumi.Input['SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs']] = None,
+                 existing_high_priority_issue: Optional[pulumi.Input['SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs']] = None,
+                 first_seen_event: Optional[pulumi.Input['SentryIssueAlertConditionsV2FirstSeenEventArgs']] = None,
+                 new_high_priority_issue: Optional[pulumi.Input['SentryIssueAlertConditionsV2NewHighPriorityIssueArgs']] = None,
+                 reappeared_event: Optional[pulumi.Input['SentryIssueAlertConditionsV2ReappearedEventArgs']] = None,
+                 regression_event: Optional[pulumi.Input['SentryIssueAlertConditionsV2RegressionEventArgs']] = None):
+        """
+        :param pulumi.Input['SentryIssueAlertConditionsV2EventFrequencyArgs'] event_frequency: When the `comparison_type` is `count`, the number of events in an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the number of events in an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        :param pulumi.Input['SentryIssueAlertConditionsV2EventFrequencyPercentArgs'] event_frequency_percent: When the `comparison_type` is `count`, the percent of sessions affected by an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the percent of sessions affected by an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        :param pulumi.Input['SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs'] event_unique_user_frequency: When the `comparison_type` is `count`, the number of users affected by an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the number of users affected by an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        :param pulumi.Input['SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs'] existing_high_priority_issue: Sentry marks an existing issue as high priority.
+        :param pulumi.Input['SentryIssueAlertConditionsV2FirstSeenEventArgs'] first_seen_event: A new issue is created.
+        :param pulumi.Input['SentryIssueAlertConditionsV2NewHighPriorityIssueArgs'] new_high_priority_issue: Sentry marks a new issue as high priority.
+        :param pulumi.Input['SentryIssueAlertConditionsV2ReappearedEventArgs'] reappeared_event: The issue changes state from ignored to unresolved.
+        :param pulumi.Input['SentryIssueAlertConditionsV2RegressionEventArgs'] regression_event: The issue changes state from resolved to unresolved.
+        """
+        if event_frequency is not None:
+            pulumi.set(__self__, "event_frequency", event_frequency)
+        if event_frequency_percent is not None:
+            pulumi.set(__self__, "event_frequency_percent", event_frequency_percent)
+        if event_unique_user_frequency is not None:
+            pulumi.set(__self__, "event_unique_user_frequency", event_unique_user_frequency)
+        if existing_high_priority_issue is not None:
+            pulumi.set(__self__, "existing_high_priority_issue", existing_high_priority_issue)
+        if first_seen_event is not None:
+            pulumi.set(__self__, "first_seen_event", first_seen_event)
+        if new_high_priority_issue is not None:
+            pulumi.set(__self__, "new_high_priority_issue", new_high_priority_issue)
+        if reappeared_event is not None:
+            pulumi.set(__self__, "reappeared_event", reappeared_event)
+        if regression_event is not None:
+            pulumi.set(__self__, "regression_event", regression_event)
+
+    @property
+    @pulumi.getter(name="eventFrequency")
+    def event_frequency(self) -> Optional[pulumi.Input['SentryIssueAlertConditionsV2EventFrequencyArgs']]:
+        """
+        When the `comparison_type` is `count`, the number of events in an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the number of events in an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        """
+        return pulumi.get(self, "event_frequency")
+
+    @event_frequency.setter
+    def event_frequency(self, value: Optional[pulumi.Input['SentryIssueAlertConditionsV2EventFrequencyArgs']]):
+        pulumi.set(self, "event_frequency", value)
+
+    @property
+    @pulumi.getter(name="eventFrequencyPercent")
+    def event_frequency_percent(self) -> Optional[pulumi.Input['SentryIssueAlertConditionsV2EventFrequencyPercentArgs']]:
+        """
+        When the `comparison_type` is `count`, the percent of sessions affected by an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the percent of sessions affected by an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        """
+        return pulumi.get(self, "event_frequency_percent")
+
+    @event_frequency_percent.setter
+    def event_frequency_percent(self, value: Optional[pulumi.Input['SentryIssueAlertConditionsV2EventFrequencyPercentArgs']]):
+        pulumi.set(self, "event_frequency_percent", value)
+
+    @property
+    @pulumi.getter(name="eventUniqueUserFrequency")
+    def event_unique_user_frequency(self) -> Optional[pulumi.Input['SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs']]:
+        """
+        When the `comparison_type` is `count`, the number of users affected by an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the number of users affected by an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        """
+        return pulumi.get(self, "event_unique_user_frequency")
+
+    @event_unique_user_frequency.setter
+    def event_unique_user_frequency(self, value: Optional[pulumi.Input['SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs']]):
+        pulumi.set(self, "event_unique_user_frequency", value)
+
+    @property
+    @pulumi.getter(name="existingHighPriorityIssue")
+    def existing_high_priority_issue(self) -> Optional[pulumi.Input['SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs']]:
+        """
+        Sentry marks an existing issue as high priority.
+        """
+        return pulumi.get(self, "existing_high_priority_issue")
+
+    @existing_high_priority_issue.setter
+    def existing_high_priority_issue(self, value: Optional[pulumi.Input['SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs']]):
+        pulumi.set(self, "existing_high_priority_issue", value)
+
+    @property
+    @pulumi.getter(name="firstSeenEvent")
+    def first_seen_event(self) -> Optional[pulumi.Input['SentryIssueAlertConditionsV2FirstSeenEventArgs']]:
+        """
+        A new issue is created.
+        """
+        return pulumi.get(self, "first_seen_event")
+
+    @first_seen_event.setter
+    def first_seen_event(self, value: Optional[pulumi.Input['SentryIssueAlertConditionsV2FirstSeenEventArgs']]):
+        pulumi.set(self, "first_seen_event", value)
+
+    @property
+    @pulumi.getter(name="newHighPriorityIssue")
+    def new_high_priority_issue(self) -> Optional[pulumi.Input['SentryIssueAlertConditionsV2NewHighPriorityIssueArgs']]:
+        """
+        Sentry marks a new issue as high priority.
+        """
+        return pulumi.get(self, "new_high_priority_issue")
+
+    @new_high_priority_issue.setter
+    def new_high_priority_issue(self, value: Optional[pulumi.Input['SentryIssueAlertConditionsV2NewHighPriorityIssueArgs']]):
+        pulumi.set(self, "new_high_priority_issue", value)
+
+    @property
+    @pulumi.getter(name="reappearedEvent")
+    def reappeared_event(self) -> Optional[pulumi.Input['SentryIssueAlertConditionsV2ReappearedEventArgs']]:
+        """
+        The issue changes state from ignored to unresolved.
+        """
+        return pulumi.get(self, "reappeared_event")
+
+    @reappeared_event.setter
+    def reappeared_event(self, value: Optional[pulumi.Input['SentryIssueAlertConditionsV2ReappearedEventArgs']]):
+        pulumi.set(self, "reappeared_event", value)
+
+    @property
+    @pulumi.getter(name="regressionEvent")
+    def regression_event(self) -> Optional[pulumi.Input['SentryIssueAlertConditionsV2RegressionEventArgs']]:
+        """
+        The issue changes state from resolved to unresolved.
+        """
+        return pulumi.get(self, "regression_event")
+
+    @regression_event.setter
+    def regression_event(self, value: Optional[pulumi.Input['SentryIssueAlertConditionsV2RegressionEventArgs']]):
+        pulumi.set(self, "regression_event", value)
+
+
+if not MYPY:
+    class SentryIssueAlertConditionsV2EventFrequencyArgsDict(TypedDict):
+        comparison_type: pulumi.Input[str]
+        """
+        Valid values are: `count`, and `percent`.
+        """
+        value: pulumi.Input[int]
+        comparison_interval: NotRequired[pulumi.Input[str]]
+        """
+        `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        interval: NotRequired[pulumi.Input[str]]
+        """
+        `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertConditionsV2EventFrequencyArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertConditionsV2EventFrequencyArgs:
+    def __init__(__self__, *,
+                 comparison_type: pulumi.Input[str],
+                 value: pulumi.Input[int],
+                 comparison_interval: Optional[pulumi.Input[str]] = None,
+                 interval: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] comparison_type: Valid values are: `count`, and `percent`.
+        :param pulumi.Input[str] comparison_interval: `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        :param pulumi.Input[str] interval: `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        pulumi.set(__self__, "comparison_type", comparison_type)
+        pulumi.set(__self__, "value", value)
+        if comparison_interval is not None:
+            pulumi.set(__self__, "comparison_interval", comparison_interval)
+        if interval is not None:
+            pulumi.set(__self__, "interval", interval)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="comparisonType")
+    def comparison_type(self) -> pulumi.Input[str]:
+        """
+        Valid values are: `count`, and `percent`.
+        """
+        return pulumi.get(self, "comparison_type")
+
+    @comparison_type.setter
+    def comparison_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "comparison_type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[int]:
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[int]):
+        pulumi.set(self, "value", value)
+
+    @property
+    @pulumi.getter(name="comparisonInterval")
+    def comparison_interval(self) -> Optional[pulumi.Input[str]]:
+        """
+        `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        return pulumi.get(self, "comparison_interval")
+
+    @comparison_interval.setter
+    def comparison_interval(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "comparison_interval", value)
+
+    @property
+    @pulumi.getter
+    def interval(self) -> Optional[pulumi.Input[str]]:
+        """
+        `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        return pulumi.get(self, "interval")
+
+    @interval.setter
+    def interval(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "interval", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertConditionsV2EventFrequencyPercentArgsDict(TypedDict):
+        comparison_type: pulumi.Input[str]
+        """
+        Valid values are: `count`, and `percent`.
+        """
+        interval: pulumi.Input[str]
+        """
+        `m` for minutes, `h` for hours. Valid values are: `5m`, `10m`, `30m`, and `1h`.
+        """
+        value: pulumi.Input[float]
+        comparison_interval: NotRequired[pulumi.Input[str]]
+        """
+        `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertConditionsV2EventFrequencyPercentArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertConditionsV2EventFrequencyPercentArgs:
+    def __init__(__self__, *,
+                 comparison_type: pulumi.Input[str],
+                 interval: pulumi.Input[str],
+                 value: pulumi.Input[float],
+                 comparison_interval: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] comparison_type: Valid values are: `count`, and `percent`.
+        :param pulumi.Input[str] interval: `m` for minutes, `h` for hours. Valid values are: `5m`, `10m`, `30m`, and `1h`.
+        :param pulumi.Input[str] comparison_interval: `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        pulumi.set(__self__, "comparison_type", comparison_type)
+        pulumi.set(__self__, "interval", interval)
+        pulumi.set(__self__, "value", value)
+        if comparison_interval is not None:
+            pulumi.set(__self__, "comparison_interval", comparison_interval)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="comparisonType")
+    def comparison_type(self) -> pulumi.Input[str]:
+        """
+        Valid values are: `count`, and `percent`.
+        """
+        return pulumi.get(self, "comparison_type")
+
+    @comparison_type.setter
+    def comparison_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "comparison_type", value)
+
+    @property
+    @pulumi.getter
+    def interval(self) -> pulumi.Input[str]:
+        """
+        `m` for minutes, `h` for hours. Valid values are: `5m`, `10m`, `30m`, and `1h`.
+        """
+        return pulumi.get(self, "interval")
+
+    @interval.setter
+    def interval(self, value: pulumi.Input[str]):
+        pulumi.set(self, "interval", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[float]:
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[float]):
+        pulumi.set(self, "value", value)
+
+    @property
+    @pulumi.getter(name="comparisonInterval")
+    def comparison_interval(self) -> Optional[pulumi.Input[str]]:
+        """
+        `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        return pulumi.get(self, "comparison_interval")
+
+    @comparison_interval.setter
+    def comparison_interval(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "comparison_interval", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgsDict(TypedDict):
+        comparison_type: pulumi.Input[str]
+        """
+        Valid values are: `count`, and `percent`.
+        """
+        value: pulumi.Input[int]
+        comparison_interval: NotRequired[pulumi.Input[str]]
+        """
+        `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        interval: NotRequired[pulumi.Input[str]]
+        """
+        `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs:
+    def __init__(__self__, *,
+                 comparison_type: pulumi.Input[str],
+                 value: pulumi.Input[int],
+                 comparison_interval: Optional[pulumi.Input[str]] = None,
+                 interval: Optional[pulumi.Input[str]] = None,
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] comparison_type: Valid values are: `count`, and `percent`.
+        :param pulumi.Input[str] comparison_interval: `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        :param pulumi.Input[str] interval: `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        pulumi.set(__self__, "comparison_type", comparison_type)
+        pulumi.set(__self__, "value", value)
+        if comparison_interval is not None:
+            pulumi.set(__self__, "comparison_interval", comparison_interval)
+        if interval is not None:
+            pulumi.set(__self__, "interval", interval)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="comparisonType")
+    def comparison_type(self) -> pulumi.Input[str]:
+        """
+        Valid values are: `count`, and `percent`.
+        """
+        return pulumi.get(self, "comparison_type")
+
+    @comparison_type.setter
+    def comparison_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "comparison_type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[int]:
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[int]):
+        pulumi.set(self, "value", value)
+
+    @property
+    @pulumi.getter(name="comparisonInterval")
+    def comparison_interval(self) -> Optional[pulumi.Input[str]]:
+        """
+        `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        return pulumi.get(self, "comparison_interval")
+
+    @comparison_interval.setter
+    def comparison_interval(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "comparison_interval", value)
+
+    @property
+    @pulumi.getter
+    def interval(self) -> Optional[pulumi.Input[str]]:
+        """
+        `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        return pulumi.get(self, "interval")
+
+    @interval.setter
+    def interval(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "interval", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgsDict(TypedDict):
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs:
+    def __init__(__self__, *,
+                 name: Optional[pulumi.Input[str]] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertConditionsV2FirstSeenEventArgsDict(TypedDict):
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertConditionsV2FirstSeenEventArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertConditionsV2FirstSeenEventArgs:
+    def __init__(__self__, *,
+                 name: Optional[pulumi.Input[str]] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertConditionsV2NewHighPriorityIssueArgsDict(TypedDict):
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertConditionsV2NewHighPriorityIssueArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertConditionsV2NewHighPriorityIssueArgs:
+    def __init__(__self__, *,
+                 name: Optional[pulumi.Input[str]] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertConditionsV2ReappearedEventArgsDict(TypedDict):
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertConditionsV2ReappearedEventArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertConditionsV2ReappearedEventArgs:
+    def __init__(__self__, *,
+                 name: Optional[pulumi.Input[str]] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertConditionsV2RegressionEventArgsDict(TypedDict):
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertConditionsV2RegressionEventArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertConditionsV2RegressionEventArgs:
+    def __init__(__self__, *,
+                 name: Optional[pulumi.Input[str]] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertFiltersV2ArgsDict(TypedDict):
+        age_comparison: NotRequired[pulumi.Input['SentryIssueAlertFiltersV2AgeComparisonArgsDict']]
+        """
+        The issue is older or newer than `value` `time`.
+        """
+        assigned_to: NotRequired[pulumi.Input['SentryIssueAlertFiltersV2AssignedToArgsDict']]
+        """
+        The issue is assigned to no one, team, or member.
+        """
+        event_attribute: NotRequired[pulumi.Input['SentryIssueAlertFiltersV2EventAttributeArgsDict']]
+        """
+        The event's `attribute` value `match` `value`.
+        """
+        issue_category: NotRequired[pulumi.Input['SentryIssueAlertFiltersV2IssueCategoryArgsDict']]
+        """
+        The issue's category is equal to `value`.
+        """
+        issue_occurrences: NotRequired[pulumi.Input['SentryIssueAlertFiltersV2IssueOccurrencesArgsDict']]
+        """
+        The issue has happened at least `value` times (Note: this is approximate).
+        """
+        latest_adopted_release: NotRequired[pulumi.Input['SentryIssueAlertFiltersV2LatestAdoptedReleaseArgsDict']]
+        """
+        The {oldest*or*newest} adopted release associated with the event's issue is {older*or*newer} than the latest adopted release in {environment}.
+        """
+        latest_release: NotRequired[pulumi.Input['SentryIssueAlertFiltersV2LatestReleaseArgsDict']]
+        """
+        The event is from the latest release.
+        """
+        level: NotRequired[pulumi.Input['SentryIssueAlertFiltersV2LevelArgsDict']]
+        """
+        The event's level is `match` `level`.
+        """
+        tagged_event: NotRequired[pulumi.Input['SentryIssueAlertFiltersV2TaggedEventArgsDict']]
+        """
+        The event's tags match `key` `match` `value`.
+        """
+elif False:
+    SentryIssueAlertFiltersV2ArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertFiltersV2Args:
+    def __init__(__self__, *,
+                 age_comparison: Optional[pulumi.Input['SentryIssueAlertFiltersV2AgeComparisonArgs']] = None,
+                 assigned_to: Optional[pulumi.Input['SentryIssueAlertFiltersV2AssignedToArgs']] = None,
+                 event_attribute: Optional[pulumi.Input['SentryIssueAlertFiltersV2EventAttributeArgs']] = None,
+                 issue_category: Optional[pulumi.Input['SentryIssueAlertFiltersV2IssueCategoryArgs']] = None,
+                 issue_occurrences: Optional[pulumi.Input['SentryIssueAlertFiltersV2IssueOccurrencesArgs']] = None,
+                 latest_adopted_release: Optional[pulumi.Input['SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs']] = None,
+                 latest_release: Optional[pulumi.Input['SentryIssueAlertFiltersV2LatestReleaseArgs']] = None,
+                 level: Optional[pulumi.Input['SentryIssueAlertFiltersV2LevelArgs']] = None,
+                 tagged_event: Optional[pulumi.Input['SentryIssueAlertFiltersV2TaggedEventArgs']] = None):
+        """
+        :param pulumi.Input['SentryIssueAlertFiltersV2AgeComparisonArgs'] age_comparison: The issue is older or newer than `value` `time`.
+        :param pulumi.Input['SentryIssueAlertFiltersV2AssignedToArgs'] assigned_to: The issue is assigned to no one, team, or member.
+        :param pulumi.Input['SentryIssueAlertFiltersV2EventAttributeArgs'] event_attribute: The event's `attribute` value `match` `value`.
+        :param pulumi.Input['SentryIssueAlertFiltersV2IssueCategoryArgs'] issue_category: The issue's category is equal to `value`.
+        :param pulumi.Input['SentryIssueAlertFiltersV2IssueOccurrencesArgs'] issue_occurrences: The issue has happened at least `value` times (Note: this is approximate).
+        :param pulumi.Input['SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs'] latest_adopted_release: The {oldest*or*newest} adopted release associated with the event's issue is {older*or*newer} than the latest adopted release in {environment}.
+        :param pulumi.Input['SentryIssueAlertFiltersV2LatestReleaseArgs'] latest_release: The event is from the latest release.
+        :param pulumi.Input['SentryIssueAlertFiltersV2LevelArgs'] level: The event's level is `match` `level`.
+        :param pulumi.Input['SentryIssueAlertFiltersV2TaggedEventArgs'] tagged_event: The event's tags match `key` `match` `value`.
+        """
+        if age_comparison is not None:
+            pulumi.set(__self__, "age_comparison", age_comparison)
+        if assigned_to is not None:
+            pulumi.set(__self__, "assigned_to", assigned_to)
+        if event_attribute is not None:
+            pulumi.set(__self__, "event_attribute", event_attribute)
+        if issue_category is not None:
+            pulumi.set(__self__, "issue_category", issue_category)
+        if issue_occurrences is not None:
+            pulumi.set(__self__, "issue_occurrences", issue_occurrences)
+        if latest_adopted_release is not None:
+            pulumi.set(__self__, "latest_adopted_release", latest_adopted_release)
+        if latest_release is not None:
+            pulumi.set(__self__, "latest_release", latest_release)
+        if level is not None:
+            pulumi.set(__self__, "level", level)
+        if tagged_event is not None:
+            pulumi.set(__self__, "tagged_event", tagged_event)
+
+    @property
+    @pulumi.getter(name="ageComparison")
+    def age_comparison(self) -> Optional[pulumi.Input['SentryIssueAlertFiltersV2AgeComparisonArgs']]:
+        """
+        The issue is older or newer than `value` `time`.
+        """
+        return pulumi.get(self, "age_comparison")
+
+    @age_comparison.setter
+    def age_comparison(self, value: Optional[pulumi.Input['SentryIssueAlertFiltersV2AgeComparisonArgs']]):
+        pulumi.set(self, "age_comparison", value)
+
+    @property
+    @pulumi.getter(name="assignedTo")
+    def assigned_to(self) -> Optional[pulumi.Input['SentryIssueAlertFiltersV2AssignedToArgs']]:
+        """
+        The issue is assigned to no one, team, or member.
+        """
+        return pulumi.get(self, "assigned_to")
+
+    @assigned_to.setter
+    def assigned_to(self, value: Optional[pulumi.Input['SentryIssueAlertFiltersV2AssignedToArgs']]):
+        pulumi.set(self, "assigned_to", value)
+
+    @property
+    @pulumi.getter(name="eventAttribute")
+    def event_attribute(self) -> Optional[pulumi.Input['SentryIssueAlertFiltersV2EventAttributeArgs']]:
+        """
+        The event's `attribute` value `match` `value`.
+        """
+        return pulumi.get(self, "event_attribute")
+
+    @event_attribute.setter
+    def event_attribute(self, value: Optional[pulumi.Input['SentryIssueAlertFiltersV2EventAttributeArgs']]):
+        pulumi.set(self, "event_attribute", value)
+
+    @property
+    @pulumi.getter(name="issueCategory")
+    def issue_category(self) -> Optional[pulumi.Input['SentryIssueAlertFiltersV2IssueCategoryArgs']]:
+        """
+        The issue's category is equal to `value`.
+        """
+        return pulumi.get(self, "issue_category")
+
+    @issue_category.setter
+    def issue_category(self, value: Optional[pulumi.Input['SentryIssueAlertFiltersV2IssueCategoryArgs']]):
+        pulumi.set(self, "issue_category", value)
+
+    @property
+    @pulumi.getter(name="issueOccurrences")
+    def issue_occurrences(self) -> Optional[pulumi.Input['SentryIssueAlertFiltersV2IssueOccurrencesArgs']]:
+        """
+        The issue has happened at least `value` times (Note: this is approximate).
+        """
+        return pulumi.get(self, "issue_occurrences")
+
+    @issue_occurrences.setter
+    def issue_occurrences(self, value: Optional[pulumi.Input['SentryIssueAlertFiltersV2IssueOccurrencesArgs']]):
+        pulumi.set(self, "issue_occurrences", value)
+
+    @property
+    @pulumi.getter(name="latestAdoptedRelease")
+    def latest_adopted_release(self) -> Optional[pulumi.Input['SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs']]:
+        """
+        The {oldest*or*newest} adopted release associated with the event's issue is {older*or*newer} than the latest adopted release in {environment}.
+        """
+        return pulumi.get(self, "latest_adopted_release")
+
+    @latest_adopted_release.setter
+    def latest_adopted_release(self, value: Optional[pulumi.Input['SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs']]):
+        pulumi.set(self, "latest_adopted_release", value)
+
+    @property
+    @pulumi.getter(name="latestRelease")
+    def latest_release(self) -> Optional[pulumi.Input['SentryIssueAlertFiltersV2LatestReleaseArgs']]:
+        """
+        The event is from the latest release.
+        """
+        return pulumi.get(self, "latest_release")
+
+    @latest_release.setter
+    def latest_release(self, value: Optional[pulumi.Input['SentryIssueAlertFiltersV2LatestReleaseArgs']]):
+        pulumi.set(self, "latest_release", value)
+
+    @property
+    @pulumi.getter
+    def level(self) -> Optional[pulumi.Input['SentryIssueAlertFiltersV2LevelArgs']]:
+        """
+        The event's level is `match` `level`.
+        """
+        return pulumi.get(self, "level")
+
+    @level.setter
+    def level(self, value: Optional[pulumi.Input['SentryIssueAlertFiltersV2LevelArgs']]):
+        pulumi.set(self, "level", value)
+
+    @property
+    @pulumi.getter(name="taggedEvent")
+    def tagged_event(self) -> Optional[pulumi.Input['SentryIssueAlertFiltersV2TaggedEventArgs']]:
+        """
+        The event's tags match `key` `match` `value`.
+        """
+        return pulumi.get(self, "tagged_event")
+
+    @tagged_event.setter
+    def tagged_event(self, value: Optional[pulumi.Input['SentryIssueAlertFiltersV2TaggedEventArgs']]):
+        pulumi.set(self, "tagged_event", value)
+
+
+if not MYPY:
+    class SentryIssueAlertFiltersV2AgeComparisonArgsDict(TypedDict):
+        comparison_type: pulumi.Input[str]
+        """
+        Valid values are: `older`, and `newer`.
+        """
+        time: pulumi.Input[str]
+        """
+        Valid values are: `minute`, `hour`, `day`, and `week`.
+        """
+        value: pulumi.Input[int]
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertFiltersV2AgeComparisonArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertFiltersV2AgeComparisonArgs:
+    def __init__(__self__, *,
+                 comparison_type: pulumi.Input[str],
+                 time: pulumi.Input[str],
+                 value: pulumi.Input[int],
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] comparison_type: Valid values are: `older`, and `newer`.
+        :param pulumi.Input[str] time: Valid values are: `minute`, `hour`, `day`, and `week`.
+        """
+        pulumi.set(__self__, "comparison_type", comparison_type)
+        pulumi.set(__self__, "time", time)
+        pulumi.set(__self__, "value", value)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="comparisonType")
+    def comparison_type(self) -> pulumi.Input[str]:
+        """
+        Valid values are: `older`, and `newer`.
+        """
+        return pulumi.get(self, "comparison_type")
+
+    @comparison_type.setter
+    def comparison_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "comparison_type", value)
+
+    @property
+    @pulumi.getter
+    def time(self) -> pulumi.Input[str]:
+        """
+        Valid values are: `minute`, `hour`, `day`, and `week`.
+        """
+        return pulumi.get(self, "time")
+
+    @time.setter
+    def time(self, value: pulumi.Input[str]):
+        pulumi.set(self, "time", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[int]:
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[int]):
+        pulumi.set(self, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertFiltersV2AssignedToArgsDict(TypedDict):
+        target_type: pulumi.Input[str]
+        """
+        Valid values are: `Unassigned`, `Team`, and `Member`.
+        """
+        name: NotRequired[pulumi.Input[str]]
+        target_identifier: NotRequired[pulumi.Input[str]]
+        """
+        The target's ID. Only required when `target_type` is `Team` or `Member`.
+        """
+elif False:
+    SentryIssueAlertFiltersV2AssignedToArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertFiltersV2AssignedToArgs:
+    def __init__(__self__, *,
+                 target_type: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None,
+                 target_identifier: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] target_type: Valid values are: `Unassigned`, `Team`, and `Member`.
+        :param pulumi.Input[str] target_identifier: The target's ID. Only required when `target_type` is `Team` or `Member`.
+        """
+        pulumi.set(__self__, "target_type", target_type)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if target_identifier is not None:
+            pulumi.set(__self__, "target_identifier", target_identifier)
+
+    @property
+    @pulumi.getter(name="targetType")
+    def target_type(self) -> pulumi.Input[str]:
+        """
+        Valid values are: `Unassigned`, `Team`, and `Member`.
+        """
+        return pulumi.get(self, "target_type")
+
+    @target_type.setter
+    def target_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "target_type", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="targetIdentifier")
+    def target_identifier(self) -> Optional[pulumi.Input[str]]:
+        """
+        The target's ID. Only required when `target_type` is `Team` or `Member`.
+        """
+        return pulumi.get(self, "target_identifier")
+
+    @target_identifier.setter
+    def target_identifier(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "target_identifier", value)
+
+
+if not MYPY:
+    class SentryIssueAlertFiltersV2EventAttributeArgsDict(TypedDict):
+        attribute: pulumi.Input[str]
+        """
+        Valid values are: `message`, `platform`, `environment`, `type`, `error.handled`, `error.unhandled`, `error.main_thread`, `exception.type`, `exception.value`, `user.id`, `user.email`, `user.username`, `user.ip_address`, `http.method`, `http.url`, `http.status_code`, `sdk.name`, `stacktrace.code`, `stacktrace.module`, `stacktrace.filename`, `stacktrace.abs_path`, `stacktrace.package`, `unreal.crashtype`, `app.in_foreground`, `os.distribution_name`, and `os.distribution_version`.
+        """
+        match: pulumi.Input[str]
+        """
+        The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+        """
+        name: NotRequired[pulumi.Input[str]]
+        value: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertFiltersV2EventAttributeArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertFiltersV2EventAttributeArgs:
+    def __init__(__self__, *,
+                 attribute: pulumi.Input[str],
+                 match: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] attribute: Valid values are: `message`, `platform`, `environment`, `type`, `error.handled`, `error.unhandled`, `error.main_thread`, `exception.type`, `exception.value`, `user.id`, `user.email`, `user.username`, `user.ip_address`, `http.method`, `http.url`, `http.status_code`, `sdk.name`, `stacktrace.code`, `stacktrace.module`, `stacktrace.filename`, `stacktrace.abs_path`, `stacktrace.package`, `unreal.crashtype`, `app.in_foreground`, `os.distribution_name`, and `os.distribution_version`.
+        :param pulumi.Input[str] match: The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+        """
+        pulumi.set(__self__, "attribute", attribute)
+        pulumi.set(__self__, "match", match)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def attribute(self) -> pulumi.Input[str]:
+        """
+        Valid values are: `message`, `platform`, `environment`, `type`, `error.handled`, `error.unhandled`, `error.main_thread`, `exception.type`, `exception.value`, `user.id`, `user.email`, `user.username`, `user.ip_address`, `http.method`, `http.url`, `http.status_code`, `sdk.name`, `stacktrace.code`, `stacktrace.module`, `stacktrace.filename`, `stacktrace.abs_path`, `stacktrace.package`, `unreal.crashtype`, `app.in_foreground`, `os.distribution_name`, and `os.distribution_version`.
+        """
+        return pulumi.get(self, "attribute")
+
+    @attribute.setter
+    def attribute(self, value: pulumi.Input[str]):
+        pulumi.set(self, "attribute", value)
+
+    @property
+    @pulumi.getter
+    def match(self) -> pulumi.Input[str]:
+        """
+        The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+        """
+        return pulumi.get(self, "match")
+
+    @match.setter
+    def match(self, value: pulumi.Input[str]):
+        pulumi.set(self, "match", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+
+if not MYPY:
+    class SentryIssueAlertFiltersV2IssueCategoryArgsDict(TypedDict):
+        value: pulumi.Input[str]
+        """
+        Valid values are: `Error`, `Performance`, `Profile`, `Cron`, `Replay`, `Feedback`, `Uptime`, and `Metric_Alert`.
+        """
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertFiltersV2IssueCategoryArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertFiltersV2IssueCategoryArgs:
+    def __init__(__self__, *,
+                 value: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] value: Valid values are: `Error`, `Performance`, `Profile`, `Cron`, `Replay`, `Feedback`, `Uptime`, and `Metric_Alert`.
+        """
+        pulumi.set(__self__, "value", value)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        Valid values are: `Error`, `Performance`, `Profile`, `Cron`, `Replay`, `Feedback`, `Uptime`, and `Metric_Alert`.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertFiltersV2IssueOccurrencesArgsDict(TypedDict):
+        value: pulumi.Input[int]
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertFiltersV2IssueOccurrencesArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertFiltersV2IssueOccurrencesArgs:
+    def __init__(__self__, *,
+                 value: pulumi.Input[int],
+                 name: Optional[pulumi.Input[str]] = None):
+        pulumi.set(__self__, "value", value)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[int]:
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[int]):
+        pulumi.set(self, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertFiltersV2LatestAdoptedReleaseArgsDict(TypedDict):
+        environment: pulumi.Input[str]
+        older_or_newer: pulumi.Input[str]
+        """
+        Valid values are: `older`, and `newer`.
+        """
+        oldest_or_newest: pulumi.Input[str]
+        """
+        Valid values are: `oldest`, and `newest`.
+        """
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertFiltersV2LatestAdoptedReleaseArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs:
+    def __init__(__self__, *,
+                 environment: pulumi.Input[str],
+                 older_or_newer: pulumi.Input[str],
+                 oldest_or_newest: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] older_or_newer: Valid values are: `older`, and `newer`.
+        :param pulumi.Input[str] oldest_or_newest: Valid values are: `oldest`, and `newest`.
+        """
+        pulumi.set(__self__, "environment", environment)
+        pulumi.set(__self__, "older_or_newer", older_or_newer)
+        pulumi.set(__self__, "oldest_or_newest", oldest_or_newest)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def environment(self) -> pulumi.Input[str]:
+        return pulumi.get(self, "environment")
+
+    @environment.setter
+    def environment(self, value: pulumi.Input[str]):
+        pulumi.set(self, "environment", value)
+
+    @property
+    @pulumi.getter(name="olderOrNewer")
+    def older_or_newer(self) -> pulumi.Input[str]:
+        """
+        Valid values are: `older`, and `newer`.
+        """
+        return pulumi.get(self, "older_or_newer")
+
+    @older_or_newer.setter
+    def older_or_newer(self, value: pulumi.Input[str]):
+        pulumi.set(self, "older_or_newer", value)
+
+    @property
+    @pulumi.getter(name="oldestOrNewest")
+    def oldest_or_newest(self) -> pulumi.Input[str]:
+        """
+        Valid values are: `oldest`, and `newest`.
+        """
+        return pulumi.get(self, "oldest_or_newest")
+
+    @oldest_or_newest.setter
+    def oldest_or_newest(self, value: pulumi.Input[str]):
+        pulumi.set(self, "oldest_or_newest", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertFiltersV2LatestReleaseArgsDict(TypedDict):
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertFiltersV2LatestReleaseArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertFiltersV2LatestReleaseArgs:
+    def __init__(__self__, *,
+                 name: Optional[pulumi.Input[str]] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertFiltersV2LevelArgsDict(TypedDict):
+        level: pulumi.Input[str]
+        """
+        Valid values are: `sample`, `debug`, `info`, `warning`, `error`, and `fatal`.
+        """
+        match: pulumi.Input[str]
+        """
+        The comparison operator. Valid values are: `EQUAL`, `GREATER_OR_EQUAL`, and `LESS_OR_EQUAL`.
+        """
+        name: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertFiltersV2LevelArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertFiltersV2LevelArgs:
+    def __init__(__self__, *,
+                 level: pulumi.Input[str],
+                 match: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] level: Valid values are: `sample`, `debug`, `info`, `warning`, `error`, and `fatal`.
+        :param pulumi.Input[str] match: The comparison operator. Valid values are: `EQUAL`, `GREATER_OR_EQUAL`, and `LESS_OR_EQUAL`.
+        """
+        pulumi.set(__self__, "level", level)
+        pulumi.set(__self__, "match", match)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def level(self) -> pulumi.Input[str]:
+        """
+        Valid values are: `sample`, `debug`, `info`, `warning`, `error`, and `fatal`.
+        """
+        return pulumi.get(self, "level")
+
+    @level.setter
+    def level(self, value: pulumi.Input[str]):
+        pulumi.set(self, "level", value)
+
+    @property
+    @pulumi.getter
+    def match(self) -> pulumi.Input[str]:
+        """
+        The comparison operator. Valid values are: `EQUAL`, `GREATER_OR_EQUAL`, and `LESS_OR_EQUAL`.
+        """
+        return pulumi.get(self, "match")
+
+    @match.setter
+    def match(self, value: pulumi.Input[str]):
+        pulumi.set(self, "match", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+
+if not MYPY:
+    class SentryIssueAlertFiltersV2TaggedEventArgsDict(TypedDict):
+        key: pulumi.Input[str]
+        """
+        The tag.
+        """
+        match: pulumi.Input[str]
+        """
+        The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+        """
+        name: NotRequired[pulumi.Input[str]]
+        value: NotRequired[pulumi.Input[str]]
+elif False:
+    SentryIssueAlertFiltersV2TaggedEventArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryIssueAlertFiltersV2TaggedEventArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 match: pulumi.Input[str],
+                 name: Optional[pulumi.Input[str]] = None,
+                 value: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] key: The tag.
+        :param pulumi.Input[str] match: The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "match", match)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        The tag.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def match(self) -> pulumi.Input[str]:
+        """
+        The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+        """
+        return pulumi.get(self, "match")
+
+    @match.setter
+    def match(self, value: pulumi.Input[str]):
+        pulumi.set(self, "match", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[pulumi.Input[str]]:
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "value", value)
+
+
+if not MYPY:
+    class SentryKeyJavascriptLoaderScriptArgsDict(TypedDict):
+        browser_sdk_version: NotRequired[pulumi.Input[str]]
+        """
+        The version of the browser SDK to load.
+        """
+        debug_enabled: NotRequired[pulumi.Input[bool]]
+        """
+        Whether debug bundles & logging are enabled for this key.
+        """
+        performance_monitoring_enabled: NotRequired[pulumi.Input[bool]]
+        """
+        Whether performance monitoring is enabled for this key.
+        """
+        session_replay_enabled: NotRequired[pulumi.Input[bool]]
+        """
+        Whether session replay is enabled for this key.
+        """
+elif False:
+    SentryKeyJavascriptLoaderScriptArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryKeyJavascriptLoaderScriptArgs:
+    def __init__(__self__, *,
+                 browser_sdk_version: Optional[pulumi.Input[str]] = None,
+                 debug_enabled: Optional[pulumi.Input[bool]] = None,
+                 performance_monitoring_enabled: Optional[pulumi.Input[bool]] = None,
+                 session_replay_enabled: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] browser_sdk_version: The version of the browser SDK to load.
+        :param pulumi.Input[bool] debug_enabled: Whether debug bundles & logging are enabled for this key.
+        :param pulumi.Input[bool] performance_monitoring_enabled: Whether performance monitoring is enabled for this key.
+        :param pulumi.Input[bool] session_replay_enabled: Whether session replay is enabled for this key.
+        """
+        if browser_sdk_version is not None:
+            pulumi.set(__self__, "browser_sdk_version", browser_sdk_version)
+        if debug_enabled is not None:
+            pulumi.set(__self__, "debug_enabled", debug_enabled)
+        if performance_monitoring_enabled is not None:
+            pulumi.set(__self__, "performance_monitoring_enabled", performance_monitoring_enabled)
+        if session_replay_enabled is not None:
+            pulumi.set(__self__, "session_replay_enabled", session_replay_enabled)
+
+    @property
+    @pulumi.getter(name="browserSdkVersion")
+    def browser_sdk_version(self) -> Optional[pulumi.Input[str]]:
+        """
+        The version of the browser SDK to load.
+        """
+        return pulumi.get(self, "browser_sdk_version")
+
+    @browser_sdk_version.setter
+    def browser_sdk_version(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "browser_sdk_version", value)
+
+    @property
+    @pulumi.getter(name="debugEnabled")
+    def debug_enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether debug bundles & logging are enabled for this key.
+        """
+        return pulumi.get(self, "debug_enabled")
+
+    @debug_enabled.setter
+    def debug_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "debug_enabled", value)
+
+    @property
+    @pulumi.getter(name="performanceMonitoringEnabled")
+    def performance_monitoring_enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether performance monitoring is enabled for this key.
+        """
+        return pulumi.get(self, "performance_monitoring_enabled")
+
+    @performance_monitoring_enabled.setter
+    def performance_monitoring_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "performance_monitoring_enabled", value)
+
+    @property
+    @pulumi.getter(name="sessionReplayEnabled")
+    def session_replay_enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether session replay is enabled for this key.
+        """
+        return pulumi.get(self, "session_replay_enabled")
+
+    @session_replay_enabled.setter
+    def session_replay_enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "session_replay_enabled", value)
+
+
+if not MYPY:
     class SentryMetricAlertTriggerArgsDict(TypedDict):
+        actions: pulumi.Input[Sequence[pulumi.Input['SentryMetricAlertTriggerActionArgsDict']]]
         alert_threshold: pulumi.Input[float]
         label: pulumi.Input[str]
         threshold_type: pulumi.Input[int]
-        actions: NotRequired[pulumi.Input[Sequence[pulumi.Input['SentryMetricAlertTriggerActionArgsDict']]]]
         id: NotRequired[pulumi.Input[str]]
         """
-        The ID of this resource.
+        The ID of the trigger.
         """
         resolve_threshold: NotRequired[pulumi.Input[float]]
 elif False:
@@ -358,24 +3157,32 @@ elif False:
 @pulumi.input_type
 class SentryMetricAlertTriggerArgs:
     def __init__(__self__, *,
+                 actions: pulumi.Input[Sequence[pulumi.Input['SentryMetricAlertTriggerActionArgs']]],
                  alert_threshold: pulumi.Input[float],
                  label: pulumi.Input[str],
                  threshold_type: pulumi.Input[int],
-                 actions: Optional[pulumi.Input[Sequence[pulumi.Input['SentryMetricAlertTriggerActionArgs']]]] = None,
                  id: Optional[pulumi.Input[str]] = None,
                  resolve_threshold: Optional[pulumi.Input[float]] = None):
         """
-        :param pulumi.Input[str] id: The ID of this resource.
+        :param pulumi.Input[str] id: The ID of the trigger.
         """
+        pulumi.set(__self__, "actions", actions)
         pulumi.set(__self__, "alert_threshold", alert_threshold)
         pulumi.set(__self__, "label", label)
         pulumi.set(__self__, "threshold_type", threshold_type)
-        if actions is not None:
-            pulumi.set(__self__, "actions", actions)
         if id is not None:
             pulumi.set(__self__, "id", id)
         if resolve_threshold is not None:
             pulumi.set(__self__, "resolve_threshold", resolve_threshold)
+
+    @property
+    @pulumi.getter
+    def actions(self) -> pulumi.Input[Sequence[pulumi.Input['SentryMetricAlertTriggerActionArgs']]]:
+        return pulumi.get(self, "actions")
+
+    @actions.setter
+    def actions(self, value: pulumi.Input[Sequence[pulumi.Input['SentryMetricAlertTriggerActionArgs']]]):
+        pulumi.set(self, "actions", value)
 
     @property
     @pulumi.getter(name="alertThreshold")
@@ -406,18 +3213,9 @@ class SentryMetricAlertTriggerArgs:
 
     @property
     @pulumi.getter
-    def actions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['SentryMetricAlertTriggerActionArgs']]]]:
-        return pulumi.get(self, "actions")
-
-    @actions.setter
-    def actions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['SentryMetricAlertTriggerActionArgs']]]]):
-        pulumi.set(self, "actions", value)
-
-    @property
-    @pulumi.getter
     def id(self) -> Optional[pulumi.Input[str]]:
         """
-        The ID of this resource.
+        The ID of the trigger.
         """
         return pulumi.get(self, "id")
 
@@ -441,7 +3239,11 @@ if not MYPY:
         type: pulumi.Input[str]
         id: NotRequired[pulumi.Input[str]]
         """
-        The ID of this resource.
+        The ID of the action.
+        """
+        input_channel_id: NotRequired[pulumi.Input[str]]
+        """
+        Slack channel ID to avoid rate-limiting, see [here](https://docs.sentry.io/product/integrations/notification-incidents/slack/#rate-limiting-error)
         """
         integration_id: NotRequired[pulumi.Input[int]]
         target_identifier: NotRequired[pulumi.Input[str]]
@@ -454,15 +3256,19 @@ class SentryMetricAlertTriggerActionArgs:
                  target_type: pulumi.Input[str],
                  type: pulumi.Input[str],
                  id: Optional[pulumi.Input[str]] = None,
+                 input_channel_id: Optional[pulumi.Input[str]] = None,
                  integration_id: Optional[pulumi.Input[int]] = None,
                  target_identifier: Optional[pulumi.Input[str]] = None):
         """
-        :param pulumi.Input[str] id: The ID of this resource.
+        :param pulumi.Input[str] id: The ID of the action.
+        :param pulumi.Input[str] input_channel_id: Slack channel ID to avoid rate-limiting, see [here](https://docs.sentry.io/product/integrations/notification-incidents/slack/#rate-limiting-error)
         """
         pulumi.set(__self__, "target_type", target_type)
         pulumi.set(__self__, "type", type)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if input_channel_id is not None:
+            pulumi.set(__self__, "input_channel_id", input_channel_id)
         if integration_id is not None:
             pulumi.set(__self__, "integration_id", integration_id)
         if target_identifier is not None:
@@ -490,13 +3296,25 @@ class SentryMetricAlertTriggerActionArgs:
     @pulumi.getter
     def id(self) -> Optional[pulumi.Input[str]]:
         """
-        The ID of this resource.
+        The ID of the action.
         """
         return pulumi.get(self, "id")
 
     @id.setter
     def id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "id", value)
+
+    @property
+    @pulumi.getter(name="inputChannelId")
+    def input_channel_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Slack channel ID to avoid rate-limiting, see [here](https://docs.sentry.io/product/integrations/notification-incidents/slack/#rate-limiting-error)
+        """
+        return pulumi.get(self, "input_channel_id")
+
+    @input_channel_id.setter
+    def input_channel_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "input_channel_id", value)
 
     @property
     @pulumi.getter(name="integrationId")
@@ -515,5 +3333,239 @@ class SentryMetricAlertTriggerActionArgs:
     @target_identifier.setter
     def target_identifier(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "target_identifier", value)
+
+
+if not MYPY:
+    class SentryProjectClientSecurityArgsDict(TypedDict):
+        allowed_domains: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        A list of allowed domains. Examples: https://example.com, *, *.example.com, *:80.
+        """
+        scrape_javascript: NotRequired[pulumi.Input[bool]]
+        """
+        Enable JavaScript source fetching. Allow Sentry to scrape missing JavaScript source context when possible.
+        """
+        security_token: NotRequired[pulumi.Input[str]]
+        """
+        Security Token. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+        """
+        security_token_header: NotRequired[pulumi.Input[str]]
+        """
+        Security Token Header. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+        """
+        verify_tls_ssl: NotRequired[pulumi.Input[bool]]
+        """
+        Verify TLS/SSL. Outbound requests will verify TLS (sometimes known as SSL) connections.
+        """
+elif False:
+    SentryProjectClientSecurityArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryProjectClientSecurityArgs:
+    def __init__(__self__, *,
+                 allowed_domains: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 scrape_javascript: Optional[pulumi.Input[bool]] = None,
+                 security_token: Optional[pulumi.Input[str]] = None,
+                 security_token_header: Optional[pulumi.Input[str]] = None,
+                 verify_tls_ssl: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] allowed_domains: A list of allowed domains. Examples: https://example.com, *, *.example.com, *:80.
+        :param pulumi.Input[bool] scrape_javascript: Enable JavaScript source fetching. Allow Sentry to scrape missing JavaScript source context when possible.
+        :param pulumi.Input[str] security_token: Security Token. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+        :param pulumi.Input[str] security_token_header: Security Token Header. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+        :param pulumi.Input[bool] verify_tls_ssl: Verify TLS/SSL. Outbound requests will verify TLS (sometimes known as SSL) connections.
+        """
+        if allowed_domains is not None:
+            pulumi.set(__self__, "allowed_domains", allowed_domains)
+        if scrape_javascript is not None:
+            pulumi.set(__self__, "scrape_javascript", scrape_javascript)
+        if security_token is not None:
+            pulumi.set(__self__, "security_token", security_token)
+        if security_token_header is not None:
+            pulumi.set(__self__, "security_token_header", security_token_header)
+        if verify_tls_ssl is not None:
+            pulumi.set(__self__, "verify_tls_ssl", verify_tls_ssl)
+
+    @property
+    @pulumi.getter(name="allowedDomains")
+    def allowed_domains(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        A list of allowed domains. Examples: https://example.com, *, *.example.com, *:80.
+        """
+        return pulumi.get(self, "allowed_domains")
+
+    @allowed_domains.setter
+    def allowed_domains(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "allowed_domains", value)
+
+    @property
+    @pulumi.getter(name="scrapeJavascript")
+    def scrape_javascript(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Enable JavaScript source fetching. Allow Sentry to scrape missing JavaScript source context when possible.
+        """
+        return pulumi.get(self, "scrape_javascript")
+
+    @scrape_javascript.setter
+    def scrape_javascript(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "scrape_javascript", value)
+
+    @property
+    @pulumi.getter(name="securityToken")
+    def security_token(self) -> Optional[pulumi.Input[str]]:
+        """
+        Security Token. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+        """
+        return pulumi.get(self, "security_token")
+
+    @security_token.setter
+    def security_token(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "security_token", value)
+
+    @property
+    @pulumi.getter(name="securityTokenHeader")
+    def security_token_header(self) -> Optional[pulumi.Input[str]]:
+        """
+        Security Token Header. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+        """
+        return pulumi.get(self, "security_token_header")
+
+    @security_token_header.setter
+    def security_token_header(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "security_token_header", value)
+
+    @property
+    @pulumi.getter(name="verifyTlsSsl")
+    def verify_tls_ssl(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Verify TLS/SSL. Outbound requests will verify TLS (sometimes known as SSL) connections.
+        """
+        return pulumi.get(self, "verify_tls_ssl")
+
+    @verify_tls_ssl.setter
+    def verify_tls_ssl(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "verify_tls_ssl", value)
+
+
+if not MYPY:
+    class SentryProjectFiltersArgsDict(TypedDict):
+        blacklisted_ips: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Filter events from these IP addresses. (e.g. 127.0.0.1 or 10.0.0.0/8)
+        """
+        error_messages: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Filter events by error messages. Allows [glob pattern matching](https://en.wikipedia.org/wiki/Glob_(programming)). (e.g. TypeError* or *: integer division or modulo by zero)
+        """
+        releases: NotRequired[pulumi.Input[Sequence[pulumi.Input[str]]]]
+        """
+        Filter events from these releases. Allows [glob pattern matching](https://en.wikipedia.org/wiki/Glob_(programming)). (e.g. 1.* or [!3].[0-9].*)
+        """
+elif False:
+    SentryProjectFiltersArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryProjectFiltersArgs:
+    def __init__(__self__, *,
+                 blacklisted_ips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 error_messages: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 releases: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] blacklisted_ips: Filter events from these IP addresses. (e.g. 127.0.0.1 or 10.0.0.0/8)
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] error_messages: Filter events by error messages. Allows [glob pattern matching](https://en.wikipedia.org/wiki/Glob_(programming)). (e.g. TypeError* or *: integer division or modulo by zero)
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] releases: Filter events from these releases. Allows [glob pattern matching](https://en.wikipedia.org/wiki/Glob_(programming)). (e.g. 1.* or [!3].[0-9].*)
+        """
+        if blacklisted_ips is not None:
+            pulumi.set(__self__, "blacklisted_ips", blacklisted_ips)
+        if error_messages is not None:
+            pulumi.set(__self__, "error_messages", error_messages)
+        if releases is not None:
+            pulumi.set(__self__, "releases", releases)
+
+    @property
+    @pulumi.getter(name="blacklistedIps")
+    def blacklisted_ips(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Filter events from these IP addresses. (e.g. 127.0.0.1 or 10.0.0.0/8)
+        """
+        return pulumi.get(self, "blacklisted_ips")
+
+    @blacklisted_ips.setter
+    def blacklisted_ips(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "blacklisted_ips", value)
+
+    @property
+    @pulumi.getter(name="errorMessages")
+    def error_messages(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Filter events by error messages. Allows [glob pattern matching](https://en.wikipedia.org/wiki/Glob_(programming)). (e.g. TypeError* or *: integer division or modulo by zero)
+        """
+        return pulumi.get(self, "error_messages")
+
+    @error_messages.setter
+    def error_messages(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "error_messages", value)
+
+    @property
+    @pulumi.getter
+    def releases(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Filter events from these releases. Allows [glob pattern matching](https://en.wikipedia.org/wiki/Glob_(programming)). (e.g. 1.* or [!3].[0-9].*)
+        """
+        return pulumi.get(self, "releases")
+
+    @releases.setter
+    def releases(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "releases", value)
+
+
+if not MYPY:
+    class SentryProjectSymbolSourceLayoutArgsDict(TypedDict):
+        casing: pulumi.Input[str]
+        """
+        The casing of the symbol source layout. The layout of the folder structure. The options are: `default` - Default (mixed case), `uppercase` - Uppercase, `lowercase` - Lowercase.
+        """
+        type: pulumi.Input[str]
+        """
+        The layout of the folder structure. The options are: `native` - Platform-Specific (SymStore / GDB / LLVM), `symstore` - Microsoft SymStore, `symstore_index2` - Microsoft SymStore (with index2.txt), `ssqp` - Microsoft SSQP, `unified` - Unified Symbol Server Layout, `debuginfod` - debuginfod.
+        """
+elif False:
+    SentryProjectSymbolSourceLayoutArgsDict: TypeAlias = Mapping[str, Any]
+
+@pulumi.input_type
+class SentryProjectSymbolSourceLayoutArgs:
+    def __init__(__self__, *,
+                 casing: pulumi.Input[str],
+                 type: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] casing: The casing of the symbol source layout. The layout of the folder structure. The options are: `default` - Default (mixed case), `uppercase` - Uppercase, `lowercase` - Lowercase.
+        :param pulumi.Input[str] type: The layout of the folder structure. The options are: `native` - Platform-Specific (SymStore / GDB / LLVM), `symstore` - Microsoft SymStore, `symstore_index2` - Microsoft SymStore (with index2.txt), `ssqp` - Microsoft SSQP, `unified` - Unified Symbol Server Layout, `debuginfod` - debuginfod.
+        """
+        pulumi.set(__self__, "casing", casing)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def casing(self) -> pulumi.Input[str]:
+        """
+        The casing of the symbol source layout. The layout of the folder structure. The options are: `default` - Default (mixed case), `uppercase` - Uppercase, `lowercase` - Lowercase.
+        """
+        return pulumi.get(self, "casing")
+
+    @casing.setter
+    def casing(self, value: pulumi.Input[str]):
+        pulumi.set(self, "casing", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The layout of the folder structure. The options are: `native` - Platform-Specific (SymStore / GDB / LLVM), `symstore` - Microsoft SymStore, `symstore_index2` - Microsoft SymStore (with index2.txt), `ssqp` - Microsoft SSQP, `unified` - Unified Symbol Server Layout, `debuginfod` - debuginfod.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
 
 

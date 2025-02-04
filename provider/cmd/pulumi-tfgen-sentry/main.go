@@ -15,13 +15,11 @@
 package main
 
 import (
-	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
+	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfgen"
 
 	sentry "github.com/pulumiverse/pulumi-sentry/provider"
-	"github.com/pulumiverse/pulumi-sentry/provider/pkg/version"
 )
 
 func main() {
-	// Modify the path to point to the new provider
-	tfgen.Main("sentry", version.Version, sentry.Provider())
+	tfgen.MainWithMuxer("sentry", sentry.Provider())
 }

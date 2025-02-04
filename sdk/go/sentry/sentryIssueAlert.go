@@ -12,130 +12,9 @@ import (
 	"github.com/pulumiverse/pulumi-sentry/sdk/go/sentry/internal"
 )
 
-// Sentry Issue Alert resource. Note that there's no public documentation for the values of conditions, filters, and actions. You can either inspect the request payload sent when creating or editing an issue alert on Sentry or inspect [Sentry's rules registry in the source code](https://github.com/getsentry/sentry/tree/master/src/sentry/rules). Since v0.11.2, you should also omit the name property of each condition, filter, and action.
+// Create an Issue Alert Rule for a Project. See the [Sentry Documentation](https://docs.sentry.io/api/alerts/create-an-issue-alert-rule-for-a-project/) for more information.
 //
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-sentry/sdk/go/sentry"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			// Retrieve a Slack integration
-//			slack, err := sentry.GetSentryOrganizationIntegration(ctx, &sentry.GetSentryOrganizationIntegrationArgs{
-//				Organization: test.Organization,
-//				ProviderKey:  "slack",
-//				Name:         "Slack Workspace",
-//			}, nil)
-//			if err != nil {
-//				return err
-//			}
-//			_, err = sentry.NewSentryIssueAlert(ctx, "main", &sentry.SentryIssueAlertArgs{
-//				Organization: pulumi.Any(mainSentryProject.Organization),
-//				Project:      pulumi.Any(mainSentryProject.Id),
-//				Name:         pulumi.String("My issue alert"),
-//				ActionMatch:  pulumi.String("any"),
-//				FilterMatch:  pulumi.String("any"),
-//				Frequency:    pulumi.Int(30),
-//				Conditions: pulumi.StringMapArray{
-//					pulumi.StringMap{
-//						"id": pulumi.String("sentry.rules.conditions.first_seen_event.FirstSeenEventCondition"),
-//					},
-//					pulumi.StringMap{
-//						"id": pulumi.String("sentry.rules.conditions.regression_event.RegressionEventCondition"),
-//					},
-//					pulumi.StringMap{
-//						"id":             pulumi.String("sentry.rules.conditions.event_frequency.EventFrequencyCondition"),
-//						"value":          pulumi.String("100"),
-//						"comparisonType": pulumi.String("count"),
-//						"interval":       pulumi.String("1h"),
-//					},
-//					pulumi.StringMap{
-//						"id":             pulumi.String("sentry.rules.conditions.event_frequency.EventUniqueUserFrequencyCondition"),
-//						"value":          pulumi.String("100"),
-//						"comparisonType": pulumi.String("count"),
-//						"interval":       pulumi.String("1h"),
-//					},
-//					pulumi.StringMap{
-//						"id":             pulumi.String("sentry.rules.conditions.event_frequency.EventFrequencyPercentCondition"),
-//						"value":          pulumi.String("50.0"),
-//						"comparisonType": pulumi.String("count"),
-//						"interval":       pulumi.String("1h"),
-//					},
-//				},
-//				Filters: pulumi.StringMapArray{
-//					pulumi.StringMap{
-//						"id":              pulumi.String("sentry.rules.filters.age_comparison.AgeComparisonFilter"),
-//						"value":           pulumi.String("10"),
-//						"time":            pulumi.String("minute"),
-//						"comparison_type": pulumi.String("older"),
-//					},
-//					pulumi.StringMap{
-//						"id":    pulumi.String("sentry.rules.filters.issue_occurrences.IssueOccurrencesFilter"),
-//						"value": pulumi.String("10"),
-//					},
-//					pulumi.StringMap{
-//						"id":               pulumi.String("sentry.rules.filters.assigned_to.AssignedToFilter"),
-//						"targetType":       pulumi.String("Team"),
-//						"targetIdentifier": pulumi.Any(mainSentryTeam.TeamId),
-//					},
-//					pulumi.StringMap{
-//						"id": pulumi.String("sentry.rules.filters.latest_release.LatestReleaseFilter"),
-//					},
-//					pulumi.StringMap{
-//						"id":        pulumi.String("sentry.rules.filters.event_attribute.EventAttributeFilter"),
-//						"attribute": pulumi.String("message"),
-//						"match":     pulumi.String("co"),
-//						"value":     pulumi.String("test"),
-//					},
-//					pulumi.StringMap{
-//						"id":    pulumi.String("sentry.rules.filters.tagged_event.TaggedEventFilter"),
-//						"key":   pulumi.String("test"),
-//						"match": pulumi.String("co"),
-//						"value": pulumi.String("test"),
-//					},
-//					pulumi.StringMap{
-//						"id":    pulumi.String("sentry.rules.filters.level.LevelFilter"),
-//						"match": pulumi.String("eq"),
-//						"level": pulumi.String("50"),
-//					},
-//				},
-//				Actions: pulumi.StringMapArray{
-//					pulumi.StringMap{
-//						"id":               pulumi.String("sentry.mail.actions.NotifyEmailAction"),
-//						"targetType":       pulumi.String("IssueOwners"),
-//						"targetIdentifier": pulumi.String(""),
-//					},
-//					pulumi.StringMap{
-//						"id":               pulumi.String("sentry.mail.actions.NotifyEmailAction"),
-//						"targetType":       pulumi.String("Team"),
-//						"targetIdentifier": pulumi.Any(mainSentryTeam.TeamId),
-//					},
-//					pulumi.StringMap{
-//						"id": pulumi.String("sentry.rules.actions.notify_event.NotifyEventAction"),
-//					},
-//					pulumi.StringMap{
-//						"id":        pulumi.String("sentry.integrations.slack.notify_action.SlackNotifyServiceAction"),
-//						"channel":   pulumi.String("#general"),
-//						"workspace": pulumi.String(slack.InternalId),
-//					},
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
+// **NOTE:** Since v0.15.0, the `conditions`, `filters`, and `actions` attributes which are JSON strings have been deprecated in favor of `conditionsV2`, `filtersV2`, and `actionsV2` which are lists of objects.
 //
 // ## Import
 //
@@ -149,32 +28,40 @@ import (
 type SentryIssueAlert struct {
 	pulumi.CustomResourceState
 
-	// Trigger actions when an event is captured by Sentry and `any` or `all` of the specified conditions happen.
+	// Trigger actions when an event is captured by Sentry and `any` or `all` of the specified conditions happen. Valid values are: `all`, and `any`.
 	ActionMatch pulumi.StringOutput `pulumi:"actionMatch"`
-	// List of actions.
-	Actions pulumi.StringMapArrayOutput `pulumi:"actions"`
-	// List of conditions.
-	Conditions pulumi.StringMapArrayOutput `pulumi:"conditions"`
+	// **Deprecated** in favor of `actionsV2`. A list of actions that take place when all required conditions and filters for the rule are met. In JSON string format.
+	//
+	// Deprecated: Use `actionsV2` instead.
+	Actions pulumi.StringPtrOutput `pulumi:"actions"`
+	// A list of actions that take place when all required conditions and filters for the rule are met.
+	ActionsV2s SentryIssueAlertActionsV2ArrayOutput `pulumi:"actionsV2s"`
+	// **Deprecated** in favor of `conditionsV2`. A list of triggers that determine when the rule fires. In JSON string format.
+	//
+	// Deprecated: Use `conditionsV2` instead.
+	Conditions pulumi.StringPtrOutput `pulumi:"conditions"`
+	// A list of triggers that determine when the rule fires.
+	ConditionsV2s SentryIssueAlertConditionsV2ArrayOutput `pulumi:"conditionsV2s"`
 	// Perform issue alert in a specific environment.
-	Environment pulumi.StringOutput `pulumi:"environment"`
-	// Trigger actions if `all`, `any`, or `none` of the specified filters match.
-	FilterMatch pulumi.StringOutput `pulumi:"filterMatch"`
-	// List of filters.
-	Filters pulumi.StringMapArrayOutput `pulumi:"filters"`
-	// Perform actions at most once every `X` minutes for this issue. Defaults to `30`.
+	Environment pulumi.StringPtrOutput `pulumi:"environment"`
+	// A string determining which filters need to be true before any actions take place. Required when a value is provided for `filters`. Valid values are: `all`, `any`, and `none`.
+	FilterMatch pulumi.StringPtrOutput `pulumi:"filterMatch"`
+	// **Deprecated** in favor of `filtersV2`. A list of filters that determine if a rule fires after the necessary conditions have been met. In JSON string format.
+	//
+	// Deprecated: Use `filtersV2` instead.
+	Filters pulumi.StringPtrOutput `pulumi:"filters"`
+	// A list of filters that determine if a rule fires after the necessary conditions have been met.
+	FiltersV2s SentryIssueAlertFiltersV2ArrayOutput `pulumi:"filtersV2s"`
+	// Perform actions at most once every `X` minutes for this issue.
 	Frequency pulumi.IntOutput `pulumi:"frequency"`
-	// The internal ID for this issue alert.
-	InternalId pulumi.StringOutput `pulumi:"internalId"`
 	// The issue alert name.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The slug of the organization the issue alert belongs to.
+	// The organization of this resource.
 	Organization pulumi.StringOutput `pulumi:"organization"`
-	// The slug of the project to create the issue alert for.
+	// The ID of the team or user that owns the rule.
+	Owner pulumi.StringPtrOutput `pulumi:"owner"`
+	// The project of this resource.
 	Project pulumi.StringOutput `pulumi:"project"`
-	// Use `project` (singular) instead.
-	//
-	// Deprecated: Use `project` (singular) instead.
-	Projects pulumi.StringArrayOutput `pulumi:"projects"`
 }
 
 // NewSentryIssueAlert registers a new resource with the given unique name, arguments, and options.
@@ -186,15 +73,6 @@ func NewSentryIssueAlert(ctx *pulumi.Context,
 
 	if args.ActionMatch == nil {
 		return nil, errors.New("invalid value for required argument 'ActionMatch'")
-	}
-	if args.Actions == nil {
-		return nil, errors.New("invalid value for required argument 'Actions'")
-	}
-	if args.Conditions == nil {
-		return nil, errors.New("invalid value for required argument 'Conditions'")
-	}
-	if args.FilterMatch == nil {
-		return nil, errors.New("invalid value for required argument 'FilterMatch'")
 	}
 	if args.Frequency == nil {
 		return nil, errors.New("invalid value for required argument 'Frequency'")
@@ -228,61 +106,77 @@ func GetSentryIssueAlert(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering SentryIssueAlert resources.
 type sentryIssueAlertState struct {
-	// Trigger actions when an event is captured by Sentry and `any` or `all` of the specified conditions happen.
+	// Trigger actions when an event is captured by Sentry and `any` or `all` of the specified conditions happen. Valid values are: `all`, and `any`.
 	ActionMatch *string `pulumi:"actionMatch"`
-	// List of actions.
-	Actions []map[string]string `pulumi:"actions"`
-	// List of conditions.
-	Conditions []map[string]string `pulumi:"conditions"`
+	// **Deprecated** in favor of `actionsV2`. A list of actions that take place when all required conditions and filters for the rule are met. In JSON string format.
+	//
+	// Deprecated: Use `actionsV2` instead.
+	Actions *string `pulumi:"actions"`
+	// A list of actions that take place when all required conditions and filters for the rule are met.
+	ActionsV2s []SentryIssueAlertActionsV2 `pulumi:"actionsV2s"`
+	// **Deprecated** in favor of `conditionsV2`. A list of triggers that determine when the rule fires. In JSON string format.
+	//
+	// Deprecated: Use `conditionsV2` instead.
+	Conditions *string `pulumi:"conditions"`
+	// A list of triggers that determine when the rule fires.
+	ConditionsV2s []SentryIssueAlertConditionsV2 `pulumi:"conditionsV2s"`
 	// Perform issue alert in a specific environment.
 	Environment *string `pulumi:"environment"`
-	// Trigger actions if `all`, `any`, or `none` of the specified filters match.
+	// A string determining which filters need to be true before any actions take place. Required when a value is provided for `filters`. Valid values are: `all`, `any`, and `none`.
 	FilterMatch *string `pulumi:"filterMatch"`
-	// List of filters.
-	Filters []map[string]string `pulumi:"filters"`
-	// Perform actions at most once every `X` minutes for this issue. Defaults to `30`.
+	// **Deprecated** in favor of `filtersV2`. A list of filters that determine if a rule fires after the necessary conditions have been met. In JSON string format.
+	//
+	// Deprecated: Use `filtersV2` instead.
+	Filters *string `pulumi:"filters"`
+	// A list of filters that determine if a rule fires after the necessary conditions have been met.
+	FiltersV2s []SentryIssueAlertFiltersV2 `pulumi:"filtersV2s"`
+	// Perform actions at most once every `X` minutes for this issue.
 	Frequency *int `pulumi:"frequency"`
-	// The internal ID for this issue alert.
-	InternalId *string `pulumi:"internalId"`
 	// The issue alert name.
 	Name *string `pulumi:"name"`
-	// The slug of the organization the issue alert belongs to.
+	// The organization of this resource.
 	Organization *string `pulumi:"organization"`
-	// The slug of the project to create the issue alert for.
+	// The ID of the team or user that owns the rule.
+	Owner *string `pulumi:"owner"`
+	// The project of this resource.
 	Project *string `pulumi:"project"`
-	// Use `project` (singular) instead.
-	//
-	// Deprecated: Use `project` (singular) instead.
-	Projects []string `pulumi:"projects"`
 }
 
 type SentryIssueAlertState struct {
-	// Trigger actions when an event is captured by Sentry and `any` or `all` of the specified conditions happen.
+	// Trigger actions when an event is captured by Sentry and `any` or `all` of the specified conditions happen. Valid values are: `all`, and `any`.
 	ActionMatch pulumi.StringPtrInput
-	// List of actions.
-	Actions pulumi.StringMapArrayInput
-	// List of conditions.
-	Conditions pulumi.StringMapArrayInput
+	// **Deprecated** in favor of `actionsV2`. A list of actions that take place when all required conditions and filters for the rule are met. In JSON string format.
+	//
+	// Deprecated: Use `actionsV2` instead.
+	Actions pulumi.StringPtrInput
+	// A list of actions that take place when all required conditions and filters for the rule are met.
+	ActionsV2s SentryIssueAlertActionsV2ArrayInput
+	// **Deprecated** in favor of `conditionsV2`. A list of triggers that determine when the rule fires. In JSON string format.
+	//
+	// Deprecated: Use `conditionsV2` instead.
+	Conditions pulumi.StringPtrInput
+	// A list of triggers that determine when the rule fires.
+	ConditionsV2s SentryIssueAlertConditionsV2ArrayInput
 	// Perform issue alert in a specific environment.
 	Environment pulumi.StringPtrInput
-	// Trigger actions if `all`, `any`, or `none` of the specified filters match.
+	// A string determining which filters need to be true before any actions take place. Required when a value is provided for `filters`. Valid values are: `all`, `any`, and `none`.
 	FilterMatch pulumi.StringPtrInput
-	// List of filters.
-	Filters pulumi.StringMapArrayInput
-	// Perform actions at most once every `X` minutes for this issue. Defaults to `30`.
+	// **Deprecated** in favor of `filtersV2`. A list of filters that determine if a rule fires after the necessary conditions have been met. In JSON string format.
+	//
+	// Deprecated: Use `filtersV2` instead.
+	Filters pulumi.StringPtrInput
+	// A list of filters that determine if a rule fires after the necessary conditions have been met.
+	FiltersV2s SentryIssueAlertFiltersV2ArrayInput
+	// Perform actions at most once every `X` minutes for this issue.
 	Frequency pulumi.IntPtrInput
-	// The internal ID for this issue alert.
-	InternalId pulumi.StringPtrInput
 	// The issue alert name.
 	Name pulumi.StringPtrInput
-	// The slug of the organization the issue alert belongs to.
+	// The organization of this resource.
 	Organization pulumi.StringPtrInput
-	// The slug of the project to create the issue alert for.
+	// The ID of the team or user that owns the rule.
+	Owner pulumi.StringPtrInput
+	// The project of this resource.
 	Project pulumi.StringPtrInput
-	// Use `project` (singular) instead.
-	//
-	// Deprecated: Use `project` (singular) instead.
-	Projects pulumi.StringArrayInput
 }
 
 func (SentryIssueAlertState) ElementType() reflect.Type {
@@ -290,49 +184,77 @@ func (SentryIssueAlertState) ElementType() reflect.Type {
 }
 
 type sentryIssueAlertArgs struct {
-	// Trigger actions when an event is captured by Sentry and `any` or `all` of the specified conditions happen.
+	// Trigger actions when an event is captured by Sentry and `any` or `all` of the specified conditions happen. Valid values are: `all`, and `any`.
 	ActionMatch string `pulumi:"actionMatch"`
-	// List of actions.
-	Actions []map[string]string `pulumi:"actions"`
-	// List of conditions.
-	Conditions []map[string]string `pulumi:"conditions"`
+	// **Deprecated** in favor of `actionsV2`. A list of actions that take place when all required conditions and filters for the rule are met. In JSON string format.
+	//
+	// Deprecated: Use `actionsV2` instead.
+	Actions *string `pulumi:"actions"`
+	// A list of actions that take place when all required conditions and filters for the rule are met.
+	ActionsV2s []SentryIssueAlertActionsV2 `pulumi:"actionsV2s"`
+	// **Deprecated** in favor of `conditionsV2`. A list of triggers that determine when the rule fires. In JSON string format.
+	//
+	// Deprecated: Use `conditionsV2` instead.
+	Conditions *string `pulumi:"conditions"`
+	// A list of triggers that determine when the rule fires.
+	ConditionsV2s []SentryIssueAlertConditionsV2 `pulumi:"conditionsV2s"`
 	// Perform issue alert in a specific environment.
 	Environment *string `pulumi:"environment"`
-	// Trigger actions if `all`, `any`, or `none` of the specified filters match.
-	FilterMatch string `pulumi:"filterMatch"`
-	// List of filters.
-	Filters []map[string]string `pulumi:"filters"`
-	// Perform actions at most once every `X` minutes for this issue. Defaults to `30`.
+	// A string determining which filters need to be true before any actions take place. Required when a value is provided for `filters`. Valid values are: `all`, `any`, and `none`.
+	FilterMatch *string `pulumi:"filterMatch"`
+	// **Deprecated** in favor of `filtersV2`. A list of filters that determine if a rule fires after the necessary conditions have been met. In JSON string format.
+	//
+	// Deprecated: Use `filtersV2` instead.
+	Filters *string `pulumi:"filters"`
+	// A list of filters that determine if a rule fires after the necessary conditions have been met.
+	FiltersV2s []SentryIssueAlertFiltersV2 `pulumi:"filtersV2s"`
+	// Perform actions at most once every `X` minutes for this issue.
 	Frequency int `pulumi:"frequency"`
 	// The issue alert name.
 	Name *string `pulumi:"name"`
-	// The slug of the organization the issue alert belongs to.
+	// The organization of this resource.
 	Organization string `pulumi:"organization"`
-	// The slug of the project to create the issue alert for.
+	// The ID of the team or user that owns the rule.
+	Owner *string `pulumi:"owner"`
+	// The project of this resource.
 	Project string `pulumi:"project"`
 }
 
 // The set of arguments for constructing a SentryIssueAlert resource.
 type SentryIssueAlertArgs struct {
-	// Trigger actions when an event is captured by Sentry and `any` or `all` of the specified conditions happen.
+	// Trigger actions when an event is captured by Sentry and `any` or `all` of the specified conditions happen. Valid values are: `all`, and `any`.
 	ActionMatch pulumi.StringInput
-	// List of actions.
-	Actions pulumi.StringMapArrayInput
-	// List of conditions.
-	Conditions pulumi.StringMapArrayInput
+	// **Deprecated** in favor of `actionsV2`. A list of actions that take place when all required conditions and filters for the rule are met. In JSON string format.
+	//
+	// Deprecated: Use `actionsV2` instead.
+	Actions pulumi.StringPtrInput
+	// A list of actions that take place when all required conditions and filters for the rule are met.
+	ActionsV2s SentryIssueAlertActionsV2ArrayInput
+	// **Deprecated** in favor of `conditionsV2`. A list of triggers that determine when the rule fires. In JSON string format.
+	//
+	// Deprecated: Use `conditionsV2` instead.
+	Conditions pulumi.StringPtrInput
+	// A list of triggers that determine when the rule fires.
+	ConditionsV2s SentryIssueAlertConditionsV2ArrayInput
 	// Perform issue alert in a specific environment.
 	Environment pulumi.StringPtrInput
-	// Trigger actions if `all`, `any`, or `none` of the specified filters match.
-	FilterMatch pulumi.StringInput
-	// List of filters.
-	Filters pulumi.StringMapArrayInput
-	// Perform actions at most once every `X` minutes for this issue. Defaults to `30`.
+	// A string determining which filters need to be true before any actions take place. Required when a value is provided for `filters`. Valid values are: `all`, `any`, and `none`.
+	FilterMatch pulumi.StringPtrInput
+	// **Deprecated** in favor of `filtersV2`. A list of filters that determine if a rule fires after the necessary conditions have been met. In JSON string format.
+	//
+	// Deprecated: Use `filtersV2` instead.
+	Filters pulumi.StringPtrInput
+	// A list of filters that determine if a rule fires after the necessary conditions have been met.
+	FiltersV2s SentryIssueAlertFiltersV2ArrayInput
+	// Perform actions at most once every `X` minutes for this issue.
 	Frequency pulumi.IntInput
 	// The issue alert name.
 	Name pulumi.StringPtrInput
-	// The slug of the organization the issue alert belongs to.
+	// The organization of this resource.
 	Organization pulumi.StringInput
-	// The slug of the project to create the issue alert for.
+	// The ID of the team or user that owns the rule.
+	Owner pulumi.StringPtrInput
+	// The project of this resource.
 	Project pulumi.StringInput
 }
 
@@ -423,44 +345,60 @@ func (o SentryIssueAlertOutput) ToSentryIssueAlertOutputWithContext(ctx context.
 	return o
 }
 
-// Trigger actions when an event is captured by Sentry and `any` or `all` of the specified conditions happen.
+// Trigger actions when an event is captured by Sentry and `any` or `all` of the specified conditions happen. Valid values are: `all`, and `any`.
 func (o SentryIssueAlertOutput) ActionMatch() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringOutput { return v.ActionMatch }).(pulumi.StringOutput)
 }
 
-// List of actions.
-func (o SentryIssueAlertOutput) Actions() pulumi.StringMapArrayOutput {
-	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringMapArrayOutput { return v.Actions }).(pulumi.StringMapArrayOutput)
+// **Deprecated** in favor of `actionsV2`. A list of actions that take place when all required conditions and filters for the rule are met. In JSON string format.
+//
+// Deprecated: Use `actionsV2` instead.
+func (o SentryIssueAlertOutput) Actions() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringPtrOutput { return v.Actions }).(pulumi.StringPtrOutput)
 }
 
-// List of conditions.
-func (o SentryIssueAlertOutput) Conditions() pulumi.StringMapArrayOutput {
-	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringMapArrayOutput { return v.Conditions }).(pulumi.StringMapArrayOutput)
+// A list of actions that take place when all required conditions and filters for the rule are met.
+func (o SentryIssueAlertOutput) ActionsV2s() SentryIssueAlertActionsV2ArrayOutput {
+	return o.ApplyT(func(v *SentryIssueAlert) SentryIssueAlertActionsV2ArrayOutput { return v.ActionsV2s }).(SentryIssueAlertActionsV2ArrayOutput)
+}
+
+// **Deprecated** in favor of `conditionsV2`. A list of triggers that determine when the rule fires. In JSON string format.
+//
+// Deprecated: Use `conditionsV2` instead.
+func (o SentryIssueAlertOutput) Conditions() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringPtrOutput { return v.Conditions }).(pulumi.StringPtrOutput)
+}
+
+// A list of triggers that determine when the rule fires.
+func (o SentryIssueAlertOutput) ConditionsV2s() SentryIssueAlertConditionsV2ArrayOutput {
+	return o.ApplyT(func(v *SentryIssueAlert) SentryIssueAlertConditionsV2ArrayOutput { return v.ConditionsV2s }).(SentryIssueAlertConditionsV2ArrayOutput)
 }
 
 // Perform issue alert in a specific environment.
-func (o SentryIssueAlertOutput) Environment() pulumi.StringOutput {
-	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringOutput { return v.Environment }).(pulumi.StringOutput)
+func (o SentryIssueAlertOutput) Environment() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringPtrOutput { return v.Environment }).(pulumi.StringPtrOutput)
 }
 
-// Trigger actions if `all`, `any`, or `none` of the specified filters match.
-func (o SentryIssueAlertOutput) FilterMatch() pulumi.StringOutput {
-	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringOutput { return v.FilterMatch }).(pulumi.StringOutput)
+// A string determining which filters need to be true before any actions take place. Required when a value is provided for `filters`. Valid values are: `all`, `any`, and `none`.
+func (o SentryIssueAlertOutput) FilterMatch() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringPtrOutput { return v.FilterMatch }).(pulumi.StringPtrOutput)
 }
 
-// List of filters.
-func (o SentryIssueAlertOutput) Filters() pulumi.StringMapArrayOutput {
-	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringMapArrayOutput { return v.Filters }).(pulumi.StringMapArrayOutput)
+// **Deprecated** in favor of `filtersV2`. A list of filters that determine if a rule fires after the necessary conditions have been met. In JSON string format.
+//
+// Deprecated: Use `filtersV2` instead.
+func (o SentryIssueAlertOutput) Filters() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringPtrOutput { return v.Filters }).(pulumi.StringPtrOutput)
 }
 
-// Perform actions at most once every `X` minutes for this issue. Defaults to `30`.
+// A list of filters that determine if a rule fires after the necessary conditions have been met.
+func (o SentryIssueAlertOutput) FiltersV2s() SentryIssueAlertFiltersV2ArrayOutput {
+	return o.ApplyT(func(v *SentryIssueAlert) SentryIssueAlertFiltersV2ArrayOutput { return v.FiltersV2s }).(SentryIssueAlertFiltersV2ArrayOutput)
+}
+
+// Perform actions at most once every `X` minutes for this issue.
 func (o SentryIssueAlertOutput) Frequency() pulumi.IntOutput {
 	return o.ApplyT(func(v *SentryIssueAlert) pulumi.IntOutput { return v.Frequency }).(pulumi.IntOutput)
-}
-
-// The internal ID for this issue alert.
-func (o SentryIssueAlertOutput) InternalId() pulumi.StringOutput {
-	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringOutput { return v.InternalId }).(pulumi.StringOutput)
 }
 
 // The issue alert name.
@@ -468,21 +406,19 @@ func (o SentryIssueAlertOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// The slug of the organization the issue alert belongs to.
+// The organization of this resource.
 func (o SentryIssueAlertOutput) Organization() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringOutput { return v.Organization }).(pulumi.StringOutput)
 }
 
-// The slug of the project to create the issue alert for.
-func (o SentryIssueAlertOutput) Project() pulumi.StringOutput {
-	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringOutput { return v.Project }).(pulumi.StringOutput)
+// The ID of the team or user that owns the rule.
+func (o SentryIssueAlertOutput) Owner() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringPtrOutput { return v.Owner }).(pulumi.StringPtrOutput)
 }
 
-// Use `project` (singular) instead.
-//
-// Deprecated: Use `project` (singular) instead.
-func (o SentryIssueAlertOutput) Projects() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringArrayOutput { return v.Projects }).(pulumi.StringArrayOutput)
+// The project of this resource.
+func (o SentryIssueAlertOutput) Project() pulumi.StringOutput {
+	return o.ApplyT(func(v *SentryIssueAlert) pulumi.StringOutput { return v.Project }).(pulumi.StringOutput)
 }
 
 type SentryIssueAlertArrayOutput struct{ *pulumi.OutputState }

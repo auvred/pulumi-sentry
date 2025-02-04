@@ -47,6 +47,7 @@ import * as utilities from "./utilities";
  *                 type: "slack",
  *                 targetType: "specific",
  *                 targetIdentifier: "#slack-channel",
+ *                 inputChannelId: "C0XXXXXXXXX",
  *                 integrationId: slack.then(slack => slack.id),
  *             }],
  *             alertThreshold: 300,
@@ -111,13 +112,17 @@ export class SentryMetricAlert extends pulumi.CustomResource {
      */
     public readonly aggregate!: pulumi.Output<string>;
     /**
+     * An optional int representing the time delta to use as the comparison period, in minutes. Required when using a percentage change threshold
+     */
+    public readonly comparisonDelta!: pulumi.Output<number | undefined>;
+    /**
      * The Sentry Alert category
      */
     public readonly dataset!: pulumi.Output<string | undefined>;
     /**
      * Perform Alert rule in a specific environment
      */
-    public readonly environment!: pulumi.Output<string>;
+    public readonly environment!: pulumi.Output<string | undefined>;
     /**
      * The events type of dataset.
      */
@@ -137,7 +142,7 @@ export class SentryMetricAlert extends pulumi.CustomResource {
     /**
      * Specifies the owner id of this Alert rule
      */
-    public readonly owner!: pulumi.Output<string>;
+    public readonly owner!: pulumi.Output<string | undefined>;
     /**
      * The slug of the project to create the metric alert for.
      */
@@ -174,6 +179,7 @@ export class SentryMetricAlert extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as SentryMetricAlertState | undefined;
             resourceInputs["aggregate"] = state ? state.aggregate : undefined;
+            resourceInputs["comparisonDelta"] = state ? state.comparisonDelta : undefined;
             resourceInputs["dataset"] = state ? state.dataset : undefined;
             resourceInputs["environment"] = state ? state.environment : undefined;
             resourceInputs["eventTypes"] = state ? state.eventTypes : undefined;
@@ -211,6 +217,7 @@ export class SentryMetricAlert extends pulumi.CustomResource {
                 throw new Error("Missing required property 'triggers'");
             }
             resourceInputs["aggregate"] = args ? args.aggregate : undefined;
+            resourceInputs["comparisonDelta"] = args ? args.comparisonDelta : undefined;
             resourceInputs["dataset"] = args ? args.dataset : undefined;
             resourceInputs["environment"] = args ? args.environment : undefined;
             resourceInputs["eventTypes"] = args ? args.eventTypes : undefined;
@@ -238,6 +245,10 @@ export interface SentryMetricAlertState {
      * The aggregation criteria to apply
      */
     aggregate?: pulumi.Input<string>;
+    /**
+     * An optional int representing the time delta to use as the comparison period, in minutes. Required when using a percentage change threshold
+     */
+    comparisonDelta?: pulumi.Input<number>;
     /**
      * The Sentry Alert category
      */
@@ -297,6 +308,10 @@ export interface SentryMetricAlertArgs {
      * The aggregation criteria to apply
      */
     aggregate: pulumi.Input<string>;
+    /**
+     * An optional int representing the time delta to use as the comparison period, in minutes. Required when using a percentage change threshold
+     */
+    comparisonDelta?: pulumi.Input<number>;
     /**
      * The Sentry Alert category
      */

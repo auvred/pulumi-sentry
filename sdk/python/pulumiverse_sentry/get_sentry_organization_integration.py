@@ -47,15 +47,16 @@ class GetSentryOrganizationIntegrationResult:
     @pulumi.getter
     def id(self) -> str:
         """
-        The provider-assigned unique ID for this managed resource.
+        The ID of this resource.
         """
         return pulumi.get(self, "id")
 
     @property
     @pulumi.getter(name="internalId")
+    @_utilities.deprecated("""This field is deprecated and will be removed in a future version. Use `id` instead.""")
     def internal_id(self) -> str:
         """
-        The internal ID for this organization integration.
+        The internal ID for this organization integration. **Deprecated** Use `id` instead.
         """
         return pulumi.get(self, "internal_id")
 
@@ -63,7 +64,7 @@ class GetSentryOrganizationIntegrationResult:
     @pulumi.getter
     def name(self) -> str:
         """
-        The name of the organization integration.
+        The name of the integration.
         """
         return pulumi.get(self, "name")
 
@@ -71,7 +72,7 @@ class GetSentryOrganizationIntegrationResult:
     @pulumi.getter
     def organization(self) -> str:
         """
-        The slug of the organization the integration belongs to.
+        The organization the resource belongs to.
         """
         return pulumi.get(self, "organization")
 
@@ -79,7 +80,7 @@ class GetSentryOrganizationIntegrationResult:
     @pulumi.getter(name="providerKey")
     def provider_key(self) -> str:
         """
-        The key of the organization integration provider.
+        Specific integration provider to filter by such as `slack`. See [the list of supported providers](https://docs.sentry.io/product/integrations/).
         """
         return pulumi.get(self, "provider_key")
 
@@ -102,7 +103,7 @@ def get_sentry_organization_integration(name: Optional[str] = None,
                                         provider_key: Optional[str] = None,
                                         opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSentryOrganizationIntegrationResult:
     """
-    Sentry Organization Integration data source.
+    Sentry Organization Integration data source. See the [Sentry documentation](https://docs.sentry.io/api/integrations/list-an-organizations-available-integrations/) for more information.
 
     ## Example Usage
 
@@ -121,9 +122,9 @@ def get_sentry_organization_integration(name: Optional[str] = None,
     ```
 
 
-    :param str name: The name of the organization integration.
-    :param str organization: The slug of the organization the integration belongs to.
-    :param str provider_key: The key of the organization integration provider.
+    :param str name: The name of the integration.
+    :param str organization: The organization the resource belongs to.
+    :param str provider_key: Specific integration provider to filter by such as `slack`. See [the list of supported providers](https://docs.sentry.io/product/integrations/).
     """
     __args__ = dict()
     __args__['name'] = name
@@ -143,7 +144,7 @@ def get_sentry_organization_integration_output(name: Optional[pulumi.Input[str]]
                                                provider_key: Optional[pulumi.Input[str]] = None,
                                                opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetSentryOrganizationIntegrationResult]:
     """
-    Sentry Organization Integration data source.
+    Sentry Organization Integration data source. See the [Sentry documentation](https://docs.sentry.io/api/integrations/list-an-organizations-available-integrations/) for more information.
 
     ## Example Usage
 
@@ -162,9 +163,9 @@ def get_sentry_organization_integration_output(name: Optional[pulumi.Input[str]]
     ```
 
 
-    :param str name: The name of the organization integration.
-    :param str organization: The slug of the organization the integration belongs to.
-    :param str provider_key: The key of the organization integration provider.
+    :param str name: The name of the integration.
+    :param str organization: The organization the resource belongs to.
+    :param str provider_key: Specific integration provider to filter by such as `slack`. See [the list of supported providers](https://docs.sentry.io/product/integrations/).
     """
     __args__ = dict()
     __args__['name'] = name

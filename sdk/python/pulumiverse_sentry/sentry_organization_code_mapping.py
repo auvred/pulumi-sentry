@@ -296,7 +296,7 @@ class SentryOrganizationCodeMapping(pulumi.CustomResource):
             name="my-github-organization")
         this = sentry.SentryProject("this",
             organization="my-organization",
-            team="my-team",
+            teams=["my-team"],
             name="Web App",
             slug="web-app",
             platform="javascript",
@@ -361,7 +361,7 @@ class SentryOrganizationCodeMapping(pulumi.CustomResource):
             name="my-github-organization")
         this = sentry.SentryProject("this",
             organization="my-organization",
-            team="my-team",
+            teams=["my-team"],
             name="Web App",
             slug="web-app",
             platform="javascript",

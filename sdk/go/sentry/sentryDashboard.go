@@ -184,12 +184,14 @@ import (
 //					},
 //					&sentry.SentryDashboardWidgetArgs{
 //						Title:       pulumi.String("Errors by Country"),
-//						DisplayType: pulumi.String("world_map"),
+//						DisplayType: pulumi.String("table"),
 //						Interval:    pulumi.String("5m"),
 //						WidgetType:  pulumi.String("discover"),
 //						Queries: sentry.SentryDashboardWidgetQueryArray{
 //							&sentry.SentryDashboardWidgetQueryArgs{
 //								Fields: pulumi.StringArray{
+//									pulumi.String("geo.country_code"),
+//									pulumi.String("geo.region"),
 //									pulumi.String("count()"),
 //								},
 //								Aggregates: pulumi.StringArray{
@@ -435,6 +437,16 @@ import (
 //		})
 //	}
 //
+// ```
+//
+// ## Import
+//
+// import using the dashboard id from the URL:
+//
+// https://sentry.io/dashboard/[dashboard-id]
+//
+// ```sh
+// $ pulumi import sentry:index/sentryDashboard:SentryDashboard default org-slug/dashboard-id
 // ```
 type SentryDashboard struct {
 	pulumi.CustomResourceState

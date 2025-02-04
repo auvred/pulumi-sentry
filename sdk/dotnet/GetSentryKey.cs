@@ -13,71 +13,13 @@ namespace Pulumiverse.Sentry
     public static class GetSentryKey
     {
         /// <summary>
-        /// Sentry Key data source.
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Sentry = Pulumi.Sentry;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     // Retrieve a project key by name
-        ///     var @default = Sentry.GetSentryKey.Invoke(new()
-        ///     {
-        ///         Organization = "my-organization",
-        ///         Project = "web-app",
-        ///         Name = "Default",
-        ///     });
-        /// 
-        ///     // Retrieve the first key of a project
-        ///     var first = Sentry.GetSentryKey.Invoke(new()
-        ///     {
-        ///         Organization = "my-organization",
-        ///         Project = "web-app",
-        ///         First = true,
-        ///     });
-        /// 
-        /// });
-        /// ```
+        /// Retrieve a Project's Client Key.
         /// </summary>
         public static Task<GetSentryKeyResult> InvokeAsync(GetSentryKeyArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSentryKeyResult>("sentry:index/getSentryKey:getSentryKey", args ?? new GetSentryKeyArgs(), options.WithDefaults());
 
         /// <summary>
-        /// Sentry Key data source.
-        /// 
-        /// ## Example Usage
-        /// 
-        /// ```csharp
-        /// using System.Collections.Generic;
-        /// using System.Linq;
-        /// using Pulumi;
-        /// using Sentry = Pulumi.Sentry;
-        /// 
-        /// return await Deployment.RunAsync(() =&gt; 
-        /// {
-        ///     // Retrieve a project key by name
-        ///     var @default = Sentry.GetSentryKey.Invoke(new()
-        ///     {
-        ///         Organization = "my-organization",
-        ///         Project = "web-app",
-        ///         Name = "Default",
-        ///     });
-        /// 
-        ///     // Retrieve the first key of a project
-        ///     var first = Sentry.GetSentryKey.Invoke(new()
-        ///     {
-        ///         Organization = "my-organization",
-        ///         Project = "web-app",
-        ///         First = true,
-        ///     });
-        /// 
-        /// });
-        /// ```
+        /// Retrieve a Project's Client Key.
         /// </summary>
         public static Output<GetSentryKeyResult> Invoke(GetSentryKeyInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSentryKeyResult>("sentry:index/getSentryKey:getSentryKey", args ?? new GetSentryKeyInvokeArgs(), options.WithDefaults());
@@ -93,19 +35,25 @@ namespace Pulumiverse.Sentry
         public bool? First { get; set; }
 
         /// <summary>
-        /// The name of the key to retrieve.
+        /// The ID of this resource.
+        /// </summary>
+        [Input("id")]
+        public string? Id { get; set; }
+
+        /// <summary>
+        /// The name of the client key.
         /// </summary>
         [Input("name")]
         public string? Name { get; set; }
 
         /// <summary>
-        /// The slug of the organization the key should be created for.
+        /// The organization the resource belongs to.
         /// </summary>
         [Input("organization", required: true)]
         public string Organization { get; set; } = null!;
 
         /// <summary>
-        /// The slug of the project the key should be created for.
+        /// The project the resource belongs to.
         /// </summary>
         [Input("project", required: true)]
         public string Project { get; set; } = null!;
@@ -125,19 +73,25 @@ namespace Pulumiverse.Sentry
         public Input<bool>? First { get; set; }
 
         /// <summary>
-        /// The name of the key to retrieve.
+        /// The ID of this resource.
+        /// </summary>
+        [Input("id")]
+        public Input<string>? Id { get; set; }
+
+        /// <summary>
+        /// The name of the client key.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         /// <summary>
-        /// The slug of the organization the key should be created for.
+        /// The organization the resource belongs to.
         /// </summary>
         [Input("organization", required: true)]
         public Input<string> Organization { get; set; } = null!;
 
         /// <summary>
-        /// The slug of the project the key should be created for.
+        /// The project the resource belongs to.
         /// </summary>
         [Input("project", required: true)]
         public Input<string> Project { get; set; } = null!;
@@ -153,44 +107,51 @@ namespace Pulumiverse.Sentry
     public sealed class GetSentryKeyResult
     {
         /// <summary>
-        /// DSN for the Content Security Policy (CSP) for the key.
+        /// This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+        /// </summary>
+        public readonly ImmutableDictionary<string, string> Dsn;
+        /// <summary>
+        /// Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
         /// </summary>
         public readonly string DsnCsp;
         /// <summary>
-        /// DSN for the key.
+        /// The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
         /// </summary>
         public readonly string DsnPublic;
+        /// <summary>
+        /// Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+        /// </summary>
         public readonly string DsnSecret;
         /// <summary>
         /// Boolean flag indicating that we want the first key of the returned keys.
         /// </summary>
         public readonly bool? First;
         /// <summary>
-        /// The provider-assigned unique ID for this managed resource.
+        /// The ID of this resource.
         /// </summary>
-        public readonly string Id;
+        public readonly string? Id;
         /// <summary>
-        /// Flag indicating the key is active.
+        /// The JavaScript loader script configuration.
         /// </summary>
-        public readonly bool IsActive;
+        public readonly Outputs.GetSentryKeyJavascriptLoaderScriptResult JavascriptLoaderScript;
         /// <summary>
-        /// The name of the key to retrieve.
+        /// The name of the client key.
         /// </summary>
         public readonly string? Name;
         /// <summary>
-        /// The slug of the organization the key should be created for.
+        /// The organization the resource belongs to.
         /// </summary>
         public readonly string Organization;
         /// <summary>
-        /// The slug of the project the key should be created for.
+        /// The project the resource belongs to.
         /// </summary>
         public readonly string Project;
         /// <summary>
         /// The ID of the project that the key belongs to.
         /// </summary>
-        public readonly int ProjectId;
+        public readonly string ProjectId;
         /// <summary>
-        /// Public key portion of the client key.
+        /// The public key.
         /// </summary>
         public readonly string Public;
         /// <summary>
@@ -198,16 +159,18 @@ namespace Pulumiverse.Sentry
         /// </summary>
         public readonly int RateLimitCount;
         /// <summary>
-        /// Length of time that will be considered when checking the rate limit.
+        /// Length of time in seconds that will be considered when checking the rate limit.
         /// </summary>
         public readonly int RateLimitWindow;
         /// <summary>
-        /// Secret key portion of the client key.
+        /// The secret key.
         /// </summary>
         public readonly string Secret;
 
         [OutputConstructor]
         private GetSentryKeyResult(
+            ImmutableDictionary<string, string> dsn,
+
             string dsnCsp,
 
             string dsnPublic,
@@ -216,9 +179,9 @@ namespace Pulumiverse.Sentry
 
             bool? first,
 
-            string id,
+            string? id,
 
-            bool isActive,
+            Outputs.GetSentryKeyJavascriptLoaderScriptResult javascriptLoaderScript,
 
             string? name,
 
@@ -226,7 +189,7 @@ namespace Pulumiverse.Sentry
 
             string project,
 
-            int projectId,
+            string projectId,
 
             string @public,
 
@@ -236,12 +199,13 @@ namespace Pulumiverse.Sentry
 
             string secret)
         {
+            Dsn = dsn;
             DsnCsp = dsnCsp;
             DsnPublic = dsnPublic;
             DsnSecret = dsnSecret;
             First = first;
             Id = id;
-            IsActive = isActive;
+            JavascriptLoaderScript = javascriptLoaderScript;
             Name = name;
             Organization = organization;
             Project = project;

@@ -22,7 +22,7 @@ import * as utilities from "./utilities";
  * });
  * const _this = new sentry.SentryProject("this", {
  *     organization: "my-organization",
- *     team: "my-team",
+ *     teams: ["my-team"],
  *     name: "Web App",
  *     slug: "web-app",
  *     platform: "javascript",

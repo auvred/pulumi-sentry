@@ -14,41 +14,6 @@ import (
 
 // Sentry Project resource.
 //
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/pulumiverse/pulumi-sentry/sdk/go/sentry"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			// Create a project
-//			_, err := sentry.NewSentryProject(ctx, "default", &sentry.SentryProjectArgs{
-//				Organization: pulumi.String("my-organization"),
-//				Teams: pulumi.StringArray{
-//					pulumi.String("my-first-team"),
-//					pulumi.String("my-second-team"),
-//				},
-//				Name:       pulumi.String("Web App"),
-//				Slug:       pulumi.String("web-app"),
-//				Platform:   pulumi.String("javascript"),
-//				ResolveAge: pulumi.Int(720),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
-// ```
-//
 // ## Import
 //
 // import using the organization and team slugs from the URL:
@@ -61,36 +26,35 @@ import (
 type SentryProject struct {
 	pulumi.CustomResourceState
 
-	Color pulumi.StringOutput `pulumi:"color"`
+	// Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+	ClientSecurity SentryProjectClientSecurityOutput `pulumi:"clientSecurity"`
+	// Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `SentryKey` resource.
+	DefaultKey pulumi.BoolPtrOutput `pulumi:"defaultKey"`
+	// Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
+	DefaultRules pulumi.BoolPtrOutput `pulumi:"defaultRules"`
 	// The maximum amount of time (in seconds) to wait between scheduling digests for delivery.
 	DigestsMaxDelay pulumi.IntOutput `pulumi:"digestsMaxDelay"`
 	// The minimum amount of time (in seconds) to wait between scheduling digests for delivery after the initial scheduling.
 	DigestsMinDelay pulumi.IntOutput         `pulumi:"digestsMinDelay"`
 	Features        pulumi.StringArrayOutput `pulumi:"features"`
+	// Custom filters for this project.
+	Filters SentryProjectFiltersOutput `pulumi:"filters"`
+	// This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob > fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+	FingerprintingRules pulumi.StringOutput `pulumi:"fingerprintingRules"`
+	// This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
+	GroupingEnhancements pulumi.StringOutput `pulumi:"groupingEnhancements"`
 	// The internal ID for this project.
 	InternalId pulumi.StringOutput `pulumi:"internalId"`
-	// Deprecated: is_bookmarked is no longer used
-	IsBookmarked pulumi.BoolOutput `pulumi:"isBookmarked"`
-	IsPublic     pulumi.BoolOutput `pulumi:"isPublic"`
 	// The name for the project.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The slug of the organization the project belongs to.
+	// The organization of this resource.
 	Organization pulumi.StringOutput `pulumi:"organization"`
-	// The optional platform for this project.
-	Platform pulumi.StringOutput `pulumi:"platform"`
-	// Use `internalId` instead.
-	//
-	// Deprecated: Use `internalId` instead.
-	ProjectId pulumi.StringOutput `pulumi:"projectId"`
+	// The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
+	Platform pulumi.StringPtrOutput `pulumi:"platform"`
 	// Hours in which an issue is automatically resolve if not seen after this amount of time.
 	ResolveAge pulumi.IntOutput `pulumi:"resolveAge"`
 	// The optional slug for this project.
-	Slug   pulumi.StringOutput `pulumi:"slug"`
-	Status pulumi.StringOutput `pulumi:"status"`
-	// The slug of the team to create the project for. **Deprecated** Use `teams` instead.
-	//
-	// Deprecated: Use `teams` instead.
-	Team pulumi.StringPtrOutput `pulumi:"team"`
+	Slug pulumi.StringOutput `pulumi:"slug"`
 	// The slugs of the teams to create the project for.
 	Teams pulumi.StringArrayOutput `pulumi:"teams"`
 }
@@ -104,6 +68,9 @@ func NewSentryProject(ctx *pulumi.Context,
 
 	if args.Organization == nil {
 		return nil, errors.New("invalid value for required argument 'Organization'")
+	}
+	if args.Teams == nil {
+		return nil, errors.New("invalid value for required argument 'Teams'")
 	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SentryProject
@@ -128,71 +95,69 @@ func GetSentryProject(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering SentryProject resources.
 type sentryProjectState struct {
-	Color *string `pulumi:"color"`
+	// Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+	ClientSecurity *SentryProjectClientSecurity `pulumi:"clientSecurity"`
+	// Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `SentryKey` resource.
+	DefaultKey *bool `pulumi:"defaultKey"`
+	// Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
+	DefaultRules *bool `pulumi:"defaultRules"`
 	// The maximum amount of time (in seconds) to wait between scheduling digests for delivery.
 	DigestsMaxDelay *int `pulumi:"digestsMaxDelay"`
 	// The minimum amount of time (in seconds) to wait between scheduling digests for delivery after the initial scheduling.
 	DigestsMinDelay *int     `pulumi:"digestsMinDelay"`
 	Features        []string `pulumi:"features"`
+	// Custom filters for this project.
+	Filters *SentryProjectFilters `pulumi:"filters"`
+	// This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob > fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+	FingerprintingRules *string `pulumi:"fingerprintingRules"`
+	// This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
+	GroupingEnhancements *string `pulumi:"groupingEnhancements"`
 	// The internal ID for this project.
 	InternalId *string `pulumi:"internalId"`
-	// Deprecated: is_bookmarked is no longer used
-	IsBookmarked *bool `pulumi:"isBookmarked"`
-	IsPublic     *bool `pulumi:"isPublic"`
 	// The name for the project.
 	Name *string `pulumi:"name"`
-	// The slug of the organization the project belongs to.
+	// The organization of this resource.
 	Organization *string `pulumi:"organization"`
-	// The optional platform for this project.
+	// The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
 	Platform *string `pulumi:"platform"`
-	// Use `internalId` instead.
-	//
-	// Deprecated: Use `internalId` instead.
-	ProjectId *string `pulumi:"projectId"`
 	// Hours in which an issue is automatically resolve if not seen after this amount of time.
 	ResolveAge *int `pulumi:"resolveAge"`
 	// The optional slug for this project.
-	Slug   *string `pulumi:"slug"`
-	Status *string `pulumi:"status"`
-	// The slug of the team to create the project for. **Deprecated** Use `teams` instead.
-	//
-	// Deprecated: Use `teams` instead.
-	Team *string `pulumi:"team"`
+	Slug *string `pulumi:"slug"`
 	// The slugs of the teams to create the project for.
 	Teams []string `pulumi:"teams"`
 }
 
 type SentryProjectState struct {
-	Color pulumi.StringPtrInput
+	// Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+	ClientSecurity SentryProjectClientSecurityPtrInput
+	// Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `SentryKey` resource.
+	DefaultKey pulumi.BoolPtrInput
+	// Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
+	DefaultRules pulumi.BoolPtrInput
 	// The maximum amount of time (in seconds) to wait between scheduling digests for delivery.
 	DigestsMaxDelay pulumi.IntPtrInput
 	// The minimum amount of time (in seconds) to wait between scheduling digests for delivery after the initial scheduling.
 	DigestsMinDelay pulumi.IntPtrInput
 	Features        pulumi.StringArrayInput
+	// Custom filters for this project.
+	Filters SentryProjectFiltersPtrInput
+	// This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob > fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+	FingerprintingRules pulumi.StringPtrInput
+	// This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
+	GroupingEnhancements pulumi.StringPtrInput
 	// The internal ID for this project.
 	InternalId pulumi.StringPtrInput
-	// Deprecated: is_bookmarked is no longer used
-	IsBookmarked pulumi.BoolPtrInput
-	IsPublic     pulumi.BoolPtrInput
 	// The name for the project.
 	Name pulumi.StringPtrInput
-	// The slug of the organization the project belongs to.
+	// The organization of this resource.
 	Organization pulumi.StringPtrInput
-	// The optional platform for this project.
+	// The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
 	Platform pulumi.StringPtrInput
-	// Use `internalId` instead.
-	//
-	// Deprecated: Use `internalId` instead.
-	ProjectId pulumi.StringPtrInput
 	// Hours in which an issue is automatically resolve if not seen after this amount of time.
 	ResolveAge pulumi.IntPtrInput
 	// The optional slug for this project.
-	Slug   pulumi.StringPtrInput
-	Status pulumi.StringPtrInput
-	// The slug of the team to create the project for. **Deprecated** Use `teams` instead.
-	//
-	// Deprecated: Use `teams` instead.
-	Team pulumi.StringPtrInput
+	Slug pulumi.StringPtrInput
 	// The slugs of the teams to create the project for.
 	Teams pulumi.StringArrayInput
 }
@@ -202,48 +167,64 @@ func (SentryProjectState) ElementType() reflect.Type {
 }
 
 type sentryProjectArgs struct {
+	// Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+	ClientSecurity *SentryProjectClientSecurity `pulumi:"clientSecurity"`
+	// Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `SentryKey` resource.
+	DefaultKey *bool `pulumi:"defaultKey"`
+	// Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
+	DefaultRules *bool `pulumi:"defaultRules"`
 	// The maximum amount of time (in seconds) to wait between scheduling digests for delivery.
 	DigestsMaxDelay *int `pulumi:"digestsMaxDelay"`
 	// The minimum amount of time (in seconds) to wait between scheduling digests for delivery after the initial scheduling.
 	DigestsMinDelay *int `pulumi:"digestsMinDelay"`
+	// Custom filters for this project.
+	Filters *SentryProjectFilters `pulumi:"filters"`
+	// This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob > fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+	FingerprintingRules *string `pulumi:"fingerprintingRules"`
+	// This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
+	GroupingEnhancements *string `pulumi:"groupingEnhancements"`
 	// The name for the project.
 	Name *string `pulumi:"name"`
-	// The slug of the organization the project belongs to.
+	// The organization of this resource.
 	Organization string `pulumi:"organization"`
-	// The optional platform for this project.
+	// The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
 	Platform *string `pulumi:"platform"`
 	// Hours in which an issue is automatically resolve if not seen after this amount of time.
 	ResolveAge *int `pulumi:"resolveAge"`
 	// The optional slug for this project.
 	Slug *string `pulumi:"slug"`
-	// The slug of the team to create the project for. **Deprecated** Use `teams` instead.
-	//
-	// Deprecated: Use `teams` instead.
-	Team *string `pulumi:"team"`
 	// The slugs of the teams to create the project for.
 	Teams []string `pulumi:"teams"`
 }
 
 // The set of arguments for constructing a SentryProject resource.
 type SentryProjectArgs struct {
+	// Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+	ClientSecurity SentryProjectClientSecurityPtrInput
+	// Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `SentryKey` resource.
+	DefaultKey pulumi.BoolPtrInput
+	// Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
+	DefaultRules pulumi.BoolPtrInput
 	// The maximum amount of time (in seconds) to wait between scheduling digests for delivery.
 	DigestsMaxDelay pulumi.IntPtrInput
 	// The minimum amount of time (in seconds) to wait between scheduling digests for delivery after the initial scheduling.
 	DigestsMinDelay pulumi.IntPtrInput
+	// Custom filters for this project.
+	Filters SentryProjectFiltersPtrInput
+	// This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob > fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+	FingerprintingRules pulumi.StringPtrInput
+	// This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
+	GroupingEnhancements pulumi.StringPtrInput
 	// The name for the project.
 	Name pulumi.StringPtrInput
-	// The slug of the organization the project belongs to.
+	// The organization of this resource.
 	Organization pulumi.StringInput
-	// The optional platform for this project.
+	// The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
 	Platform pulumi.StringPtrInput
 	// Hours in which an issue is automatically resolve if not seen after this amount of time.
 	ResolveAge pulumi.IntPtrInput
 	// The optional slug for this project.
 	Slug pulumi.StringPtrInput
-	// The slug of the team to create the project for. **Deprecated** Use `teams` instead.
-	//
-	// Deprecated: Use `teams` instead.
-	Team pulumi.StringPtrInput
 	// The slugs of the teams to create the project for.
 	Teams pulumi.StringArrayInput
 }
@@ -335,8 +316,19 @@ func (o SentryProjectOutput) ToSentryProjectOutputWithContext(ctx context.Contex
 	return o
 }
 
-func (o SentryProjectOutput) Color() pulumi.StringOutput {
-	return o.ApplyT(func(v *SentryProject) pulumi.StringOutput { return v.Color }).(pulumi.StringOutput)
+// Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+func (o SentryProjectOutput) ClientSecurity() SentryProjectClientSecurityOutput {
+	return o.ApplyT(func(v *SentryProject) SentryProjectClientSecurityOutput { return v.ClientSecurity }).(SentryProjectClientSecurityOutput)
+}
+
+// Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `SentryKey` resource.
+func (o SentryProjectOutput) DefaultKey() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SentryProject) pulumi.BoolPtrOutput { return v.DefaultKey }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
+func (o SentryProjectOutput) DefaultRules() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SentryProject) pulumi.BoolPtrOutput { return v.DefaultRules }).(pulumi.BoolPtrOutput)
 }
 
 // The maximum amount of time (in seconds) to wait between scheduling digests for delivery.
@@ -353,18 +345,24 @@ func (o SentryProjectOutput) Features() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *SentryProject) pulumi.StringArrayOutput { return v.Features }).(pulumi.StringArrayOutput)
 }
 
+// Custom filters for this project.
+func (o SentryProjectOutput) Filters() SentryProjectFiltersOutput {
+	return o.ApplyT(func(v *SentryProject) SentryProjectFiltersOutput { return v.Filters }).(SentryProjectFiltersOutput)
+}
+
+// This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob > fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+func (o SentryProjectOutput) FingerprintingRules() pulumi.StringOutput {
+	return o.ApplyT(func(v *SentryProject) pulumi.StringOutput { return v.FingerprintingRules }).(pulumi.StringOutput)
+}
+
+// This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
+func (o SentryProjectOutput) GroupingEnhancements() pulumi.StringOutput {
+	return o.ApplyT(func(v *SentryProject) pulumi.StringOutput { return v.GroupingEnhancements }).(pulumi.StringOutput)
+}
+
 // The internal ID for this project.
 func (o SentryProjectOutput) InternalId() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryProject) pulumi.StringOutput { return v.InternalId }).(pulumi.StringOutput)
-}
-
-// Deprecated: is_bookmarked is no longer used
-func (o SentryProjectOutput) IsBookmarked() pulumi.BoolOutput {
-	return o.ApplyT(func(v *SentryProject) pulumi.BoolOutput { return v.IsBookmarked }).(pulumi.BoolOutput)
-}
-
-func (o SentryProjectOutput) IsPublic() pulumi.BoolOutput {
-	return o.ApplyT(func(v *SentryProject) pulumi.BoolOutput { return v.IsPublic }).(pulumi.BoolOutput)
 }
 
 // The name for the project.
@@ -372,21 +370,14 @@ func (o SentryProjectOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryProject) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// The slug of the organization the project belongs to.
+// The organization of this resource.
 func (o SentryProjectOutput) Organization() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryProject) pulumi.StringOutput { return v.Organization }).(pulumi.StringOutput)
 }
 
-// The optional platform for this project.
-func (o SentryProjectOutput) Platform() pulumi.StringOutput {
-	return o.ApplyT(func(v *SentryProject) pulumi.StringOutput { return v.Platform }).(pulumi.StringOutput)
-}
-
-// Use `internalId` instead.
-//
-// Deprecated: Use `internalId` instead.
-func (o SentryProjectOutput) ProjectId() pulumi.StringOutput {
-	return o.ApplyT(func(v *SentryProject) pulumi.StringOutput { return v.ProjectId }).(pulumi.StringOutput)
+// The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
+func (o SentryProjectOutput) Platform() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SentryProject) pulumi.StringPtrOutput { return v.Platform }).(pulumi.StringPtrOutput)
 }
 
 // Hours in which an issue is automatically resolve if not seen after this amount of time.
@@ -397,17 +388,6 @@ func (o SentryProjectOutput) ResolveAge() pulumi.IntOutput {
 // The optional slug for this project.
 func (o SentryProjectOutput) Slug() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryProject) pulumi.StringOutput { return v.Slug }).(pulumi.StringOutput)
-}
-
-func (o SentryProjectOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v *SentryProject) pulumi.StringOutput { return v.Status }).(pulumi.StringOutput)
-}
-
-// The slug of the team to create the project for. **Deprecated** Use `teams` instead.
-//
-// Deprecated: Use `teams` instead.
-func (o SentryProjectOutput) Team() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *SentryProject) pulumi.StringPtrOutput { return v.Team }).(pulumi.StringPtrOutput)
 }
 
 // The slugs of the teams to create the project for.

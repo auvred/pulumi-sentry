@@ -151,7 +151,7 @@ class SentryOrganizationRepositoryGithub(pulumi.CustomResource):
                  organization: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Sentry Github Organization Repository resource.
+        Sentry Github Organization Repository resource. This resource is deprecated and will be removed in the next major version of the provider. Use `SentryOrganizationRepository` instead.
 
         ## Example Usage
 
@@ -195,7 +195,7 @@ class SentryOrganizationRepositoryGithub(pulumi.CustomResource):
                  args: SentryOrganizationRepositoryGithubArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Sentry Github Organization Repository resource.
+        Sentry Github Organization Repository resource. This resource is deprecated and will be removed in the next major version of the provider. Use `SentryOrganizationRepository` instead.
 
         ## Example Usage
 

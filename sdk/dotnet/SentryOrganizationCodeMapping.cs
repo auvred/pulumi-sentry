@@ -35,7 +35,10 @@ namespace Pulumiverse.Sentry
     ///     var @this = new Sentry.SentryProject("this", new()
     ///     {
     ///         Organization = "my-organization",
-    ///         Team = "my-team",
+    ///         Teams = new[]
+    ///         {
+    ///             "my-team",
+    ///         },
     ///         Name = "Web App",
     ///         Slug = "web-app",
     ///         Platform = "javascript",

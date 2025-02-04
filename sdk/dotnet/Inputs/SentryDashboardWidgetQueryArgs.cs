@@ -49,7 +49,7 @@ namespace Pulumiverse.Sentry.Inputs
         }
 
         /// <summary>
-        /// The ID of this resource.
+        /// The ID of the query.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }

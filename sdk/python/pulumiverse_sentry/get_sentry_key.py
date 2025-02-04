@@ -13,6 +13,7 @@ if sys.version_info >= (3, 11):
 else:
     from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
+from . import outputs
 
 __all__ = [
     'GetSentryKeyResult',
@@ -26,7 +27,10 @@ class GetSentryKeyResult:
     """
     A collection of values returned by getSentryKey.
     """
-    def __init__(__self__, dsn_csp=None, dsn_public=None, dsn_secret=None, first=None, id=None, is_active=None, name=None, organization=None, project=None, project_id=None, public=None, rate_limit_count=None, rate_limit_window=None, secret=None):
+    def __init__(__self__, dsn=None, dsn_csp=None, dsn_public=None, dsn_secret=None, first=None, id=None, javascript_loader_script=None, name=None, organization=None, project=None, project_id=None, public=None, rate_limit_count=None, rate_limit_window=None, secret=None):
+        if dsn and not isinstance(dsn, dict):
+            raise TypeError("Expected argument 'dsn' to be a dict")
+        pulumi.set(__self__, "dsn", dsn)
         if dsn_csp and not isinstance(dsn_csp, str):
             raise TypeError("Expected argument 'dsn_csp' to be a str")
         pulumi.set(__self__, "dsn_csp", dsn_csp)
@@ -42,9 +46,9 @@ class GetSentryKeyResult:
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
-        if is_active and not isinstance(is_active, bool):
-            raise TypeError("Expected argument 'is_active' to be a bool")
-        pulumi.set(__self__, "is_active", is_active)
+        if javascript_loader_script and not isinstance(javascript_loader_script, dict):
+            raise TypeError("Expected argument 'javascript_loader_script' to be a dict")
+        pulumi.set(__self__, "javascript_loader_script", javascript_loader_script)
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
@@ -54,8 +58,8 @@ class GetSentryKeyResult:
         if project and not isinstance(project, str):
             raise TypeError("Expected argument 'project' to be a str")
         pulumi.set(__self__, "project", project)
-        if project_id and not isinstance(project_id, int):
-            raise TypeError("Expected argument 'project_id' to be a int")
+        if project_id and not isinstance(project_id, str):
+            raise TypeError("Expected argument 'project_id' to be a str")
         pulumi.set(__self__, "project_id", project_id)
         if public and not isinstance(public, str):
             raise TypeError("Expected argument 'public' to be a str")
@@ -71,25 +75,38 @@ class GetSentryKeyResult:
         pulumi.set(__self__, "secret", secret)
 
     @property
+    @pulumi.getter
+    def dsn(self) -> Mapping[str, str]:
+        """
+        This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+        """
+        return pulumi.get(self, "dsn")
+
+    @property
     @pulumi.getter(name="dsnCsp")
+    @_utilities.deprecated("""This field is deprecated and will be removed in a future version. Use `dsn[\"csp\"]` instead.""")
     def dsn_csp(self) -> str:
         """
-        DSN for the Content Security Policy (CSP) for the key.
+        Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
         """
         return pulumi.get(self, "dsn_csp")
 
     @property
     @pulumi.getter(name="dsnPublic")
+    @_utilities.deprecated("""This field is deprecated and will be removed in a future version. Use `dsn[\"public\"]` instead.""")
     def dsn_public(self) -> str:
         """
-        DSN for the key.
+        The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
         """
         return pulumi.get(self, "dsn_public")
 
     @property
     @pulumi.getter(name="dsnSecret")
-    @_utilities.deprecated("""DSN (Deprecated) for the key.""")
+    @_utilities.deprecated("""This field is deprecated and will be removed in a future version. Use `dsn[\"secret\"]` instead.""")
     def dsn_secret(self) -> str:
+        """
+        Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+        """
         return pulumi.get(self, "dsn_secret")
 
     @property
@@ -102,25 +119,25 @@ class GetSentryKeyResult:
 
     @property
     @pulumi.getter
-    def id(self) -> str:
+    def id(self) -> Optional[str]:
         """
-        The provider-assigned unique ID for this managed resource.
+        The ID of this resource.
         """
         return pulumi.get(self, "id")
 
     @property
-    @pulumi.getter(name="isActive")
-    def is_active(self) -> bool:
+    @pulumi.getter(name="javascriptLoaderScript")
+    def javascript_loader_script(self) -> 'outputs.GetSentryKeyJavascriptLoaderScriptResult':
         """
-        Flag indicating the key is active.
+        The JavaScript loader script configuration.
         """
-        return pulumi.get(self, "is_active")
+        return pulumi.get(self, "javascript_loader_script")
 
     @property
     @pulumi.getter
     def name(self) -> Optional[str]:
         """
-        The name of the key to retrieve.
+        The name of the client key.
         """
         return pulumi.get(self, "name")
 
@@ -128,7 +145,7 @@ class GetSentryKeyResult:
     @pulumi.getter
     def organization(self) -> str:
         """
-        The slug of the organization the key should be created for.
+        The organization the resource belongs to.
         """
         return pulumi.get(self, "organization")
 
@@ -136,13 +153,13 @@ class GetSentryKeyResult:
     @pulumi.getter
     def project(self) -> str:
         """
-        The slug of the project the key should be created for.
+        The project the resource belongs to.
         """
         return pulumi.get(self, "project")
 
     @property
     @pulumi.getter(name="projectId")
-    def project_id(self) -> int:
+    def project_id(self) -> str:
         """
         The ID of the project that the key belongs to.
         """
@@ -152,7 +169,7 @@ class GetSentryKeyResult:
     @pulumi.getter
     def public(self) -> str:
         """
-        Public key portion of the client key.
+        The public key.
         """
         return pulumi.get(self, "public")
 
@@ -168,7 +185,7 @@ class GetSentryKeyResult:
     @pulumi.getter(name="rateLimitWindow")
     def rate_limit_window(self) -> int:
         """
-        Length of time that will be considered when checking the rate limit.
+        Length of time in seconds that will be considered when checking the rate limit.
         """
         return pulumi.get(self, "rate_limit_window")
 
@@ -176,7 +193,7 @@ class GetSentryKeyResult:
     @pulumi.getter
     def secret(self) -> str:
         """
-        Secret key portion of the client key.
+        The secret key.
         """
         return pulumi.get(self, "secret")
 
@@ -187,12 +204,13 @@ class AwaitableGetSentryKeyResult(GetSentryKeyResult):
         if False:
             yield self
         return GetSentryKeyResult(
+            dsn=self.dsn,
             dsn_csp=self.dsn_csp,
             dsn_public=self.dsn_public,
             dsn_secret=self.dsn_secret,
             first=self.first,
             id=self.id,
-            is_active=self.is_active,
+            javascript_loader_script=self.javascript_loader_script,
             name=self.name,
             organization=self.organization,
             project=self.project,
@@ -204,37 +222,24 @@ class AwaitableGetSentryKeyResult(GetSentryKeyResult):
 
 
 def get_sentry_key(first: Optional[bool] = None,
+                   id: Optional[str] = None,
                    name: Optional[str] = None,
                    organization: Optional[str] = None,
                    project: Optional[str] = None,
                    opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSentryKeyResult:
     """
-    Sentry Key data source.
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_sentry as sentry
-
-    # Retrieve a project key by name
-    default = sentry.get_sentry_key(organization="my-organization",
-        project="web-app",
-        name="Default")
-    # Retrieve the first key of a project
-    first = sentry.get_sentry_key(organization="my-organization",
-        project="web-app",
-        first=True)
-    ```
+    Retrieve a Project's Client Key.
 
 
     :param bool first: Boolean flag indicating that we want the first key of the returned keys.
-    :param str name: The name of the key to retrieve.
-    :param str organization: The slug of the organization the key should be created for.
-    :param str project: The slug of the project the key should be created for.
+    :param str id: The ID of this resource.
+    :param str name: The name of the client key.
+    :param str organization: The organization the resource belongs to.
+    :param str project: The project the resource belongs to.
     """
     __args__ = dict()
     __args__['first'] = first
+    __args__['id'] = id
     __args__['name'] = name
     __args__['organization'] = organization
     __args__['project'] = project
@@ -242,12 +247,13 @@ def get_sentry_key(first: Optional[bool] = None,
     __ret__ = pulumi.runtime.invoke('sentry:index/getSentryKey:getSentryKey', __args__, opts=opts, typ=GetSentryKeyResult).value
 
     return AwaitableGetSentryKeyResult(
+        dsn=pulumi.get(__ret__, 'dsn'),
         dsn_csp=pulumi.get(__ret__, 'dsn_csp'),
         dsn_public=pulumi.get(__ret__, 'dsn_public'),
         dsn_secret=pulumi.get(__ret__, 'dsn_secret'),
         first=pulumi.get(__ret__, 'first'),
         id=pulumi.get(__ret__, 'id'),
-        is_active=pulumi.get(__ret__, 'is_active'),
+        javascript_loader_script=pulumi.get(__ret__, 'javascript_loader_script'),
         name=pulumi.get(__ret__, 'name'),
         organization=pulumi.get(__ret__, 'organization'),
         project=pulumi.get(__ret__, 'project'),
@@ -257,49 +263,37 @@ def get_sentry_key(first: Optional[bool] = None,
         rate_limit_window=pulumi.get(__ret__, 'rate_limit_window'),
         secret=pulumi.get(__ret__, 'secret'))
 def get_sentry_key_output(first: Optional[pulumi.Input[Optional[bool]]] = None,
+                          id: Optional[pulumi.Input[Optional[str]]] = None,
                           name: Optional[pulumi.Input[Optional[str]]] = None,
                           organization: Optional[pulumi.Input[str]] = None,
                           project: Optional[pulumi.Input[str]] = None,
                           opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetSentryKeyResult]:
     """
-    Sentry Key data source.
-
-    ## Example Usage
-
-    ```python
-    import pulumi
-    import pulumi_sentry as sentry
-
-    # Retrieve a project key by name
-    default = sentry.get_sentry_key(organization="my-organization",
-        project="web-app",
-        name="Default")
-    # Retrieve the first key of a project
-    first = sentry.get_sentry_key(organization="my-organization",
-        project="web-app",
-        first=True)
-    ```
+    Retrieve a Project's Client Key.
 
 
     :param bool first: Boolean flag indicating that we want the first key of the returned keys.
-    :param str name: The name of the key to retrieve.
-    :param str organization: The slug of the organization the key should be created for.
-    :param str project: The slug of the project the key should be created for.
+    :param str id: The ID of this resource.
+    :param str name: The name of the client key.
+    :param str organization: The organization the resource belongs to.
+    :param str project: The project the resource belongs to.
     """
     __args__ = dict()
     __args__['first'] = first
+    __args__['id'] = id
     __args__['name'] = name
     __args__['organization'] = organization
     __args__['project'] = project
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
     __ret__ = pulumi.runtime.invoke_output('sentry:index/getSentryKey:getSentryKey', __args__, opts=opts, typ=GetSentryKeyResult)
     return __ret__.apply(lambda __response__: GetSentryKeyResult(
+        dsn=pulumi.get(__response__, 'dsn'),
         dsn_csp=pulumi.get(__response__, 'dsn_csp'),
         dsn_public=pulumi.get(__response__, 'dsn_public'),
         dsn_secret=pulumi.get(__response__, 'dsn_secret'),
         first=pulumi.get(__response__, 'first'),
         id=pulumi.get(__response__, 'id'),
-        is_active=pulumi.get(__response__, 'is_active'),
+        javascript_loader_script=pulumi.get(__response__, 'javascript_loader_script'),
         name=pulumi.get(__response__, 'name'),
         organization=pulumi.get(__response__, 'organization'),
         project=pulumi.get(__response__, 'project'),

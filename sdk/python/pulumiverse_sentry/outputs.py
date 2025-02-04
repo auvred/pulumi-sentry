@@ -19,11 +19,88 @@ __all__ = [
     'SentryDashboardWidget',
     'SentryDashboardWidgetLayout',
     'SentryDashboardWidgetQuery',
+    'SentryIssueAlertActionsV2',
+    'SentryIssueAlertActionsV2AzureDevopsCreateTicket',
+    'SentryIssueAlertActionsV2DiscordNotifyService',
+    'SentryIssueAlertActionsV2GithubCreateTicket',
+    'SentryIssueAlertActionsV2GithubEnterpriseCreateTicket',
+    'SentryIssueAlertActionsV2JiraCreateTicket',
+    'SentryIssueAlertActionsV2JiraServerCreateTicket',
+    'SentryIssueAlertActionsV2MsteamsNotifyService',
+    'SentryIssueAlertActionsV2NotifyEmail',
+    'SentryIssueAlertActionsV2NotifyEvent',
+    'SentryIssueAlertActionsV2NotifyEventSentryApp',
+    'SentryIssueAlertActionsV2NotifyEventService',
+    'SentryIssueAlertActionsV2OpsgenieNotifyTeam',
+    'SentryIssueAlertActionsV2PagerdutyNotifyService',
+    'SentryIssueAlertActionsV2SlackNotifyService',
+    'SentryIssueAlertConditionsV2',
+    'SentryIssueAlertConditionsV2EventFrequency',
+    'SentryIssueAlertConditionsV2EventFrequencyPercent',
+    'SentryIssueAlertConditionsV2EventUniqueUserFrequency',
+    'SentryIssueAlertConditionsV2ExistingHighPriorityIssue',
+    'SentryIssueAlertConditionsV2FirstSeenEvent',
+    'SentryIssueAlertConditionsV2NewHighPriorityIssue',
+    'SentryIssueAlertConditionsV2ReappearedEvent',
+    'SentryIssueAlertConditionsV2RegressionEvent',
+    'SentryIssueAlertFiltersV2',
+    'SentryIssueAlertFiltersV2AgeComparison',
+    'SentryIssueAlertFiltersV2AssignedTo',
+    'SentryIssueAlertFiltersV2EventAttribute',
+    'SentryIssueAlertFiltersV2IssueCategory',
+    'SentryIssueAlertFiltersV2IssueOccurrences',
+    'SentryIssueAlertFiltersV2LatestAdoptedRelease',
+    'SentryIssueAlertFiltersV2LatestRelease',
+    'SentryIssueAlertFiltersV2Level',
+    'SentryIssueAlertFiltersV2TaggedEvent',
+    'SentryKeyJavascriptLoaderScript',
     'SentryMetricAlertTrigger',
     'SentryMetricAlertTriggerAction',
+    'SentryProjectClientSecurity',
+    'SentryProjectFilters',
+    'SentryProjectSymbolSourceLayout',
+    'GetSentryAllKeysKeyResult',
+    'GetSentryAllKeysKeyJavascriptLoaderScriptResult',
+    'GetSentryAllOrganizationMembersMemberResult',
+    'GetSentryAllProjectsProjectResult',
     'GetSentryDashboardWidgetResult',
     'GetSentryDashboardWidgetLayoutResult',
     'GetSentryDashboardWidgetQueryResult',
+    'GetSentryIssueAlertActionsV2Result',
+    'GetSentryIssueAlertActionsV2AzureDevopsCreateTicketResult',
+    'GetSentryIssueAlertActionsV2DiscordNotifyServiceResult',
+    'GetSentryIssueAlertActionsV2GithubCreateTicketResult',
+    'GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketResult',
+    'GetSentryIssueAlertActionsV2JiraCreateTicketResult',
+    'GetSentryIssueAlertActionsV2JiraServerCreateTicketResult',
+    'GetSentryIssueAlertActionsV2MsteamsNotifyServiceResult',
+    'GetSentryIssueAlertActionsV2NotifyEmailResult',
+    'GetSentryIssueAlertActionsV2NotifyEventResult',
+    'GetSentryIssueAlertActionsV2NotifyEventSentryAppResult',
+    'GetSentryIssueAlertActionsV2NotifyEventServiceResult',
+    'GetSentryIssueAlertActionsV2OpsgenieNotifyTeamResult',
+    'GetSentryIssueAlertActionsV2PagerdutyNotifyServiceResult',
+    'GetSentryIssueAlertActionsV2SlackNotifyServiceResult',
+    'GetSentryIssueAlertConditionsV2Result',
+    'GetSentryIssueAlertConditionsV2EventFrequencyResult',
+    'GetSentryIssueAlertConditionsV2EventFrequencyPercentResult',
+    'GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyResult',
+    'GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueResult',
+    'GetSentryIssueAlertConditionsV2FirstSeenEventResult',
+    'GetSentryIssueAlertConditionsV2NewHighPriorityIssueResult',
+    'GetSentryIssueAlertConditionsV2ReappearedEventResult',
+    'GetSentryIssueAlertConditionsV2RegressionEventResult',
+    'GetSentryIssueAlertFiltersV2Result',
+    'GetSentryIssueAlertFiltersV2AgeComparisonResult',
+    'GetSentryIssueAlertFiltersV2AssignedToResult',
+    'GetSentryIssueAlertFiltersV2EventAttributeResult',
+    'GetSentryIssueAlertFiltersV2IssueCategoryResult',
+    'GetSentryIssueAlertFiltersV2IssueOccurrencesResult',
+    'GetSentryIssueAlertFiltersV2LatestAdoptedReleaseResult',
+    'GetSentryIssueAlertFiltersV2LatestReleaseResult',
+    'GetSentryIssueAlertFiltersV2LevelResult',
+    'GetSentryIssueAlertFiltersV2TaggedEventResult',
+    'GetSentryKeyJavascriptLoaderScriptResult',
     'GetSentryMetricAlertTriggerResult',
     'GetSentryMetricAlertTriggerActionResult',
 ]
@@ -59,7 +136,7 @@ class SentryDashboardWidget(dict):
                  limit: Optional[int] = None,
                  widget_type: Optional[str] = None):
         """
-        :param str id: The ID of this resource.
+        :param str id: The ID of the widget.
         """
         pulumi.set(__self__, "display_type", display_type)
         pulumi.set(__self__, "layout", layout)
@@ -98,7 +175,7 @@ class SentryDashboardWidget(dict):
     @pulumi.getter
     def id(self) -> Optional[str]:
         """
-        The ID of this resource.
+        The ID of the widget.
         """
         return pulumi.get(self, "id")
 
@@ -206,7 +283,7 @@ class SentryDashboardWidgetQuery(dict):
                  name: Optional[str] = None,
                  order_by: Optional[str] = None):
         """
-        :param str id: The ID of this resource.
+        :param str id: The ID of the query.
         """
         if aggregates is not None:
             pulumi.set(__self__, "aggregates", aggregates)
@@ -254,7 +331,7 @@ class SentryDashboardWidgetQuery(dict):
     @pulumi.getter
     def id(self) -> Optional[str]:
         """
-        The ID of this resource.
+        The ID of the query.
         """
         return pulumi.get(self, "id")
 
@@ -267,6 +344,1993 @@ class SentryDashboardWidgetQuery(dict):
     @pulumi.getter(name="orderBy")
     def order_by(self) -> Optional[str]:
         return pulumi.get(self, "order_by")
+
+
+@pulumi.output_type
+class SentryIssueAlertActionsV2(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "azureDevopsCreateTicket":
+            suggest = "azure_devops_create_ticket"
+        elif key == "discordNotifyService":
+            suggest = "discord_notify_service"
+        elif key == "githubCreateTicket":
+            suggest = "github_create_ticket"
+        elif key == "githubEnterpriseCreateTicket":
+            suggest = "github_enterprise_create_ticket"
+        elif key == "jiraCreateTicket":
+            suggest = "jira_create_ticket"
+        elif key == "jiraServerCreateTicket":
+            suggest = "jira_server_create_ticket"
+        elif key == "msteamsNotifyService":
+            suggest = "msteams_notify_service"
+        elif key == "notifyEmail":
+            suggest = "notify_email"
+        elif key == "notifyEvent":
+            suggest = "notify_event"
+        elif key == "notifyEventSentryApp":
+            suggest = "notify_event_sentry_app"
+        elif key == "notifyEventService":
+            suggest = "notify_event_service"
+        elif key == "opsgenieNotifyTeam":
+            suggest = "opsgenie_notify_team"
+        elif key == "pagerdutyNotifyService":
+            suggest = "pagerduty_notify_service"
+        elif key == "slackNotifyService":
+            suggest = "slack_notify_service"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertActionsV2. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertActionsV2.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertActionsV2.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 azure_devops_create_ticket: Optional['outputs.SentryIssueAlertActionsV2AzureDevopsCreateTicket'] = None,
+                 discord_notify_service: Optional['outputs.SentryIssueAlertActionsV2DiscordNotifyService'] = None,
+                 github_create_ticket: Optional['outputs.SentryIssueAlertActionsV2GithubCreateTicket'] = None,
+                 github_enterprise_create_ticket: Optional['outputs.SentryIssueAlertActionsV2GithubEnterpriseCreateTicket'] = None,
+                 jira_create_ticket: Optional['outputs.SentryIssueAlertActionsV2JiraCreateTicket'] = None,
+                 jira_server_create_ticket: Optional['outputs.SentryIssueAlertActionsV2JiraServerCreateTicket'] = None,
+                 msteams_notify_service: Optional['outputs.SentryIssueAlertActionsV2MsteamsNotifyService'] = None,
+                 notify_email: Optional['outputs.SentryIssueAlertActionsV2NotifyEmail'] = None,
+                 notify_event: Optional['outputs.SentryIssueAlertActionsV2NotifyEvent'] = None,
+                 notify_event_sentry_app: Optional['outputs.SentryIssueAlertActionsV2NotifyEventSentryApp'] = None,
+                 notify_event_service: Optional['outputs.SentryIssueAlertActionsV2NotifyEventService'] = None,
+                 opsgenie_notify_team: Optional['outputs.SentryIssueAlertActionsV2OpsgenieNotifyTeam'] = None,
+                 pagerduty_notify_service: Optional['outputs.SentryIssueAlertActionsV2PagerdutyNotifyService'] = None,
+                 slack_notify_service: Optional['outputs.SentryIssueAlertActionsV2SlackNotifyService'] = None):
+        """
+        :param 'SentryIssueAlertActionsV2AzureDevopsCreateTicketArgs' azure_devops_create_ticket: Create an Azure DevOps work item in `integration`.
+        :param 'SentryIssueAlertActionsV2DiscordNotifyServiceArgs' discord_notify_service: Send a notification to the `server` Discord server in the channel with ID or URL: `channel_id` and show tags `tags` in the notification.
+        :param 'SentryIssueAlertActionsV2GithubCreateTicketArgs' github_create_ticket: Create a GitHub issue in `integration`.
+        :param 'SentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs' github_enterprise_create_ticket: Create a GitHub Enterprise issue in `integration`.
+        :param 'SentryIssueAlertActionsV2JiraCreateTicketArgs' jira_create_ticket: Create a Jira issue in `integration`.
+        :param 'SentryIssueAlertActionsV2JiraServerCreateTicketArgs' jira_server_create_ticket: Create a Jira Server issue in `integration`.
+        :param 'SentryIssueAlertActionsV2MsteamsNotifyServiceArgs' msteams_notify_service: Send a notification to the `team` Team to `channel`.
+        :param 'SentryIssueAlertActionsV2NotifyEmailArgs' notify_email: Send a notification to `target_type` and if none can be found then send a notification to `fallthrough_type`.
+        :param 'SentryIssueAlertActionsV2NotifyEventArgs' notify_event: Send a notification to all legacy integrations.
+        :param 'SentryIssueAlertActionsV2NotifyEventSentryAppArgs' notify_event_sentry_app: Send a notification to a Sentry app.
+        :param 'SentryIssueAlertActionsV2NotifyEventServiceArgs' notify_event_service: Send a notification via an integration.
+        :param 'SentryIssueAlertActionsV2OpsgenieNotifyTeamArgs' opsgenie_notify_team: Send a notification to Opsgenie account `account` and team `team` with `priority` priority.
+        :param 'SentryIssueAlertActionsV2PagerdutyNotifyServiceArgs' pagerduty_notify_service: Send a notification to PagerDuty account `account` and service `service` with `severity` severity.
+        :param 'SentryIssueAlertActionsV2SlackNotifyServiceArgs' slack_notify_service: Send a notification to the `workspace` Slack workspace to `channel` (optionally, an ID: `channel_id`) and show tags `tags` and notes `notes` in notification.
+        """
+        if azure_devops_create_ticket is not None:
+            pulumi.set(__self__, "azure_devops_create_ticket", azure_devops_create_ticket)
+        if discord_notify_service is not None:
+            pulumi.set(__self__, "discord_notify_service", discord_notify_service)
+        if github_create_ticket is not None:
+            pulumi.set(__self__, "github_create_ticket", github_create_ticket)
+        if github_enterprise_create_ticket is not None:
+            pulumi.set(__self__, "github_enterprise_create_ticket", github_enterprise_create_ticket)
+        if jira_create_ticket is not None:
+            pulumi.set(__self__, "jira_create_ticket", jira_create_ticket)
+        if jira_server_create_ticket is not None:
+            pulumi.set(__self__, "jira_server_create_ticket", jira_server_create_ticket)
+        if msteams_notify_service is not None:
+            pulumi.set(__self__, "msteams_notify_service", msteams_notify_service)
+        if notify_email is not None:
+            pulumi.set(__self__, "notify_email", notify_email)
+        if notify_event is not None:
+            pulumi.set(__self__, "notify_event", notify_event)
+        if notify_event_sentry_app is not None:
+            pulumi.set(__self__, "notify_event_sentry_app", notify_event_sentry_app)
+        if notify_event_service is not None:
+            pulumi.set(__self__, "notify_event_service", notify_event_service)
+        if opsgenie_notify_team is not None:
+            pulumi.set(__self__, "opsgenie_notify_team", opsgenie_notify_team)
+        if pagerduty_notify_service is not None:
+            pulumi.set(__self__, "pagerduty_notify_service", pagerduty_notify_service)
+        if slack_notify_service is not None:
+            pulumi.set(__self__, "slack_notify_service", slack_notify_service)
+
+    @property
+    @pulumi.getter(name="azureDevopsCreateTicket")
+    def azure_devops_create_ticket(self) -> Optional['outputs.SentryIssueAlertActionsV2AzureDevopsCreateTicket']:
+        """
+        Create an Azure DevOps work item in `integration`.
+        """
+        return pulumi.get(self, "azure_devops_create_ticket")
+
+    @property
+    @pulumi.getter(name="discordNotifyService")
+    def discord_notify_service(self) -> Optional['outputs.SentryIssueAlertActionsV2DiscordNotifyService']:
+        """
+        Send a notification to the `server` Discord server in the channel with ID or URL: `channel_id` and show tags `tags` in the notification.
+        """
+        return pulumi.get(self, "discord_notify_service")
+
+    @property
+    @pulumi.getter(name="githubCreateTicket")
+    def github_create_ticket(self) -> Optional['outputs.SentryIssueAlertActionsV2GithubCreateTicket']:
+        """
+        Create a GitHub issue in `integration`.
+        """
+        return pulumi.get(self, "github_create_ticket")
+
+    @property
+    @pulumi.getter(name="githubEnterpriseCreateTicket")
+    def github_enterprise_create_ticket(self) -> Optional['outputs.SentryIssueAlertActionsV2GithubEnterpriseCreateTicket']:
+        """
+        Create a GitHub Enterprise issue in `integration`.
+        """
+        return pulumi.get(self, "github_enterprise_create_ticket")
+
+    @property
+    @pulumi.getter(name="jiraCreateTicket")
+    def jira_create_ticket(self) -> Optional['outputs.SentryIssueAlertActionsV2JiraCreateTicket']:
+        """
+        Create a Jira issue in `integration`.
+        """
+        return pulumi.get(self, "jira_create_ticket")
+
+    @property
+    @pulumi.getter(name="jiraServerCreateTicket")
+    def jira_server_create_ticket(self) -> Optional['outputs.SentryIssueAlertActionsV2JiraServerCreateTicket']:
+        """
+        Create a Jira Server issue in `integration`.
+        """
+        return pulumi.get(self, "jira_server_create_ticket")
+
+    @property
+    @pulumi.getter(name="msteamsNotifyService")
+    def msteams_notify_service(self) -> Optional['outputs.SentryIssueAlertActionsV2MsteamsNotifyService']:
+        """
+        Send a notification to the `team` Team to `channel`.
+        """
+        return pulumi.get(self, "msteams_notify_service")
+
+    @property
+    @pulumi.getter(name="notifyEmail")
+    def notify_email(self) -> Optional['outputs.SentryIssueAlertActionsV2NotifyEmail']:
+        """
+        Send a notification to `target_type` and if none can be found then send a notification to `fallthrough_type`.
+        """
+        return pulumi.get(self, "notify_email")
+
+    @property
+    @pulumi.getter(name="notifyEvent")
+    def notify_event(self) -> Optional['outputs.SentryIssueAlertActionsV2NotifyEvent']:
+        """
+        Send a notification to all legacy integrations.
+        """
+        return pulumi.get(self, "notify_event")
+
+    @property
+    @pulumi.getter(name="notifyEventSentryApp")
+    def notify_event_sentry_app(self) -> Optional['outputs.SentryIssueAlertActionsV2NotifyEventSentryApp']:
+        """
+        Send a notification to a Sentry app.
+        """
+        return pulumi.get(self, "notify_event_sentry_app")
+
+    @property
+    @pulumi.getter(name="notifyEventService")
+    def notify_event_service(self) -> Optional['outputs.SentryIssueAlertActionsV2NotifyEventService']:
+        """
+        Send a notification via an integration.
+        """
+        return pulumi.get(self, "notify_event_service")
+
+    @property
+    @pulumi.getter(name="opsgenieNotifyTeam")
+    def opsgenie_notify_team(self) -> Optional['outputs.SentryIssueAlertActionsV2OpsgenieNotifyTeam']:
+        """
+        Send a notification to Opsgenie account `account` and team `team` with `priority` priority.
+        """
+        return pulumi.get(self, "opsgenie_notify_team")
+
+    @property
+    @pulumi.getter(name="pagerdutyNotifyService")
+    def pagerduty_notify_service(self) -> Optional['outputs.SentryIssueAlertActionsV2PagerdutyNotifyService']:
+        """
+        Send a notification to PagerDuty account `account` and service `service` with `severity` severity.
+        """
+        return pulumi.get(self, "pagerduty_notify_service")
+
+    @property
+    @pulumi.getter(name="slackNotifyService")
+    def slack_notify_service(self) -> Optional['outputs.SentryIssueAlertActionsV2SlackNotifyService']:
+        """
+        Send a notification to the `workspace` Slack workspace to `channel` (optionally, an ID: `channel_id`) and show tags `tags` and notes `notes` in notification.
+        """
+        return pulumi.get(self, "slack_notify_service")
+
+
+@pulumi.output_type
+class SentryIssueAlertActionsV2AzureDevopsCreateTicket(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "workItemType":
+            suggest = "work_item_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertActionsV2AzureDevopsCreateTicket. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertActionsV2AzureDevopsCreateTicket.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertActionsV2AzureDevopsCreateTicket.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 integration: str,
+                 project: str,
+                 work_item_type: str,
+                 name: Optional[str] = None):
+        """
+        :param str integration: The integration ID.
+        :param str project: The ID of the Azure DevOps project.
+        :param str work_item_type: The type of work item to create.
+        """
+        pulumi.set(__self__, "integration", integration)
+        pulumi.set(__self__, "project", project)
+        pulumi.set(__self__, "work_item_type", work_item_type)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def integration(self) -> str:
+        """
+        The integration ID.
+        """
+        return pulumi.get(self, "integration")
+
+    @property
+    @pulumi.getter
+    def project(self) -> str:
+        """
+        The ID of the Azure DevOps project.
+        """
+        return pulumi.get(self, "project")
+
+    @property
+    @pulumi.getter(name="workItemType")
+    def work_item_type(self) -> str:
+        """
+        The type of work item to create.
+        """
+        return pulumi.get(self, "work_item_type")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertActionsV2DiscordNotifyService(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "channelId":
+            suggest = "channel_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertActionsV2DiscordNotifyService. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertActionsV2DiscordNotifyService.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertActionsV2DiscordNotifyService.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 channel_id: str,
+                 server: str,
+                 name: Optional[str] = None,
+                 tags: Optional[Sequence[str]] = None):
+        """
+        :param str channel_id: The ID of the channel to send the notification to. You must enter either a channel ID or a channel URL, not a channel name
+        :param str server: The integration ID associated with the Discord server.
+        :param Sequence[str] tags: A string of tags to show in the notification.
+        """
+        pulumi.set(__self__, "channel_id", channel_id)
+        pulumi.set(__self__, "server", server)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter(name="channelId")
+    def channel_id(self) -> str:
+        """
+        The ID of the channel to send the notification to. You must enter either a channel ID or a channel URL, not a channel name
+        """
+        return pulumi.get(self, "channel_id")
+
+    @property
+    @pulumi.getter
+    def server(self) -> str:
+        """
+        The integration ID associated with the Discord server.
+        """
+        return pulumi.get(self, "server")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[Sequence[str]]:
+        """
+        A string of tags to show in the notification.
+        """
+        return pulumi.get(self, "tags")
+
+
+@pulumi.output_type
+class SentryIssueAlertActionsV2GithubCreateTicket(dict):
+    def __init__(__self__, *,
+                 integration: str,
+                 repo: str,
+                 assignee: Optional[str] = None,
+                 labels: Optional[Sequence[str]] = None,
+                 name: Optional[str] = None):
+        """
+        :param str integration: The integration ID associated with GitHub.
+        :param str repo: The name of the repository to create the issue in.
+        :param str assignee: The GitHub user to assign the issue to.
+        :param Sequence[str] labels: A list of labels to assign to the issue.
+        """
+        pulumi.set(__self__, "integration", integration)
+        pulumi.set(__self__, "repo", repo)
+        if assignee is not None:
+            pulumi.set(__self__, "assignee", assignee)
+        if labels is not None:
+            pulumi.set(__self__, "labels", labels)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def integration(self) -> str:
+        """
+        The integration ID associated with GitHub.
+        """
+        return pulumi.get(self, "integration")
+
+    @property
+    @pulumi.getter
+    def repo(self) -> str:
+        """
+        The name of the repository to create the issue in.
+        """
+        return pulumi.get(self, "repo")
+
+    @property
+    @pulumi.getter
+    def assignee(self) -> Optional[str]:
+        """
+        The GitHub user to assign the issue to.
+        """
+        return pulumi.get(self, "assignee")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Optional[Sequence[str]]:
+        """
+        A list of labels to assign to the issue.
+        """
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertActionsV2GithubEnterpriseCreateTicket(dict):
+    def __init__(__self__, *,
+                 integration: str,
+                 repo: str,
+                 assignee: Optional[str] = None,
+                 labels: Optional[Sequence[str]] = None,
+                 name: Optional[str] = None):
+        """
+        :param str integration: The integration ID associated with GitHub Enterprise.
+        :param str repo: The name of the repository to create the issue in.
+        :param str assignee: The GitHub user to assign the issue to.
+        :param Sequence[str] labels: A list of labels to assign to the issue.
+        """
+        pulumi.set(__self__, "integration", integration)
+        pulumi.set(__self__, "repo", repo)
+        if assignee is not None:
+            pulumi.set(__self__, "assignee", assignee)
+        if labels is not None:
+            pulumi.set(__self__, "labels", labels)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def integration(self) -> str:
+        """
+        The integration ID associated with GitHub Enterprise.
+        """
+        return pulumi.get(self, "integration")
+
+    @property
+    @pulumi.getter
+    def repo(self) -> str:
+        """
+        The name of the repository to create the issue in.
+        """
+        return pulumi.get(self, "repo")
+
+    @property
+    @pulumi.getter
+    def assignee(self) -> Optional[str]:
+        """
+        The GitHub user to assign the issue to.
+        """
+        return pulumi.get(self, "assignee")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Optional[Sequence[str]]:
+        """
+        A list of labels to assign to the issue.
+        """
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertActionsV2JiraCreateTicket(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "issueType":
+            suggest = "issue_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertActionsV2JiraCreateTicket. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertActionsV2JiraCreateTicket.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertActionsV2JiraCreateTicket.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 integration: str,
+                 issue_type: str,
+                 project: str,
+                 name: Optional[str] = None):
+        """
+        :param str integration: The integration ID associated with Jira.
+        :param str issue_type: The ID of the type of issue that the ticket should be created as.
+        :param str project: The ID of the Jira project.
+        """
+        pulumi.set(__self__, "integration", integration)
+        pulumi.set(__self__, "issue_type", issue_type)
+        pulumi.set(__self__, "project", project)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def integration(self) -> str:
+        """
+        The integration ID associated with Jira.
+        """
+        return pulumi.get(self, "integration")
+
+    @property
+    @pulumi.getter(name="issueType")
+    def issue_type(self) -> str:
+        """
+        The ID of the type of issue that the ticket should be created as.
+        """
+        return pulumi.get(self, "issue_type")
+
+    @property
+    @pulumi.getter
+    def project(self) -> str:
+        """
+        The ID of the Jira project.
+        """
+        return pulumi.get(self, "project")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertActionsV2JiraServerCreateTicket(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "issueType":
+            suggest = "issue_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertActionsV2JiraServerCreateTicket. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertActionsV2JiraServerCreateTicket.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertActionsV2JiraServerCreateTicket.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 integration: str,
+                 issue_type: str,
+                 project: str,
+                 name: Optional[str] = None):
+        """
+        :param str integration: The integration ID associated with Jira Server.
+        :param str issue_type: The ID of the type of issue that the ticket should be created as.
+        :param str project: The ID of the Jira Server project.
+        """
+        pulumi.set(__self__, "integration", integration)
+        pulumi.set(__self__, "issue_type", issue_type)
+        pulumi.set(__self__, "project", project)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def integration(self) -> str:
+        """
+        The integration ID associated with Jira Server.
+        """
+        return pulumi.get(self, "integration")
+
+    @property
+    @pulumi.getter(name="issueType")
+    def issue_type(self) -> str:
+        """
+        The ID of the type of issue that the ticket should be created as.
+        """
+        return pulumi.get(self, "issue_type")
+
+    @property
+    @pulumi.getter
+    def project(self) -> str:
+        """
+        The ID of the Jira Server project.
+        """
+        return pulumi.get(self, "project")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertActionsV2MsteamsNotifyService(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "channelId":
+            suggest = "channel_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertActionsV2MsteamsNotifyService. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertActionsV2MsteamsNotifyService.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertActionsV2MsteamsNotifyService.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 channel: str,
+                 team: str,
+                 channel_id: Optional[str] = None,
+                 name: Optional[str] = None):
+        """
+        :param str channel: The name of the channel to send the notification to.
+        :param str team: The integration ID associated with the Microsoft Teams team.
+        """
+        pulumi.set(__self__, "channel", channel)
+        pulumi.set(__self__, "team", team)
+        if channel_id is not None:
+            pulumi.set(__self__, "channel_id", channel_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def channel(self) -> str:
+        """
+        The name of the channel to send the notification to.
+        """
+        return pulumi.get(self, "channel")
+
+    @property
+    @pulumi.getter
+    def team(self) -> str:
+        """
+        The integration ID associated with the Microsoft Teams team.
+        """
+        return pulumi.get(self, "team")
+
+    @property
+    @pulumi.getter(name="channelId")
+    def channel_id(self) -> Optional[str]:
+        return pulumi.get(self, "channel_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertActionsV2NotifyEmail(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "targetType":
+            suggest = "target_type"
+        elif key == "fallthroughType":
+            suggest = "fallthrough_type"
+        elif key == "targetIdentifier":
+            suggest = "target_identifier"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertActionsV2NotifyEmail. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertActionsV2NotifyEmail.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertActionsV2NotifyEmail.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 target_type: str,
+                 fallthrough_type: Optional[str] = None,
+                 name: Optional[str] = None,
+                 target_identifier: Optional[str] = None):
+        """
+        :param str target_type: Valid values are: `IssueOwners`, `Team`, and `Member`.
+        :param str fallthrough_type: Who the notification should be sent to if there are no suggested assignees. Valid values are: `AllMembers`, `ActiveMembers`, and `NoOne`.
+        :param str target_identifier: The ID of the Member or Team the notification should be sent to. Only required when `target_type` is `Team` or `Member`.
+        """
+        pulumi.set(__self__, "target_type", target_type)
+        if fallthrough_type is not None:
+            pulumi.set(__self__, "fallthrough_type", fallthrough_type)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if target_identifier is not None:
+            pulumi.set(__self__, "target_identifier", target_identifier)
+
+    @property
+    @pulumi.getter(name="targetType")
+    def target_type(self) -> str:
+        """
+        Valid values are: `IssueOwners`, `Team`, and `Member`.
+        """
+        return pulumi.get(self, "target_type")
+
+    @property
+    @pulumi.getter(name="fallthroughType")
+    def fallthrough_type(self) -> Optional[str]:
+        """
+        Who the notification should be sent to if there are no suggested assignees. Valid values are: `AllMembers`, `ActiveMembers`, and `NoOne`.
+        """
+        return pulumi.get(self, "fallthrough_type")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="targetIdentifier")
+    def target_identifier(self) -> Optional[str]:
+        """
+        The ID of the Member or Team the notification should be sent to. Only required when `target_type` is `Team` or `Member`.
+        """
+        return pulumi.get(self, "target_identifier")
+
+
+@pulumi.output_type
+class SentryIssueAlertActionsV2NotifyEvent(dict):
+    def __init__(__self__, *,
+                 name: Optional[str] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertActionsV2NotifyEventSentryApp(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "sentryAppInstallationUuid":
+            suggest = "sentry_app_installation_uuid"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertActionsV2NotifyEventSentryApp. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertActionsV2NotifyEventSentryApp.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertActionsV2NotifyEventSentryApp.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 sentry_app_installation_uuid: str,
+                 name: Optional[str] = None,
+                 settings: Optional[Mapping[str, str]] = None):
+        pulumi.set(__self__, "sentry_app_installation_uuid", sentry_app_installation_uuid)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if settings is not None:
+            pulumi.set(__self__, "settings", settings)
+
+    @property
+    @pulumi.getter(name="sentryAppInstallationUuid")
+    def sentry_app_installation_uuid(self) -> str:
+        return pulumi.get(self, "sentry_app_installation_uuid")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def settings(self) -> Optional[Mapping[str, str]]:
+        return pulumi.get(self, "settings")
+
+
+@pulumi.output_type
+class SentryIssueAlertActionsV2NotifyEventService(dict):
+    def __init__(__self__, *,
+                 service: str,
+                 name: Optional[str] = None):
+        pulumi.set(__self__, "service", service)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def service(self) -> str:
+        return pulumi.get(self, "service")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertActionsV2OpsgenieNotifyTeam(dict):
+    def __init__(__self__, *,
+                 account: str,
+                 priority: str,
+                 team: str,
+                 name: Optional[str] = None):
+        pulumi.set(__self__, "account", account)
+        pulumi.set(__self__, "priority", priority)
+        pulumi.set(__self__, "team", team)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def account(self) -> str:
+        return pulumi.get(self, "account")
+
+    @property
+    @pulumi.getter
+    def priority(self) -> str:
+        return pulumi.get(self, "priority")
+
+    @property
+    @pulumi.getter
+    def team(self) -> str:
+        return pulumi.get(self, "team")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertActionsV2PagerdutyNotifyService(dict):
+    def __init__(__self__, *,
+                 account: str,
+                 service: str,
+                 severity: str,
+                 name: Optional[str] = None):
+        pulumi.set(__self__, "account", account)
+        pulumi.set(__self__, "service", service)
+        pulumi.set(__self__, "severity", severity)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def account(self) -> str:
+        return pulumi.get(self, "account")
+
+    @property
+    @pulumi.getter
+    def service(self) -> str:
+        return pulumi.get(self, "service")
+
+    @property
+    @pulumi.getter
+    def severity(self) -> str:
+        return pulumi.get(self, "severity")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertActionsV2SlackNotifyService(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "channelId":
+            suggest = "channel_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertActionsV2SlackNotifyService. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertActionsV2SlackNotifyService.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertActionsV2SlackNotifyService.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 channel: str,
+                 workspace: str,
+                 channel_id: Optional[str] = None,
+                 name: Optional[str] = None,
+                 notes: Optional[str] = None,
+                 tags: Optional[Sequence[str]] = None):
+        """
+        :param str channel: The name of the channel to send the notification to (e.g., #critical, Jane Schmidt).
+        :param str workspace: The integration ID associated with the Slack workspace.
+        :param str channel_id: The ID of the channel to send the notification to.
+        :param str notes: Text to show alongside the notification. To @ a user, include their user id like `@<USER_ID>`. To include a clickable link, format the link and title like `<http://example.com|Click Here>`.
+        :param Sequence[str] tags: A string of tags to show in the notification.
+        """
+        pulumi.set(__self__, "channel", channel)
+        pulumi.set(__self__, "workspace", workspace)
+        if channel_id is not None:
+            pulumi.set(__self__, "channel_id", channel_id)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if notes is not None:
+            pulumi.set(__self__, "notes", notes)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter
+    def channel(self) -> str:
+        """
+        The name of the channel to send the notification to (e.g., #critical, Jane Schmidt).
+        """
+        return pulumi.get(self, "channel")
+
+    @property
+    @pulumi.getter
+    def workspace(self) -> str:
+        """
+        The integration ID associated with the Slack workspace.
+        """
+        return pulumi.get(self, "workspace")
+
+    @property
+    @pulumi.getter(name="channelId")
+    def channel_id(self) -> Optional[str]:
+        """
+        The ID of the channel to send the notification to.
+        """
+        return pulumi.get(self, "channel_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def notes(self) -> Optional[str]:
+        """
+        Text to show alongside the notification. To @ a user, include their user id like `@<USER_ID>`. To include a clickable link, format the link and title like `<http://example.com|Click Here>`.
+        """
+        return pulumi.get(self, "notes")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[Sequence[str]]:
+        """
+        A string of tags to show in the notification.
+        """
+        return pulumi.get(self, "tags")
+
+
+@pulumi.output_type
+class SentryIssueAlertConditionsV2(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "eventFrequency":
+            suggest = "event_frequency"
+        elif key == "eventFrequencyPercent":
+            suggest = "event_frequency_percent"
+        elif key == "eventUniqueUserFrequency":
+            suggest = "event_unique_user_frequency"
+        elif key == "existingHighPriorityIssue":
+            suggest = "existing_high_priority_issue"
+        elif key == "firstSeenEvent":
+            suggest = "first_seen_event"
+        elif key == "newHighPriorityIssue":
+            suggest = "new_high_priority_issue"
+        elif key == "reappearedEvent":
+            suggest = "reappeared_event"
+        elif key == "regressionEvent":
+            suggest = "regression_event"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertConditionsV2. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertConditionsV2.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertConditionsV2.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 event_frequency: Optional['outputs.SentryIssueAlertConditionsV2EventFrequency'] = None,
+                 event_frequency_percent: Optional['outputs.SentryIssueAlertConditionsV2EventFrequencyPercent'] = None,
+                 event_unique_user_frequency: Optional['outputs.SentryIssueAlertConditionsV2EventUniqueUserFrequency'] = None,
+                 existing_high_priority_issue: Optional['outputs.SentryIssueAlertConditionsV2ExistingHighPriorityIssue'] = None,
+                 first_seen_event: Optional['outputs.SentryIssueAlertConditionsV2FirstSeenEvent'] = None,
+                 new_high_priority_issue: Optional['outputs.SentryIssueAlertConditionsV2NewHighPriorityIssue'] = None,
+                 reappeared_event: Optional['outputs.SentryIssueAlertConditionsV2ReappearedEvent'] = None,
+                 regression_event: Optional['outputs.SentryIssueAlertConditionsV2RegressionEvent'] = None):
+        """
+        :param 'SentryIssueAlertConditionsV2EventFrequencyArgs' event_frequency: When the `comparison_type` is `count`, the number of events in an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the number of events in an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        :param 'SentryIssueAlertConditionsV2EventFrequencyPercentArgs' event_frequency_percent: When the `comparison_type` is `count`, the percent of sessions affected by an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the percent of sessions affected by an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        :param 'SentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs' event_unique_user_frequency: When the `comparison_type` is `count`, the number of users affected by an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the number of users affected by an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        :param 'SentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs' existing_high_priority_issue: Sentry marks an existing issue as high priority.
+        :param 'SentryIssueAlertConditionsV2FirstSeenEventArgs' first_seen_event: A new issue is created.
+        :param 'SentryIssueAlertConditionsV2NewHighPriorityIssueArgs' new_high_priority_issue: Sentry marks a new issue as high priority.
+        :param 'SentryIssueAlertConditionsV2ReappearedEventArgs' reappeared_event: The issue changes state from ignored to unresolved.
+        :param 'SentryIssueAlertConditionsV2RegressionEventArgs' regression_event: The issue changes state from resolved to unresolved.
+        """
+        if event_frequency is not None:
+            pulumi.set(__self__, "event_frequency", event_frequency)
+        if event_frequency_percent is not None:
+            pulumi.set(__self__, "event_frequency_percent", event_frequency_percent)
+        if event_unique_user_frequency is not None:
+            pulumi.set(__self__, "event_unique_user_frequency", event_unique_user_frequency)
+        if existing_high_priority_issue is not None:
+            pulumi.set(__self__, "existing_high_priority_issue", existing_high_priority_issue)
+        if first_seen_event is not None:
+            pulumi.set(__self__, "first_seen_event", first_seen_event)
+        if new_high_priority_issue is not None:
+            pulumi.set(__self__, "new_high_priority_issue", new_high_priority_issue)
+        if reappeared_event is not None:
+            pulumi.set(__self__, "reappeared_event", reappeared_event)
+        if regression_event is not None:
+            pulumi.set(__self__, "regression_event", regression_event)
+
+    @property
+    @pulumi.getter(name="eventFrequency")
+    def event_frequency(self) -> Optional['outputs.SentryIssueAlertConditionsV2EventFrequency']:
+        """
+        When the `comparison_type` is `count`, the number of events in an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the number of events in an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        """
+        return pulumi.get(self, "event_frequency")
+
+    @property
+    @pulumi.getter(name="eventFrequencyPercent")
+    def event_frequency_percent(self) -> Optional['outputs.SentryIssueAlertConditionsV2EventFrequencyPercent']:
+        """
+        When the `comparison_type` is `count`, the percent of sessions affected by an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the percent of sessions affected by an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        """
+        return pulumi.get(self, "event_frequency_percent")
+
+    @property
+    @pulumi.getter(name="eventUniqueUserFrequency")
+    def event_unique_user_frequency(self) -> Optional['outputs.SentryIssueAlertConditionsV2EventUniqueUserFrequency']:
+        """
+        When the `comparison_type` is `count`, the number of users affected by an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the number of users affected by an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        """
+        return pulumi.get(self, "event_unique_user_frequency")
+
+    @property
+    @pulumi.getter(name="existingHighPriorityIssue")
+    def existing_high_priority_issue(self) -> Optional['outputs.SentryIssueAlertConditionsV2ExistingHighPriorityIssue']:
+        """
+        Sentry marks an existing issue as high priority.
+        """
+        return pulumi.get(self, "existing_high_priority_issue")
+
+    @property
+    @pulumi.getter(name="firstSeenEvent")
+    def first_seen_event(self) -> Optional['outputs.SentryIssueAlertConditionsV2FirstSeenEvent']:
+        """
+        A new issue is created.
+        """
+        return pulumi.get(self, "first_seen_event")
+
+    @property
+    @pulumi.getter(name="newHighPriorityIssue")
+    def new_high_priority_issue(self) -> Optional['outputs.SentryIssueAlertConditionsV2NewHighPriorityIssue']:
+        """
+        Sentry marks a new issue as high priority.
+        """
+        return pulumi.get(self, "new_high_priority_issue")
+
+    @property
+    @pulumi.getter(name="reappearedEvent")
+    def reappeared_event(self) -> Optional['outputs.SentryIssueAlertConditionsV2ReappearedEvent']:
+        """
+        The issue changes state from ignored to unresolved.
+        """
+        return pulumi.get(self, "reappeared_event")
+
+    @property
+    @pulumi.getter(name="regressionEvent")
+    def regression_event(self) -> Optional['outputs.SentryIssueAlertConditionsV2RegressionEvent']:
+        """
+        The issue changes state from resolved to unresolved.
+        """
+        return pulumi.get(self, "regression_event")
+
+
+@pulumi.output_type
+class SentryIssueAlertConditionsV2EventFrequency(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "comparisonType":
+            suggest = "comparison_type"
+        elif key == "comparisonInterval":
+            suggest = "comparison_interval"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertConditionsV2EventFrequency. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertConditionsV2EventFrequency.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertConditionsV2EventFrequency.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 comparison_type: str,
+                 value: int,
+                 comparison_interval: Optional[str] = None,
+                 interval: Optional[str] = None,
+                 name: Optional[str] = None):
+        """
+        :param str comparison_type: Valid values are: `count`, and `percent`.
+        :param str comparison_interval: `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        :param str interval: `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        pulumi.set(__self__, "comparison_type", comparison_type)
+        pulumi.set(__self__, "value", value)
+        if comparison_interval is not None:
+            pulumi.set(__self__, "comparison_interval", comparison_interval)
+        if interval is not None:
+            pulumi.set(__self__, "interval", interval)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="comparisonType")
+    def comparison_type(self) -> str:
+        """
+        Valid values are: `count`, and `percent`.
+        """
+        return pulumi.get(self, "comparison_type")
+
+    @property
+    @pulumi.getter
+    def value(self) -> int:
+        return pulumi.get(self, "value")
+
+    @property
+    @pulumi.getter(name="comparisonInterval")
+    def comparison_interval(self) -> Optional[str]:
+        """
+        `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        return pulumi.get(self, "comparison_interval")
+
+    @property
+    @pulumi.getter
+    def interval(self) -> Optional[str]:
+        """
+        `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        return pulumi.get(self, "interval")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertConditionsV2EventFrequencyPercent(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "comparisonType":
+            suggest = "comparison_type"
+        elif key == "comparisonInterval":
+            suggest = "comparison_interval"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertConditionsV2EventFrequencyPercent. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertConditionsV2EventFrequencyPercent.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertConditionsV2EventFrequencyPercent.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 comparison_type: str,
+                 interval: str,
+                 value: float,
+                 comparison_interval: Optional[str] = None,
+                 name: Optional[str] = None):
+        """
+        :param str comparison_type: Valid values are: `count`, and `percent`.
+        :param str interval: `m` for minutes, `h` for hours. Valid values are: `5m`, `10m`, `30m`, and `1h`.
+        :param str comparison_interval: `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        pulumi.set(__self__, "comparison_type", comparison_type)
+        pulumi.set(__self__, "interval", interval)
+        pulumi.set(__self__, "value", value)
+        if comparison_interval is not None:
+            pulumi.set(__self__, "comparison_interval", comparison_interval)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="comparisonType")
+    def comparison_type(self) -> str:
+        """
+        Valid values are: `count`, and `percent`.
+        """
+        return pulumi.get(self, "comparison_type")
+
+    @property
+    @pulumi.getter
+    def interval(self) -> str:
+        """
+        `m` for minutes, `h` for hours. Valid values are: `5m`, `10m`, `30m`, and `1h`.
+        """
+        return pulumi.get(self, "interval")
+
+    @property
+    @pulumi.getter
+    def value(self) -> float:
+        return pulumi.get(self, "value")
+
+    @property
+    @pulumi.getter(name="comparisonInterval")
+    def comparison_interval(self) -> Optional[str]:
+        """
+        `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        return pulumi.get(self, "comparison_interval")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertConditionsV2EventUniqueUserFrequency(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "comparisonType":
+            suggest = "comparison_type"
+        elif key == "comparisonInterval":
+            suggest = "comparison_interval"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertConditionsV2EventUniqueUserFrequency. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertConditionsV2EventUniqueUserFrequency.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertConditionsV2EventUniqueUserFrequency.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 comparison_type: str,
+                 value: int,
+                 comparison_interval: Optional[str] = None,
+                 interval: Optional[str] = None,
+                 name: Optional[str] = None):
+        """
+        :param str comparison_type: Valid values are: `count`, and `percent`.
+        :param str comparison_interval: `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        :param str interval: `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        pulumi.set(__self__, "comparison_type", comparison_type)
+        pulumi.set(__self__, "value", value)
+        if comparison_interval is not None:
+            pulumi.set(__self__, "comparison_interval", comparison_interval)
+        if interval is not None:
+            pulumi.set(__self__, "interval", interval)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="comparisonType")
+    def comparison_type(self) -> str:
+        """
+        Valid values are: `count`, and `percent`.
+        """
+        return pulumi.get(self, "comparison_type")
+
+    @property
+    @pulumi.getter
+    def value(self) -> int:
+        return pulumi.get(self, "value")
+
+    @property
+    @pulumi.getter(name="comparisonInterval")
+    def comparison_interval(self) -> Optional[str]:
+        """
+        `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        return pulumi.get(self, "comparison_interval")
+
+    @property
+    @pulumi.getter
+    def interval(self) -> Optional[str]:
+        """
+        `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+        """
+        return pulumi.get(self, "interval")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertConditionsV2ExistingHighPriorityIssue(dict):
+    def __init__(__self__, *,
+                 name: Optional[str] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertConditionsV2FirstSeenEvent(dict):
+    def __init__(__self__, *,
+                 name: Optional[str] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertConditionsV2NewHighPriorityIssue(dict):
+    def __init__(__self__, *,
+                 name: Optional[str] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertConditionsV2ReappearedEvent(dict):
+    def __init__(__self__, *,
+                 name: Optional[str] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertConditionsV2RegressionEvent(dict):
+    def __init__(__self__, *,
+                 name: Optional[str] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertFiltersV2(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "ageComparison":
+            suggest = "age_comparison"
+        elif key == "assignedTo":
+            suggest = "assigned_to"
+        elif key == "eventAttribute":
+            suggest = "event_attribute"
+        elif key == "issueCategory":
+            suggest = "issue_category"
+        elif key == "issueOccurrences":
+            suggest = "issue_occurrences"
+        elif key == "latestAdoptedRelease":
+            suggest = "latest_adopted_release"
+        elif key == "latestRelease":
+            suggest = "latest_release"
+        elif key == "taggedEvent":
+            suggest = "tagged_event"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertFiltersV2. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertFiltersV2.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertFiltersV2.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 age_comparison: Optional['outputs.SentryIssueAlertFiltersV2AgeComparison'] = None,
+                 assigned_to: Optional['outputs.SentryIssueAlertFiltersV2AssignedTo'] = None,
+                 event_attribute: Optional['outputs.SentryIssueAlertFiltersV2EventAttribute'] = None,
+                 issue_category: Optional['outputs.SentryIssueAlertFiltersV2IssueCategory'] = None,
+                 issue_occurrences: Optional['outputs.SentryIssueAlertFiltersV2IssueOccurrences'] = None,
+                 latest_adopted_release: Optional['outputs.SentryIssueAlertFiltersV2LatestAdoptedRelease'] = None,
+                 latest_release: Optional['outputs.SentryIssueAlertFiltersV2LatestRelease'] = None,
+                 level: Optional['outputs.SentryIssueAlertFiltersV2Level'] = None,
+                 tagged_event: Optional['outputs.SentryIssueAlertFiltersV2TaggedEvent'] = None):
+        """
+        :param 'SentryIssueAlertFiltersV2AgeComparisonArgs' age_comparison: The issue is older or newer than `value` `time`.
+        :param 'SentryIssueAlertFiltersV2AssignedToArgs' assigned_to: The issue is assigned to no one, team, or member.
+        :param 'SentryIssueAlertFiltersV2EventAttributeArgs' event_attribute: The event's `attribute` value `match` `value`.
+        :param 'SentryIssueAlertFiltersV2IssueCategoryArgs' issue_category: The issue's category is equal to `value`.
+        :param 'SentryIssueAlertFiltersV2IssueOccurrencesArgs' issue_occurrences: The issue has happened at least `value` times (Note: this is approximate).
+        :param 'SentryIssueAlertFiltersV2LatestAdoptedReleaseArgs' latest_adopted_release: The {oldest*or*newest} adopted release associated with the event's issue is {older*or*newer} than the latest adopted release in {environment}.
+        :param 'SentryIssueAlertFiltersV2LatestReleaseArgs' latest_release: The event is from the latest release.
+        :param 'SentryIssueAlertFiltersV2LevelArgs' level: The event's level is `match` `level`.
+        :param 'SentryIssueAlertFiltersV2TaggedEventArgs' tagged_event: The event's tags match `key` `match` `value`.
+        """
+        if age_comparison is not None:
+            pulumi.set(__self__, "age_comparison", age_comparison)
+        if assigned_to is not None:
+            pulumi.set(__self__, "assigned_to", assigned_to)
+        if event_attribute is not None:
+            pulumi.set(__self__, "event_attribute", event_attribute)
+        if issue_category is not None:
+            pulumi.set(__self__, "issue_category", issue_category)
+        if issue_occurrences is not None:
+            pulumi.set(__self__, "issue_occurrences", issue_occurrences)
+        if latest_adopted_release is not None:
+            pulumi.set(__self__, "latest_adopted_release", latest_adopted_release)
+        if latest_release is not None:
+            pulumi.set(__self__, "latest_release", latest_release)
+        if level is not None:
+            pulumi.set(__self__, "level", level)
+        if tagged_event is not None:
+            pulumi.set(__self__, "tagged_event", tagged_event)
+
+    @property
+    @pulumi.getter(name="ageComparison")
+    def age_comparison(self) -> Optional['outputs.SentryIssueAlertFiltersV2AgeComparison']:
+        """
+        The issue is older or newer than `value` `time`.
+        """
+        return pulumi.get(self, "age_comparison")
+
+    @property
+    @pulumi.getter(name="assignedTo")
+    def assigned_to(self) -> Optional['outputs.SentryIssueAlertFiltersV2AssignedTo']:
+        """
+        The issue is assigned to no one, team, or member.
+        """
+        return pulumi.get(self, "assigned_to")
+
+    @property
+    @pulumi.getter(name="eventAttribute")
+    def event_attribute(self) -> Optional['outputs.SentryIssueAlertFiltersV2EventAttribute']:
+        """
+        The event's `attribute` value `match` `value`.
+        """
+        return pulumi.get(self, "event_attribute")
+
+    @property
+    @pulumi.getter(name="issueCategory")
+    def issue_category(self) -> Optional['outputs.SentryIssueAlertFiltersV2IssueCategory']:
+        """
+        The issue's category is equal to `value`.
+        """
+        return pulumi.get(self, "issue_category")
+
+    @property
+    @pulumi.getter(name="issueOccurrences")
+    def issue_occurrences(self) -> Optional['outputs.SentryIssueAlertFiltersV2IssueOccurrences']:
+        """
+        The issue has happened at least `value` times (Note: this is approximate).
+        """
+        return pulumi.get(self, "issue_occurrences")
+
+    @property
+    @pulumi.getter(name="latestAdoptedRelease")
+    def latest_adopted_release(self) -> Optional['outputs.SentryIssueAlertFiltersV2LatestAdoptedRelease']:
+        """
+        The {oldest*or*newest} adopted release associated with the event's issue is {older*or*newer} than the latest adopted release in {environment}.
+        """
+        return pulumi.get(self, "latest_adopted_release")
+
+    @property
+    @pulumi.getter(name="latestRelease")
+    def latest_release(self) -> Optional['outputs.SentryIssueAlertFiltersV2LatestRelease']:
+        """
+        The event is from the latest release.
+        """
+        return pulumi.get(self, "latest_release")
+
+    @property
+    @pulumi.getter
+    def level(self) -> Optional['outputs.SentryIssueAlertFiltersV2Level']:
+        """
+        The event's level is `match` `level`.
+        """
+        return pulumi.get(self, "level")
+
+    @property
+    @pulumi.getter(name="taggedEvent")
+    def tagged_event(self) -> Optional['outputs.SentryIssueAlertFiltersV2TaggedEvent']:
+        """
+        The event's tags match `key` `match` `value`.
+        """
+        return pulumi.get(self, "tagged_event")
+
+
+@pulumi.output_type
+class SentryIssueAlertFiltersV2AgeComparison(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "comparisonType":
+            suggest = "comparison_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertFiltersV2AgeComparison. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertFiltersV2AgeComparison.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertFiltersV2AgeComparison.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 comparison_type: str,
+                 time: str,
+                 value: int,
+                 name: Optional[str] = None):
+        """
+        :param str comparison_type: Valid values are: `older`, and `newer`.
+        :param str time: Valid values are: `minute`, `hour`, `day`, and `week`.
+        """
+        pulumi.set(__self__, "comparison_type", comparison_type)
+        pulumi.set(__self__, "time", time)
+        pulumi.set(__self__, "value", value)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="comparisonType")
+    def comparison_type(self) -> str:
+        """
+        Valid values are: `older`, and `newer`.
+        """
+        return pulumi.get(self, "comparison_type")
+
+    @property
+    @pulumi.getter
+    def time(self) -> str:
+        """
+        Valid values are: `minute`, `hour`, `day`, and `week`.
+        """
+        return pulumi.get(self, "time")
+
+    @property
+    @pulumi.getter
+    def value(self) -> int:
+        return pulumi.get(self, "value")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertFiltersV2AssignedTo(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "targetType":
+            suggest = "target_type"
+        elif key == "targetIdentifier":
+            suggest = "target_identifier"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertFiltersV2AssignedTo. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertFiltersV2AssignedTo.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertFiltersV2AssignedTo.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 target_type: str,
+                 name: Optional[str] = None,
+                 target_identifier: Optional[str] = None):
+        """
+        :param str target_type: Valid values are: `Unassigned`, `Team`, and `Member`.
+        :param str target_identifier: The target's ID. Only required when `target_type` is `Team` or `Member`.
+        """
+        pulumi.set(__self__, "target_type", target_type)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if target_identifier is not None:
+            pulumi.set(__self__, "target_identifier", target_identifier)
+
+    @property
+    @pulumi.getter(name="targetType")
+    def target_type(self) -> str:
+        """
+        Valid values are: `Unassigned`, `Team`, and `Member`.
+        """
+        return pulumi.get(self, "target_type")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="targetIdentifier")
+    def target_identifier(self) -> Optional[str]:
+        """
+        The target's ID. Only required when `target_type` is `Team` or `Member`.
+        """
+        return pulumi.get(self, "target_identifier")
+
+
+@pulumi.output_type
+class SentryIssueAlertFiltersV2EventAttribute(dict):
+    def __init__(__self__, *,
+                 attribute: str,
+                 match: str,
+                 name: Optional[str] = None,
+                 value: Optional[str] = None):
+        """
+        :param str attribute: Valid values are: `message`, `platform`, `environment`, `type`, `error.handled`, `error.unhandled`, `error.main_thread`, `exception.type`, `exception.value`, `user.id`, `user.email`, `user.username`, `user.ip_address`, `http.method`, `http.url`, `http.status_code`, `sdk.name`, `stacktrace.code`, `stacktrace.module`, `stacktrace.filename`, `stacktrace.abs_path`, `stacktrace.package`, `unreal.crashtype`, `app.in_foreground`, `os.distribution_name`, and `os.distribution_version`.
+        :param str match: The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+        """
+        pulumi.set(__self__, "attribute", attribute)
+        pulumi.set(__self__, "match", match)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def attribute(self) -> str:
+        """
+        Valid values are: `message`, `platform`, `environment`, `type`, `error.handled`, `error.unhandled`, `error.main_thread`, `exception.type`, `exception.value`, `user.id`, `user.email`, `user.username`, `user.ip_address`, `http.method`, `http.url`, `http.status_code`, `sdk.name`, `stacktrace.code`, `stacktrace.module`, `stacktrace.filename`, `stacktrace.abs_path`, `stacktrace.package`, `unreal.crashtype`, `app.in_foreground`, `os.distribution_name`, and `os.distribution_version`.
+        """
+        return pulumi.get(self, "attribute")
+
+    @property
+    @pulumi.getter
+    def match(self) -> str:
+        """
+        The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+        """
+        return pulumi.get(self, "match")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[str]:
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class SentryIssueAlertFiltersV2IssueCategory(dict):
+    def __init__(__self__, *,
+                 value: str,
+                 name: Optional[str] = None):
+        """
+        :param str value: Valid values are: `Error`, `Performance`, `Profile`, `Cron`, `Replay`, `Feedback`, `Uptime`, and `Metric_Alert`.
+        """
+        pulumi.set(__self__, "value", value)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Valid values are: `Error`, `Performance`, `Profile`, `Cron`, `Replay`, `Feedback`, `Uptime`, and `Metric_Alert`.
+        """
+        return pulumi.get(self, "value")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertFiltersV2IssueOccurrences(dict):
+    def __init__(__self__, *,
+                 value: int,
+                 name: Optional[str] = None):
+        pulumi.set(__self__, "value", value)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def value(self) -> int:
+        return pulumi.get(self, "value")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertFiltersV2LatestAdoptedRelease(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "olderOrNewer":
+            suggest = "older_or_newer"
+        elif key == "oldestOrNewest":
+            suggest = "oldest_or_newest"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryIssueAlertFiltersV2LatestAdoptedRelease. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryIssueAlertFiltersV2LatestAdoptedRelease.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryIssueAlertFiltersV2LatestAdoptedRelease.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 environment: str,
+                 older_or_newer: str,
+                 oldest_or_newest: str,
+                 name: Optional[str] = None):
+        """
+        :param str older_or_newer: Valid values are: `older`, and `newer`.
+        :param str oldest_or_newest: Valid values are: `oldest`, and `newest`.
+        """
+        pulumi.set(__self__, "environment", environment)
+        pulumi.set(__self__, "older_or_newer", older_or_newer)
+        pulumi.set(__self__, "oldest_or_newest", oldest_or_newest)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def environment(self) -> str:
+        return pulumi.get(self, "environment")
+
+    @property
+    @pulumi.getter(name="olderOrNewer")
+    def older_or_newer(self) -> str:
+        """
+        Valid values are: `older`, and `newer`.
+        """
+        return pulumi.get(self, "older_or_newer")
+
+    @property
+    @pulumi.getter(name="oldestOrNewest")
+    def oldest_or_newest(self) -> str:
+        """
+        Valid values are: `oldest`, and `newest`.
+        """
+        return pulumi.get(self, "oldest_or_newest")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertFiltersV2LatestRelease(dict):
+    def __init__(__self__, *,
+                 name: Optional[str] = None):
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertFiltersV2Level(dict):
+    def __init__(__self__, *,
+                 level: str,
+                 match: str,
+                 name: Optional[str] = None):
+        """
+        :param str level: Valid values are: `sample`, `debug`, `info`, `warning`, `error`, and `fatal`.
+        :param str match: The comparison operator. Valid values are: `EQUAL`, `GREATER_OR_EQUAL`, and `LESS_OR_EQUAL`.
+        """
+        pulumi.set(__self__, "level", level)
+        pulumi.set(__self__, "match", match)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def level(self) -> str:
+        """
+        Valid values are: `sample`, `debug`, `info`, `warning`, `error`, and `fatal`.
+        """
+        return pulumi.get(self, "level")
+
+    @property
+    @pulumi.getter
+    def match(self) -> str:
+        """
+        The comparison operator. Valid values are: `EQUAL`, `GREATER_OR_EQUAL`, and `LESS_OR_EQUAL`.
+        """
+        return pulumi.get(self, "match")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class SentryIssueAlertFiltersV2TaggedEvent(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 match: str,
+                 name: Optional[str] = None,
+                 value: Optional[str] = None):
+        """
+        :param str key: The tag.
+        :param str match: The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "match", match)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        The tag.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def match(self) -> str:
+        """
+        The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+        """
+        return pulumi.get(self, "match")
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[str]:
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class SentryKeyJavascriptLoaderScript(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "browserSdkVersion":
+            suggest = "browser_sdk_version"
+        elif key == "debugEnabled":
+            suggest = "debug_enabled"
+        elif key == "performanceMonitoringEnabled":
+            suggest = "performance_monitoring_enabled"
+        elif key == "sessionReplayEnabled":
+            suggest = "session_replay_enabled"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryKeyJavascriptLoaderScript. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryKeyJavascriptLoaderScript.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryKeyJavascriptLoaderScript.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 browser_sdk_version: Optional[str] = None,
+                 debug_enabled: Optional[bool] = None,
+                 performance_monitoring_enabled: Optional[bool] = None,
+                 session_replay_enabled: Optional[bool] = None):
+        """
+        :param str browser_sdk_version: The version of the browser SDK to load.
+        :param bool debug_enabled: Whether debug bundles & logging are enabled for this key.
+        :param bool performance_monitoring_enabled: Whether performance monitoring is enabled for this key.
+        :param bool session_replay_enabled: Whether session replay is enabled for this key.
+        """
+        if browser_sdk_version is not None:
+            pulumi.set(__self__, "browser_sdk_version", browser_sdk_version)
+        if debug_enabled is not None:
+            pulumi.set(__self__, "debug_enabled", debug_enabled)
+        if performance_monitoring_enabled is not None:
+            pulumi.set(__self__, "performance_monitoring_enabled", performance_monitoring_enabled)
+        if session_replay_enabled is not None:
+            pulumi.set(__self__, "session_replay_enabled", session_replay_enabled)
+
+    @property
+    @pulumi.getter(name="browserSdkVersion")
+    def browser_sdk_version(self) -> Optional[str]:
+        """
+        The version of the browser SDK to load.
+        """
+        return pulumi.get(self, "browser_sdk_version")
+
+    @property
+    @pulumi.getter(name="debugEnabled")
+    def debug_enabled(self) -> Optional[bool]:
+        """
+        Whether debug bundles & logging are enabled for this key.
+        """
+        return pulumi.get(self, "debug_enabled")
+
+    @property
+    @pulumi.getter(name="performanceMonitoringEnabled")
+    def performance_monitoring_enabled(self) -> Optional[bool]:
+        """
+        Whether performance monitoring is enabled for this key.
+        """
+        return pulumi.get(self, "performance_monitoring_enabled")
+
+    @property
+    @pulumi.getter(name="sessionReplayEnabled")
+    def session_replay_enabled(self) -> Optional[bool]:
+        """
+        Whether session replay is enabled for this key.
+        """
+        return pulumi.get(self, "session_replay_enabled")
 
 
 @pulumi.output_type
@@ -293,24 +2357,28 @@ class SentryMetricAlertTrigger(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 actions: Sequence['outputs.SentryMetricAlertTriggerAction'],
                  alert_threshold: float,
                  label: str,
                  threshold_type: int,
-                 actions: Optional[Sequence['outputs.SentryMetricAlertTriggerAction']] = None,
                  id: Optional[str] = None,
                  resolve_threshold: Optional[float] = None):
         """
-        :param str id: The ID of this resource.
+        :param str id: The ID of the trigger.
         """
+        pulumi.set(__self__, "actions", actions)
         pulumi.set(__self__, "alert_threshold", alert_threshold)
         pulumi.set(__self__, "label", label)
         pulumi.set(__self__, "threshold_type", threshold_type)
-        if actions is not None:
-            pulumi.set(__self__, "actions", actions)
         if id is not None:
             pulumi.set(__self__, "id", id)
         if resolve_threshold is not None:
             pulumi.set(__self__, "resolve_threshold", resolve_threshold)
+
+    @property
+    @pulumi.getter
+    def actions(self) -> Sequence['outputs.SentryMetricAlertTriggerAction']:
+        return pulumi.get(self, "actions")
 
     @property
     @pulumi.getter(name="alertThreshold")
@@ -329,14 +2397,9 @@ class SentryMetricAlertTrigger(dict):
 
     @property
     @pulumi.getter
-    def actions(self) -> Optional[Sequence['outputs.SentryMetricAlertTriggerAction']]:
-        return pulumi.get(self, "actions")
-
-    @property
-    @pulumi.getter
     def id(self) -> Optional[str]:
         """
-        The ID of this resource.
+        The ID of the trigger.
         """
         return pulumi.get(self, "id")
 
@@ -353,6 +2416,8 @@ class SentryMetricAlertTriggerAction(dict):
         suggest = None
         if key == "targetType":
             suggest = "target_type"
+        elif key == "inputChannelId":
+            suggest = "input_channel_id"
         elif key == "integrationId":
             suggest = "integration_id"
         elif key == "targetIdentifier":
@@ -373,15 +2438,19 @@ class SentryMetricAlertTriggerAction(dict):
                  target_type: str,
                  type: str,
                  id: Optional[str] = None,
+                 input_channel_id: Optional[str] = None,
                  integration_id: Optional[int] = None,
                  target_identifier: Optional[str] = None):
         """
-        :param str id: The ID of this resource.
+        :param str id: The ID of the action.
+        :param str input_channel_id: Slack channel ID to avoid rate-limiting, see [here](https://docs.sentry.io/product/integrations/notification-incidents/slack/#rate-limiting-error)
         """
         pulumi.set(__self__, "target_type", target_type)
         pulumi.set(__self__, "type", type)
         if id is not None:
             pulumi.set(__self__, "id", id)
+        if input_channel_id is not None:
+            pulumi.set(__self__, "input_channel_id", input_channel_id)
         if integration_id is not None:
             pulumi.set(__self__, "integration_id", integration_id)
         if target_identifier is not None:
@@ -401,9 +2470,17 @@ class SentryMetricAlertTriggerAction(dict):
     @pulumi.getter
     def id(self) -> Optional[str]:
         """
-        The ID of this resource.
+        The ID of the action.
         """
         return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="inputChannelId")
+    def input_channel_id(self) -> Optional[str]:
+        """
+        Slack channel ID to avoid rate-limiting, see [here](https://docs.sentry.io/product/integrations/notification-incidents/slack/#rate-limiting-error)
+        """
+        return pulumi.get(self, "input_channel_id")
 
     @property
     @pulumi.getter(name="integrationId")
@@ -414,6 +2491,528 @@ class SentryMetricAlertTriggerAction(dict):
     @pulumi.getter(name="targetIdentifier")
     def target_identifier(self) -> Optional[str]:
         return pulumi.get(self, "target_identifier")
+
+
+@pulumi.output_type
+class SentryProjectClientSecurity(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "allowedDomains":
+            suggest = "allowed_domains"
+        elif key == "scrapeJavascript":
+            suggest = "scrape_javascript"
+        elif key == "securityToken":
+            suggest = "security_token"
+        elif key == "securityTokenHeader":
+            suggest = "security_token_header"
+        elif key == "verifyTlsSsl":
+            suggest = "verify_tls_ssl"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryProjectClientSecurity. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryProjectClientSecurity.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryProjectClientSecurity.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 allowed_domains: Optional[Sequence[str]] = None,
+                 scrape_javascript: Optional[bool] = None,
+                 security_token: Optional[str] = None,
+                 security_token_header: Optional[str] = None,
+                 verify_tls_ssl: Optional[bool] = None):
+        """
+        :param Sequence[str] allowed_domains: A list of allowed domains. Examples: https://example.com, *, *.example.com, *:80.
+        :param bool scrape_javascript: Enable JavaScript source fetching. Allow Sentry to scrape missing JavaScript source context when possible.
+        :param str security_token: Security Token. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+        :param str security_token_header: Security Token Header. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+        :param bool verify_tls_ssl: Verify TLS/SSL. Outbound requests will verify TLS (sometimes known as SSL) connections.
+        """
+        if allowed_domains is not None:
+            pulumi.set(__self__, "allowed_domains", allowed_domains)
+        if scrape_javascript is not None:
+            pulumi.set(__self__, "scrape_javascript", scrape_javascript)
+        if security_token is not None:
+            pulumi.set(__self__, "security_token", security_token)
+        if security_token_header is not None:
+            pulumi.set(__self__, "security_token_header", security_token_header)
+        if verify_tls_ssl is not None:
+            pulumi.set(__self__, "verify_tls_ssl", verify_tls_ssl)
+
+    @property
+    @pulumi.getter(name="allowedDomains")
+    def allowed_domains(self) -> Optional[Sequence[str]]:
+        """
+        A list of allowed domains. Examples: https://example.com, *, *.example.com, *:80.
+        """
+        return pulumi.get(self, "allowed_domains")
+
+    @property
+    @pulumi.getter(name="scrapeJavascript")
+    def scrape_javascript(self) -> Optional[bool]:
+        """
+        Enable JavaScript source fetching. Allow Sentry to scrape missing JavaScript source context when possible.
+        """
+        return pulumi.get(self, "scrape_javascript")
+
+    @property
+    @pulumi.getter(name="securityToken")
+    def security_token(self) -> Optional[str]:
+        """
+        Security Token. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+        """
+        return pulumi.get(self, "security_token")
+
+    @property
+    @pulumi.getter(name="securityTokenHeader")
+    def security_token_header(self) -> Optional[str]:
+        """
+        Security Token Header. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+        """
+        return pulumi.get(self, "security_token_header")
+
+    @property
+    @pulumi.getter(name="verifyTlsSsl")
+    def verify_tls_ssl(self) -> Optional[bool]:
+        """
+        Verify TLS/SSL. Outbound requests will verify TLS (sometimes known as SSL) connections.
+        """
+        return pulumi.get(self, "verify_tls_ssl")
+
+
+@pulumi.output_type
+class SentryProjectFilters(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "blacklistedIps":
+            suggest = "blacklisted_ips"
+        elif key == "errorMessages":
+            suggest = "error_messages"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in SentryProjectFilters. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        SentryProjectFilters.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        SentryProjectFilters.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 blacklisted_ips: Optional[Sequence[str]] = None,
+                 error_messages: Optional[Sequence[str]] = None,
+                 releases: Optional[Sequence[str]] = None):
+        """
+        :param Sequence[str] blacklisted_ips: Filter events from these IP addresses. (e.g. 127.0.0.1 or 10.0.0.0/8)
+        :param Sequence[str] error_messages: Filter events by error messages. Allows [glob pattern matching](https://en.wikipedia.org/wiki/Glob_(programming)). (e.g. TypeError* or *: integer division or modulo by zero)
+        :param Sequence[str] releases: Filter events from these releases. Allows [glob pattern matching](https://en.wikipedia.org/wiki/Glob_(programming)). (e.g. 1.* or [!3].[0-9].*)
+        """
+        if blacklisted_ips is not None:
+            pulumi.set(__self__, "blacklisted_ips", blacklisted_ips)
+        if error_messages is not None:
+            pulumi.set(__self__, "error_messages", error_messages)
+        if releases is not None:
+            pulumi.set(__self__, "releases", releases)
+
+    @property
+    @pulumi.getter(name="blacklistedIps")
+    def blacklisted_ips(self) -> Optional[Sequence[str]]:
+        """
+        Filter events from these IP addresses. (e.g. 127.0.0.1 or 10.0.0.0/8)
+        """
+        return pulumi.get(self, "blacklisted_ips")
+
+    @property
+    @pulumi.getter(name="errorMessages")
+    def error_messages(self) -> Optional[Sequence[str]]:
+        """
+        Filter events by error messages. Allows [glob pattern matching](https://en.wikipedia.org/wiki/Glob_(programming)). (e.g. TypeError* or *: integer division or modulo by zero)
+        """
+        return pulumi.get(self, "error_messages")
+
+    @property
+    @pulumi.getter
+    def releases(self) -> Optional[Sequence[str]]:
+        """
+        Filter events from these releases. Allows [glob pattern matching](https://en.wikipedia.org/wiki/Glob_(programming)). (e.g. 1.* or [!3].[0-9].*)
+        """
+        return pulumi.get(self, "releases")
+
+
+@pulumi.output_type
+class SentryProjectSymbolSourceLayout(dict):
+    def __init__(__self__, *,
+                 casing: str,
+                 type: str):
+        """
+        :param str casing: The casing of the symbol source layout. The layout of the folder structure. The options are: `default` - Default (mixed case), `uppercase` - Uppercase, `lowercase` - Lowercase.
+        :param str type: The layout of the folder structure. The options are: `native` - Platform-Specific (SymStore / GDB / LLVM), `symstore` - Microsoft SymStore, `symstore_index2` - Microsoft SymStore (with index2.txt), `ssqp` - Microsoft SSQP, `unified` - Unified Symbol Server Layout, `debuginfod` - debuginfod.
+        """
+        pulumi.set(__self__, "casing", casing)
+        pulumi.set(__self__, "type", type)
+
+    @property
+    @pulumi.getter
+    def casing(self) -> str:
+        """
+        The casing of the symbol source layout. The layout of the folder structure. The options are: `default` - Default (mixed case), `uppercase` - Uppercase, `lowercase` - Lowercase.
+        """
+        return pulumi.get(self, "casing")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        The layout of the folder structure. The options are: `native` - Platform-Specific (SymStore / GDB / LLVM), `symstore` - Microsoft SymStore, `symstore_index2` - Microsoft SymStore (with index2.txt), `ssqp` - Microsoft SSQP, `unified` - Unified Symbol Server Layout, `debuginfod` - debuginfod.
+        """
+        return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class GetSentryAllKeysKeyResult(dict):
+    def __init__(__self__, *,
+                 dsn: Mapping[str, str],
+                 dsn_csp: str,
+                 dsn_public: str,
+                 dsn_secret: str,
+                 id: str,
+                 javascript_loader_script: 'outputs.GetSentryAllKeysKeyJavascriptLoaderScriptResult',
+                 name: str,
+                 organization: str,
+                 project: str,
+                 project_id: str,
+                 public: str,
+                 rate_limit_count: int,
+                 rate_limit_window: int,
+                 secret: str):
+        """
+        :param Mapping[str, str] dsn: This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+        :param str dsn_csp: Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
+        :param str dsn_public: The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
+        :param str dsn_secret: Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+        :param str id: The ID of this resource.
+        :param 'GetSentryAllKeysKeyJavascriptLoaderScriptArgs' javascript_loader_script: The JavaScript loader script configuration.
+        :param str name: The name of the client key.
+        :param str organization: The slug of the organization the resource belongs to.
+        :param str project: The slug of the project the resource belongs to.
+        :param str project_id: The ID of the project that the key belongs to.
+        :param str public: The public key.
+        :param int rate_limit_count: Number of events that can be reported within the rate limit window.
+        :param int rate_limit_window: Length of time in seconds that will be considered when checking the rate limit.
+        :param str secret: The secret key.
+        """
+        pulumi.set(__self__, "dsn", dsn)
+        pulumi.set(__self__, "dsn_csp", dsn_csp)
+        pulumi.set(__self__, "dsn_public", dsn_public)
+        pulumi.set(__self__, "dsn_secret", dsn_secret)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "javascript_loader_script", javascript_loader_script)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "organization", organization)
+        pulumi.set(__self__, "project", project)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "public", public)
+        pulumi.set(__self__, "rate_limit_count", rate_limit_count)
+        pulumi.set(__self__, "rate_limit_window", rate_limit_window)
+        pulumi.set(__self__, "secret", secret)
+
+    @property
+    @pulumi.getter
+    def dsn(self) -> Mapping[str, str]:
+        """
+        This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+        """
+        return pulumi.get(self, "dsn")
+
+    @property
+    @pulumi.getter(name="dsnCsp")
+    @_utilities.deprecated("""This field is deprecated and will be removed in a future version. Use `dsn[\"csp\"]` instead.""")
+    def dsn_csp(self) -> str:
+        """
+        Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
+        """
+        return pulumi.get(self, "dsn_csp")
+
+    @property
+    @pulumi.getter(name="dsnPublic")
+    @_utilities.deprecated("""This field is deprecated and will be removed in a future version. Use `dsn[\"public\"]` instead.""")
+    def dsn_public(self) -> str:
+        """
+        The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
+        """
+        return pulumi.get(self, "dsn_public")
+
+    @property
+    @pulumi.getter(name="dsnSecret")
+    @_utilities.deprecated("""This field is deprecated and will be removed in a future version. Use `dsn[\"secret\"]` instead.""")
+    def dsn_secret(self) -> str:
+        """
+        Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+        """
+        return pulumi.get(self, "dsn_secret")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        The ID of this resource.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="javascriptLoaderScript")
+    def javascript_loader_script(self) -> 'outputs.GetSentryAllKeysKeyJavascriptLoaderScriptResult':
+        """
+        The JavaScript loader script configuration.
+        """
+        return pulumi.get(self, "javascript_loader_script")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The name of the client key.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def organization(self) -> str:
+        """
+        The slug of the organization the resource belongs to.
+        """
+        return pulumi.get(self, "organization")
+
+    @property
+    @pulumi.getter
+    def project(self) -> str:
+        """
+        The slug of the project the resource belongs to.
+        """
+        return pulumi.get(self, "project")
+
+    @property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> str:
+        """
+        The ID of the project that the key belongs to.
+        """
+        return pulumi.get(self, "project_id")
+
+    @property
+    @pulumi.getter
+    def public(self) -> str:
+        """
+        The public key.
+        """
+        return pulumi.get(self, "public")
+
+    @property
+    @pulumi.getter(name="rateLimitCount")
+    def rate_limit_count(self) -> int:
+        """
+        Number of events that can be reported within the rate limit window.
+        """
+        return pulumi.get(self, "rate_limit_count")
+
+    @property
+    @pulumi.getter(name="rateLimitWindow")
+    def rate_limit_window(self) -> int:
+        """
+        Length of time in seconds that will be considered when checking the rate limit.
+        """
+        return pulumi.get(self, "rate_limit_window")
+
+    @property
+    @pulumi.getter
+    def secret(self) -> str:
+        """
+        The secret key.
+        """
+        return pulumi.get(self, "secret")
+
+
+@pulumi.output_type
+class GetSentryAllKeysKeyJavascriptLoaderScriptResult(dict):
+    def __init__(__self__, *,
+                 browser_sdk_version: str,
+                 debug_enabled: bool,
+                 performance_monitoring_enabled: bool,
+                 session_replay_enabled: bool):
+        """
+        :param str browser_sdk_version: The version of the browser SDK to load.
+        :param bool debug_enabled: Whether debug bundles & logging are enabled for this key.
+        :param bool performance_monitoring_enabled: Whether performance monitoring is enabled for this key.
+        :param bool session_replay_enabled: Whether session replay is enabled for this key.
+        """
+        pulumi.set(__self__, "browser_sdk_version", browser_sdk_version)
+        pulumi.set(__self__, "debug_enabled", debug_enabled)
+        pulumi.set(__self__, "performance_monitoring_enabled", performance_monitoring_enabled)
+        pulumi.set(__self__, "session_replay_enabled", session_replay_enabled)
+
+    @property
+    @pulumi.getter(name="browserSdkVersion")
+    def browser_sdk_version(self) -> str:
+        """
+        The version of the browser SDK to load.
+        """
+        return pulumi.get(self, "browser_sdk_version")
+
+    @property
+    @pulumi.getter(name="debugEnabled")
+    def debug_enabled(self) -> bool:
+        """
+        Whether debug bundles & logging are enabled for this key.
+        """
+        return pulumi.get(self, "debug_enabled")
+
+    @property
+    @pulumi.getter(name="performanceMonitoringEnabled")
+    def performance_monitoring_enabled(self) -> bool:
+        """
+        Whether performance monitoring is enabled for this key.
+        """
+        return pulumi.get(self, "performance_monitoring_enabled")
+
+    @property
+    @pulumi.getter(name="sessionReplayEnabled")
+    def session_replay_enabled(self) -> bool:
+        """
+        Whether session replay is enabled for this key.
+        """
+        return pulumi.get(self, "session_replay_enabled")
+
+
+@pulumi.output_type
+class GetSentryAllOrganizationMembersMemberResult(dict):
+    def __init__(__self__, *,
+                 email: str,
+                 id: str,
+                 role: str):
+        """
+        :param str email: The email of the organization member.
+        :param str id: The ID of of the organization member.
+        :param str role: This is the role of the organization member.
+        """
+        pulumi.set(__self__, "email", email)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "role", role)
+
+    @property
+    @pulumi.getter
+    def email(self) -> str:
+        """
+        The email of the organization member.
+        """
+        return pulumi.get(self, "email")
+
+    @property
+    @pulumi.getter
+    def id(self) -> str:
+        """
+        The ID of of the organization member.
+        """
+        return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter
+    def role(self) -> str:
+        """
+        This is the role of the organization member.
+        """
+        return pulumi.get(self, "role")
+
+
+@pulumi.output_type
+class GetSentryAllProjectsProjectResult(dict):
+    def __init__(__self__, *,
+                 color: str,
+                 date_created: str,
+                 features: Sequence[str],
+                 internal_id: str,
+                 name: str,
+                 platform: str,
+                 slug: str):
+        """
+        :param str color: The color of this project.
+        :param str date_created: The date this project was created.
+        :param Sequence[str] features: The features of this project.
+        :param str internal_id: The internal ID of this project.
+        :param str name: The name of this project.
+        :param str platform: The platform of this project.
+        :param str slug: The slug of this project.
+        """
+        pulumi.set(__self__, "color", color)
+        pulumi.set(__self__, "date_created", date_created)
+        pulumi.set(__self__, "features", features)
+        pulumi.set(__self__, "internal_id", internal_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "platform", platform)
+        pulumi.set(__self__, "slug", slug)
+
+    @property
+    @pulumi.getter
+    def color(self) -> str:
+        """
+        The color of this project.
+        """
+        return pulumi.get(self, "color")
+
+    @property
+    @pulumi.getter(name="dateCreated")
+    def date_created(self) -> str:
+        """
+        The date this project was created.
+        """
+        return pulumi.get(self, "date_created")
+
+    @property
+    @pulumi.getter
+    def features(self) -> Sequence[str]:
+        """
+        The features of this project.
+        """
+        return pulumi.get(self, "features")
+
+    @property
+    @pulumi.getter(name="internalId")
+    def internal_id(self) -> str:
+        """
+        The internal ID of this project.
+        """
+        return pulumi.get(self, "internal_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The name of this project.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def platform(self) -> str:
+        """
+        The platform of this project.
+        """
+        return pulumi.get(self, "platform")
+
+    @property
+    @pulumi.getter
+    def slug(self) -> str:
+        """
+        The slug of this project.
+        """
+        return pulumi.get(self, "slug")
 
 
 @pulumi.output_type
@@ -579,6 +3178,1274 @@ class GetSentryDashboardWidgetQueryResult(dict):
 
 
 @pulumi.output_type
+class GetSentryIssueAlertActionsV2Result(dict):
+    def __init__(__self__, *,
+                 azure_devops_create_ticket: 'outputs.GetSentryIssueAlertActionsV2AzureDevopsCreateTicketResult',
+                 discord_notify_service: 'outputs.GetSentryIssueAlertActionsV2DiscordNotifyServiceResult',
+                 github_create_ticket: 'outputs.GetSentryIssueAlertActionsV2GithubCreateTicketResult',
+                 github_enterprise_create_ticket: 'outputs.GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketResult',
+                 jira_create_ticket: 'outputs.GetSentryIssueAlertActionsV2JiraCreateTicketResult',
+                 jira_server_create_ticket: 'outputs.GetSentryIssueAlertActionsV2JiraServerCreateTicketResult',
+                 msteams_notify_service: 'outputs.GetSentryIssueAlertActionsV2MsteamsNotifyServiceResult',
+                 notify_email: 'outputs.GetSentryIssueAlertActionsV2NotifyEmailResult',
+                 notify_event: 'outputs.GetSentryIssueAlertActionsV2NotifyEventResult',
+                 notify_event_sentry_app: 'outputs.GetSentryIssueAlertActionsV2NotifyEventSentryAppResult',
+                 notify_event_service: 'outputs.GetSentryIssueAlertActionsV2NotifyEventServiceResult',
+                 opsgenie_notify_team: 'outputs.GetSentryIssueAlertActionsV2OpsgenieNotifyTeamResult',
+                 pagerduty_notify_service: 'outputs.GetSentryIssueAlertActionsV2PagerdutyNotifyServiceResult',
+                 slack_notify_service: 'outputs.GetSentryIssueAlertActionsV2SlackNotifyServiceResult'):
+        """
+        :param 'GetSentryIssueAlertActionsV2AzureDevopsCreateTicketArgs' azure_devops_create_ticket: Create an Azure DevOps work item in `integration`.
+        :param 'GetSentryIssueAlertActionsV2DiscordNotifyServiceArgs' discord_notify_service: Send a notification to the `server` Discord server in the channel with ID or URL: `channel_id` and show tags `tags` in the notification.
+        :param 'GetSentryIssueAlertActionsV2GithubCreateTicketArgs' github_create_ticket: Create a GitHub issue in `integration`.
+        :param 'GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketArgs' github_enterprise_create_ticket: Create a GitHub Enterprise issue in `integration`.
+        :param 'GetSentryIssueAlertActionsV2JiraCreateTicketArgs' jira_create_ticket: Create a Jira issue in `integration`.
+        :param 'GetSentryIssueAlertActionsV2JiraServerCreateTicketArgs' jira_server_create_ticket: Create a Jira Server issue in `integration`.
+        :param 'GetSentryIssueAlertActionsV2MsteamsNotifyServiceArgs' msteams_notify_service: Send a notification to the `team` Team to `channel`.
+        :param 'GetSentryIssueAlertActionsV2NotifyEmailArgs' notify_email: Send a notification to `target_type` and if none can be found then send a notification to `fallthrough_type`.
+        :param 'GetSentryIssueAlertActionsV2NotifyEventArgs' notify_event: Send a notification to all legacy integrations.
+        :param 'GetSentryIssueAlertActionsV2NotifyEventSentryAppArgs' notify_event_sentry_app: Send a notification to a Sentry app.
+        :param 'GetSentryIssueAlertActionsV2NotifyEventServiceArgs' notify_event_service: Send a notification via an integration.
+        :param 'GetSentryIssueAlertActionsV2OpsgenieNotifyTeamArgs' opsgenie_notify_team: Send a notification to Opsgenie account `account` and team `team` with `priority` priority.
+        :param 'GetSentryIssueAlertActionsV2PagerdutyNotifyServiceArgs' pagerduty_notify_service: Send a notification to PagerDuty account `account` and service `service` with `severity` severity.
+        :param 'GetSentryIssueAlertActionsV2SlackNotifyServiceArgs' slack_notify_service: Send a notification to the `workspace` Slack workspace to `channel` (optionally, an ID: `channel_id`) and show tags `tags` and notes `notes` in notification.
+        """
+        pulumi.set(__self__, "azure_devops_create_ticket", azure_devops_create_ticket)
+        pulumi.set(__self__, "discord_notify_service", discord_notify_service)
+        pulumi.set(__self__, "github_create_ticket", github_create_ticket)
+        pulumi.set(__self__, "github_enterprise_create_ticket", github_enterprise_create_ticket)
+        pulumi.set(__self__, "jira_create_ticket", jira_create_ticket)
+        pulumi.set(__self__, "jira_server_create_ticket", jira_server_create_ticket)
+        pulumi.set(__self__, "msteams_notify_service", msteams_notify_service)
+        pulumi.set(__self__, "notify_email", notify_email)
+        pulumi.set(__self__, "notify_event", notify_event)
+        pulumi.set(__self__, "notify_event_sentry_app", notify_event_sentry_app)
+        pulumi.set(__self__, "notify_event_service", notify_event_service)
+        pulumi.set(__self__, "opsgenie_notify_team", opsgenie_notify_team)
+        pulumi.set(__self__, "pagerduty_notify_service", pagerduty_notify_service)
+        pulumi.set(__self__, "slack_notify_service", slack_notify_service)
+
+    @property
+    @pulumi.getter(name="azureDevopsCreateTicket")
+    def azure_devops_create_ticket(self) -> 'outputs.GetSentryIssueAlertActionsV2AzureDevopsCreateTicketResult':
+        """
+        Create an Azure DevOps work item in `integration`.
+        """
+        return pulumi.get(self, "azure_devops_create_ticket")
+
+    @property
+    @pulumi.getter(name="discordNotifyService")
+    def discord_notify_service(self) -> 'outputs.GetSentryIssueAlertActionsV2DiscordNotifyServiceResult':
+        """
+        Send a notification to the `server` Discord server in the channel with ID or URL: `channel_id` and show tags `tags` in the notification.
+        """
+        return pulumi.get(self, "discord_notify_service")
+
+    @property
+    @pulumi.getter(name="githubCreateTicket")
+    def github_create_ticket(self) -> 'outputs.GetSentryIssueAlertActionsV2GithubCreateTicketResult':
+        """
+        Create a GitHub issue in `integration`.
+        """
+        return pulumi.get(self, "github_create_ticket")
+
+    @property
+    @pulumi.getter(name="githubEnterpriseCreateTicket")
+    def github_enterprise_create_ticket(self) -> 'outputs.GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketResult':
+        """
+        Create a GitHub Enterprise issue in `integration`.
+        """
+        return pulumi.get(self, "github_enterprise_create_ticket")
+
+    @property
+    @pulumi.getter(name="jiraCreateTicket")
+    def jira_create_ticket(self) -> 'outputs.GetSentryIssueAlertActionsV2JiraCreateTicketResult':
+        """
+        Create a Jira issue in `integration`.
+        """
+        return pulumi.get(self, "jira_create_ticket")
+
+    @property
+    @pulumi.getter(name="jiraServerCreateTicket")
+    def jira_server_create_ticket(self) -> 'outputs.GetSentryIssueAlertActionsV2JiraServerCreateTicketResult':
+        """
+        Create a Jira Server issue in `integration`.
+        """
+        return pulumi.get(self, "jira_server_create_ticket")
+
+    @property
+    @pulumi.getter(name="msteamsNotifyService")
+    def msteams_notify_service(self) -> 'outputs.GetSentryIssueAlertActionsV2MsteamsNotifyServiceResult':
+        """
+        Send a notification to the `team` Team to `channel`.
+        """
+        return pulumi.get(self, "msteams_notify_service")
+
+    @property
+    @pulumi.getter(name="notifyEmail")
+    def notify_email(self) -> 'outputs.GetSentryIssueAlertActionsV2NotifyEmailResult':
+        """
+        Send a notification to `target_type` and if none can be found then send a notification to `fallthrough_type`.
+        """
+        return pulumi.get(self, "notify_email")
+
+    @property
+    @pulumi.getter(name="notifyEvent")
+    def notify_event(self) -> 'outputs.GetSentryIssueAlertActionsV2NotifyEventResult':
+        """
+        Send a notification to all legacy integrations.
+        """
+        return pulumi.get(self, "notify_event")
+
+    @property
+    @pulumi.getter(name="notifyEventSentryApp")
+    def notify_event_sentry_app(self) -> 'outputs.GetSentryIssueAlertActionsV2NotifyEventSentryAppResult':
+        """
+        Send a notification to a Sentry app.
+        """
+        return pulumi.get(self, "notify_event_sentry_app")
+
+    @property
+    @pulumi.getter(name="notifyEventService")
+    def notify_event_service(self) -> 'outputs.GetSentryIssueAlertActionsV2NotifyEventServiceResult':
+        """
+        Send a notification via an integration.
+        """
+        return pulumi.get(self, "notify_event_service")
+
+    @property
+    @pulumi.getter(name="opsgenieNotifyTeam")
+    def opsgenie_notify_team(self) -> 'outputs.GetSentryIssueAlertActionsV2OpsgenieNotifyTeamResult':
+        """
+        Send a notification to Opsgenie account `account` and team `team` with `priority` priority.
+        """
+        return pulumi.get(self, "opsgenie_notify_team")
+
+    @property
+    @pulumi.getter(name="pagerdutyNotifyService")
+    def pagerduty_notify_service(self) -> 'outputs.GetSentryIssueAlertActionsV2PagerdutyNotifyServiceResult':
+        """
+        Send a notification to PagerDuty account `account` and service `service` with `severity` severity.
+        """
+        return pulumi.get(self, "pagerduty_notify_service")
+
+    @property
+    @pulumi.getter(name="slackNotifyService")
+    def slack_notify_service(self) -> 'outputs.GetSentryIssueAlertActionsV2SlackNotifyServiceResult':
+        """
+        Send a notification to the `workspace` Slack workspace to `channel` (optionally, an ID: `channel_id`) and show tags `tags` and notes `notes` in notification.
+        """
+        return pulumi.get(self, "slack_notify_service")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertActionsV2AzureDevopsCreateTicketResult(dict):
+    def __init__(__self__, *,
+                 integration: str,
+                 name: str,
+                 work_item_type: str):
+        pulumi.set(__self__, "integration", integration)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "work_item_type", work_item_type)
+
+    @property
+    @pulumi.getter
+    def integration(self) -> str:
+        return pulumi.get(self, "integration")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="workItemType")
+    def work_item_type(self) -> str:
+        return pulumi.get(self, "work_item_type")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertActionsV2DiscordNotifyServiceResult(dict):
+    def __init__(__self__, *,
+                 channel_id: str,
+                 name: str,
+                 server: str,
+                 tags: Sequence[str]):
+        pulumi.set(__self__, "channel_id", channel_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "server", server)
+        pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter(name="channelId")
+    def channel_id(self) -> str:
+        return pulumi.get(self, "channel_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def server(self) -> str:
+        return pulumi.get(self, "server")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence[str]:
+        return pulumi.get(self, "tags")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertActionsV2GithubCreateTicketResult(dict):
+    def __init__(__self__, *,
+                 assignee: str,
+                 integration: str,
+                 labels: Sequence[str],
+                 name: str,
+                 repo: str):
+        pulumi.set(__self__, "assignee", assignee)
+        pulumi.set(__self__, "integration", integration)
+        pulumi.set(__self__, "labels", labels)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "repo", repo)
+
+    @property
+    @pulumi.getter
+    def assignee(self) -> str:
+        return pulumi.get(self, "assignee")
+
+    @property
+    @pulumi.getter
+    def integration(self) -> str:
+        return pulumi.get(self, "integration")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Sequence[str]:
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def repo(self) -> str:
+        return pulumi.get(self, "repo")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicketResult(dict):
+    def __init__(__self__, *,
+                 assignee: str,
+                 integration: str,
+                 labels: Sequence[str],
+                 name: str,
+                 repo: str):
+        pulumi.set(__self__, "assignee", assignee)
+        pulumi.set(__self__, "integration", integration)
+        pulumi.set(__self__, "labels", labels)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "repo", repo)
+
+    @property
+    @pulumi.getter
+    def assignee(self) -> str:
+        return pulumi.get(self, "assignee")
+
+    @property
+    @pulumi.getter
+    def integration(self) -> str:
+        return pulumi.get(self, "integration")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Sequence[str]:
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def repo(self) -> str:
+        return pulumi.get(self, "repo")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertActionsV2JiraCreateTicketResult(dict):
+    def __init__(__self__, *,
+                 integration: str,
+                 issue_type: str,
+                 name: str,
+                 project: str):
+        pulumi.set(__self__, "integration", integration)
+        pulumi.set(__self__, "issue_type", issue_type)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "project", project)
+
+    @property
+    @pulumi.getter
+    def integration(self) -> str:
+        return pulumi.get(self, "integration")
+
+    @property
+    @pulumi.getter(name="issueType")
+    def issue_type(self) -> str:
+        return pulumi.get(self, "issue_type")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def project(self) -> str:
+        return pulumi.get(self, "project")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertActionsV2JiraServerCreateTicketResult(dict):
+    def __init__(__self__, *,
+                 integration: str,
+                 issue_type: str,
+                 name: str,
+                 project: str):
+        pulumi.set(__self__, "integration", integration)
+        pulumi.set(__self__, "issue_type", issue_type)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "project", project)
+
+    @property
+    @pulumi.getter
+    def integration(self) -> str:
+        return pulumi.get(self, "integration")
+
+    @property
+    @pulumi.getter(name="issueType")
+    def issue_type(self) -> str:
+        return pulumi.get(self, "issue_type")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def project(self) -> str:
+        return pulumi.get(self, "project")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertActionsV2MsteamsNotifyServiceResult(dict):
+    def __init__(__self__, *,
+                 channel: str,
+                 channel_id: str,
+                 name: str,
+                 team: str):
+        pulumi.set(__self__, "channel", channel)
+        pulumi.set(__self__, "channel_id", channel_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "team", team)
+
+    @property
+    @pulumi.getter
+    def channel(self) -> str:
+        return pulumi.get(self, "channel")
+
+    @property
+    @pulumi.getter(name="channelId")
+    def channel_id(self) -> str:
+        return pulumi.get(self, "channel_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def team(self) -> str:
+        return pulumi.get(self, "team")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertActionsV2NotifyEmailResult(dict):
+    def __init__(__self__, *,
+                 fallthrough_type: str,
+                 name: str,
+                 target_identifier: str,
+                 target_type: str):
+        pulumi.set(__self__, "fallthrough_type", fallthrough_type)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "target_identifier", target_identifier)
+        pulumi.set(__self__, "target_type", target_type)
+
+    @property
+    @pulumi.getter(name="fallthroughType")
+    def fallthrough_type(self) -> str:
+        return pulumi.get(self, "fallthrough_type")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="targetIdentifier")
+    def target_identifier(self) -> str:
+        return pulumi.get(self, "target_identifier")
+
+    @property
+    @pulumi.getter(name="targetType")
+    def target_type(self) -> str:
+        return pulumi.get(self, "target_type")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertActionsV2NotifyEventResult(dict):
+    def __init__(__self__, *,
+                 name: str):
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertActionsV2NotifyEventSentryAppResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 sentry_app_installation_uuid: str,
+                 settings: Mapping[str, str]):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "sentry_app_installation_uuid", sentry_app_installation_uuid)
+        pulumi.set(__self__, "settings", settings)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="sentryAppInstallationUuid")
+    def sentry_app_installation_uuid(self) -> str:
+        return pulumi.get(self, "sentry_app_installation_uuid")
+
+    @property
+    @pulumi.getter
+    def settings(self) -> Mapping[str, str]:
+        return pulumi.get(self, "settings")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertActionsV2NotifyEventServiceResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 service: str):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "service", service)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def service(self) -> str:
+        return pulumi.get(self, "service")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertActionsV2OpsgenieNotifyTeamResult(dict):
+    def __init__(__self__, *,
+                 account: str,
+                 name: str,
+                 priority: str,
+                 team: str):
+        pulumi.set(__self__, "account", account)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "priority", priority)
+        pulumi.set(__self__, "team", team)
+
+    @property
+    @pulumi.getter
+    def account(self) -> str:
+        return pulumi.get(self, "account")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def priority(self) -> str:
+        return pulumi.get(self, "priority")
+
+    @property
+    @pulumi.getter
+    def team(self) -> str:
+        return pulumi.get(self, "team")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertActionsV2PagerdutyNotifyServiceResult(dict):
+    def __init__(__self__, *,
+                 account: str,
+                 name: str,
+                 service: str,
+                 severity: str):
+        pulumi.set(__self__, "account", account)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "service", service)
+        pulumi.set(__self__, "severity", severity)
+
+    @property
+    @pulumi.getter
+    def account(self) -> str:
+        return pulumi.get(self, "account")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def service(self) -> str:
+        return pulumi.get(self, "service")
+
+    @property
+    @pulumi.getter
+    def severity(self) -> str:
+        return pulumi.get(self, "severity")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertActionsV2SlackNotifyServiceResult(dict):
+    def __init__(__self__, *,
+                 channel: str,
+                 channel_id: str,
+                 name: str,
+                 notes: str,
+                 tags: Sequence[str],
+                 workspace: str):
+        pulumi.set(__self__, "channel", channel)
+        pulumi.set(__self__, "channel_id", channel_id)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "notes", notes)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "workspace", workspace)
+
+    @property
+    @pulumi.getter
+    def channel(self) -> str:
+        return pulumi.get(self, "channel")
+
+    @property
+    @pulumi.getter(name="channelId")
+    def channel_id(self) -> str:
+        return pulumi.get(self, "channel_id")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def notes(self) -> str:
+        return pulumi.get(self, "notes")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence[str]:
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter
+    def workspace(self) -> str:
+        return pulumi.get(self, "workspace")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertConditionsV2Result(dict):
+    def __init__(__self__, *,
+                 event_frequency: 'outputs.GetSentryIssueAlertConditionsV2EventFrequencyResult',
+                 event_frequency_percent: 'outputs.GetSentryIssueAlertConditionsV2EventFrequencyPercentResult',
+                 event_unique_user_frequency: 'outputs.GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyResult',
+                 existing_high_priority_issue: 'outputs.GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueResult',
+                 first_seen_event: 'outputs.GetSentryIssueAlertConditionsV2FirstSeenEventResult',
+                 new_high_priority_issue: 'outputs.GetSentryIssueAlertConditionsV2NewHighPriorityIssueResult',
+                 reappeared_event: 'outputs.GetSentryIssueAlertConditionsV2ReappearedEventResult',
+                 regression_event: 'outputs.GetSentryIssueAlertConditionsV2RegressionEventResult'):
+        """
+        :param 'GetSentryIssueAlertConditionsV2EventFrequencyArgs' event_frequency: When the `comparison_type` is `count`, the number of events in an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the number of events in an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        :param 'GetSentryIssueAlertConditionsV2EventFrequencyPercentArgs' event_frequency_percent: When the `comparison_type` is `count`, the percent of sessions affected by an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the percent of sessions affected by an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        :param 'GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyArgs' event_unique_user_frequency: When the `comparison_type` is `count`, the number of users affected by an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the number of users affected by an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        :param 'GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueArgs' existing_high_priority_issue: Sentry marks an existing issue as high priority.
+        :param 'GetSentryIssueAlertConditionsV2FirstSeenEventArgs' first_seen_event: A new issue is created.
+        :param 'GetSentryIssueAlertConditionsV2NewHighPriorityIssueArgs' new_high_priority_issue: Sentry marks a new issue as high priority.
+        :param 'GetSentryIssueAlertConditionsV2ReappearedEventArgs' reappeared_event: The issue changes state from ignored to unresolved.
+        :param 'GetSentryIssueAlertConditionsV2RegressionEventArgs' regression_event: The issue changes state from resolved to unresolved.
+        """
+        pulumi.set(__self__, "event_frequency", event_frequency)
+        pulumi.set(__self__, "event_frequency_percent", event_frequency_percent)
+        pulumi.set(__self__, "event_unique_user_frequency", event_unique_user_frequency)
+        pulumi.set(__self__, "existing_high_priority_issue", existing_high_priority_issue)
+        pulumi.set(__self__, "first_seen_event", first_seen_event)
+        pulumi.set(__self__, "new_high_priority_issue", new_high_priority_issue)
+        pulumi.set(__self__, "reappeared_event", reappeared_event)
+        pulumi.set(__self__, "regression_event", regression_event)
+
+    @property
+    @pulumi.getter(name="eventFrequency")
+    def event_frequency(self) -> 'outputs.GetSentryIssueAlertConditionsV2EventFrequencyResult':
+        """
+        When the `comparison_type` is `count`, the number of events in an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the number of events in an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        """
+        return pulumi.get(self, "event_frequency")
+
+    @property
+    @pulumi.getter(name="eventFrequencyPercent")
+    def event_frequency_percent(self) -> 'outputs.GetSentryIssueAlertConditionsV2EventFrequencyPercentResult':
+        """
+        When the `comparison_type` is `count`, the percent of sessions affected by an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the percent of sessions affected by an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        """
+        return pulumi.get(self, "event_frequency_percent")
+
+    @property
+    @pulumi.getter(name="eventUniqueUserFrequency")
+    def event_unique_user_frequency(self) -> 'outputs.GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyResult':
+        """
+        When the `comparison_type` is `count`, the number of users affected by an issue is more than `value` in `interval`. When the `comparison_type` is `percent`, the number of users affected by an issue is `value` % higher in `interval` compared to `comparison_interval` ago.
+        """
+        return pulumi.get(self, "event_unique_user_frequency")
+
+    @property
+    @pulumi.getter(name="existingHighPriorityIssue")
+    def existing_high_priority_issue(self) -> 'outputs.GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueResult':
+        """
+        Sentry marks an existing issue as high priority.
+        """
+        return pulumi.get(self, "existing_high_priority_issue")
+
+    @property
+    @pulumi.getter(name="firstSeenEvent")
+    def first_seen_event(self) -> 'outputs.GetSentryIssueAlertConditionsV2FirstSeenEventResult':
+        """
+        A new issue is created.
+        """
+        return pulumi.get(self, "first_seen_event")
+
+    @property
+    @pulumi.getter(name="newHighPriorityIssue")
+    def new_high_priority_issue(self) -> 'outputs.GetSentryIssueAlertConditionsV2NewHighPriorityIssueResult':
+        """
+        Sentry marks a new issue as high priority.
+        """
+        return pulumi.get(self, "new_high_priority_issue")
+
+    @property
+    @pulumi.getter(name="reappearedEvent")
+    def reappeared_event(self) -> 'outputs.GetSentryIssueAlertConditionsV2ReappearedEventResult':
+        """
+        The issue changes state from ignored to unresolved.
+        """
+        return pulumi.get(self, "reappeared_event")
+
+    @property
+    @pulumi.getter(name="regressionEvent")
+    def regression_event(self) -> 'outputs.GetSentryIssueAlertConditionsV2RegressionEventResult':
+        """
+        The issue changes state from resolved to unresolved.
+        """
+        return pulumi.get(self, "regression_event")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertConditionsV2EventFrequencyResult(dict):
+    def __init__(__self__, *,
+                 comparison_interval: str,
+                 comparison_type: str,
+                 interval: str,
+                 name: str,
+                 value: int):
+        pulumi.set(__self__, "comparison_interval", comparison_interval)
+        pulumi.set(__self__, "comparison_type", comparison_type)
+        pulumi.set(__self__, "interval", interval)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter(name="comparisonInterval")
+    def comparison_interval(self) -> str:
+        return pulumi.get(self, "comparison_interval")
+
+    @property
+    @pulumi.getter(name="comparisonType")
+    def comparison_type(self) -> str:
+        return pulumi.get(self, "comparison_type")
+
+    @property
+    @pulumi.getter
+    def interval(self) -> str:
+        return pulumi.get(self, "interval")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> int:
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertConditionsV2EventFrequencyPercentResult(dict):
+    def __init__(__self__, *,
+                 comparison_interval: str,
+                 comparison_type: str,
+                 interval: str,
+                 name: str,
+                 value: float):
+        pulumi.set(__self__, "comparison_interval", comparison_interval)
+        pulumi.set(__self__, "comparison_type", comparison_type)
+        pulumi.set(__self__, "interval", interval)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter(name="comparisonInterval")
+    def comparison_interval(self) -> str:
+        return pulumi.get(self, "comparison_interval")
+
+    @property
+    @pulumi.getter(name="comparisonType")
+    def comparison_type(self) -> str:
+        return pulumi.get(self, "comparison_type")
+
+    @property
+    @pulumi.getter
+    def interval(self) -> str:
+        return pulumi.get(self, "interval")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> float:
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertConditionsV2EventUniqueUserFrequencyResult(dict):
+    def __init__(__self__, *,
+                 comparison_interval: str,
+                 comparison_type: str,
+                 interval: str,
+                 name: str,
+                 value: int):
+        pulumi.set(__self__, "comparison_interval", comparison_interval)
+        pulumi.set(__self__, "comparison_type", comparison_type)
+        pulumi.set(__self__, "interval", interval)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter(name="comparisonInterval")
+    def comparison_interval(self) -> str:
+        return pulumi.get(self, "comparison_interval")
+
+    @property
+    @pulumi.getter(name="comparisonType")
+    def comparison_type(self) -> str:
+        return pulumi.get(self, "comparison_type")
+
+    @property
+    @pulumi.getter
+    def interval(self) -> str:
+        return pulumi.get(self, "interval")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> int:
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertConditionsV2ExistingHighPriorityIssueResult(dict):
+    def __init__(__self__, *,
+                 name: str):
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertConditionsV2FirstSeenEventResult(dict):
+    def __init__(__self__, *,
+                 name: str):
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertConditionsV2NewHighPriorityIssueResult(dict):
+    def __init__(__self__, *,
+                 name: str):
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertConditionsV2ReappearedEventResult(dict):
+    def __init__(__self__, *,
+                 name: str):
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertConditionsV2RegressionEventResult(dict):
+    def __init__(__self__, *,
+                 name: str):
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertFiltersV2Result(dict):
+    def __init__(__self__, *,
+                 age_comparison: 'outputs.GetSentryIssueAlertFiltersV2AgeComparisonResult',
+                 assigned_to: 'outputs.GetSentryIssueAlertFiltersV2AssignedToResult',
+                 event_attribute: 'outputs.GetSentryIssueAlertFiltersV2EventAttributeResult',
+                 issue_category: 'outputs.GetSentryIssueAlertFiltersV2IssueCategoryResult',
+                 issue_occurrences: 'outputs.GetSentryIssueAlertFiltersV2IssueOccurrencesResult',
+                 latest_adopted_release: 'outputs.GetSentryIssueAlertFiltersV2LatestAdoptedReleaseResult',
+                 latest_release: 'outputs.GetSentryIssueAlertFiltersV2LatestReleaseResult',
+                 level: 'outputs.GetSentryIssueAlertFiltersV2LevelResult',
+                 tagged_event: 'outputs.GetSentryIssueAlertFiltersV2TaggedEventResult'):
+        """
+        :param 'GetSentryIssueAlertFiltersV2AgeComparisonArgs' age_comparison: The issue is older or newer than `value` `time`.
+        :param 'GetSentryIssueAlertFiltersV2AssignedToArgs' assigned_to: The issue is assigned to no one, team, or member.
+        :param 'GetSentryIssueAlertFiltersV2EventAttributeArgs' event_attribute: The event's `attribute` value `match` `value`.
+        :param 'GetSentryIssueAlertFiltersV2IssueCategoryArgs' issue_category: The issue's category is equal to `value`.
+        :param 'GetSentryIssueAlertFiltersV2IssueOccurrencesArgs' issue_occurrences: The issue has happened at least `value` times (Note: this is approximate).
+        :param 'GetSentryIssueAlertFiltersV2LatestAdoptedReleaseArgs' latest_adopted_release: The {oldest*or*newest} adopted release associated with the event's issue is {older*or*newer} than the latest adopted release in {environment}.
+        :param 'GetSentryIssueAlertFiltersV2LatestReleaseArgs' latest_release: The event is from the latest release.
+        :param 'GetSentryIssueAlertFiltersV2LevelArgs' level: The event's level is `match` `level`.
+        :param 'GetSentryIssueAlertFiltersV2TaggedEventArgs' tagged_event: The event's tags match `key` `match` `value`.
+        """
+        pulumi.set(__self__, "age_comparison", age_comparison)
+        pulumi.set(__self__, "assigned_to", assigned_to)
+        pulumi.set(__self__, "event_attribute", event_attribute)
+        pulumi.set(__self__, "issue_category", issue_category)
+        pulumi.set(__self__, "issue_occurrences", issue_occurrences)
+        pulumi.set(__self__, "latest_adopted_release", latest_adopted_release)
+        pulumi.set(__self__, "latest_release", latest_release)
+        pulumi.set(__self__, "level", level)
+        pulumi.set(__self__, "tagged_event", tagged_event)
+
+    @property
+    @pulumi.getter(name="ageComparison")
+    def age_comparison(self) -> 'outputs.GetSentryIssueAlertFiltersV2AgeComparisonResult':
+        """
+        The issue is older or newer than `value` `time`.
+        """
+        return pulumi.get(self, "age_comparison")
+
+    @property
+    @pulumi.getter(name="assignedTo")
+    def assigned_to(self) -> 'outputs.GetSentryIssueAlertFiltersV2AssignedToResult':
+        """
+        The issue is assigned to no one, team, or member.
+        """
+        return pulumi.get(self, "assigned_to")
+
+    @property
+    @pulumi.getter(name="eventAttribute")
+    def event_attribute(self) -> 'outputs.GetSentryIssueAlertFiltersV2EventAttributeResult':
+        """
+        The event's `attribute` value `match` `value`.
+        """
+        return pulumi.get(self, "event_attribute")
+
+    @property
+    @pulumi.getter(name="issueCategory")
+    def issue_category(self) -> 'outputs.GetSentryIssueAlertFiltersV2IssueCategoryResult':
+        """
+        The issue's category is equal to `value`.
+        """
+        return pulumi.get(self, "issue_category")
+
+    @property
+    @pulumi.getter(name="issueOccurrences")
+    def issue_occurrences(self) -> 'outputs.GetSentryIssueAlertFiltersV2IssueOccurrencesResult':
+        """
+        The issue has happened at least `value` times (Note: this is approximate).
+        """
+        return pulumi.get(self, "issue_occurrences")
+
+    @property
+    @pulumi.getter(name="latestAdoptedRelease")
+    def latest_adopted_release(self) -> 'outputs.GetSentryIssueAlertFiltersV2LatestAdoptedReleaseResult':
+        """
+        The {oldest*or*newest} adopted release associated with the event's issue is {older*or*newer} than the latest adopted release in {environment}.
+        """
+        return pulumi.get(self, "latest_adopted_release")
+
+    @property
+    @pulumi.getter(name="latestRelease")
+    def latest_release(self) -> 'outputs.GetSentryIssueAlertFiltersV2LatestReleaseResult':
+        """
+        The event is from the latest release.
+        """
+        return pulumi.get(self, "latest_release")
+
+    @property
+    @pulumi.getter
+    def level(self) -> 'outputs.GetSentryIssueAlertFiltersV2LevelResult':
+        """
+        The event's level is `match` `level`.
+        """
+        return pulumi.get(self, "level")
+
+    @property
+    @pulumi.getter(name="taggedEvent")
+    def tagged_event(self) -> 'outputs.GetSentryIssueAlertFiltersV2TaggedEventResult':
+        """
+        The event's tags match `key` `match` `value`.
+        """
+        return pulumi.get(self, "tagged_event")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertFiltersV2AgeComparisonResult(dict):
+    def __init__(__self__, *,
+                 comparison_type: str,
+                 name: str,
+                 time: str,
+                 value: int):
+        pulumi.set(__self__, "comparison_type", comparison_type)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "time", time)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter(name="comparisonType")
+    def comparison_type(self) -> str:
+        return pulumi.get(self, "comparison_type")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def time(self) -> str:
+        return pulumi.get(self, "time")
+
+    @property
+    @pulumi.getter
+    def value(self) -> int:
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertFiltersV2AssignedToResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 target_identifier: int,
+                 target_type: int):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "target_identifier", target_identifier)
+        pulumi.set(__self__, "target_type", target_type)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="targetIdentifier")
+    def target_identifier(self) -> int:
+        return pulumi.get(self, "target_identifier")
+
+    @property
+    @pulumi.getter(name="targetType")
+    def target_type(self) -> int:
+        return pulumi.get(self, "target_type")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertFiltersV2EventAttributeResult(dict):
+    def __init__(__self__, *,
+                 attribute: str,
+                 match: str,
+                 name: str,
+                 value: str):
+        pulumi.set(__self__, "attribute", attribute)
+        pulumi.set(__self__, "match", match)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def attribute(self) -> str:
+        return pulumi.get(self, "attribute")
+
+    @property
+    @pulumi.getter
+    def match(self) -> str:
+        return pulumi.get(self, "match")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertFiltersV2IssueCategoryResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 value: str):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertFiltersV2IssueOccurrencesResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 value: int):
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> int:
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertFiltersV2LatestAdoptedReleaseResult(dict):
+    def __init__(__self__, *,
+                 environment: int,
+                 name: str,
+                 older_or_newer: int,
+                 oldest_or_newest: int):
+        pulumi.set(__self__, "environment", environment)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "older_or_newer", older_or_newer)
+        pulumi.set(__self__, "oldest_or_newest", oldest_or_newest)
+
+    @property
+    @pulumi.getter
+    def environment(self) -> int:
+        return pulumi.get(self, "environment")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="olderOrNewer")
+    def older_or_newer(self) -> int:
+        return pulumi.get(self, "older_or_newer")
+
+    @property
+    @pulumi.getter(name="oldestOrNewest")
+    def oldest_or_newest(self) -> int:
+        return pulumi.get(self, "oldest_or_newest")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertFiltersV2LatestReleaseResult(dict):
+    def __init__(__self__, *,
+                 name: str):
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertFiltersV2LevelResult(dict):
+    def __init__(__self__, *,
+                 level: str,
+                 match: str,
+                 name: str):
+        pulumi.set(__self__, "level", level)
+        pulumi.set(__self__, "match", match)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter
+    def level(self) -> str:
+        return pulumi.get(self, "level")
+
+    @property
+    @pulumi.getter
+    def match(self) -> str:
+        return pulumi.get(self, "match")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetSentryIssueAlertFiltersV2TaggedEventResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 match: str,
+                 name: str,
+                 value: str):
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "match", match)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def match(self) -> str:
+        return pulumi.get(self, "match")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetSentryKeyJavascriptLoaderScriptResult(dict):
+    def __init__(__self__, *,
+                 browser_sdk_version: str,
+                 debug_enabled: bool,
+                 performance_monitoring_enabled: bool,
+                 session_replay_enabled: bool):
+        """
+        :param str browser_sdk_version: The version of the browser SDK to load.
+        :param bool debug_enabled: Whether debug bundles & logging are enabled for this key.
+        :param bool performance_monitoring_enabled: Whether performance monitoring is enabled for this key.
+        :param bool session_replay_enabled: Whether session replay is enabled for this key.
+        """
+        pulumi.set(__self__, "browser_sdk_version", browser_sdk_version)
+        pulumi.set(__self__, "debug_enabled", debug_enabled)
+        pulumi.set(__self__, "performance_monitoring_enabled", performance_monitoring_enabled)
+        pulumi.set(__self__, "session_replay_enabled", session_replay_enabled)
+
+    @property
+    @pulumi.getter(name="browserSdkVersion")
+    def browser_sdk_version(self) -> str:
+        """
+        The version of the browser SDK to load.
+        """
+        return pulumi.get(self, "browser_sdk_version")
+
+    @property
+    @pulumi.getter(name="debugEnabled")
+    def debug_enabled(self) -> bool:
+        """
+        Whether debug bundles & logging are enabled for this key.
+        """
+        return pulumi.get(self, "debug_enabled")
+
+    @property
+    @pulumi.getter(name="performanceMonitoringEnabled")
+    def performance_monitoring_enabled(self) -> bool:
+        """
+        Whether performance monitoring is enabled for this key.
+        """
+        return pulumi.get(self, "performance_monitoring_enabled")
+
+    @property
+    @pulumi.getter(name="sessionReplayEnabled")
+    def session_replay_enabled(self) -> bool:
+        """
+        Whether session replay is enabled for this key.
+        """
+        return pulumi.get(self, "session_replay_enabled")
+
+
+@pulumi.output_type
 class GetSentryMetricAlertTriggerResult(dict):
     def __init__(__self__, *,
                  actions: Sequence['outputs.GetSentryMetricAlertTriggerActionResult'],
@@ -629,11 +4496,13 @@ class GetSentryMetricAlertTriggerResult(dict):
 class GetSentryMetricAlertTriggerActionResult(dict):
     def __init__(__self__, *,
                  id: str,
+                 input_channel_id: str,
                  integration_id: int,
                  target_identifier: str,
                  target_type: str,
                  type: str):
         pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "input_channel_id", input_channel_id)
         pulumi.set(__self__, "integration_id", integration_id)
         pulumi.set(__self__, "target_identifier", target_identifier)
         pulumi.set(__self__, "target_type", target_type)
@@ -643,6 +4512,11 @@ class GetSentryMetricAlertTriggerActionResult(dict):
     @pulumi.getter
     def id(self) -> str:
         return pulumi.get(self, "id")
+
+    @property
+    @pulumi.getter(name="inputChannelId")
+    def input_channel_id(self) -> str:
+        return pulumi.get(self, "input_channel_id")
 
     @property
     @pulumi.getter(name="integrationId")

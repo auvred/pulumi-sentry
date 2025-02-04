@@ -17,7 +17,7 @@ namespace Pulumiverse.Sentry.Inputs
         public Input<string> DisplayType { get; set; } = null!;
 
         /// <summary>
-        /// The ID of this resource.
+        /// The ID of the widget.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }

@@ -13,6 +13,7 @@ if sys.version_info >= (3, 11):
 else:
     from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
+from . import outputs
 
 __all__ = [
     'GetSentryIssueAlertResult',
@@ -26,40 +27,49 @@ class GetSentryIssueAlertResult:
     """
     A collection of values returned by getSentryIssueAlert.
     """
-    def __init__(__self__, action_match=None, actions=None, conditions=None, environment=None, filter_match=None, filters=None, frequency=None, id=None, internal_id=None, name=None, organization=None, project=None):
+    def __init__(__self__, action_match=None, actions=None, actions_v2s=None, conditions=None, conditions_v2s=None, environment=None, filter_match=None, filters=None, filters_v2s=None, frequency=None, id=None, name=None, organization=None, owner=None, project=None):
         if action_match and not isinstance(action_match, str):
             raise TypeError("Expected argument 'action_match' to be a str")
         pulumi.set(__self__, "action_match", action_match)
-        if actions and not isinstance(actions, list):
-            raise TypeError("Expected argument 'actions' to be a list")
+        if actions and not isinstance(actions, str):
+            raise TypeError("Expected argument 'actions' to be a str")
         pulumi.set(__self__, "actions", actions)
-        if conditions and not isinstance(conditions, list):
-            raise TypeError("Expected argument 'conditions' to be a list")
+        if actions_v2s and not isinstance(actions_v2s, list):
+            raise TypeError("Expected argument 'actions_v2s' to be a list")
+        pulumi.set(__self__, "actions_v2s", actions_v2s)
+        if conditions and not isinstance(conditions, str):
+            raise TypeError("Expected argument 'conditions' to be a str")
         pulumi.set(__self__, "conditions", conditions)
+        if conditions_v2s and not isinstance(conditions_v2s, list):
+            raise TypeError("Expected argument 'conditions_v2s' to be a list")
+        pulumi.set(__self__, "conditions_v2s", conditions_v2s)
         if environment and not isinstance(environment, str):
             raise TypeError("Expected argument 'environment' to be a str")
         pulumi.set(__self__, "environment", environment)
         if filter_match and not isinstance(filter_match, str):
             raise TypeError("Expected argument 'filter_match' to be a str")
         pulumi.set(__self__, "filter_match", filter_match)
-        if filters and not isinstance(filters, list):
-            raise TypeError("Expected argument 'filters' to be a list")
+        if filters and not isinstance(filters, str):
+            raise TypeError("Expected argument 'filters' to be a str")
         pulumi.set(__self__, "filters", filters)
+        if filters_v2s and not isinstance(filters_v2s, list):
+            raise TypeError("Expected argument 'filters_v2s' to be a list")
+        pulumi.set(__self__, "filters_v2s", filters_v2s)
         if frequency and not isinstance(frequency, int):
             raise TypeError("Expected argument 'frequency' to be a int")
         pulumi.set(__self__, "frequency", frequency)
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
-        if internal_id and not isinstance(internal_id, str):
-            raise TypeError("Expected argument 'internal_id' to be a str")
-        pulumi.set(__self__, "internal_id", internal_id)
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
         if organization and not isinstance(organization, str):
             raise TypeError("Expected argument 'organization' to be a str")
         pulumi.set(__self__, "organization", organization)
+        if owner and not isinstance(owner, str):
+            raise TypeError("Expected argument 'owner' to be a str")
+        pulumi.set(__self__, "owner", owner)
         if project and not isinstance(project, str):
             raise TypeError("Expected argument 'project' to be a str")
         pulumi.set(__self__, "project", project)
@@ -74,19 +84,35 @@ class GetSentryIssueAlertResult:
 
     @property
     @pulumi.getter
-    def actions(self) -> Sequence[Mapping[str, str]]:
+    def actions(self) -> str:
         """
-        List of actions.
+        List of actions. In JSON string format.
         """
         return pulumi.get(self, "actions")
 
     @property
-    @pulumi.getter
-    def conditions(self) -> Sequence[Mapping[str, str]]:
+    @pulumi.getter(name="actionsV2s")
+    def actions_v2s(self) -> Sequence['outputs.GetSentryIssueAlertActionsV2Result']:
         """
-        List of conditions.
+        A list of actions that take place when all required conditions and filters for the rule are met.
+        """
+        return pulumi.get(self, "actions_v2s")
+
+    @property
+    @pulumi.getter
+    def conditions(self) -> str:
+        """
+        List of conditions. In JSON string format.
         """
         return pulumi.get(self, "conditions")
+
+    @property
+    @pulumi.getter(name="conditionsV2s")
+    def conditions_v2s(self) -> Sequence['outputs.GetSentryIssueAlertConditionsV2Result']:
+        """
+        A list of triggers that determine when the rule fires.
+        """
+        return pulumi.get(self, "conditions_v2s")
 
     @property
     @pulumi.getter
@@ -100,23 +126,31 @@ class GetSentryIssueAlertResult:
     @pulumi.getter(name="filterMatch")
     def filter_match(self) -> str:
         """
-        Trigger actions if `all`, `any`, or `none` of the specified filters match.
+        A string determining which filters need to be true before any actions take place. Required when a value is provided for `filters`.
         """
         return pulumi.get(self, "filter_match")
 
     @property
     @pulumi.getter
-    def filters(self) -> Sequence[Mapping[str, str]]:
+    def filters(self) -> str:
         """
-        List of filters.
+        A list of filters that determine if a rule fires after the necessary conditions have been met. In JSON string format.
         """
         return pulumi.get(self, "filters")
+
+    @property
+    @pulumi.getter(name="filtersV2s")
+    def filters_v2s(self) -> Sequence['outputs.GetSentryIssueAlertFiltersV2Result']:
+        """
+        A list of filters that determine if a rule fires after the necessary conditions have been met.
+        """
+        return pulumi.get(self, "filters_v2s")
 
     @property
     @pulumi.getter
     def frequency(self) -> int:
         """
-        Perform actions at most once every `X` minutes for this issue. Defaults to `30`.
+        Perform actions at most once every `X` minutes for this issue.
         """
         return pulumi.get(self, "frequency")
 
@@ -124,17 +158,9 @@ class GetSentryIssueAlertResult:
     @pulumi.getter
     def id(self) -> str:
         """
-        The provider-assigned unique ID for this managed resource.
+        The ID of this resource.
         """
         return pulumi.get(self, "id")
-
-    @property
-    @pulumi.getter(name="internalId")
-    def internal_id(self) -> str:
-        """
-        The internal ID for this issue alert.
-        """
-        return pulumi.get(self, "internal_id")
 
     @property
     @pulumi.getter
@@ -148,15 +174,23 @@ class GetSentryIssueAlertResult:
     @pulumi.getter
     def organization(self) -> str:
         """
-        The slug of the organization the issue alert belongs to.
+        The organization the resource belongs to.
         """
         return pulumi.get(self, "organization")
 
     @property
     @pulumi.getter
+    def owner(self) -> str:
+        """
+        The ID of the team or user that owns the rule.
+        """
+        return pulumi.get(self, "owner")
+
+    @property
+    @pulumi.getter
     def project(self) -> str:
         """
-        The slug of the project the issue alert belongs to.
+        The project the resource belongs to.
         """
         return pulumi.get(self, "project")
 
@@ -169,57 +203,47 @@ class AwaitableGetSentryIssueAlertResult(GetSentryIssueAlertResult):
         return GetSentryIssueAlertResult(
             action_match=self.action_match,
             actions=self.actions,
+            actions_v2s=self.actions_v2s,
             conditions=self.conditions,
+            conditions_v2s=self.conditions_v2s,
             environment=self.environment,
             filter_match=self.filter_match,
             filters=self.filters,
+            filters_v2s=self.filters_v2s,
             frequency=self.frequency,
             id=self.id,
-            internal_id=self.internal_id,
             name=self.name,
             organization=self.organization,
+            owner=self.owner,
             project=self.project)
 
 
-def get_sentry_issue_alert(internal_id: Optional[str] = None,
+def get_sentry_issue_alert(id: Optional[str] = None,
                            organization: Optional[str] = None,
                            project: Optional[str] = None,
                            opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetSentryIssueAlertResult:
     """
-    Sentry Issue Alert data source. As the object structure of `conditions`, `filters`, and `actions` are undocumented, a tip is to set up an Issue Alert via the Web UI, and use this data source to copy its object structure to your resources.
+    Sentry Issue Alert data source. See the [Sentry documentation](https://docs.sentry.io/api/alerts/retrieve-an-issue-alert-rule-for-a-project/) for more information.
 
     ## Example Usage
 
     ```python
     import pulumi
     import pulumi_sentry as sentry
-    import pulumiverse_sentry as sentry
 
     # Retrieve an Issue Alert
-    # URL format: https://sentry.io/organizations/[organization]/alerts/rules/[project]/[internal_id]/details/
     original = sentry.get_sentry_issue_alert(organization="my-organization",
         project="my-project",
-        internal_id="42")
-    # Create a copy of an Issue Alert
-    copy = sentry.SentryIssueAlert("copy",
-        organization=original.organization,
-        project=original.project,
-        name=f"{original.name}-copy",
-        action_match=original.action_match,
-        filter_match=original.filter_match,
-        frequency=original.frequency,
-        conditions=original.conditions,
-        filters=original.filters,
-        actions=original.actions)
+        id="42")
     ```
 
 
-    :param str internal_id: The internal ID for this issue alert.
-    :param str organization: The slug of the organization the issue alert belongs to.
-    :param str project: The slug of the project the issue alert belongs to.
+    :param str id: The ID of this resource.
+    :param str organization: The organization the resource belongs to.
+    :param str project: The project the resource belongs to.
     """
     __args__ = dict()
-    __args__['internalId'] = internal_id
+    __args__['id'] = id
     __args__['organization'] = organization
     __args__['project'] = project
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
@@ -228,55 +252,45 @@ def get_sentry_issue_alert(internal_id: Optional[str] = None,
     return AwaitableGetSentryIssueAlertResult(
         action_match=pulumi.get(__ret__, 'action_match'),
         actions=pulumi.get(__ret__, 'actions'),
+        actions_v2s=pulumi.get(__ret__, 'actions_v2s'),
         conditions=pulumi.get(__ret__, 'conditions'),
+        conditions_v2s=pulumi.get(__ret__, 'conditions_v2s'),
         environment=pulumi.get(__ret__, 'environment'),
         filter_match=pulumi.get(__ret__, 'filter_match'),
         filters=pulumi.get(__ret__, 'filters'),
+        filters_v2s=pulumi.get(__ret__, 'filters_v2s'),
         frequency=pulumi.get(__ret__, 'frequency'),
         id=pulumi.get(__ret__, 'id'),
-        internal_id=pulumi.get(__ret__, 'internal_id'),
         name=pulumi.get(__ret__, 'name'),
         organization=pulumi.get(__ret__, 'organization'),
+        owner=pulumi.get(__ret__, 'owner'),
         project=pulumi.get(__ret__, 'project'))
-def get_sentry_issue_alert_output(internal_id: Optional[pulumi.Input[str]] = None,
+def get_sentry_issue_alert_output(id: Optional[pulumi.Input[str]] = None,
                                   organization: Optional[pulumi.Input[str]] = None,
                                   project: Optional[pulumi.Input[str]] = None,
                                   opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetSentryIssueAlertResult]:
     """
-    Sentry Issue Alert data source. As the object structure of `conditions`, `filters`, and `actions` are undocumented, a tip is to set up an Issue Alert via the Web UI, and use this data source to copy its object structure to your resources.
+    Sentry Issue Alert data source. See the [Sentry documentation](https://docs.sentry.io/api/alerts/retrieve-an-issue-alert-rule-for-a-project/) for more information.
 
     ## Example Usage
 
     ```python
     import pulumi
     import pulumi_sentry as sentry
-    import pulumiverse_sentry as sentry
 
     # Retrieve an Issue Alert
-    # URL format: https://sentry.io/organizations/[organization]/alerts/rules/[project]/[internal_id]/details/
     original = sentry.get_sentry_issue_alert(organization="my-organization",
         project="my-project",
-        internal_id="42")
-    # Create a copy of an Issue Alert
-    copy = sentry.SentryIssueAlert("copy",
-        organization=original.organization,
-        project=original.project,
-        name=f"{original.name}-copy",
-        action_match=original.action_match,
-        filter_match=original.filter_match,
-        frequency=original.frequency,
-        conditions=original.conditions,
-        filters=original.filters,
-        actions=original.actions)
+        id="42")
     ```
 
 
-    :param str internal_id: The internal ID for this issue alert.
-    :param str organization: The slug of the organization the issue alert belongs to.
-    :param str project: The slug of the project the issue alert belongs to.
+    :param str id: The ID of this resource.
+    :param str organization: The organization the resource belongs to.
+    :param str project: The project the resource belongs to.
     """
     __args__ = dict()
-    __args__['internalId'] = internal_id
+    __args__['id'] = id
     __args__['organization'] = organization
     __args__['project'] = project
     opts = pulumi.InvokeOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
@@ -284,13 +298,16 @@ def get_sentry_issue_alert_output(internal_id: Optional[pulumi.Input[str]] = Non
     return __ret__.apply(lambda __response__: GetSentryIssueAlertResult(
         action_match=pulumi.get(__response__, 'action_match'),
         actions=pulumi.get(__response__, 'actions'),
+        actions_v2s=pulumi.get(__response__, 'actions_v2s'),
         conditions=pulumi.get(__response__, 'conditions'),
+        conditions_v2s=pulumi.get(__response__, 'conditions_v2s'),
         environment=pulumi.get(__response__, 'environment'),
         filter_match=pulumi.get(__response__, 'filter_match'),
         filters=pulumi.get(__response__, 'filters'),
+        filters_v2s=pulumi.get(__response__, 'filters_v2s'),
         frequency=pulumi.get(__response__, 'frequency'),
         id=pulumi.get(__response__, 'id'),
-        internal_id=pulumi.get(__response__, 'internal_id'),
         name=pulumi.get(__response__, 'name'),
         organization=pulumi.get(__response__, 'organization'),
+        owner=pulumi.get(__response__, 'owner'),
         project=pulumi.get(__response__, 'project')))

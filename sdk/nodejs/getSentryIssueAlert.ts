@@ -2,43 +2,31 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Sentry Issue Alert data source. As the object structure of `conditions`, `filters`, and `actions` are undocumented, a tip is to set up an Issue Alert via the Web UI, and use this data source to copy its object structure to your resources.
+ * Sentry Issue Alert data source. See the [Sentry documentation](https://docs.sentry.io/api/alerts/retrieve-an-issue-alert-rule-for-a-project/) for more information.
  *
  * ## Example Usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as sentry from "@pulumi/sentry";
- * import * as sentry from "@pulumiverse/sentry";
  *
  * // Retrieve an Issue Alert
- * // URL format: https://sentry.io/organizations/[organization]/alerts/rules/[project]/[internal_id]/details/
  * const original = sentry.getSentryIssueAlert({
  *     organization: "my-organization",
  *     project: "my-project",
- *     internalId: "42",
- * });
- * // Create a copy of an Issue Alert
- * const copy = new sentry.SentryIssueAlert("copy", {
- *     organization: original.then(original => original.organization),
- *     project: original.then(original => original.project),
- *     name: original.then(original => `${original.name}-copy`),
- *     actionMatch: original.then(original => original.actionMatch),
- *     filterMatch: original.then(original => original.filterMatch),
- *     frequency: original.then(original => original.frequency),
- *     conditions: original.then(original => original.conditions),
- *     filters: original.then(original => original.filters),
- *     actions: original.then(original => original.actions),
+ *     id: "42",
  * });
  * ```
  */
 export function getSentryIssueAlert(args: GetSentryIssueAlertArgs, opts?: pulumi.InvokeOptions): Promise<GetSentryIssueAlertResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("sentry:index/getSentryIssueAlert:getSentryIssueAlert", {
-        "internalId": args.internalId,
+        "id": args.id,
         "organization": args.organization,
         "project": args.project,
     }, opts);
@@ -49,15 +37,15 @@ export function getSentryIssueAlert(args: GetSentryIssueAlertArgs, opts?: pulumi
  */
 export interface GetSentryIssueAlertArgs {
     /**
-     * The internal ID for this issue alert.
+     * The ID of this resource.
      */
-    internalId: string;
+    id: string;
     /**
-     * The slug of the organization the issue alert belongs to.
+     * The organization the resource belongs to.
      */
     organization: string;
     /**
-     * The slug of the project the issue alert belongs to.
+     * The project the resource belongs to.
      */
     project: string;
 }
@@ -71,85 +59,83 @@ export interface GetSentryIssueAlertResult {
      */
     readonly actionMatch: string;
     /**
-     * List of actions.
+     * List of actions. In JSON string format.
      */
-    readonly actions: {[key: string]: string}[];
+    readonly actions: string;
     /**
-     * List of conditions.
+     * A list of actions that take place when all required conditions and filters for the rule are met.
      */
-    readonly conditions: {[key: string]: string}[];
+    readonly actionsV2s: outputs.GetSentryIssueAlertActionsV2[];
+    /**
+     * List of conditions. In JSON string format.
+     */
+    readonly conditions: string;
+    /**
+     * A list of triggers that determine when the rule fires.
+     */
+    readonly conditionsV2s: outputs.GetSentryIssueAlertConditionsV2[];
     /**
      * Perform issue alert in a specific environment.
      */
     readonly environment: string;
     /**
-     * Trigger actions if `all`, `any`, or `none` of the specified filters match.
+     * A string determining which filters need to be true before any actions take place. Required when a value is provided for `filters`.
      */
     readonly filterMatch: string;
     /**
-     * List of filters.
+     * A list of filters that determine if a rule fires after the necessary conditions have been met. In JSON string format.
      */
-    readonly filters: {[key: string]: string}[];
+    readonly filters: string;
     /**
-     * Perform actions at most once every `X` minutes for this issue. Defaults to `30`.
+     * A list of filters that determine if a rule fires after the necessary conditions have been met.
+     */
+    readonly filtersV2s: outputs.GetSentryIssueAlertFiltersV2[];
+    /**
+     * Perform actions at most once every `X` minutes for this issue.
      */
     readonly frequency: number;
     /**
-     * The provider-assigned unique ID for this managed resource.
+     * The ID of this resource.
      */
     readonly id: string;
-    /**
-     * The internal ID for this issue alert.
-     */
-    readonly internalId: string;
     /**
      * The issue alert name.
      */
     readonly name: string;
     /**
-     * The slug of the organization the issue alert belongs to.
+     * The organization the resource belongs to.
      */
     readonly organization: string;
     /**
-     * The slug of the project the issue alert belongs to.
+     * The ID of the team or user that owns the rule.
+     */
+    readonly owner: string;
+    /**
+     * The project the resource belongs to.
      */
     readonly project: string;
 }
 /**
- * Sentry Issue Alert data source. As the object structure of `conditions`, `filters`, and `actions` are undocumented, a tip is to set up an Issue Alert via the Web UI, and use this data source to copy its object structure to your resources.
+ * Sentry Issue Alert data source. See the [Sentry documentation](https://docs.sentry.io/api/alerts/retrieve-an-issue-alert-rule-for-a-project/) for more information.
  *
  * ## Example Usage
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as sentry from "@pulumi/sentry";
- * import * as sentry from "@pulumiverse/sentry";
  *
  * // Retrieve an Issue Alert
- * // URL format: https://sentry.io/organizations/[organization]/alerts/rules/[project]/[internal_id]/details/
  * const original = sentry.getSentryIssueAlert({
  *     organization: "my-organization",
  *     project: "my-project",
- *     internalId: "42",
- * });
- * // Create a copy of an Issue Alert
- * const copy = new sentry.SentryIssueAlert("copy", {
- *     organization: original.then(original => original.organization),
- *     project: original.then(original => original.project),
- *     name: original.then(original => `${original.name}-copy`),
- *     actionMatch: original.then(original => original.actionMatch),
- *     filterMatch: original.then(original => original.filterMatch),
- *     frequency: original.then(original => original.frequency),
- *     conditions: original.then(original => original.conditions),
- *     filters: original.then(original => original.filters),
- *     actions: original.then(original => original.actions),
+ *     id: "42",
  * });
  * ```
  */
 export function getSentryIssueAlertOutput(args: GetSentryIssueAlertOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSentryIssueAlertResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("sentry:index/getSentryIssueAlert:getSentryIssueAlert", {
-        "internalId": args.internalId,
+        "id": args.id,
         "organization": args.organization,
         "project": args.project,
     }, opts);
@@ -160,15 +146,15 @@ export function getSentryIssueAlertOutput(args: GetSentryIssueAlertOutputArgs, o
  */
 export interface GetSentryIssueAlertOutputArgs {
     /**
-     * The internal ID for this issue alert.
+     * The ID of this resource.
      */
-    internalId: pulumi.Input<string>;
+    id: pulumi.Input<string>;
     /**
-     * The slug of the organization the issue alert belongs to.
+     * The organization the resource belongs to.
      */
     organization: pulumi.Input<string>;
     /**
-     * The slug of the project the issue alert belongs to.
+     * The project the resource belongs to.
      */
     project: pulumi.Input<string>;
 }

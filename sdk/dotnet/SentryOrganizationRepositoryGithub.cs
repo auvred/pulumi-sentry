@@ -11,7 +11,7 @@ using Pulumi;
 namespace Pulumiverse.Sentry
 {
     /// <summary>
-    /// Sentry Github Organization Repository resource.
+    /// Sentry Github Organization Repository resource. This resource is deprecated and will be removed in the next major version of the provider. Use `sentry.SentryOrganizationRepository` instead.
     /// 
     /// ## Example Usage
     /// 

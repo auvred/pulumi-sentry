@@ -1,6 +1,14 @@
 {
     "auto-aliasing": {
         "resources": {
+            "sentry_all_projects_spike_protection": {
+                "current": "sentry:index/sentryAllProjectsSpikeProtection:SentryAllProjectsSpikeProtection",
+                "fields": {
+                    "projects": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "sentry_dashboard": {
                 "current": "sentry:index/sentryDashboard:SentryDashboard",
                 "fields": {
@@ -35,19 +43,54 @@
                     }
                 }
             },
+            "sentry_integration_opsgenie": {
+                "current": "sentry:index/sentryIntegrationOpsgenie:SentryIntegrationOpsgenie"
+            },
+            "sentry_integration_pagerduty": {
+                "current": "sentry:index/sentryIntegrationPagerduty:SentryIntegrationPagerduty"
+            },
             "sentry_issue_alert": {
                 "current": "sentry:index/sentryIssueAlert:SentryIssueAlert",
                 "fields": {
-                    "actions": {
+                    "actions_v2": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "discord_notify_service": {
+                                    "fields": {
+                                        "tags": {
+                                            "maxItemsOne": false
+                                        }
+                                    }
+                                },
+                                "github_create_ticket": {
+                                    "fields": {
+                                        "labels": {
+                                            "maxItemsOne": false
+                                        }
+                                    }
+                                },
+                                "github_enterprise_create_ticket": {
+                                    "fields": {
+                                        "labels": {
+                                            "maxItemsOne": false
+                                        }
+                                    }
+                                },
+                                "slack_notify_service": {
+                                    "fields": {
+                                        "tags": {
+                                            "maxItemsOne": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "conditions_v2": {
                         "maxItemsOne": false
                     },
-                    "conditions": {
-                        "maxItemsOne": false
-                    },
-                    "filters": {
-                        "maxItemsOne": false
-                    },
-                    "projects": {
+                    "filters_v2": {
                         "maxItemsOne": false
                     }
                 }
@@ -73,6 +116,14 @@
                     }
                 }
             },
+            "sentry_notification_action": {
+                "current": "sentry:index/sentryNotificationAction:SentryNotificationAction",
+                "fields": {
+                    "projects": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "sentry_organization": {
                 "current": "sentry:index/sentryOrganization:SentryOrganization"
             },
@@ -80,12 +131,10 @@
                 "current": "sentry:index/sentryOrganizationCodeMapping:SentryOrganizationCodeMapping"
             },
             "sentry_organization_member": {
-                "current": "sentry:index/sentryOrganizationMember:SentryOrganizationMember",
-                "fields": {
-                    "teams": {
-                        "maxItemsOne": false
-                    }
-                }
+                "current": "sentry:index/sentryOrganizationMember:SentryOrganizationMember"
+            },
+            "sentry_organization_repository": {
+                "current": "sentry:index/sentryOrganizationRepository:SentryOrganizationRepository"
             },
             "sentry_organization_repository_github": {
                 "current": "sentry:index/sentryOrganizationRepositoryGithub:SentryOrganizationRepositoryGithub"
@@ -96,36 +145,90 @@
             "sentry_project": {
                 "current": "sentry:index/sentryProject:SentryProject",
                 "fields": {
+                    "client_security": {
+                        "fields": {
+                            "allowed_domains": {
+                                "maxItemsOne": false
+                            }
+                        }
+                    },
                     "features": {
                         "maxItemsOne": false
+                    },
+                    "filters": {
+                        "fields": {
+                            "blacklisted_ips": {
+                                "maxItemsOne": false
+                            },
+                            "error_messages": {
+                                "maxItemsOne": false
+                            },
+                            "releases": {
+                                "maxItemsOne": false
+                            }
+                        }
                     },
                     "teams": {
                         "maxItemsOne": false
                     }
                 }
             },
-            "sentry_rule": {
-                "current": "sentry:index/sentryRule:SentryRule",
+            "sentry_project_inbound_data_filter": {
+                "current": "sentry:index/sentryProjectInboundDataFilter:SentryProjectInboundDataFilter",
                 "fields": {
-                    "actions": {
-                        "maxItemsOne": false
-                    },
-                    "conditions": {
-                        "maxItemsOne": false
-                    },
-                    "filters": {
-                        "maxItemsOne": false
-                    },
-                    "projects": {
+                    "subfilters": {
                         "maxItemsOne": false
                     }
                 }
             },
+            "sentry_project_spike_protection": {
+                "current": "sentry:index/sentryProjectSpikeProtection:SentryProjectSpikeProtection"
+            },
+            "sentry_project_symbol_source": {
+                "current": "sentry:index/sentryProjectSymbolSource:SentryProjectSymbolSource"
+            },
             "sentry_team": {
                 "current": "sentry:index/sentryTeam:SentryTeam"
+            },
+            "sentry_team_member": {
+                "current": "sentry:index/sentryTeamMember:SentryTeamMember"
             }
         },
         "datasources": {
+            "sentry_all_keys": {
+                "current": "sentry:index/getSentryAllKeys:getSentryAllKeys",
+                "fields": {
+                    "keys": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "sentry_all_organization_members": {
+                "current": "sentry:index/getSentryAllOrganizationMembers:getSentryAllOrganizationMembers",
+                "fields": {
+                    "members": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "sentry_all_projects": {
+                "current": "sentry:index/getSentryAllProjects:getSentryAllProjects",
+                "fields": {
+                    "project_slugs": {
+                        "maxItemsOne": false
+                    },
+                    "projects": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "features": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "sentry_dashboard": {
                 "current": "sentry:index/getSentryDashboard:getSentryDashboard",
                 "fields": {
@@ -163,13 +266,45 @@
             "sentry_issue_alert": {
                 "current": "sentry:index/getSentryIssueAlert:getSentryIssueAlert",
                 "fields": {
-                    "actions": {
+                    "actions_v2": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "discord_notify_service": {
+                                    "fields": {
+                                        "tags": {
+                                            "maxItemsOne": false
+                                        }
+                                    }
+                                },
+                                "github_create_ticket": {
+                                    "fields": {
+                                        "labels": {
+                                            "maxItemsOne": false
+                                        }
+                                    }
+                                },
+                                "github_enterprise_create_ticket": {
+                                    "fields": {
+                                        "labels": {
+                                            "maxItemsOne": false
+                                        }
+                                    }
+                                },
+                                "slack_notify_service": {
+                                    "fields": {
+                                        "tags": {
+                                            "maxItemsOne": false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "conditions_v2": {
                         "maxItemsOne": false
                     },
-                    "conditions": {
-                        "maxItemsOne": false
-                    },
-                    "filters": {
+                    "filters_v2": {
                         "maxItemsOne": false
                     }
                 }
@@ -201,10 +336,59 @@
             "sentry_organization_integration": {
                 "current": "sentry:index/getSentryOrganizationIntegration:getSentryOrganizationIntegration"
             },
+            "sentry_organization_member": {
+                "current": "sentry:index/getSentryOrganizationMember:getSentryOrganizationMember"
+            },
+            "sentry_project": {
+                "current": "sentry:index/getSentryProject:getSentryProject",
+                "fields": {
+                    "features": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
             "sentry_team": {
                 "current": "sentry:index/getSentryTeam:getSentryTeam"
             }
         }
     },
-    "auto-settings": {}
+    "auto-settings": {},
+    "mux": {
+        "resources": {
+            "sentry:index/sentryAllProjectsSpikeProtection:SentryAllProjectsSpikeProtection": 1,
+            "sentry:index/sentryDashboard:SentryDashboard": 0,
+            "sentry:index/sentryIntegrationOpsgenie:SentryIntegrationOpsgenie": 1,
+            "sentry:index/sentryIntegrationPagerduty:SentryIntegrationPagerduty": 1,
+            "sentry:index/sentryIssueAlert:SentryIssueAlert": 1,
+            "sentry:index/sentryKey:SentryKey": 1,
+            "sentry:index/sentryMetricAlert:SentryMetricAlert": 0,
+            "sentry:index/sentryNotificationAction:SentryNotificationAction": 1,
+            "sentry:index/sentryOrganization:SentryOrganization": 0,
+            "sentry:index/sentryOrganizationCodeMapping:SentryOrganizationCodeMapping": 0,
+            "sentry:index/sentryOrganizationMember:SentryOrganizationMember": 0,
+            "sentry:index/sentryOrganizationRepository:SentryOrganizationRepository": 1,
+            "sentry:index/sentryOrganizationRepositoryGithub:SentryOrganizationRepositoryGithub": 0,
+            "sentry:index/sentryPlugin:SentryPlugin": 0,
+            "sentry:index/sentryProject:SentryProject": 1,
+            "sentry:index/sentryProjectInboundDataFilter:SentryProjectInboundDataFilter": 1,
+            "sentry:index/sentryProjectSpikeProtection:SentryProjectSpikeProtection": 1,
+            "sentry:index/sentryProjectSymbolSource:SentryProjectSymbolSource": 1,
+            "sentry:index/sentryTeam:SentryTeam": 0,
+            "sentry:index/sentryTeamMember:SentryTeamMember": 1
+        },
+        "functions": {
+            "sentry:index/getSentryAllKeys:getSentryAllKeys": 1,
+            "sentry:index/getSentryAllOrganizationMembers:getSentryAllOrganizationMembers": 1,
+            "sentry:index/getSentryAllProjects:getSentryAllProjects": 1,
+            "sentry:index/getSentryDashboard:getSentryDashboard": 0,
+            "sentry:index/getSentryIssueAlert:getSentryIssueAlert": 1,
+            "sentry:index/getSentryKey:getSentryKey": 1,
+            "sentry:index/getSentryMetricAlert:getSentryMetricAlert": 0,
+            "sentry:index/getSentryOrganization:getSentryOrganization": 1,
+            "sentry:index/getSentryOrganizationIntegration:getSentryOrganizationIntegration": 1,
+            "sentry:index/getSentryOrganizationMember:getSentryOrganizationMember": 1,
+            "sentry:index/getSentryProject:getSentryProject": 1,
+            "sentry:index/getSentryTeam:getSentryTeam": 0
+        }
+    }
 }

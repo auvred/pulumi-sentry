@@ -31,7 +31,7 @@ export function getSentryOrganization(args: GetSentryOrganizationArgs, opts?: pu
  */
 export interface GetSentryOrganizationArgs {
     /**
-     * The unique URL slug for this organization.
+     * The organization the resource belongs to.
      */
     slug: string;
 }
@@ -41,7 +41,7 @@ export interface GetSentryOrganizationArgs {
  */
 export interface GetSentryOrganizationResult {
     /**
-     * The provider-assigned unique ID for this managed resource.
+     * The unique URL slug for this organization.
      */
     readonly id: string;
     /**
@@ -53,7 +53,7 @@ export interface GetSentryOrganizationResult {
      */
     readonly name: string;
     /**
-     * The unique URL slug for this organization.
+     * The organization the resource belongs to.
      */
     readonly slug: string;
 }
@@ -84,7 +84,7 @@ export function getSentryOrganizationOutput(args: GetSentryOrganizationOutputArg
  */
 export interface GetSentryOrganizationOutputArgs {
     /**
-     * The unique URL slug for this organization.
+     * The organization the resource belongs to.
      */
     slug: pulumi.Input<string>;
 }

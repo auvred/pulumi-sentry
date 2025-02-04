@@ -11,6 +11,8 @@ using Pulumi;
 namespace Pulumiverse.Sentry
 {
     /// <summary>
+    /// Resource for managing Sentry organization members. To add a member to a team, use the `sentry.SentryTeamMember` resource.
+    /// 
     /// ## Example Usage
     /// 
     /// ```csharp
@@ -27,10 +29,6 @@ namespace Pulumiverse.Sentry
     ///         Organization = "my-organization",
     ///         Email = "test@example.com",
     ///         Role = "member",
-    ///         Teams = new[]
-    ///         {
-    ///             "my-team",
-    ///         },
     ///     });
     /// 
     /// });
@@ -84,12 +82,6 @@ namespace Pulumiverse.Sentry
         /// </summary>
         [Output("role")]
         public Output<string> Role { get; private set; } = null!;
-
-        /// <summary>
-        /// The teams the organization member should be added to.
-        /// </summary>
-        [Output("teams")]
-        public Output<ImmutableArray<string>> Teams { get; private set; } = null!;
 
 
         /// <summary>
@@ -156,18 +148,6 @@ namespace Pulumiverse.Sentry
         [Input("role", required: true)]
         public Input<string> Role { get; set; } = null!;
 
-        [Input("teams")]
-        private InputList<string>? _teams;
-
-        /// <summary>
-        /// The teams the organization member should be added to.
-        /// </summary>
-        public InputList<string> Teams
-        {
-            get => _teams ?? (_teams = new InputList<string>());
-            set => _teams = value;
-        }
-
         public SentryOrganizationMemberArgs()
         {
         }
@@ -211,18 +191,6 @@ namespace Pulumiverse.Sentry
         /// </summary>
         [Input("role")]
         public Input<string>? Role { get; set; }
-
-        [Input("teams")]
-        private InputList<string>? _teams;
-
-        /// <summary>
-        /// The teams the organization member should be added to.
-        /// </summary>
-        public InputList<string> Teams
-        {
-            get => _teams ?? (_teams = new InputList<string>());
-            set => _teams = value;
-        }
 
         public SentryOrganizationMemberState()
         {

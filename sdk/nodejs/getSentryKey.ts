@@ -2,35 +2,18 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
- * Sentry Key data source.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sentry from "@pulumi/sentry";
- *
- * // Retrieve a project key by name
- * const default = sentry.getSentryKey({
- *     organization: "my-organization",
- *     project: "web-app",
- *     name: "Default",
- * });
- * // Retrieve the first key of a project
- * const first = sentry.getSentryKey({
- *     organization: "my-organization",
- *     project: "web-app",
- *     first: true,
- * });
- * ```
+ * Retrieve a Project's Client Key.
  */
 export function getSentryKey(args: GetSentryKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetSentryKeyResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("sentry:index/getSentryKey:getSentryKey", {
         "first": args.first,
+        "id": args.id,
         "name": args.name,
         "organization": args.organization,
         "project": args.project,
@@ -46,15 +29,19 @@ export interface GetSentryKeyArgs {
      */
     first?: boolean;
     /**
-     * The name of the key to retrieve.
+     * The ID of this resource.
+     */
+    id?: string;
+    /**
+     * The name of the client key.
      */
     name?: string;
     /**
-     * The slug of the organization the key should be created for.
+     * The organization the resource belongs to.
      */
     organization: string;
     /**
-     * The slug of the project the key should be created for.
+     * The project the resource belongs to.
      */
     project: string;
 }
@@ -64,15 +51,25 @@ export interface GetSentryKeyArgs {
  */
 export interface GetSentryKeyResult {
     /**
-     * DSN for the Content Security Policy (CSP) for the key.
+     * This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+     */
+    readonly dsn: {[key: string]: string};
+    /**
+     * Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
+     *
+     * @deprecated This field is deprecated and will be removed in a future version. Use `dsn["csp"]` instead.
      */
     readonly dsnCsp: string;
     /**
-     * DSN for the key.
+     * The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
+     *
+     * @deprecated This field is deprecated and will be removed in a future version. Use `dsn["public"]` instead.
      */
     readonly dsnPublic: string;
     /**
-     * @deprecated DSN (Deprecated) for the key.
+     * Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+     *
+     * @deprecated This field is deprecated and will be removed in a future version. Use `dsn["secret"]` instead.
      */
     readonly dsnSecret: string;
     /**
@@ -80,31 +77,31 @@ export interface GetSentryKeyResult {
      */
     readonly first?: boolean;
     /**
-     * The provider-assigned unique ID for this managed resource.
+     * The ID of this resource.
      */
-    readonly id: string;
+    readonly id?: string;
     /**
-     * Flag indicating the key is active.
+     * The JavaScript loader script configuration.
      */
-    readonly isActive: boolean;
+    readonly javascriptLoaderScript: outputs.GetSentryKeyJavascriptLoaderScript;
     /**
-     * The name of the key to retrieve.
+     * The name of the client key.
      */
     readonly name?: string;
     /**
-     * The slug of the organization the key should be created for.
+     * The organization the resource belongs to.
      */
     readonly organization: string;
     /**
-     * The slug of the project the key should be created for.
+     * The project the resource belongs to.
      */
     readonly project: string;
     /**
      * The ID of the project that the key belongs to.
      */
-    readonly projectId: number;
+    readonly projectId: string;
     /**
-     * Public key portion of the client key.
+     * The public key.
      */
     readonly public: string;
     /**
@@ -112,41 +109,22 @@ export interface GetSentryKeyResult {
      */
     readonly rateLimitCount: number;
     /**
-     * Length of time that will be considered when checking the rate limit.
+     * Length of time in seconds that will be considered when checking the rate limit.
      */
     readonly rateLimitWindow: number;
     /**
-     * Secret key portion of the client key.
+     * The secret key.
      */
     readonly secret: string;
 }
 /**
- * Sentry Key data source.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as sentry from "@pulumi/sentry";
- *
- * // Retrieve a project key by name
- * const default = sentry.getSentryKey({
- *     organization: "my-organization",
- *     project: "web-app",
- *     name: "Default",
- * });
- * // Retrieve the first key of a project
- * const first = sentry.getSentryKey({
- *     organization: "my-organization",
- *     project: "web-app",
- *     first: true,
- * });
- * ```
+ * Retrieve a Project's Client Key.
  */
 export function getSentryKeyOutput(args: GetSentryKeyOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSentryKeyResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invokeOutput("sentry:index/getSentryKey:getSentryKey", {
         "first": args.first,
+        "id": args.id,
         "name": args.name,
         "organization": args.organization,
         "project": args.project,
@@ -162,15 +140,19 @@ export interface GetSentryKeyOutputArgs {
      */
     first?: pulumi.Input<boolean>;
     /**
-     * The name of the key to retrieve.
+     * The ID of this resource.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * The name of the client key.
      */
     name?: pulumi.Input<string>;
     /**
-     * The slug of the organization the key should be created for.
+     * The organization the resource belongs to.
      */
     organization: pulumi.Input<string>;
     /**
-     * The slug of the project the key should be created for.
+     * The project the resource belongs to.
      */
     project: pulumi.Input<string>;
 }

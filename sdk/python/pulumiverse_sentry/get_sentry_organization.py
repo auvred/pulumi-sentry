@@ -44,7 +44,7 @@ class GetSentryOrganizationResult:
     @pulumi.getter
     def id(self) -> str:
         """
-        The provider-assigned unique ID for this managed resource.
+        The unique URL slug for this organization.
         """
         return pulumi.get(self, "id")
 
@@ -68,7 +68,7 @@ class GetSentryOrganizationResult:
     @pulumi.getter
     def slug(self) -> str:
         """
-        The unique URL slug for this organization.
+        The organization the resource belongs to.
         """
         return pulumi.get(self, "slug")
 
@@ -101,7 +101,7 @@ def get_sentry_organization(slug: Optional[str] = None,
     ```
 
 
-    :param str slug: The unique URL slug for this organization.
+    :param str slug: The organization the resource belongs to.
     """
     __args__ = dict()
     __args__['slug'] = slug
@@ -129,7 +129,7 @@ def get_sentry_organization_output(slug: Optional[pulumi.Input[str]] = None,
     ```
 
 
-    :param str slug: The unique URL slug for this organization.
+    :param str slug: The organization the resource belongs to.
     """
     __args__ = dict()
     __args__['slug'] = slug

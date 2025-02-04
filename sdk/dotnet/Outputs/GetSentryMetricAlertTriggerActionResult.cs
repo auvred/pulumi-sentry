@@ -15,6 +15,7 @@ namespace Pulumiverse.Sentry.Outputs
     public sealed class GetSentryMetricAlertTriggerActionResult
     {
         public readonly string Id;
+        public readonly string InputChannelId;
         public readonly int IntegrationId;
         public readonly string TargetIdentifier;
         public readonly string TargetType;
@@ -23,6 +24,8 @@ namespace Pulumiverse.Sentry.Outputs
         [OutputConstructor]
         private GetSentryMetricAlertTriggerActionResult(
             string id,
+
+            string inputChannelId,
 
             int integrationId,
 
@@ -33,6 +36,7 @@ namespace Pulumiverse.Sentry.Outputs
             string type)
         {
             Id = id;
+            InputChannelId = inputChannelId;
             IntegrationId = integrationId;
             TargetIdentifier = targetIdentifier;
             TargetType = targetType;

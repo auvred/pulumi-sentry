@@ -14,10 +14,16 @@ namespace Pulumiverse.Sentry.Inputs
     public sealed class SentryMetricAlertTriggerActionGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The ID of this resource.
+        /// The ID of the action.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }
+
+        /// <summary>
+        /// Slack channel ID to avoid rate-limiting, see [here](https://docs.sentry.io/product/integrations/notification-incidents/slack/#rate-limiting-error)
+        /// </summary>
+        [Input("inputChannelId")]
+        public Input<string>? InputChannelId { get; set; }
 
         [Input("integrationId")]
         public Input<int>? IntegrationId { get; set; }

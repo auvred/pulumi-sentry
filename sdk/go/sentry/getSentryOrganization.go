@@ -51,19 +51,19 @@ func LookupSentryOrganization(ctx *pulumi.Context, args *LookupSentryOrganizatio
 
 // A collection of arguments for invoking getSentryOrganization.
 type LookupSentryOrganizationArgs struct {
-	// The unique URL slug for this organization.
+	// The organization the resource belongs to.
 	Slug string `pulumi:"slug"`
 }
 
 // A collection of values returned by getSentryOrganization.
 type LookupSentryOrganizationResult struct {
-	// The provider-assigned unique ID for this managed resource.
+	// The unique URL slug for this organization.
 	Id string `pulumi:"id"`
 	// The internal ID for this organization.
 	InternalId string `pulumi:"internalId"`
 	// The human readable name for this organization.
 	Name string `pulumi:"name"`
-	// The unique URL slug for this organization.
+	// The organization the resource belongs to.
 	Slug string `pulumi:"slug"`
 }
 
@@ -88,7 +88,7 @@ func LookupSentryOrganizationOutput(ctx *pulumi.Context, args LookupSentryOrgani
 
 // A collection of arguments for invoking getSentryOrganization.
 type LookupSentryOrganizationOutputArgs struct {
-	// The unique URL slug for this organization.
+	// The organization the resource belongs to.
 	Slug pulumi.StringInput `pulumi:"slug"`
 }
 
@@ -111,7 +111,7 @@ func (o LookupSentryOrganizationResultOutput) ToLookupSentryOrganizationResultOu
 	return o
 }
 
-// The provider-assigned unique ID for this managed resource.
+// The unique URL slug for this organization.
 func (o LookupSentryOrganizationResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupSentryOrganizationResult) string { return v.Id }).(pulumi.StringOutput)
 }
@@ -126,7 +126,7 @@ func (o LookupSentryOrganizationResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupSentryOrganizationResult) string { return v.Name }).(pulumi.StringOutput)
 }
 
-// The unique URL slug for this organization.
+// The organization the resource belongs to.
 func (o LookupSentryOrganizationResultOutput) Slug() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupSentryOrganizationResult) string { return v.Slug }).(pulumi.StringOutput)
 }

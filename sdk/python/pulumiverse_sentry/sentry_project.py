@@ -13,6 +13,8 @@ if sys.version_info >= (3, 11):
 else:
     from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['SentryProjectArgs', 'SentryProject']
 
@@ -20,31 +22,54 @@ __all__ = ['SentryProjectArgs', 'SentryProject']
 class SentryProjectArgs:
     def __init__(__self__, *,
                  organization: pulumi.Input[str],
+                 teams: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 client_security: Optional[pulumi.Input['SentryProjectClientSecurityArgs']] = None,
+                 default_key: Optional[pulumi.Input[bool]] = None,
+                 default_rules: Optional[pulumi.Input[bool]] = None,
                  digests_max_delay: Optional[pulumi.Input[int]] = None,
                  digests_min_delay: Optional[pulumi.Input[int]] = None,
+                 filters: Optional[pulumi.Input['SentryProjectFiltersArgs']] = None,
+                 fingerprinting_rules: Optional[pulumi.Input[str]] = None,
+                 grouping_enhancements: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  platform: Optional[pulumi.Input[str]] = None,
                  resolve_age: Optional[pulumi.Input[int]] = None,
-                 slug: Optional[pulumi.Input[str]] = None,
-                 team: Optional[pulumi.Input[str]] = None,
-                 teams: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+                 slug: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a SentryProject resource.
-        :param pulumi.Input[str] organization: The slug of the organization the project belongs to.
+        :param pulumi.Input[str] organization: The organization of this resource.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] teams: The slugs of the teams to create the project for.
+        :param pulumi.Input['SentryProjectClientSecurityArgs'] client_security: Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+        :param pulumi.Input[bool] default_key: Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `SentryKey` resource.
+        :param pulumi.Input[bool] default_rules: Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
         :param pulumi.Input[int] digests_max_delay: The maximum amount of time (in seconds) to wait between scheduling digests for delivery.
         :param pulumi.Input[int] digests_min_delay: The minimum amount of time (in seconds) to wait between scheduling digests for delivery after the initial scheduling.
+        :param pulumi.Input['SentryProjectFiltersArgs'] filters: Custom filters for this project.
+        :param pulumi.Input[str] fingerprinting_rules: This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob > fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+        :param pulumi.Input[str] grouping_enhancements: This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
         :param pulumi.Input[str] name: The name for the project.
-        :param pulumi.Input[str] platform: The optional platform for this project.
+        :param pulumi.Input[str] platform: The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
         :param pulumi.Input[int] resolve_age: Hours in which an issue is automatically resolve if not seen after this amount of time.
         :param pulumi.Input[str] slug: The optional slug for this project.
-        :param pulumi.Input[str] team: The slug of the team to create the project for. **Deprecated** Use `teams` instead.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] teams: The slugs of the teams to create the project for.
         """
         pulumi.set(__self__, "organization", organization)
+        pulumi.set(__self__, "teams", teams)
+        if client_security is not None:
+            pulumi.set(__self__, "client_security", client_security)
+        if default_key is not None:
+            pulumi.set(__self__, "default_key", default_key)
+        if default_rules is not None:
+            pulumi.set(__self__, "default_rules", default_rules)
         if digests_max_delay is not None:
             pulumi.set(__self__, "digests_max_delay", digests_max_delay)
         if digests_min_delay is not None:
             pulumi.set(__self__, "digests_min_delay", digests_min_delay)
+        if filters is not None:
+            pulumi.set(__self__, "filters", filters)
+        if fingerprinting_rules is not None:
+            pulumi.set(__self__, "fingerprinting_rules", fingerprinting_rules)
+        if grouping_enhancements is not None:
+            pulumi.set(__self__, "grouping_enhancements", grouping_enhancements)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if platform is not None:
@@ -53,25 +78,66 @@ class SentryProjectArgs:
             pulumi.set(__self__, "resolve_age", resolve_age)
         if slug is not None:
             pulumi.set(__self__, "slug", slug)
-        if team is not None:
-            warnings.warn("""Use `teams` instead.""", DeprecationWarning)
-            pulumi.log.warn("""team is deprecated: Use `teams` instead.""")
-        if team is not None:
-            pulumi.set(__self__, "team", team)
-        if teams is not None:
-            pulumi.set(__self__, "teams", teams)
 
     @property
     @pulumi.getter
     def organization(self) -> pulumi.Input[str]:
         """
-        The slug of the organization the project belongs to.
+        The organization of this resource.
         """
         return pulumi.get(self, "organization")
 
     @organization.setter
     def organization(self, value: pulumi.Input[str]):
         pulumi.set(self, "organization", value)
+
+    @property
+    @pulumi.getter
+    def teams(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        The slugs of the teams to create the project for.
+        """
+        return pulumi.get(self, "teams")
+
+    @teams.setter
+    def teams(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "teams", value)
+
+    @property
+    @pulumi.getter(name="clientSecurity")
+    def client_security(self) -> Optional[pulumi.Input['SentryProjectClientSecurityArgs']]:
+        """
+        Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+        """
+        return pulumi.get(self, "client_security")
+
+    @client_security.setter
+    def client_security(self, value: Optional[pulumi.Input['SentryProjectClientSecurityArgs']]):
+        pulumi.set(self, "client_security", value)
+
+    @property
+    @pulumi.getter(name="defaultKey")
+    def default_key(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `SentryKey` resource.
+        """
+        return pulumi.get(self, "default_key")
+
+    @default_key.setter
+    def default_key(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "default_key", value)
+
+    @property
+    @pulumi.getter(name="defaultRules")
+    def default_rules(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
+        """
+        return pulumi.get(self, "default_rules")
+
+    @default_rules.setter
+    def default_rules(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "default_rules", value)
 
     @property
     @pulumi.getter(name="digestsMaxDelay")
@@ -99,6 +165,42 @@ class SentryProjectArgs:
 
     @property
     @pulumi.getter
+    def filters(self) -> Optional[pulumi.Input['SentryProjectFiltersArgs']]:
+        """
+        Custom filters for this project.
+        """
+        return pulumi.get(self, "filters")
+
+    @filters.setter
+    def filters(self, value: Optional[pulumi.Input['SentryProjectFiltersArgs']]):
+        pulumi.set(self, "filters", value)
+
+    @property
+    @pulumi.getter(name="fingerprintingRules")
+    def fingerprinting_rules(self) -> Optional[pulumi.Input[str]]:
+        """
+        This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob > fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+        """
+        return pulumi.get(self, "fingerprinting_rules")
+
+    @fingerprinting_rules.setter
+    def fingerprinting_rules(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fingerprinting_rules", value)
+
+    @property
+    @pulumi.getter(name="groupingEnhancements")
+    def grouping_enhancements(self) -> Optional[pulumi.Input[str]]:
+        """
+        This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
+        """
+        return pulumi.get(self, "grouping_enhancements")
+
+    @grouping_enhancements.setter
+    def grouping_enhancements(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "grouping_enhancements", value)
+
+    @property
+    @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
         The name for the project.
@@ -113,7 +215,7 @@ class SentryProjectArgs:
     @pulumi.getter
     def platform(self) -> Optional[pulumi.Input[str]]:
         """
-        The optional platform for this project.
+        The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
         """
         return pulumi.get(self, "platform")
 
@@ -145,115 +247,112 @@ class SentryProjectArgs:
     def slug(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "slug", value)
 
-    @property
-    @pulumi.getter
-    @_utilities.deprecated("""Use `teams` instead.""")
-    def team(self) -> Optional[pulumi.Input[str]]:
-        """
-        The slug of the team to create the project for. **Deprecated** Use `teams` instead.
-        """
-        return pulumi.get(self, "team")
-
-    @team.setter
-    def team(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "team", value)
-
-    @property
-    @pulumi.getter
-    def teams(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
-        """
-        The slugs of the teams to create the project for.
-        """
-        return pulumi.get(self, "teams")
-
-    @teams.setter
-    def teams(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
-        pulumi.set(self, "teams", value)
-
 
 @pulumi.input_type
 class _SentryProjectState:
     def __init__(__self__, *,
-                 color: Optional[pulumi.Input[str]] = None,
+                 client_security: Optional[pulumi.Input['SentryProjectClientSecurityArgs']] = None,
+                 default_key: Optional[pulumi.Input[bool]] = None,
+                 default_rules: Optional[pulumi.Input[bool]] = None,
                  digests_max_delay: Optional[pulumi.Input[int]] = None,
                  digests_min_delay: Optional[pulumi.Input[int]] = None,
                  features: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 filters: Optional[pulumi.Input['SentryProjectFiltersArgs']] = None,
+                 fingerprinting_rules: Optional[pulumi.Input[str]] = None,
+                 grouping_enhancements: Optional[pulumi.Input[str]] = None,
                  internal_id: Optional[pulumi.Input[str]] = None,
-                 is_bookmarked: Optional[pulumi.Input[bool]] = None,
-                 is_public: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  organization: Optional[pulumi.Input[str]] = None,
                  platform: Optional[pulumi.Input[str]] = None,
-                 project_id: Optional[pulumi.Input[str]] = None,
                  resolve_age: Optional[pulumi.Input[int]] = None,
                  slug: Optional[pulumi.Input[str]] = None,
-                 status: Optional[pulumi.Input[str]] = None,
-                 team: Optional[pulumi.Input[str]] = None,
                  teams: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
         """
         Input properties used for looking up and filtering SentryProject resources.
+        :param pulumi.Input['SentryProjectClientSecurityArgs'] client_security: Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+        :param pulumi.Input[bool] default_key: Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `SentryKey` resource.
+        :param pulumi.Input[bool] default_rules: Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
         :param pulumi.Input[int] digests_max_delay: The maximum amount of time (in seconds) to wait between scheduling digests for delivery.
         :param pulumi.Input[int] digests_min_delay: The minimum amount of time (in seconds) to wait between scheduling digests for delivery after the initial scheduling.
+        :param pulumi.Input['SentryProjectFiltersArgs'] filters: Custom filters for this project.
+        :param pulumi.Input[str] fingerprinting_rules: This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob > fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+        :param pulumi.Input[str] grouping_enhancements: This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
         :param pulumi.Input[str] internal_id: The internal ID for this project.
         :param pulumi.Input[str] name: The name for the project.
-        :param pulumi.Input[str] organization: The slug of the organization the project belongs to.
-        :param pulumi.Input[str] platform: The optional platform for this project.
-        :param pulumi.Input[str] project_id: Use `internal_id` instead.
+        :param pulumi.Input[str] organization: The organization of this resource.
+        :param pulumi.Input[str] platform: The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
         :param pulumi.Input[int] resolve_age: Hours in which an issue is automatically resolve if not seen after this amount of time.
         :param pulumi.Input[str] slug: The optional slug for this project.
-        :param pulumi.Input[str] team: The slug of the team to create the project for. **Deprecated** Use `teams` instead.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] teams: The slugs of the teams to create the project for.
         """
-        if color is not None:
-            pulumi.set(__self__, "color", color)
+        if client_security is not None:
+            pulumi.set(__self__, "client_security", client_security)
+        if default_key is not None:
+            pulumi.set(__self__, "default_key", default_key)
+        if default_rules is not None:
+            pulumi.set(__self__, "default_rules", default_rules)
         if digests_max_delay is not None:
             pulumi.set(__self__, "digests_max_delay", digests_max_delay)
         if digests_min_delay is not None:
             pulumi.set(__self__, "digests_min_delay", digests_min_delay)
         if features is not None:
             pulumi.set(__self__, "features", features)
+        if filters is not None:
+            pulumi.set(__self__, "filters", filters)
+        if fingerprinting_rules is not None:
+            pulumi.set(__self__, "fingerprinting_rules", fingerprinting_rules)
+        if grouping_enhancements is not None:
+            pulumi.set(__self__, "grouping_enhancements", grouping_enhancements)
         if internal_id is not None:
             pulumi.set(__self__, "internal_id", internal_id)
-        if is_bookmarked is not None:
-            warnings.warn("""is_bookmarked is no longer used""", DeprecationWarning)
-            pulumi.log.warn("""is_bookmarked is deprecated: is_bookmarked is no longer used""")
-        if is_bookmarked is not None:
-            pulumi.set(__self__, "is_bookmarked", is_bookmarked)
-        if is_public is not None:
-            pulumi.set(__self__, "is_public", is_public)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if organization is not None:
             pulumi.set(__self__, "organization", organization)
         if platform is not None:
             pulumi.set(__self__, "platform", platform)
-        if project_id is not None:
-            warnings.warn("""Use `internal_id` instead.""", DeprecationWarning)
-            pulumi.log.warn("""project_id is deprecated: Use `internal_id` instead.""")
-        if project_id is not None:
-            pulumi.set(__self__, "project_id", project_id)
         if resolve_age is not None:
             pulumi.set(__self__, "resolve_age", resolve_age)
         if slug is not None:
             pulumi.set(__self__, "slug", slug)
-        if status is not None:
-            pulumi.set(__self__, "status", status)
-        if team is not None:
-            warnings.warn("""Use `teams` instead.""", DeprecationWarning)
-            pulumi.log.warn("""team is deprecated: Use `teams` instead.""")
-        if team is not None:
-            pulumi.set(__self__, "team", team)
         if teams is not None:
             pulumi.set(__self__, "teams", teams)
 
     @property
-    @pulumi.getter
-    def color(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "color")
+    @pulumi.getter(name="clientSecurity")
+    def client_security(self) -> Optional[pulumi.Input['SentryProjectClientSecurityArgs']]:
+        """
+        Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+        """
+        return pulumi.get(self, "client_security")
 
-    @color.setter
-    def color(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "color", value)
+    @client_security.setter
+    def client_security(self, value: Optional[pulumi.Input['SentryProjectClientSecurityArgs']]):
+        pulumi.set(self, "client_security", value)
+
+    @property
+    @pulumi.getter(name="defaultKey")
+    def default_key(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `SentryKey` resource.
+        """
+        return pulumi.get(self, "default_key")
+
+    @default_key.setter
+    def default_key(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "default_key", value)
+
+    @property
+    @pulumi.getter(name="defaultRules")
+    def default_rules(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
+        """
+        return pulumi.get(self, "default_rules")
+
+    @default_rules.setter
+    def default_rules(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "default_rules", value)
 
     @property
     @pulumi.getter(name="digestsMaxDelay")
@@ -289,6 +388,42 @@ class _SentryProjectState:
         pulumi.set(self, "features", value)
 
     @property
+    @pulumi.getter
+    def filters(self) -> Optional[pulumi.Input['SentryProjectFiltersArgs']]:
+        """
+        Custom filters for this project.
+        """
+        return pulumi.get(self, "filters")
+
+    @filters.setter
+    def filters(self, value: Optional[pulumi.Input['SentryProjectFiltersArgs']]):
+        pulumi.set(self, "filters", value)
+
+    @property
+    @pulumi.getter(name="fingerprintingRules")
+    def fingerprinting_rules(self) -> Optional[pulumi.Input[str]]:
+        """
+        This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob > fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+        """
+        return pulumi.get(self, "fingerprinting_rules")
+
+    @fingerprinting_rules.setter
+    def fingerprinting_rules(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "fingerprinting_rules", value)
+
+    @property
+    @pulumi.getter(name="groupingEnhancements")
+    def grouping_enhancements(self) -> Optional[pulumi.Input[str]]:
+        """
+        This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
+        """
+        return pulumi.get(self, "grouping_enhancements")
+
+    @grouping_enhancements.setter
+    def grouping_enhancements(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "grouping_enhancements", value)
+
+    @property
     @pulumi.getter(name="internalId")
     def internal_id(self) -> Optional[pulumi.Input[str]]:
         """
@@ -299,25 +434,6 @@ class _SentryProjectState:
     @internal_id.setter
     def internal_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "internal_id", value)
-
-    @property
-    @pulumi.getter(name="isBookmarked")
-    @_utilities.deprecated("""is_bookmarked is no longer used""")
-    def is_bookmarked(self) -> Optional[pulumi.Input[bool]]:
-        return pulumi.get(self, "is_bookmarked")
-
-    @is_bookmarked.setter
-    def is_bookmarked(self, value: Optional[pulumi.Input[bool]]):
-        pulumi.set(self, "is_bookmarked", value)
-
-    @property
-    @pulumi.getter(name="isPublic")
-    def is_public(self) -> Optional[pulumi.Input[bool]]:
-        return pulumi.get(self, "is_public")
-
-    @is_public.setter
-    def is_public(self, value: Optional[pulumi.Input[bool]]):
-        pulumi.set(self, "is_public", value)
 
     @property
     @pulumi.getter
@@ -335,7 +451,7 @@ class _SentryProjectState:
     @pulumi.getter
     def organization(self) -> Optional[pulumi.Input[str]]:
         """
-        The slug of the organization the project belongs to.
+        The organization of this resource.
         """
         return pulumi.get(self, "organization")
 
@@ -347,26 +463,13 @@ class _SentryProjectState:
     @pulumi.getter
     def platform(self) -> Optional[pulumi.Input[str]]:
         """
-        The optional platform for this project.
+        The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
         """
         return pulumi.get(self, "platform")
 
     @platform.setter
     def platform(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "platform", value)
-
-    @property
-    @pulumi.getter(name="projectId")
-    @_utilities.deprecated("""Use `internal_id` instead.""")
-    def project_id(self) -> Optional[pulumi.Input[str]]:
-        """
-        Use `internal_id` instead.
-        """
-        return pulumi.get(self, "project_id")
-
-    @project_id.setter
-    def project_id(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "project_id", value)
 
     @property
     @pulumi.getter(name="resolveAge")
@@ -394,28 +497,6 @@ class _SentryProjectState:
 
     @property
     @pulumi.getter
-    def status(self) -> Optional[pulumi.Input[str]]:
-        return pulumi.get(self, "status")
-
-    @status.setter
-    def status(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "status", value)
-
-    @property
-    @pulumi.getter
-    @_utilities.deprecated("""Use `teams` instead.""")
-    def team(self) -> Optional[pulumi.Input[str]]:
-        """
-        The slug of the team to create the project for. **Deprecated** Use `teams` instead.
-        """
-        return pulumi.get(self, "team")
-
-    @team.setter
-    def team(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "team", value)
-
-    @property
-    @pulumi.getter
     def teams(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
         The slugs of the teams to create the project for.
@@ -432,37 +513,23 @@ class SentryProject(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 client_security: Optional[pulumi.Input[Union['SentryProjectClientSecurityArgs', 'SentryProjectClientSecurityArgsDict']]] = None,
+                 default_key: Optional[pulumi.Input[bool]] = None,
+                 default_rules: Optional[pulumi.Input[bool]] = None,
                  digests_max_delay: Optional[pulumi.Input[int]] = None,
                  digests_min_delay: Optional[pulumi.Input[int]] = None,
+                 filters: Optional[pulumi.Input[Union['SentryProjectFiltersArgs', 'SentryProjectFiltersArgsDict']]] = None,
+                 fingerprinting_rules: Optional[pulumi.Input[str]] = None,
+                 grouping_enhancements: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  organization: Optional[pulumi.Input[str]] = None,
                  platform: Optional[pulumi.Input[str]] = None,
                  resolve_age: Optional[pulumi.Input[int]] = None,
                  slug: Optional[pulumi.Input[str]] = None,
-                 team: Optional[pulumi.Input[str]] = None,
                  teams: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         """
         Sentry Project resource.
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumiverse_sentry as sentry
-
-        # Create a project
-        default = sentry.SentryProject("default",
-            organization="my-organization",
-            teams=[
-                "my-first-team",
-                "my-second-team",
-            ],
-            name="Web App",
-            slug="web-app",
-            platform="javascript",
-            resolve_age=720)
-        ```
 
         ## Import
 
@@ -476,14 +543,19 @@ class SentryProject(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Union['SentryProjectClientSecurityArgs', 'SentryProjectClientSecurityArgsDict']] client_security: Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+        :param pulumi.Input[bool] default_key: Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `SentryKey` resource.
+        :param pulumi.Input[bool] default_rules: Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
         :param pulumi.Input[int] digests_max_delay: The maximum amount of time (in seconds) to wait between scheduling digests for delivery.
         :param pulumi.Input[int] digests_min_delay: The minimum amount of time (in seconds) to wait between scheduling digests for delivery after the initial scheduling.
+        :param pulumi.Input[Union['SentryProjectFiltersArgs', 'SentryProjectFiltersArgsDict']] filters: Custom filters for this project.
+        :param pulumi.Input[str] fingerprinting_rules: This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob > fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+        :param pulumi.Input[str] grouping_enhancements: This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
         :param pulumi.Input[str] name: The name for the project.
-        :param pulumi.Input[str] organization: The slug of the organization the project belongs to.
-        :param pulumi.Input[str] platform: The optional platform for this project.
+        :param pulumi.Input[str] organization: The organization of this resource.
+        :param pulumi.Input[str] platform: The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
         :param pulumi.Input[int] resolve_age: Hours in which an issue is automatically resolve if not seen after this amount of time.
         :param pulumi.Input[str] slug: The optional slug for this project.
-        :param pulumi.Input[str] team: The slug of the team to create the project for. **Deprecated** Use `teams` instead.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] teams: The slugs of the teams to create the project for.
         """
         ...
@@ -494,25 +566,6 @@ class SentryProject(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Sentry Project resource.
-
-        ## Example Usage
-
-        ```python
-        import pulumi
-        import pulumiverse_sentry as sentry
-
-        # Create a project
-        default = sentry.SentryProject("default",
-            organization="my-organization",
-            teams=[
-                "my-first-team",
-                "my-second-team",
-            ],
-            name="Web App",
-            slug="web-app",
-            platform="javascript",
-            resolve_age=720)
-        ```
 
         ## Import
 
@@ -539,14 +592,19 @@ class SentryProject(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 client_security: Optional[pulumi.Input[Union['SentryProjectClientSecurityArgs', 'SentryProjectClientSecurityArgsDict']]] = None,
+                 default_key: Optional[pulumi.Input[bool]] = None,
+                 default_rules: Optional[pulumi.Input[bool]] = None,
                  digests_max_delay: Optional[pulumi.Input[int]] = None,
                  digests_min_delay: Optional[pulumi.Input[int]] = None,
+                 filters: Optional[pulumi.Input[Union['SentryProjectFiltersArgs', 'SentryProjectFiltersArgsDict']]] = None,
+                 fingerprinting_rules: Optional[pulumi.Input[str]] = None,
+                 grouping_enhancements: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  organization: Optional[pulumi.Input[str]] = None,
                  platform: Optional[pulumi.Input[str]] = None,
                  resolve_age: Optional[pulumi.Input[int]] = None,
                  slug: Optional[pulumi.Input[str]] = None,
-                 team: Optional[pulumi.Input[str]] = None,
                  teams: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -557,8 +615,14 @@ class SentryProject(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = SentryProjectArgs.__new__(SentryProjectArgs)
 
+            __props__.__dict__["client_security"] = client_security
+            __props__.__dict__["default_key"] = default_key
+            __props__.__dict__["default_rules"] = default_rules
             __props__.__dict__["digests_max_delay"] = digests_max_delay
             __props__.__dict__["digests_min_delay"] = digests_min_delay
+            __props__.__dict__["filters"] = filters
+            __props__.__dict__["fingerprinting_rules"] = fingerprinting_rules
+            __props__.__dict__["grouping_enhancements"] = grouping_enhancements
             __props__.__dict__["name"] = name
             if organization is None and not opts.urn:
                 raise TypeError("Missing required property 'organization'")
@@ -566,15 +630,11 @@ class SentryProject(pulumi.CustomResource):
             __props__.__dict__["platform"] = platform
             __props__.__dict__["resolve_age"] = resolve_age
             __props__.__dict__["slug"] = slug
-            __props__.__dict__["team"] = team
+            if teams is None and not opts.urn:
+                raise TypeError("Missing required property 'teams'")
             __props__.__dict__["teams"] = teams
-            __props__.__dict__["color"] = None
             __props__.__dict__["features"] = None
             __props__.__dict__["internal_id"] = None
-            __props__.__dict__["is_bookmarked"] = None
-            __props__.__dict__["is_public"] = None
-            __props__.__dict__["project_id"] = None
-            __props__.__dict__["status"] = None
         super(SentryProject, __self__).__init__(
             'sentry:index/sentryProject:SentryProject',
             resource_name,
@@ -585,21 +645,21 @@ class SentryProject(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
-            color: Optional[pulumi.Input[str]] = None,
+            client_security: Optional[pulumi.Input[Union['SentryProjectClientSecurityArgs', 'SentryProjectClientSecurityArgsDict']]] = None,
+            default_key: Optional[pulumi.Input[bool]] = None,
+            default_rules: Optional[pulumi.Input[bool]] = None,
             digests_max_delay: Optional[pulumi.Input[int]] = None,
             digests_min_delay: Optional[pulumi.Input[int]] = None,
             features: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            filters: Optional[pulumi.Input[Union['SentryProjectFiltersArgs', 'SentryProjectFiltersArgsDict']]] = None,
+            fingerprinting_rules: Optional[pulumi.Input[str]] = None,
+            grouping_enhancements: Optional[pulumi.Input[str]] = None,
             internal_id: Optional[pulumi.Input[str]] = None,
-            is_bookmarked: Optional[pulumi.Input[bool]] = None,
-            is_public: Optional[pulumi.Input[bool]] = None,
             name: Optional[pulumi.Input[str]] = None,
             organization: Optional[pulumi.Input[str]] = None,
             platform: Optional[pulumi.Input[str]] = None,
-            project_id: Optional[pulumi.Input[str]] = None,
             resolve_age: Optional[pulumi.Input[int]] = None,
             slug: Optional[pulumi.Input[str]] = None,
-            status: Optional[pulumi.Input[str]] = None,
-            team: Optional[pulumi.Input[str]] = None,
             teams: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None) -> 'SentryProject':
         """
         Get an existing SentryProject resource's state with the given name, id, and optional extra
@@ -608,44 +668,67 @@ class SentryProject(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[Union['SentryProjectClientSecurityArgs', 'SentryProjectClientSecurityArgsDict']] client_security: Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+        :param pulumi.Input[bool] default_key: Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `SentryKey` resource.
+        :param pulumi.Input[bool] default_rules: Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
         :param pulumi.Input[int] digests_max_delay: The maximum amount of time (in seconds) to wait between scheduling digests for delivery.
         :param pulumi.Input[int] digests_min_delay: The minimum amount of time (in seconds) to wait between scheduling digests for delivery after the initial scheduling.
+        :param pulumi.Input[Union['SentryProjectFiltersArgs', 'SentryProjectFiltersArgsDict']] filters: Custom filters for this project.
+        :param pulumi.Input[str] fingerprinting_rules: This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob > fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+        :param pulumi.Input[str] grouping_enhancements: This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
         :param pulumi.Input[str] internal_id: The internal ID for this project.
         :param pulumi.Input[str] name: The name for the project.
-        :param pulumi.Input[str] organization: The slug of the organization the project belongs to.
-        :param pulumi.Input[str] platform: The optional platform for this project.
-        :param pulumi.Input[str] project_id: Use `internal_id` instead.
+        :param pulumi.Input[str] organization: The organization of this resource.
+        :param pulumi.Input[str] platform: The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
         :param pulumi.Input[int] resolve_age: Hours in which an issue is automatically resolve if not seen after this amount of time.
         :param pulumi.Input[str] slug: The optional slug for this project.
-        :param pulumi.Input[str] team: The slug of the team to create the project for. **Deprecated** Use `teams` instead.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] teams: The slugs of the teams to create the project for.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _SentryProjectState.__new__(_SentryProjectState)
 
-        __props__.__dict__["color"] = color
+        __props__.__dict__["client_security"] = client_security
+        __props__.__dict__["default_key"] = default_key
+        __props__.__dict__["default_rules"] = default_rules
         __props__.__dict__["digests_max_delay"] = digests_max_delay
         __props__.__dict__["digests_min_delay"] = digests_min_delay
         __props__.__dict__["features"] = features
+        __props__.__dict__["filters"] = filters
+        __props__.__dict__["fingerprinting_rules"] = fingerprinting_rules
+        __props__.__dict__["grouping_enhancements"] = grouping_enhancements
         __props__.__dict__["internal_id"] = internal_id
-        __props__.__dict__["is_bookmarked"] = is_bookmarked
-        __props__.__dict__["is_public"] = is_public
         __props__.__dict__["name"] = name
         __props__.__dict__["organization"] = organization
         __props__.__dict__["platform"] = platform
-        __props__.__dict__["project_id"] = project_id
         __props__.__dict__["resolve_age"] = resolve_age
         __props__.__dict__["slug"] = slug
-        __props__.__dict__["status"] = status
-        __props__.__dict__["team"] = team
         __props__.__dict__["teams"] = teams
         return SentryProject(resource_name, opts=opts, __props__=__props__)
 
     @property
-    @pulumi.getter
-    def color(self) -> pulumi.Output[str]:
-        return pulumi.get(self, "color")
+    @pulumi.getter(name="clientSecurity")
+    def client_security(self) -> pulumi.Output['outputs.SentryProjectClientSecurity']:
+        """
+        Configure origin URLs which Sentry should accept events from. This is used for communication with clients like [sentry-javascript](https://github.com/getsentry/sentry-javascript).
+        """
+        return pulumi.get(self, "client_security")
+
+    @property
+    @pulumi.getter(name="defaultKey")
+    def default_key(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Whether to create a default key. By default, Sentry will create a key for you. If you wish to manage keys manually, set this to false and create keys using the `SentryKey` resource.
+        """
+        return pulumi.get(self, "default_key")
+
+    @property
+    @pulumi.getter(name="defaultRules")
+    def default_rules(self) -> pulumi.Output[Optional[bool]]:
+        """
+        Whether to create a default issue alert. Defaults to true where the behavior is to alert the user on every new issue.
+        """
+        return pulumi.get(self, "default_rules")
 
     @property
     @pulumi.getter(name="digestsMaxDelay")
@@ -669,23 +752,36 @@ class SentryProject(pulumi.CustomResource):
         return pulumi.get(self, "features")
 
     @property
+    @pulumi.getter
+    def filters(self) -> pulumi.Output['outputs.SentryProjectFilters']:
+        """
+        Custom filters for this project.
+        """
+        return pulumi.get(self, "filters")
+
+    @property
+    @pulumi.getter(name="fingerprintingRules")
+    def fingerprinting_rules(self) -> pulumi.Output[str]:
+        """
+        This can be used to modify the fingerprint rules on the server with custom rules. Rules follow the pattern `matcher:glob > fingerprint, values`. To learn more about fingerprint rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/fingerprint-rules/).
+        """
+        return pulumi.get(self, "fingerprinting_rules")
+
+    @property
+    @pulumi.getter(name="groupingEnhancements")
+    def grouping_enhancements(self) -> pulumi.Output[str]:
+        """
+        This can be used to enhance the grouping algorithm with custom rules. Rules follow the pattern `matcher:glob [v^]?[+-]flag`. To learn more about stack trace rules, [read the docs](https://docs.sentry.io/concepts/data-management/event-grouping/stack-trace-rules/).
+        """
+        return pulumi.get(self, "grouping_enhancements")
+
+    @property
     @pulumi.getter(name="internalId")
     def internal_id(self) -> pulumi.Output[str]:
         """
         The internal ID for this project.
         """
         return pulumi.get(self, "internal_id")
-
-    @property
-    @pulumi.getter(name="isBookmarked")
-    @_utilities.deprecated("""is_bookmarked is no longer used""")
-    def is_bookmarked(self) -> pulumi.Output[bool]:
-        return pulumi.get(self, "is_bookmarked")
-
-    @property
-    @pulumi.getter(name="isPublic")
-    def is_public(self) -> pulumi.Output[bool]:
-        return pulumi.get(self, "is_public")
 
     @property
     @pulumi.getter
@@ -699,26 +795,17 @@ class SentryProject(pulumi.CustomResource):
     @pulumi.getter
     def organization(self) -> pulumi.Output[str]:
         """
-        The slug of the organization the project belongs to.
+        The organization of this resource.
         """
         return pulumi.get(self, "organization")
 
     @property
     @pulumi.getter
-    def platform(self) -> pulumi.Output[str]:
+    def platform(self) -> pulumi.Output[Optional[str]]:
         """
-        The optional platform for this project.
+        The platform for this project. For a list of valid values, see this page. Use `other` for platforms not listed.
         """
         return pulumi.get(self, "platform")
-
-    @property
-    @pulumi.getter(name="projectId")
-    @_utilities.deprecated("""Use `internal_id` instead.""")
-    def project_id(self) -> pulumi.Output[str]:
-        """
-        Use `internal_id` instead.
-        """
-        return pulumi.get(self, "project_id")
 
     @property
     @pulumi.getter(name="resolveAge")
@@ -738,21 +825,7 @@ class SentryProject(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def status(self) -> pulumi.Output[str]:
-        return pulumi.get(self, "status")
-
-    @property
-    @pulumi.getter
-    @_utilities.deprecated("""Use `teams` instead.""")
-    def team(self) -> pulumi.Output[Optional[str]]:
-        """
-        The slug of the team to create the project for. **Deprecated** Use `teams` instead.
-        """
-        return pulumi.get(self, "team")
-
-    @property
-    @pulumi.getter
-    def teams(self) -> pulumi.Output[Optional[Sequence[str]]]:
+    def teams(self) -> pulumi.Output[Sequence[str]]:
         """
         The slugs of the teams to create the project for.
         """

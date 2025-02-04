@@ -39,11 +39,13 @@ import (
 //			}
 //			this, err := sentry.NewSentryProject(ctx, "this", &sentry.SentryProjectArgs{
 //				Organization: pulumi.String("my-organization"),
-//				Team:         pulumi.String("my-team"),
-//				Name:         pulumi.String("Web App"),
-//				Slug:         pulumi.String("web-app"),
-//				Platform:     pulumi.String("javascript"),
-//				ResolveAge:   pulumi.Int(720),
+//				Teams: pulumi.StringArray{
+//					pulumi.String("my-team"),
+//				},
+//				Name:       pulumi.String("Web App"),
+//				Slug:       pulumi.String("web-app"),
+//				Platform:   pulumi.String("javascript"),
+//				ResolveAge: pulumi.Int(720),
 //			})
 //			if err != nil {
 //				return err

@@ -16,7 +16,7 @@ namespace Pulumiverse.Sentry.Outputs
     {
         public readonly string DisplayType;
         /// <summary>
-        /// The ID of this resource.
+        /// The ID of the widget.
         /// </summary>
         public readonly string? Id;
         public readonly string? Interval;

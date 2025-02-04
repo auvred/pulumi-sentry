@@ -12,7 +12,7 @@ import (
 	"github.com/pulumiverse/pulumi-sentry/sdk/go/sentry/internal"
 )
 
-// Sentry Github Organization Repository resource.
+// Sentry Github Organization Repository resource. This resource is deprecated and will be removed in the next major version of the provider. Use `SentryOrganizationRepository` instead.
 //
 // ## Example Usage
 //

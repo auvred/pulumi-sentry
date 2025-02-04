@@ -13,7 +13,7 @@ namespace Pulumiverse.Sentry.Inputs
 
     public sealed class SentryMetricAlertTriggerGetArgs : global::Pulumi.ResourceArgs
     {
-        [Input("actions")]
+        [Input("actions", required: true)]
         private InputList<Inputs.SentryMetricAlertTriggerActionGetArgs>? _actions;
         public InputList<Inputs.SentryMetricAlertTriggerActionGetArgs> Actions
         {
@@ -25,7 +25,7 @@ namespace Pulumiverse.Sentry.Inputs
         public Input<double> AlertThreshold { get; set; } = null!;
 
         /// <summary>
-        /// The ID of this resource.
+        /// The ID of the trigger.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }

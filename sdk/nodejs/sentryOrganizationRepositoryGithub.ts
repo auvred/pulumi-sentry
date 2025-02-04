@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 /**
- * Sentry Github Organization Repository resource.
+ * Sentry Github Organization Repository resource. This resource is deprecated and will be removed in the next major version of the provider. Use `sentry.SentryOrganizationRepository` instead.
  *
  * ## Example Usage
  *

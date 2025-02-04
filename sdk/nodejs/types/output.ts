@@ -5,6 +5,136 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
+export interface GetSentryAllKeysKey {
+    /**
+     * This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+     */
+    dsn: {[key: string]: string};
+    /**
+     * Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
+     *
+     * @deprecated This field is deprecated and will be removed in a future version. Use `dsn["csp"]` instead.
+     */
+    dsnCsp: string;
+    /**
+     * The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
+     *
+     * @deprecated This field is deprecated and will be removed in a future version. Use `dsn["public"]` instead.
+     */
+    dsnPublic: string;
+    /**
+     * Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+     *
+     * @deprecated This field is deprecated and will be removed in a future version. Use `dsn["secret"]` instead.
+     */
+    dsnSecret: string;
+    /**
+     * The ID of this resource.
+     */
+    id: string;
+    /**
+     * The JavaScript loader script configuration.
+     */
+    javascriptLoaderScript: outputs.GetSentryAllKeysKeyJavascriptLoaderScript;
+    /**
+     * The name of the client key.
+     */
+    name: string;
+    /**
+     * The slug of the organization the resource belongs to.
+     */
+    organization: string;
+    /**
+     * The slug of the project the resource belongs to.
+     */
+    project: string;
+    /**
+     * The ID of the project that the key belongs to.
+     */
+    projectId: string;
+    /**
+     * The public key.
+     */
+    public: string;
+    /**
+     * Number of events that can be reported within the rate limit window.
+     */
+    rateLimitCount: number;
+    /**
+     * Length of time in seconds that will be considered when checking the rate limit.
+     */
+    rateLimitWindow: number;
+    /**
+     * The secret key.
+     */
+    secret: string;
+}
+
+export interface GetSentryAllKeysKeyJavascriptLoaderScript {
+    /**
+     * The version of the browser SDK to load.
+     */
+    browserSdkVersion: string;
+    /**
+     * Whether debug bundles & logging are enabled for this key.
+     */
+    debugEnabled: boolean;
+    /**
+     * Whether performance monitoring is enabled for this key.
+     */
+    performanceMonitoringEnabled: boolean;
+    /**
+     * Whether session replay is enabled for this key.
+     */
+    sessionReplayEnabled: boolean;
+}
+
+export interface GetSentryAllOrganizationMembersMember {
+    /**
+     * The email of the organization member.
+     */
+    email: string;
+    /**
+     * The ID of of the organization member.
+     */
+    id: string;
+    /**
+     * This is the role of the organization member.
+     */
+    role: string;
+}
+
+export interface GetSentryAllProjectsProject {
+    /**
+     * The color of this project.
+     */
+    color: string;
+    /**
+     * The date this project was created.
+     */
+    dateCreated: string;
+    /**
+     * The features of this project.
+     */
+    features: string[];
+    /**
+     * The internal ID of this project.
+     */
+    internalId: string;
+    /**
+     * The name of this project.
+     */
+    name: string;
+    /**
+     * The platform of this project.
+     */
+    platform: string;
+    /**
+     * The slug of this project.
+     */
+    slug: string;
+}
+
 export interface GetSentryDashboardWidget {
     displayType: string;
     id: string;
@@ -35,6 +165,351 @@ export interface GetSentryDashboardWidgetQuery {
     orderBy: string;
 }
 
+export interface GetSentryIssueAlertActionsV2 {
+    /**
+     * Create an Azure DevOps work item in `integration`.
+     */
+    azureDevopsCreateTicket: outputs.GetSentryIssueAlertActionsV2AzureDevopsCreateTicket;
+    /**
+     * Send a notification to the `server` Discord server in the channel with ID or URL: `channelId` and show tags `tags` in the notification.
+     */
+    discordNotifyService: outputs.GetSentryIssueAlertActionsV2DiscordNotifyService;
+    /**
+     * Create a GitHub issue in `integration`.
+     */
+    githubCreateTicket: outputs.GetSentryIssueAlertActionsV2GithubCreateTicket;
+    /**
+     * Create a GitHub Enterprise issue in `integration`.
+     */
+    githubEnterpriseCreateTicket: outputs.GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicket;
+    /**
+     * Create a Jira issue in `integration`.
+     */
+    jiraCreateTicket: outputs.GetSentryIssueAlertActionsV2JiraCreateTicket;
+    /**
+     * Create a Jira Server issue in `integration`.
+     */
+    jiraServerCreateTicket: outputs.GetSentryIssueAlertActionsV2JiraServerCreateTicket;
+    /**
+     * Send a notification to the `team` Team to `channel`.
+     */
+    msteamsNotifyService: outputs.GetSentryIssueAlertActionsV2MsteamsNotifyService;
+    /**
+     * Send a notification to `targetType` and if none can be found then send a notification to `fallthroughType`.
+     */
+    notifyEmail: outputs.GetSentryIssueAlertActionsV2NotifyEmail;
+    /**
+     * Send a notification to all legacy integrations.
+     */
+    notifyEvent: outputs.GetSentryIssueAlertActionsV2NotifyEvent;
+    /**
+     * Send a notification to a Sentry app.
+     */
+    notifyEventSentryApp: outputs.GetSentryIssueAlertActionsV2NotifyEventSentryApp;
+    /**
+     * Send a notification via an integration.
+     */
+    notifyEventService: outputs.GetSentryIssueAlertActionsV2NotifyEventService;
+    /**
+     * Send a notification to Opsgenie account `account` and team `team` with `priority` priority.
+     */
+    opsgenieNotifyTeam: outputs.GetSentryIssueAlertActionsV2OpsgenieNotifyTeam;
+    /**
+     * Send a notification to PagerDuty account `account` and service `service` with `severity` severity.
+     */
+    pagerdutyNotifyService: outputs.GetSentryIssueAlertActionsV2PagerdutyNotifyService;
+    /**
+     * Send a notification to the `workspace` Slack workspace to `channel` (optionally, an ID: `channelId`) and show tags `tags` and notes `notes` in notification.
+     */
+    slackNotifyService: outputs.GetSentryIssueAlertActionsV2SlackNotifyService;
+}
+
+export interface GetSentryIssueAlertActionsV2AzureDevopsCreateTicket {
+    integration: string;
+    name: string;
+    workItemType: string;
+}
+
+export interface GetSentryIssueAlertActionsV2DiscordNotifyService {
+    channelId: string;
+    name: string;
+    server: string;
+    tags: string[];
+}
+
+export interface GetSentryIssueAlertActionsV2GithubCreateTicket {
+    assignee: string;
+    integration: string;
+    labels: string[];
+    name: string;
+    repo: string;
+}
+
+export interface GetSentryIssueAlertActionsV2GithubEnterpriseCreateTicket {
+    assignee: string;
+    integration: string;
+    labels: string[];
+    name: string;
+    repo: string;
+}
+
+export interface GetSentryIssueAlertActionsV2JiraCreateTicket {
+    integration: string;
+    issueType: string;
+    name: string;
+    project: string;
+}
+
+export interface GetSentryIssueAlertActionsV2JiraServerCreateTicket {
+    integration: string;
+    issueType: string;
+    name: string;
+    project: string;
+}
+
+export interface GetSentryIssueAlertActionsV2MsteamsNotifyService {
+    channel: string;
+    channelId: string;
+    name: string;
+    team: string;
+}
+
+export interface GetSentryIssueAlertActionsV2NotifyEmail {
+    fallthroughType: string;
+    name: string;
+    targetIdentifier: string;
+    targetType: string;
+}
+
+export interface GetSentryIssueAlertActionsV2NotifyEvent {
+    name: string;
+}
+
+export interface GetSentryIssueAlertActionsV2NotifyEventSentryApp {
+    name: string;
+    sentryAppInstallationUuid: string;
+    settings: {[key: string]: string};
+}
+
+export interface GetSentryIssueAlertActionsV2NotifyEventService {
+    name: string;
+    service: string;
+}
+
+export interface GetSentryIssueAlertActionsV2OpsgenieNotifyTeam {
+    account: string;
+    name: string;
+    priority: string;
+    team: string;
+}
+
+export interface GetSentryIssueAlertActionsV2PagerdutyNotifyService {
+    account: string;
+    name: string;
+    service: string;
+    severity: string;
+}
+
+export interface GetSentryIssueAlertActionsV2SlackNotifyService {
+    channel: string;
+    channelId: string;
+    name: string;
+    notes: string;
+    tags: string[];
+    workspace: string;
+}
+
+export interface GetSentryIssueAlertConditionsV2 {
+    /**
+     * When the `comparisonType` is `count`, the number of events in an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of events in an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+     */
+    eventFrequency: outputs.GetSentryIssueAlertConditionsV2EventFrequency;
+    /**
+     * When the `comparisonType` is `count`, the percent of sessions affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the percent of sessions affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+     */
+    eventFrequencyPercent: outputs.GetSentryIssueAlertConditionsV2EventFrequencyPercent;
+    /**
+     * When the `comparisonType` is `count`, the number of users affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of users affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+     */
+    eventUniqueUserFrequency: outputs.GetSentryIssueAlertConditionsV2EventUniqueUserFrequency;
+    /**
+     * Sentry marks an existing issue as high priority.
+     */
+    existingHighPriorityIssue: outputs.GetSentryIssueAlertConditionsV2ExistingHighPriorityIssue;
+    /**
+     * A new issue is created.
+     */
+    firstSeenEvent: outputs.GetSentryIssueAlertConditionsV2FirstSeenEvent;
+    /**
+     * Sentry marks a new issue as high priority.
+     */
+    newHighPriorityIssue: outputs.GetSentryIssueAlertConditionsV2NewHighPriorityIssue;
+    /**
+     * The issue changes state from ignored to unresolved.
+     */
+    reappearedEvent: outputs.GetSentryIssueAlertConditionsV2ReappearedEvent;
+    /**
+     * The issue changes state from resolved to unresolved.
+     */
+    regressionEvent: outputs.GetSentryIssueAlertConditionsV2RegressionEvent;
+}
+
+export interface GetSentryIssueAlertConditionsV2EventFrequency {
+    comparisonInterval: string;
+    comparisonType: string;
+    interval: string;
+    name: string;
+    value: number;
+}
+
+export interface GetSentryIssueAlertConditionsV2EventFrequencyPercent {
+    comparisonInterval: string;
+    comparisonType: string;
+    interval: string;
+    name: string;
+    value: number;
+}
+
+export interface GetSentryIssueAlertConditionsV2EventUniqueUserFrequency {
+    comparisonInterval: string;
+    comparisonType: string;
+    interval: string;
+    name: string;
+    value: number;
+}
+
+export interface GetSentryIssueAlertConditionsV2ExistingHighPriorityIssue {
+    name: string;
+}
+
+export interface GetSentryIssueAlertConditionsV2FirstSeenEvent {
+    name: string;
+}
+
+export interface GetSentryIssueAlertConditionsV2NewHighPriorityIssue {
+    name: string;
+}
+
+export interface GetSentryIssueAlertConditionsV2ReappearedEvent {
+    name: string;
+}
+
+export interface GetSentryIssueAlertConditionsV2RegressionEvent {
+    name: string;
+}
+
+export interface GetSentryIssueAlertFiltersV2 {
+    /**
+     * The issue is older or newer than `value` `time`.
+     */
+    ageComparison: outputs.GetSentryIssueAlertFiltersV2AgeComparison;
+    /**
+     * The issue is assigned to no one, team, or member.
+     */
+    assignedTo: outputs.GetSentryIssueAlertFiltersV2AssignedTo;
+    /**
+     * The event's `attribute` value `match` `value`.
+     */
+    eventAttribute: outputs.GetSentryIssueAlertFiltersV2EventAttribute;
+    /**
+     * The issue's category is equal to `value`.
+     */
+    issueCategory: outputs.GetSentryIssueAlertFiltersV2IssueCategory;
+    /**
+     * The issue has happened at least `value` times (Note: this is approximate).
+     */
+    issueOccurrences: outputs.GetSentryIssueAlertFiltersV2IssueOccurrences;
+    /**
+     * The {oldest*or*newest} adopted release associated with the event's issue is {older*or*newer} than the latest adopted release in {environment}.
+     */
+    latestAdoptedRelease: outputs.GetSentryIssueAlertFiltersV2LatestAdoptedRelease;
+    /**
+     * The event is from the latest release.
+     */
+    latestRelease: outputs.GetSentryIssueAlertFiltersV2LatestRelease;
+    /**
+     * The event's level is `match` `level`.
+     */
+    level: outputs.GetSentryIssueAlertFiltersV2Level;
+    /**
+     * The event's tags match `key` `match` `value`.
+     */
+    taggedEvent: outputs.GetSentryIssueAlertFiltersV2TaggedEvent;
+}
+
+export interface GetSentryIssueAlertFiltersV2AgeComparison {
+    comparisonType: string;
+    name: string;
+    time: string;
+    value: number;
+}
+
+export interface GetSentryIssueAlertFiltersV2AssignedTo {
+    name: string;
+    targetIdentifier: number;
+    targetType: number;
+}
+
+export interface GetSentryIssueAlertFiltersV2EventAttribute {
+    attribute: string;
+    match: string;
+    name: string;
+    value: string;
+}
+
+export interface GetSentryIssueAlertFiltersV2IssueCategory {
+    name: string;
+    value: string;
+}
+
+export interface GetSentryIssueAlertFiltersV2IssueOccurrences {
+    name: string;
+    value: number;
+}
+
+export interface GetSentryIssueAlertFiltersV2LatestAdoptedRelease {
+    environment: number;
+    name: string;
+    olderOrNewer: number;
+    oldestOrNewest: number;
+}
+
+export interface GetSentryIssueAlertFiltersV2LatestRelease {
+    name: string;
+}
+
+export interface GetSentryIssueAlertFiltersV2Level {
+    level: string;
+    match: string;
+    name: string;
+}
+
+export interface GetSentryIssueAlertFiltersV2TaggedEvent {
+    key: string;
+    match: string;
+    name: string;
+    value: string;
+}
+
+export interface GetSentryKeyJavascriptLoaderScript {
+    /**
+     * The version of the browser SDK to load.
+     */
+    browserSdkVersion: string;
+    /**
+     * Whether debug bundles & logging are enabled for this key.
+     */
+    debugEnabled: boolean;
+    /**
+     * Whether performance monitoring is enabled for this key.
+     */
+    performanceMonitoringEnabled: boolean;
+    /**
+     * Whether session replay is enabled for this key.
+     */
+    sessionReplayEnabled: boolean;
+}
+
 export interface GetSentryMetricAlertTrigger {
     actions: outputs.GetSentryMetricAlertTriggerAction[];
     alertThreshold: number;
@@ -46,6 +521,7 @@ export interface GetSentryMetricAlertTrigger {
 
 export interface GetSentryMetricAlertTriggerAction {
     id: string;
+    inputChannelId: string;
     integrationId: number;
     targetIdentifier: string;
     targetType: string;
@@ -55,7 +531,7 @@ export interface GetSentryMetricAlertTriggerAction {
 export interface SentryDashboardWidget {
     displayType: string;
     /**
-     * The ID of this resource.
+     * The ID of the widget.
      */
     id: string;
     interval: string;
@@ -81,18 +557,520 @@ export interface SentryDashboardWidgetQuery {
     fieldAliases: string[];
     fields: string[];
     /**
-     * The ID of this resource.
+     * The ID of the query.
      */
     id: string;
     name?: string;
     orderBy: string;
 }
 
+export interface SentryIssueAlertActionsV2 {
+    /**
+     * Create an Azure DevOps work item in `integration`.
+     */
+    azureDevopsCreateTicket?: outputs.SentryIssueAlertActionsV2AzureDevopsCreateTicket;
+    /**
+     * Send a notification to the `server` Discord server in the channel with ID or URL: `channelId` and show tags `tags` in the notification.
+     */
+    discordNotifyService?: outputs.SentryIssueAlertActionsV2DiscordNotifyService;
+    /**
+     * Create a GitHub issue in `integration`.
+     */
+    githubCreateTicket?: outputs.SentryIssueAlertActionsV2GithubCreateTicket;
+    /**
+     * Create a GitHub Enterprise issue in `integration`.
+     */
+    githubEnterpriseCreateTicket?: outputs.SentryIssueAlertActionsV2GithubEnterpriseCreateTicket;
+    /**
+     * Create a Jira issue in `integration`.
+     */
+    jiraCreateTicket?: outputs.SentryIssueAlertActionsV2JiraCreateTicket;
+    /**
+     * Create a Jira Server issue in `integration`.
+     */
+    jiraServerCreateTicket?: outputs.SentryIssueAlertActionsV2JiraServerCreateTicket;
+    /**
+     * Send a notification to the `team` Team to `channel`.
+     */
+    msteamsNotifyService?: outputs.SentryIssueAlertActionsV2MsteamsNotifyService;
+    /**
+     * Send a notification to `targetType` and if none can be found then send a notification to `fallthroughType`.
+     */
+    notifyEmail?: outputs.SentryIssueAlertActionsV2NotifyEmail;
+    /**
+     * Send a notification to all legacy integrations.
+     */
+    notifyEvent?: outputs.SentryIssueAlertActionsV2NotifyEvent;
+    /**
+     * Send a notification to a Sentry app.
+     */
+    notifyEventSentryApp?: outputs.SentryIssueAlertActionsV2NotifyEventSentryApp;
+    /**
+     * Send a notification via an integration.
+     */
+    notifyEventService?: outputs.SentryIssueAlertActionsV2NotifyEventService;
+    /**
+     * Send a notification to Opsgenie account `account` and team `team` with `priority` priority.
+     */
+    opsgenieNotifyTeam?: outputs.SentryIssueAlertActionsV2OpsgenieNotifyTeam;
+    /**
+     * Send a notification to PagerDuty account `account` and service `service` with `severity` severity.
+     */
+    pagerdutyNotifyService?: outputs.SentryIssueAlertActionsV2PagerdutyNotifyService;
+    /**
+     * Send a notification to the `workspace` Slack workspace to `channel` (optionally, an ID: `channelId`) and show tags `tags` and notes `notes` in notification.
+     */
+    slackNotifyService?: outputs.SentryIssueAlertActionsV2SlackNotifyService;
+}
+
+export interface SentryIssueAlertActionsV2AzureDevopsCreateTicket {
+    /**
+     * The integration ID.
+     */
+    integration: string;
+    name: string;
+    /**
+     * The ID of the Azure DevOps project.
+     */
+    project: string;
+    /**
+     * The type of work item to create.
+     */
+    workItemType: string;
+}
+
+export interface SentryIssueAlertActionsV2DiscordNotifyService {
+    /**
+     * The ID of the channel to send the notification to. You must enter either a channel ID or a channel URL, not a channel name
+     */
+    channelId: string;
+    name: string;
+    /**
+     * The integration ID associated with the Discord server.
+     */
+    server: string;
+    /**
+     * A string of tags to show in the notification.
+     */
+    tags?: string[];
+}
+
+export interface SentryIssueAlertActionsV2GithubCreateTicket {
+    /**
+     * The GitHub user to assign the issue to.
+     */
+    assignee?: string;
+    /**
+     * The integration ID associated with GitHub.
+     */
+    integration: string;
+    /**
+     * A list of labels to assign to the issue.
+     */
+    labels?: string[];
+    name: string;
+    /**
+     * The name of the repository to create the issue in.
+     */
+    repo: string;
+}
+
+export interface SentryIssueAlertActionsV2GithubEnterpriseCreateTicket {
+    /**
+     * The GitHub user to assign the issue to.
+     */
+    assignee?: string;
+    /**
+     * The integration ID associated with GitHub Enterprise.
+     */
+    integration: string;
+    /**
+     * A list of labels to assign to the issue.
+     */
+    labels?: string[];
+    name: string;
+    /**
+     * The name of the repository to create the issue in.
+     */
+    repo: string;
+}
+
+export interface SentryIssueAlertActionsV2JiraCreateTicket {
+    /**
+     * The integration ID associated with Jira.
+     */
+    integration: string;
+    /**
+     * The ID of the type of issue that the ticket should be created as.
+     */
+    issueType: string;
+    name: string;
+    /**
+     * The ID of the Jira project.
+     */
+    project: string;
+}
+
+export interface SentryIssueAlertActionsV2JiraServerCreateTicket {
+    /**
+     * The integration ID associated with Jira Server.
+     */
+    integration: string;
+    /**
+     * The ID of the type of issue that the ticket should be created as.
+     */
+    issueType: string;
+    name: string;
+    /**
+     * The ID of the Jira Server project.
+     */
+    project: string;
+}
+
+export interface SentryIssueAlertActionsV2MsteamsNotifyService {
+    /**
+     * The name of the channel to send the notification to.
+     */
+    channel: string;
+    channelId: string;
+    name: string;
+    /**
+     * The integration ID associated with the Microsoft Teams team.
+     */
+    team: string;
+}
+
+export interface SentryIssueAlertActionsV2NotifyEmail {
+    /**
+     * Who the notification should be sent to if there are no suggested assignees. Valid values are: `AllMembers`, `ActiveMembers`, and `NoOne`.
+     */
+    fallthroughType?: string;
+    name: string;
+    /**
+     * The ID of the Member or Team the notification should be sent to. Only required when `targetType` is `Team` or `Member`.
+     */
+    targetIdentifier?: string;
+    /**
+     * Valid values are: `IssueOwners`, `Team`, and `Member`.
+     */
+    targetType: string;
+}
+
+export interface SentryIssueAlertActionsV2NotifyEvent {
+    name: string;
+}
+
+export interface SentryIssueAlertActionsV2NotifyEventSentryApp {
+    name: string;
+    sentryAppInstallationUuid: string;
+    settings?: {[key: string]: string};
+}
+
+export interface SentryIssueAlertActionsV2NotifyEventService {
+    name: string;
+    service: string;
+}
+
+export interface SentryIssueAlertActionsV2OpsgenieNotifyTeam {
+    account: string;
+    name: string;
+    priority: string;
+    team: string;
+}
+
+export interface SentryIssueAlertActionsV2PagerdutyNotifyService {
+    account: string;
+    name: string;
+    service: string;
+    severity: string;
+}
+
+export interface SentryIssueAlertActionsV2SlackNotifyService {
+    /**
+     * The name of the channel to send the notification to (e.g., #critical, Jane Schmidt).
+     */
+    channel: string;
+    /**
+     * The ID of the channel to send the notification to.
+     */
+    channelId: string;
+    name: string;
+    /**
+     * Text to show alongside the notification. To @ a user, include their user id like `@<USER_ID>`. To include a clickable link, format the link and title like `<http://example.com|Click Here>`.
+     */
+    notes?: string;
+    /**
+     * A string of tags to show in the notification.
+     */
+    tags?: string[];
+    /**
+     * The integration ID associated with the Slack workspace.
+     */
+    workspace: string;
+}
+
+export interface SentryIssueAlertConditionsV2 {
+    /**
+     * When the `comparisonType` is `count`, the number of events in an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of events in an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+     */
+    eventFrequency?: outputs.SentryIssueAlertConditionsV2EventFrequency;
+    /**
+     * When the `comparisonType` is `count`, the percent of sessions affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the percent of sessions affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+     */
+    eventFrequencyPercent?: outputs.SentryIssueAlertConditionsV2EventFrequencyPercent;
+    /**
+     * When the `comparisonType` is `count`, the number of users affected by an issue is more than `value` in `interval`. When the `comparisonType` is `percent`, the number of users affected by an issue is `value` % higher in `interval` compared to `comparisonInterval` ago.
+     */
+    eventUniqueUserFrequency?: outputs.SentryIssueAlertConditionsV2EventUniqueUserFrequency;
+    /**
+     * Sentry marks an existing issue as high priority.
+     */
+    existingHighPriorityIssue?: outputs.SentryIssueAlertConditionsV2ExistingHighPriorityIssue;
+    /**
+     * A new issue is created.
+     */
+    firstSeenEvent?: outputs.SentryIssueAlertConditionsV2FirstSeenEvent;
+    /**
+     * Sentry marks a new issue as high priority.
+     */
+    newHighPriorityIssue?: outputs.SentryIssueAlertConditionsV2NewHighPriorityIssue;
+    /**
+     * The issue changes state from ignored to unresolved.
+     */
+    reappearedEvent?: outputs.SentryIssueAlertConditionsV2ReappearedEvent;
+    /**
+     * The issue changes state from resolved to unresolved.
+     */
+    regressionEvent?: outputs.SentryIssueAlertConditionsV2RegressionEvent;
+}
+
+export interface SentryIssueAlertConditionsV2EventFrequency {
+    /**
+     * `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+     */
+    comparisonInterval?: string;
+    /**
+     * Valid values are: `count`, and `percent`.
+     */
+    comparisonType: string;
+    /**
+     * `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+     */
+    interval?: string;
+    name: string;
+    value: number;
+}
+
+export interface SentryIssueAlertConditionsV2EventFrequencyPercent {
+    /**
+     * `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+     */
+    comparisonInterval?: string;
+    /**
+     * Valid values are: `count`, and `percent`.
+     */
+    comparisonType: string;
+    /**
+     * `m` for minutes, `h` for hours. Valid values are: `5m`, `10m`, `30m`, and `1h`.
+     */
+    interval: string;
+    name: string;
+    value: number;
+}
+
+export interface SentryIssueAlertConditionsV2EventUniqueUserFrequency {
+    /**
+     * `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+     */
+    comparisonInterval?: string;
+    /**
+     * Valid values are: `count`, and `percent`.
+     */
+    comparisonType: string;
+    /**
+     * `m` for minutes, `h` for hours, `d` for days, and `w` for weeks. Valid values are: `1m`, `5m`, `15m`, `1h`, `1d`, `1w`, and `30d`.
+     */
+    interval?: string;
+    name: string;
+    value: number;
+}
+
+export interface SentryIssueAlertConditionsV2ExistingHighPriorityIssue {
+    name: string;
+}
+
+export interface SentryIssueAlertConditionsV2FirstSeenEvent {
+    name: string;
+}
+
+export interface SentryIssueAlertConditionsV2NewHighPriorityIssue {
+    name: string;
+}
+
+export interface SentryIssueAlertConditionsV2ReappearedEvent {
+    name: string;
+}
+
+export interface SentryIssueAlertConditionsV2RegressionEvent {
+    name: string;
+}
+
+export interface SentryIssueAlertFiltersV2 {
+    /**
+     * The issue is older or newer than `value` `time`.
+     */
+    ageComparison?: outputs.SentryIssueAlertFiltersV2AgeComparison;
+    /**
+     * The issue is assigned to no one, team, or member.
+     */
+    assignedTo?: outputs.SentryIssueAlertFiltersV2AssignedTo;
+    /**
+     * The event's `attribute` value `match` `value`.
+     */
+    eventAttribute?: outputs.SentryIssueAlertFiltersV2EventAttribute;
+    /**
+     * The issue's category is equal to `value`.
+     */
+    issueCategory?: outputs.SentryIssueAlertFiltersV2IssueCategory;
+    /**
+     * The issue has happened at least `value` times (Note: this is approximate).
+     */
+    issueOccurrences?: outputs.SentryIssueAlertFiltersV2IssueOccurrences;
+    /**
+     * The {oldest*or*newest} adopted release associated with the event's issue is {older*or*newer} than the latest adopted release in {environment}.
+     */
+    latestAdoptedRelease?: outputs.SentryIssueAlertFiltersV2LatestAdoptedRelease;
+    /**
+     * The event is from the latest release.
+     */
+    latestRelease?: outputs.SentryIssueAlertFiltersV2LatestRelease;
+    /**
+     * The event's level is `match` `level`.
+     */
+    level?: outputs.SentryIssueAlertFiltersV2Level;
+    /**
+     * The event's tags match `key` `match` `value`.
+     */
+    taggedEvent?: outputs.SentryIssueAlertFiltersV2TaggedEvent;
+}
+
+export interface SentryIssueAlertFiltersV2AgeComparison {
+    /**
+     * Valid values are: `older`, and `newer`.
+     */
+    comparisonType: string;
+    name: string;
+    /**
+     * Valid values are: `minute`, `hour`, `day`, and `week`.
+     */
+    time: string;
+    value: number;
+}
+
+export interface SentryIssueAlertFiltersV2AssignedTo {
+    name: string;
+    /**
+     * The target's ID. Only required when `targetType` is `Team` or `Member`.
+     */
+    targetIdentifier?: string;
+    /**
+     * Valid values are: `Unassigned`, `Team`, and `Member`.
+     */
+    targetType: string;
+}
+
+export interface SentryIssueAlertFiltersV2EventAttribute {
+    /**
+     * Valid values are: `message`, `platform`, `environment`, `type`, `error.handled`, `error.unhandled`, `error.main_thread`, `exception.type`, `exception.value`, `user.id`, `user.email`, `user.username`, `user.ip_address`, `http.method`, `http.url`, `http.status_code`, `sdk.name`, `stacktrace.code`, `stacktrace.module`, `stacktrace.filename`, `stacktrace.abs_path`, `stacktrace.package`, `unreal.crashtype`, `app.in_foreground`, `os.distribution_name`, and `os.distribution_version`.
+     */
+    attribute: string;
+    /**
+     * The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+     */
+    match: string;
+    name: string;
+    value?: string;
+}
+
+export interface SentryIssueAlertFiltersV2IssueCategory {
+    name: string;
+    /**
+     * Valid values are: `Error`, `Performance`, `Profile`, `Cron`, `Replay`, `Feedback`, `Uptime`, and `Metric_Alert`.
+     */
+    value: string;
+}
+
+export interface SentryIssueAlertFiltersV2IssueOccurrences {
+    name: string;
+    value: number;
+}
+
+export interface SentryIssueAlertFiltersV2LatestAdoptedRelease {
+    environment: string;
+    name: string;
+    /**
+     * Valid values are: `older`, and `newer`.
+     */
+    olderOrNewer: string;
+    /**
+     * Valid values are: `oldest`, and `newest`.
+     */
+    oldestOrNewest: string;
+}
+
+export interface SentryIssueAlertFiltersV2LatestRelease {
+    name: string;
+}
+
+export interface SentryIssueAlertFiltersV2Level {
+    /**
+     * Valid values are: `sample`, `debug`, `info`, `warning`, `error`, and `fatal`.
+     */
+    level: string;
+    /**
+     * The comparison operator. Valid values are: `EQUAL`, `GREATER_OR_EQUAL`, and `LESS_OR_EQUAL`.
+     */
+    match: string;
+    name: string;
+}
+
+export interface SentryIssueAlertFiltersV2TaggedEvent {
+    /**
+     * The tag.
+     */
+    key: string;
+    /**
+     * The comparison operator. Valid values are: `CONTAINS`, `ENDS_WITH`, `EQUAL`, `GREATER_OR_EQUAL`, `GREATER`, `IS_SET`, `IS_IN`, `LESS_OR_EQUAL`, `LESS`, `NOT_CONTAINS`, `NOT_ENDS_WITH`, `NOT_EQUAL`, `NOT_SET`, `NOT_STARTS_WITH`, `NOT_IN`, and `STARTS_WITH`.
+     */
+    match: string;
+    name: string;
+    value?: string;
+}
+
+export interface SentryKeyJavascriptLoaderScript {
+    /**
+     * The version of the browser SDK to load.
+     */
+    browserSdkVersion: string;
+    /**
+     * Whether debug bundles & logging are enabled for this key.
+     */
+    debugEnabled: boolean;
+    /**
+     * Whether performance monitoring is enabled for this key.
+     */
+    performanceMonitoringEnabled: boolean;
+    /**
+     * Whether session replay is enabled for this key.
+     */
+    sessionReplayEnabled: boolean;
+}
+
 export interface SentryMetricAlertTrigger {
-    actions?: outputs.SentryMetricAlertTriggerAction[];
+    actions: outputs.SentryMetricAlertTriggerAction[];
     alertThreshold: number;
     /**
-     * The ID of this resource.
+     * The ID of the trigger.
      */
     id: string;
     label: string;
@@ -102,12 +1080,65 @@ export interface SentryMetricAlertTrigger {
 
 export interface SentryMetricAlertTriggerAction {
     /**
-     * The ID of this resource.
+     * The ID of the action.
      */
     id: string;
+    /**
+     * Slack channel ID to avoid rate-limiting, see [here](https://docs.sentry.io/product/integrations/notification-incidents/slack/#rate-limiting-error)
+     */
+    inputChannelId?: string;
     integrationId?: number;
     targetIdentifier?: string;
     targetType: string;
+    type: string;
+}
+
+export interface SentryProjectClientSecurity {
+    /**
+     * A list of allowed domains. Examples: https://example.com, *, *.example.com, *:80.
+     */
+    allowedDomains: string[];
+    /**
+     * Enable JavaScript source fetching. Allow Sentry to scrape missing JavaScript source context when possible.
+     */
+    scrapeJavascript: boolean;
+    /**
+     * Security Token. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+     */
+    securityToken: string;
+    /**
+     * Security Token Header. Outbound requests matching Allowed Domains will have the header "{security*token*header}: {security_token}" appended.
+     */
+    securityTokenHeader: string;
+    /**
+     * Verify TLS/SSL. Outbound requests will verify TLS (sometimes known as SSL) connections.
+     */
+    verifyTlsSsl: boolean;
+}
+
+export interface SentryProjectFilters {
+    /**
+     * Filter events from these IP addresses. (e.g. 127.0.0.1 or 10.0.0.0/8)
+     */
+    blacklistedIps: string[];
+    /**
+     * Filter events by error messages. Allows [glob pattern matching](https://en.wikipedia.org/wiki/Glob_(programming)). (e.g. TypeError* or *: integer division or modulo by zero)
+     */
+    errorMessages: string[];
+    /**
+     * Filter events from these releases. Allows [glob pattern matching](https://en.wikipedia.org/wiki/Glob_(programming)). (e.g. 1.* or [!3].[0-9].*)
+     */
+    releases: string[];
+}
+
+export interface SentryProjectSymbolSourceLayout {
+    /**
+     * The casing of the symbol source layout. The layout of the folder structure. The options are: `default` - Default (mixed case), `uppercase` - Uppercase, `lowercase` - Lowercase.
+     */
+    casing: string;
+    /**
+     * The layout of the folder structure. The options are: `native` - Platform-Specific (SymStore / GDB / LLVM), `symstore` - Microsoft SymStore, `symstoreIndex2` - Microsoft SymStore (with index2.txt), `ssqp` - Microsoft SSQP, `unified` - Unified Symbol Server Layout, `debuginfod` - debuginfod.
+     */
     type: string;
 }
 

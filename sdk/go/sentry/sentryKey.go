@@ -12,7 +12,7 @@ import (
 	"github.com/pulumiverse/pulumi-sentry/sdk/go/sentry/internal"
 )
 
-// Sentry Key resource.
+// Return a client key bound to a project.
 //
 // ## Example Usage
 //
@@ -55,29 +55,37 @@ import (
 type SentryKey struct {
 	pulumi.CustomResourceState
 
-	// DSN for the Content Security Policy (CSP) for the key.
+	// This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+	Dsn pulumi.StringMapOutput `pulumi:"dsn"`
+	// Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
+	//
+	// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["csp"]` instead.
 	DsnCsp pulumi.StringOutput `pulumi:"dsnCsp"`
-	// DSN for the key.
+	// The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
+	//
+	// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["public"]` instead.
 	DsnPublic pulumi.StringOutput `pulumi:"dsnPublic"`
-	// Deprecated: DSN (Deprecated) for the key.
+	// Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+	//
+	// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["secret"]` instead.
 	DsnSecret pulumi.StringOutput `pulumi:"dsnSecret"`
-	// Flag indicating the key is active.
-	IsActive pulumi.BoolOutput `pulumi:"isActive"`
-	// The name of the key.
+	// The JavaScript loader script configuration.
+	JavascriptLoaderScript SentryKeyJavascriptLoaderScriptOutput `pulumi:"javascriptLoaderScript"`
+	// The name of the client key.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// The slug of the organization the key should be created for.
+	// The organization of this resource.
 	Organization pulumi.StringOutput `pulumi:"organization"`
-	// The slug of the project the key should be created for.
+	// The project of this resource.
 	Project pulumi.StringOutput `pulumi:"project"`
 	// The ID of the project that the key belongs to.
-	ProjectId pulumi.IntOutput `pulumi:"projectId"`
-	// Public key portion of the client key.
+	ProjectId pulumi.StringOutput `pulumi:"projectId"`
+	// The public key.
 	Public pulumi.StringOutput `pulumi:"public"`
 	// Number of events that can be reported within the rate limit window.
 	RateLimitCount pulumi.IntOutput `pulumi:"rateLimitCount"`
-	// Length of time that will be considered when checking the rate limit.
+	// Length of time in seconds that will be considered when checking the rate limit.
 	RateLimitWindow pulumi.IntOutput `pulumi:"rateLimitWindow"`
-	// Secret key portion of the client key.
+	// The secret key.
 	Secret pulumi.StringOutput `pulumi:"secret"`
 }
 
@@ -122,56 +130,72 @@ func GetSentryKey(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering SentryKey resources.
 type sentryKeyState struct {
-	// DSN for the Content Security Policy (CSP) for the key.
+	// This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+	Dsn map[string]string `pulumi:"dsn"`
+	// Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
+	//
+	// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["csp"]` instead.
 	DsnCsp *string `pulumi:"dsnCsp"`
-	// DSN for the key.
+	// The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
+	//
+	// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["public"]` instead.
 	DsnPublic *string `pulumi:"dsnPublic"`
-	// Deprecated: DSN (Deprecated) for the key.
+	// Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+	//
+	// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["secret"]` instead.
 	DsnSecret *string `pulumi:"dsnSecret"`
-	// Flag indicating the key is active.
-	IsActive *bool `pulumi:"isActive"`
-	// The name of the key.
+	// The JavaScript loader script configuration.
+	JavascriptLoaderScript *SentryKeyJavascriptLoaderScript `pulumi:"javascriptLoaderScript"`
+	// The name of the client key.
 	Name *string `pulumi:"name"`
-	// The slug of the organization the key should be created for.
+	// The organization of this resource.
 	Organization *string `pulumi:"organization"`
-	// The slug of the project the key should be created for.
+	// The project of this resource.
 	Project *string `pulumi:"project"`
 	// The ID of the project that the key belongs to.
-	ProjectId *int `pulumi:"projectId"`
-	// Public key portion of the client key.
+	ProjectId *string `pulumi:"projectId"`
+	// The public key.
 	Public *string `pulumi:"public"`
 	// Number of events that can be reported within the rate limit window.
 	RateLimitCount *int `pulumi:"rateLimitCount"`
-	// Length of time that will be considered when checking the rate limit.
+	// Length of time in seconds that will be considered when checking the rate limit.
 	RateLimitWindow *int `pulumi:"rateLimitWindow"`
-	// Secret key portion of the client key.
+	// The secret key.
 	Secret *string `pulumi:"secret"`
 }
 
 type SentryKeyState struct {
-	// DSN for the Content Security Policy (CSP) for the key.
+	// This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+	Dsn pulumi.StringMapInput
+	// Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
+	//
+	// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["csp"]` instead.
 	DsnCsp pulumi.StringPtrInput
-	// DSN for the key.
+	// The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
+	//
+	// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["public"]` instead.
 	DsnPublic pulumi.StringPtrInput
-	// Deprecated: DSN (Deprecated) for the key.
+	// Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+	//
+	// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["secret"]` instead.
 	DsnSecret pulumi.StringPtrInput
-	// Flag indicating the key is active.
-	IsActive pulumi.BoolPtrInput
-	// The name of the key.
+	// The JavaScript loader script configuration.
+	JavascriptLoaderScript SentryKeyJavascriptLoaderScriptPtrInput
+	// The name of the client key.
 	Name pulumi.StringPtrInput
-	// The slug of the organization the key should be created for.
+	// The organization of this resource.
 	Organization pulumi.StringPtrInput
-	// The slug of the project the key should be created for.
+	// The project of this resource.
 	Project pulumi.StringPtrInput
 	// The ID of the project that the key belongs to.
-	ProjectId pulumi.IntPtrInput
-	// Public key portion of the client key.
+	ProjectId pulumi.StringPtrInput
+	// The public key.
 	Public pulumi.StringPtrInput
 	// Number of events that can be reported within the rate limit window.
 	RateLimitCount pulumi.IntPtrInput
-	// Length of time that will be considered when checking the rate limit.
+	// Length of time in seconds that will be considered when checking the rate limit.
 	RateLimitWindow pulumi.IntPtrInput
-	// Secret key portion of the client key.
+	// The secret key.
 	Secret pulumi.StringPtrInput
 }
 
@@ -180,29 +204,33 @@ func (SentryKeyState) ElementType() reflect.Type {
 }
 
 type sentryKeyArgs struct {
-	// The name of the key.
+	// The JavaScript loader script configuration.
+	JavascriptLoaderScript *SentryKeyJavascriptLoaderScript `pulumi:"javascriptLoaderScript"`
+	// The name of the client key.
 	Name *string `pulumi:"name"`
-	// The slug of the organization the key should be created for.
+	// The organization of this resource.
 	Organization string `pulumi:"organization"`
-	// The slug of the project the key should be created for.
+	// The project of this resource.
 	Project string `pulumi:"project"`
 	// Number of events that can be reported within the rate limit window.
 	RateLimitCount *int `pulumi:"rateLimitCount"`
-	// Length of time that will be considered when checking the rate limit.
+	// Length of time in seconds that will be considered when checking the rate limit.
 	RateLimitWindow *int `pulumi:"rateLimitWindow"`
 }
 
 // The set of arguments for constructing a SentryKey resource.
 type SentryKeyArgs struct {
-	// The name of the key.
+	// The JavaScript loader script configuration.
+	JavascriptLoaderScript SentryKeyJavascriptLoaderScriptPtrInput
+	// The name of the client key.
 	Name pulumi.StringPtrInput
-	// The slug of the organization the key should be created for.
+	// The organization of this resource.
 	Organization pulumi.StringInput
-	// The slug of the project the key should be created for.
+	// The project of this resource.
 	Project pulumi.StringInput
 	// Number of events that can be reported within the rate limit window.
 	RateLimitCount pulumi.IntPtrInput
-	// Length of time that will be considered when checking the rate limit.
+	// Length of time in seconds that will be considered when checking the rate limit.
 	RateLimitWindow pulumi.IntPtrInput
 }
 
@@ -293,47 +321,58 @@ func (o SentryKeyOutput) ToSentryKeyOutputWithContext(ctx context.Context) Sentr
 	return o
 }
 
-// DSN for the Content Security Policy (CSP) for the key.
+// This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+func (o SentryKeyOutput) Dsn() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *SentryKey) pulumi.StringMapOutput { return v.Dsn }).(pulumi.StringMapOutput)
+}
+
+// Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
+//
+// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["csp"]` instead.
 func (o SentryKeyOutput) DsnCsp() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryKey) pulumi.StringOutput { return v.DsnCsp }).(pulumi.StringOutput)
 }
 
-// DSN for the key.
+// The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
+//
+// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["public"]` instead.
 func (o SentryKeyOutput) DsnPublic() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryKey) pulumi.StringOutput { return v.DsnPublic }).(pulumi.StringOutput)
 }
 
-// Deprecated: DSN (Deprecated) for the key.
+// Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+//
+// Deprecated: This field is deprecated and will be removed in a future version. Use `dsn["secret"]` instead.
 func (o SentryKeyOutput) DsnSecret() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryKey) pulumi.StringOutput { return v.DsnSecret }).(pulumi.StringOutput)
 }
 
-// Flag indicating the key is active.
-func (o SentryKeyOutput) IsActive() pulumi.BoolOutput {
-	return o.ApplyT(func(v *SentryKey) pulumi.BoolOutput { return v.IsActive }).(pulumi.BoolOutput)
+// The JavaScript loader script configuration.
+func (o SentryKeyOutput) JavascriptLoaderScript() SentryKeyJavascriptLoaderScriptOutput {
+	return o.ApplyT(func(v *SentryKey) SentryKeyJavascriptLoaderScriptOutput { return v.JavascriptLoaderScript }).(SentryKeyJavascriptLoaderScriptOutput)
 }
 
-// The name of the key.
+// The name of the client key.
 func (o SentryKeyOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryKey) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// The slug of the organization the key should be created for.
+// The organization of this resource.
 func (o SentryKeyOutput) Organization() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryKey) pulumi.StringOutput { return v.Organization }).(pulumi.StringOutput)
 }
 
-// The slug of the project the key should be created for.
+// The project of this resource.
 func (o SentryKeyOutput) Project() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryKey) pulumi.StringOutput { return v.Project }).(pulumi.StringOutput)
 }
 
 // The ID of the project that the key belongs to.
-func (o SentryKeyOutput) ProjectId() pulumi.IntOutput {
-	return o.ApplyT(func(v *SentryKey) pulumi.IntOutput { return v.ProjectId }).(pulumi.IntOutput)
+func (o SentryKeyOutput) ProjectId() pulumi.StringOutput {
+	return o.ApplyT(func(v *SentryKey) pulumi.StringOutput { return v.ProjectId }).(pulumi.StringOutput)
 }
 
-// Public key portion of the client key.
+// The public key.
 func (o SentryKeyOutput) Public() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryKey) pulumi.StringOutput { return v.Public }).(pulumi.StringOutput)
 }
@@ -343,12 +382,12 @@ func (o SentryKeyOutput) RateLimitCount() pulumi.IntOutput {
 	return o.ApplyT(func(v *SentryKey) pulumi.IntOutput { return v.RateLimitCount }).(pulumi.IntOutput)
 }
 
-// Length of time that will be considered when checking the rate limit.
+// Length of time in seconds that will be considered when checking the rate limit.
 func (o SentryKeyOutput) RateLimitWindow() pulumi.IntOutput {
 	return o.ApplyT(func(v *SentryKey) pulumi.IntOutput { return v.RateLimitWindow }).(pulumi.IntOutput)
 }
 
-// Secret key portion of the client key.
+// The secret key.
 func (o SentryKeyOutput) Secret() pulumi.StringOutput {
 	return o.ApplyT(func(v *SentryKey) pulumi.StringOutput { return v.Secret }).(pulumi.StringOutput)
 }

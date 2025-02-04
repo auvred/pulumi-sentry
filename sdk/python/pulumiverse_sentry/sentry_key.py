@@ -13,6 +13,8 @@ if sys.version_info >= (3, 11):
 else:
     from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['SentryKeyArgs', 'SentryKey']
 
@@ -21,19 +23,23 @@ class SentryKeyArgs:
     def __init__(__self__, *,
                  organization: pulumi.Input[str],
                  project: pulumi.Input[str],
+                 javascript_loader_script: Optional[pulumi.Input['SentryKeyJavascriptLoaderScriptArgs']] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  rate_limit_count: Optional[pulumi.Input[int]] = None,
                  rate_limit_window: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a SentryKey resource.
-        :param pulumi.Input[str] organization: The slug of the organization the key should be created for.
-        :param pulumi.Input[str] project: The slug of the project the key should be created for.
-        :param pulumi.Input[str] name: The name of the key.
+        :param pulumi.Input[str] organization: The organization of this resource.
+        :param pulumi.Input[str] project: The project of this resource.
+        :param pulumi.Input['SentryKeyJavascriptLoaderScriptArgs'] javascript_loader_script: The JavaScript loader script configuration.
+        :param pulumi.Input[str] name: The name of the client key.
         :param pulumi.Input[int] rate_limit_count: Number of events that can be reported within the rate limit window.
-        :param pulumi.Input[int] rate_limit_window: Length of time that will be considered when checking the rate limit.
+        :param pulumi.Input[int] rate_limit_window: Length of time in seconds that will be considered when checking the rate limit.
         """
         pulumi.set(__self__, "organization", organization)
         pulumi.set(__self__, "project", project)
+        if javascript_loader_script is not None:
+            pulumi.set(__self__, "javascript_loader_script", javascript_loader_script)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if rate_limit_count is not None:
@@ -45,7 +51,7 @@ class SentryKeyArgs:
     @pulumi.getter
     def organization(self) -> pulumi.Input[str]:
         """
-        The slug of the organization the key should be created for.
+        The organization of this resource.
         """
         return pulumi.get(self, "organization")
 
@@ -57,7 +63,7 @@ class SentryKeyArgs:
     @pulumi.getter
     def project(self) -> pulumi.Input[str]:
         """
-        The slug of the project the key should be created for.
+        The project of this resource.
         """
         return pulumi.get(self, "project")
 
@@ -66,10 +72,22 @@ class SentryKeyArgs:
         pulumi.set(self, "project", value)
 
     @property
+    @pulumi.getter(name="javascriptLoaderScript")
+    def javascript_loader_script(self) -> Optional[pulumi.Input['SentryKeyJavascriptLoaderScriptArgs']]:
+        """
+        The JavaScript loader script configuration.
+        """
+        return pulumi.get(self, "javascript_loader_script")
+
+    @javascript_loader_script.setter
+    def javascript_loader_script(self, value: Optional[pulumi.Input['SentryKeyJavascriptLoaderScriptArgs']]):
+        pulumi.set(self, "javascript_loader_script", value)
+
+    @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the key.
+        The name of the client key.
         """
         return pulumi.get(self, "name")
 
@@ -93,7 +111,7 @@ class SentryKeyArgs:
     @pulumi.getter(name="rateLimitWindow")
     def rate_limit_window(self) -> Optional[pulumi.Input[int]]:
         """
-        Length of time that will be considered when checking the rate limit.
+        Length of time in seconds that will be considered when checking the rate limit.
         """
         return pulumi.get(self, "rate_limit_window")
 
@@ -105,43 +123,54 @@ class SentryKeyArgs:
 @pulumi.input_type
 class _SentryKeyState:
     def __init__(__self__, *,
+                 dsn: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
                  dsn_csp: Optional[pulumi.Input[str]] = None,
                  dsn_public: Optional[pulumi.Input[str]] = None,
                  dsn_secret: Optional[pulumi.Input[str]] = None,
-                 is_active: Optional[pulumi.Input[bool]] = None,
+                 javascript_loader_script: Optional[pulumi.Input['SentryKeyJavascriptLoaderScriptArgs']] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  organization: Optional[pulumi.Input[str]] = None,
                  project: Optional[pulumi.Input[str]] = None,
-                 project_id: Optional[pulumi.Input[int]] = None,
+                 project_id: Optional[pulumi.Input[str]] = None,
                  public: Optional[pulumi.Input[str]] = None,
                  rate_limit_count: Optional[pulumi.Input[int]] = None,
                  rate_limit_window: Optional[pulumi.Input[int]] = None,
                  secret: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering SentryKey resources.
-        :param pulumi.Input[str] dsn_csp: DSN for the Content Security Policy (CSP) for the key.
-        :param pulumi.Input[str] dsn_public: DSN for the key.
-        :param pulumi.Input[bool] is_active: Flag indicating the key is active.
-        :param pulumi.Input[str] name: The name of the key.
-        :param pulumi.Input[str] organization: The slug of the organization the key should be created for.
-        :param pulumi.Input[str] project: The slug of the project the key should be created for.
-        :param pulumi.Input[int] project_id: The ID of the project that the key belongs to.
-        :param pulumi.Input[str] public: Public key portion of the client key.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] dsn: This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+        :param pulumi.Input[str] dsn_csp: Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
+        :param pulumi.Input[str] dsn_public: The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
+        :param pulumi.Input[str] dsn_secret: Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+        :param pulumi.Input['SentryKeyJavascriptLoaderScriptArgs'] javascript_loader_script: The JavaScript loader script configuration.
+        :param pulumi.Input[str] name: The name of the client key.
+        :param pulumi.Input[str] organization: The organization of this resource.
+        :param pulumi.Input[str] project: The project of this resource.
+        :param pulumi.Input[str] project_id: The ID of the project that the key belongs to.
+        :param pulumi.Input[str] public: The public key.
         :param pulumi.Input[int] rate_limit_count: Number of events that can be reported within the rate limit window.
-        :param pulumi.Input[int] rate_limit_window: Length of time that will be considered when checking the rate limit.
-        :param pulumi.Input[str] secret: Secret key portion of the client key.
+        :param pulumi.Input[int] rate_limit_window: Length of time in seconds that will be considered when checking the rate limit.
+        :param pulumi.Input[str] secret: The secret key.
         """
+        if dsn is not None:
+            pulumi.set(__self__, "dsn", dsn)
+        if dsn_csp is not None:
+            warnings.warn("""This field is deprecated and will be removed in a future version. Use `dsn[\"csp\"]` instead.""", DeprecationWarning)
+            pulumi.log.warn("""dsn_csp is deprecated: This field is deprecated and will be removed in a future version. Use `dsn[\"csp\"]` instead.""")
         if dsn_csp is not None:
             pulumi.set(__self__, "dsn_csp", dsn_csp)
         if dsn_public is not None:
+            warnings.warn("""This field is deprecated and will be removed in a future version. Use `dsn[\"public\"]` instead.""", DeprecationWarning)
+            pulumi.log.warn("""dsn_public is deprecated: This field is deprecated and will be removed in a future version. Use `dsn[\"public\"]` instead.""")
+        if dsn_public is not None:
             pulumi.set(__self__, "dsn_public", dsn_public)
         if dsn_secret is not None:
-            warnings.warn("""DSN (Deprecated) for the key.""", DeprecationWarning)
-            pulumi.log.warn("""dsn_secret is deprecated: DSN (Deprecated) for the key.""")
+            warnings.warn("""This field is deprecated and will be removed in a future version. Use `dsn[\"secret\"]` instead.""", DeprecationWarning)
+            pulumi.log.warn("""dsn_secret is deprecated: This field is deprecated and will be removed in a future version. Use `dsn[\"secret\"]` instead.""")
         if dsn_secret is not None:
             pulumi.set(__self__, "dsn_secret", dsn_secret)
-        if is_active is not None:
-            pulumi.set(__self__, "is_active", is_active)
+        if javascript_loader_script is not None:
+            pulumi.set(__self__, "javascript_loader_script", javascript_loader_script)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if organization is not None:
@@ -160,10 +189,23 @@ class _SentryKeyState:
             pulumi.set(__self__, "secret", secret)
 
     @property
+    @pulumi.getter
+    def dsn(self) -> Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]:
+        """
+        This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+        """
+        return pulumi.get(self, "dsn")
+
+    @dsn.setter
+    def dsn(self, value: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]]):
+        pulumi.set(self, "dsn", value)
+
+    @property
     @pulumi.getter(name="dsnCsp")
+    @_utilities.deprecated("""This field is deprecated and will be removed in a future version. Use `dsn[\"csp\"]` instead.""")
     def dsn_csp(self) -> Optional[pulumi.Input[str]]:
         """
-        DSN for the Content Security Policy (CSP) for the key.
+        Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
         """
         return pulumi.get(self, "dsn_csp")
 
@@ -173,9 +215,10 @@ class _SentryKeyState:
 
     @property
     @pulumi.getter(name="dsnPublic")
+    @_utilities.deprecated("""This field is deprecated and will be removed in a future version. Use `dsn[\"public\"]` instead.""")
     def dsn_public(self) -> Optional[pulumi.Input[str]]:
         """
-        DSN for the key.
+        The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
         """
         return pulumi.get(self, "dsn_public")
 
@@ -185,8 +228,11 @@ class _SentryKeyState:
 
     @property
     @pulumi.getter(name="dsnSecret")
-    @_utilities.deprecated("""DSN (Deprecated) for the key.""")
+    @_utilities.deprecated("""This field is deprecated and will be removed in a future version. Use `dsn[\"secret\"]` instead.""")
     def dsn_secret(self) -> Optional[pulumi.Input[str]]:
+        """
+        Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+        """
         return pulumi.get(self, "dsn_secret")
 
     @dsn_secret.setter
@@ -194,22 +240,22 @@ class _SentryKeyState:
         pulumi.set(self, "dsn_secret", value)
 
     @property
-    @pulumi.getter(name="isActive")
-    def is_active(self) -> Optional[pulumi.Input[bool]]:
+    @pulumi.getter(name="javascriptLoaderScript")
+    def javascript_loader_script(self) -> Optional[pulumi.Input['SentryKeyJavascriptLoaderScriptArgs']]:
         """
-        Flag indicating the key is active.
+        The JavaScript loader script configuration.
         """
-        return pulumi.get(self, "is_active")
+        return pulumi.get(self, "javascript_loader_script")
 
-    @is_active.setter
-    def is_active(self, value: Optional[pulumi.Input[bool]]):
-        pulumi.set(self, "is_active", value)
+    @javascript_loader_script.setter
+    def javascript_loader_script(self, value: Optional[pulumi.Input['SentryKeyJavascriptLoaderScriptArgs']]):
+        pulumi.set(self, "javascript_loader_script", value)
 
     @property
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the key.
+        The name of the client key.
         """
         return pulumi.get(self, "name")
 
@@ -221,7 +267,7 @@ class _SentryKeyState:
     @pulumi.getter
     def organization(self) -> Optional[pulumi.Input[str]]:
         """
-        The slug of the organization the key should be created for.
+        The organization of this resource.
         """
         return pulumi.get(self, "organization")
 
@@ -233,7 +279,7 @@ class _SentryKeyState:
     @pulumi.getter
     def project(self) -> Optional[pulumi.Input[str]]:
         """
-        The slug of the project the key should be created for.
+        The project of this resource.
         """
         return pulumi.get(self, "project")
 
@@ -243,21 +289,21 @@ class _SentryKeyState:
 
     @property
     @pulumi.getter(name="projectId")
-    def project_id(self) -> Optional[pulumi.Input[int]]:
+    def project_id(self) -> Optional[pulumi.Input[str]]:
         """
         The ID of the project that the key belongs to.
         """
         return pulumi.get(self, "project_id")
 
     @project_id.setter
-    def project_id(self, value: Optional[pulumi.Input[int]]):
+    def project_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "project_id", value)
 
     @property
     @pulumi.getter
     def public(self) -> Optional[pulumi.Input[str]]:
         """
-        Public key portion of the client key.
+        The public key.
         """
         return pulumi.get(self, "public")
 
@@ -281,7 +327,7 @@ class _SentryKeyState:
     @pulumi.getter(name="rateLimitWindow")
     def rate_limit_window(self) -> Optional[pulumi.Input[int]]:
         """
-        Length of time that will be considered when checking the rate limit.
+        Length of time in seconds that will be considered when checking the rate limit.
         """
         return pulumi.get(self, "rate_limit_window")
 
@@ -293,7 +339,7 @@ class _SentryKeyState:
     @pulumi.getter
     def secret(self) -> Optional[pulumi.Input[str]]:
         """
-        Secret key portion of the client key.
+        The secret key.
         """
         return pulumi.get(self, "secret")
 
@@ -307,6 +353,7 @@ class SentryKey(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 javascript_loader_script: Optional[pulumi.Input[Union['SentryKeyJavascriptLoaderScriptArgs', 'SentryKeyJavascriptLoaderScriptArgsDict']]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  organization: Optional[pulumi.Input[str]] = None,
                  project: Optional[pulumi.Input[str]] = None,
@@ -314,7 +361,7 @@ class SentryKey(pulumi.CustomResource):
                  rate_limit_window: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
-        Sentry Key resource.
+        Return a client key bound to a project.
 
         ## Example Usage
 
@@ -341,11 +388,12 @@ class SentryKey(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] name: The name of the key.
-        :param pulumi.Input[str] organization: The slug of the organization the key should be created for.
-        :param pulumi.Input[str] project: The slug of the project the key should be created for.
+        :param pulumi.Input[Union['SentryKeyJavascriptLoaderScriptArgs', 'SentryKeyJavascriptLoaderScriptArgsDict']] javascript_loader_script: The JavaScript loader script configuration.
+        :param pulumi.Input[str] name: The name of the client key.
+        :param pulumi.Input[str] organization: The organization of this resource.
+        :param pulumi.Input[str] project: The project of this resource.
         :param pulumi.Input[int] rate_limit_count: Number of events that can be reported within the rate limit window.
-        :param pulumi.Input[int] rate_limit_window: Length of time that will be considered when checking the rate limit.
+        :param pulumi.Input[int] rate_limit_window: Length of time in seconds that will be considered when checking the rate limit.
         """
         ...
     @overload
@@ -354,7 +402,7 @@ class SentryKey(pulumi.CustomResource):
                  args: SentryKeyArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Sentry Key resource.
+        Return a client key bound to a project.
 
         ## Example Usage
 
@@ -394,6 +442,7 @@ class SentryKey(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 javascript_loader_script: Optional[pulumi.Input[Union['SentryKeyJavascriptLoaderScriptArgs', 'SentryKeyJavascriptLoaderScriptArgsDict']]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  organization: Optional[pulumi.Input[str]] = None,
                  project: Optional[pulumi.Input[str]] = None,
@@ -408,6 +457,7 @@ class SentryKey(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = SentryKeyArgs.__new__(SentryKeyArgs)
 
+            __props__.__dict__["javascript_loader_script"] = javascript_loader_script
             __props__.__dict__["name"] = name
             if organization is None and not opts.urn:
                 raise TypeError("Missing required property 'organization'")
@@ -417,10 +467,10 @@ class SentryKey(pulumi.CustomResource):
             __props__.__dict__["project"] = project
             __props__.__dict__["rate_limit_count"] = rate_limit_count
             __props__.__dict__["rate_limit_window"] = rate_limit_window
+            __props__.__dict__["dsn"] = None
             __props__.__dict__["dsn_csp"] = None
             __props__.__dict__["dsn_public"] = None
             __props__.__dict__["dsn_secret"] = None
-            __props__.__dict__["is_active"] = None
             __props__.__dict__["project_id"] = None
             __props__.__dict__["public"] = None
             __props__.__dict__["secret"] = None
@@ -436,14 +486,15 @@ class SentryKey(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            dsn: Optional[pulumi.Input[Mapping[str, pulumi.Input[str]]]] = None,
             dsn_csp: Optional[pulumi.Input[str]] = None,
             dsn_public: Optional[pulumi.Input[str]] = None,
             dsn_secret: Optional[pulumi.Input[str]] = None,
-            is_active: Optional[pulumi.Input[bool]] = None,
+            javascript_loader_script: Optional[pulumi.Input[Union['SentryKeyJavascriptLoaderScriptArgs', 'SentryKeyJavascriptLoaderScriptArgsDict']]] = None,
             name: Optional[pulumi.Input[str]] = None,
             organization: Optional[pulumi.Input[str]] = None,
             project: Optional[pulumi.Input[str]] = None,
-            project_id: Optional[pulumi.Input[int]] = None,
+            project_id: Optional[pulumi.Input[str]] = None,
             public: Optional[pulumi.Input[str]] = None,
             rate_limit_count: Optional[pulumi.Input[int]] = None,
             rate_limit_window: Optional[pulumi.Input[int]] = None,
@@ -455,26 +506,29 @@ class SentryKey(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[str] dsn_csp: DSN for the Content Security Policy (CSP) for the key.
-        :param pulumi.Input[str] dsn_public: DSN for the key.
-        :param pulumi.Input[bool] is_active: Flag indicating the key is active.
-        :param pulumi.Input[str] name: The name of the key.
-        :param pulumi.Input[str] organization: The slug of the organization the key should be created for.
-        :param pulumi.Input[str] project: The slug of the project the key should be created for.
-        :param pulumi.Input[int] project_id: The ID of the project that the key belongs to.
-        :param pulumi.Input[str] public: Public key portion of the client key.
+        :param pulumi.Input[Mapping[str, pulumi.Input[str]]] dsn: This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+        :param pulumi.Input[str] dsn_csp: Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
+        :param pulumi.Input[str] dsn_public: The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
+        :param pulumi.Input[str] dsn_secret: Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+        :param pulumi.Input[Union['SentryKeyJavascriptLoaderScriptArgs', 'SentryKeyJavascriptLoaderScriptArgsDict']] javascript_loader_script: The JavaScript loader script configuration.
+        :param pulumi.Input[str] name: The name of the client key.
+        :param pulumi.Input[str] organization: The organization of this resource.
+        :param pulumi.Input[str] project: The project of this resource.
+        :param pulumi.Input[str] project_id: The ID of the project that the key belongs to.
+        :param pulumi.Input[str] public: The public key.
         :param pulumi.Input[int] rate_limit_count: Number of events that can be reported within the rate limit window.
-        :param pulumi.Input[int] rate_limit_window: Length of time that will be considered when checking the rate limit.
-        :param pulumi.Input[str] secret: Secret key portion of the client key.
+        :param pulumi.Input[int] rate_limit_window: Length of time in seconds that will be considered when checking the rate limit.
+        :param pulumi.Input[str] secret: The secret key.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _SentryKeyState.__new__(_SentryKeyState)
 
+        __props__.__dict__["dsn"] = dsn
         __props__.__dict__["dsn_csp"] = dsn_csp
         __props__.__dict__["dsn_public"] = dsn_public
         __props__.__dict__["dsn_secret"] = dsn_secret
-        __props__.__dict__["is_active"] = is_active
+        __props__.__dict__["javascript_loader_script"] = javascript_loader_script
         __props__.__dict__["name"] = name
         __props__.__dict__["organization"] = organization
         __props__.__dict__["project"] = project
@@ -486,40 +540,53 @@ class SentryKey(pulumi.CustomResource):
         return SentryKey(resource_name, opts=opts, __props__=__props__)
 
     @property
+    @pulumi.getter
+    def dsn(self) -> pulumi.Output[Mapping[str, str]]:
+        """
+        This is a map of DSN values. The keys include `public`, `secret`, `csp`, `security`, `minidump`, `nel`, `unreal`, `cdn`, and `crons`.
+        """
+        return pulumi.get(self, "dsn")
+
+    @property
     @pulumi.getter(name="dsnCsp")
+    @_utilities.deprecated("""This field is deprecated and will be removed in a future version. Use `dsn[\"csp\"]` instead.""")
     def dsn_csp(self) -> pulumi.Output[str]:
         """
-        DSN for the Content Security Policy (CSP) for the key.
+        Security header endpoint for features like CSP and Expect-CT reports. **Deprecated** Use `dsn["csp"]` instead.
         """
         return pulumi.get(self, "dsn_csp")
 
     @property
     @pulumi.getter(name="dsnPublic")
+    @_utilities.deprecated("""This field is deprecated and will be removed in a future version. Use `dsn[\"public\"]` instead.""")
     def dsn_public(self) -> pulumi.Output[str]:
         """
-        DSN for the key.
+        The DSN tells the SDK where to send the events to. **Deprecated** Use `dsn["public"]` instead.
         """
         return pulumi.get(self, "dsn_public")
 
     @property
     @pulumi.getter(name="dsnSecret")
-    @_utilities.deprecated("""DSN (Deprecated) for the key.""")
+    @_utilities.deprecated("""This field is deprecated and will be removed in a future version. Use `dsn[\"secret\"]` instead.""")
     def dsn_secret(self) -> pulumi.Output[str]:
+        """
+        Deprecated DSN includes a secret which is no longer required by newer SDK versions. If you are unsure which to use, follow installation instructions for your language. **Deprecated** Use `dsn["secret"] instead.
+        """
         return pulumi.get(self, "dsn_secret")
 
     @property
-    @pulumi.getter(name="isActive")
-    def is_active(self) -> pulumi.Output[bool]:
+    @pulumi.getter(name="javascriptLoaderScript")
+    def javascript_loader_script(self) -> pulumi.Output['outputs.SentryKeyJavascriptLoaderScript']:
         """
-        Flag indicating the key is active.
+        The JavaScript loader script configuration.
         """
-        return pulumi.get(self, "is_active")
+        return pulumi.get(self, "javascript_loader_script")
 
     @property
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        The name of the key.
+        The name of the client key.
         """
         return pulumi.get(self, "name")
 
@@ -527,7 +594,7 @@ class SentryKey(pulumi.CustomResource):
     @pulumi.getter
     def organization(self) -> pulumi.Output[str]:
         """
-        The slug of the organization the key should be created for.
+        The organization of this resource.
         """
         return pulumi.get(self, "organization")
 
@@ -535,13 +602,13 @@ class SentryKey(pulumi.CustomResource):
     @pulumi.getter
     def project(self) -> pulumi.Output[str]:
         """
-        The slug of the project the key should be created for.
+        The project of this resource.
         """
         return pulumi.get(self, "project")
 
     @property
     @pulumi.getter(name="projectId")
-    def project_id(self) -> pulumi.Output[int]:
+    def project_id(self) -> pulumi.Output[str]:
         """
         The ID of the project that the key belongs to.
         """
@@ -551,7 +618,7 @@ class SentryKey(pulumi.CustomResource):
     @pulumi.getter
     def public(self) -> pulumi.Output[str]:
         """
-        Public key portion of the client key.
+        The public key.
         """
         return pulumi.get(self, "public")
 
@@ -567,7 +634,7 @@ class SentryKey(pulumi.CustomResource):
     @pulumi.getter(name="rateLimitWindow")
     def rate_limit_window(self) -> pulumi.Output[int]:
         """
-        Length of time that will be considered when checking the rate limit.
+        Length of time in seconds that will be considered when checking the rate limit.
         """
         return pulumi.get(self, "rate_limit_window")
 
@@ -575,7 +642,7 @@ class SentryKey(pulumi.CustomResource):
     @pulumi.getter
     def secret(self) -> pulumi.Output[str]:
         """
-        Secret key portion of the client key.
+        The secret key.
         """
         return pulumi.get(self, "secret")
 
