@@ -128,7 +128,7 @@ func Provider() tfbridge.ProviderInfo {
 						return "", fmt.Errorf("organization is required")
 					}
 					if projectIds.IsNull() {
-						return "", fmt.Errorf("organization is required")
+						return "", fmt.Errorf("projectIds is required")
 					}
 
 					idParts := []string{organizationId.StringValue()}
